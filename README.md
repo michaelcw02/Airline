@@ -9,7 +9,7 @@ Desarrollar una aplicación en web que permita la compra y reserva de tiquetes a
 ### [fmsv](https://github.com/fmsv) - Fabiana Salas V.
 ### [michaelcw02](https://github.com/michaelcw02) - Michael Chen W.
 
-[Guidelines of the project](Proyecto_Aerolinea.pdf)
+#### [Guidelines of the project](Proyecto_Aerolinea.pdf)
 
 ![alt tag](http://forthebadge.com/images/badges/built-with-love.svg) 
 ![alt tag](http://forthebadge.com/images/badges/built-by-developers.svg) 
