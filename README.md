@@ -4,10 +4,8 @@
 ## Final Project of Programming IV, I SEMESTER, 2017
 Members:
 
-* [addaleax](https://github.com/addaleax) -
-**Anna Henningsen** &lt;anna@addaleax.net&gt; (she/her)
-### * [ChrisF9](https://github.com/ChrisF9) - Christian Fuentes 
-### * [fmsv](https://github.com/fmsv) - Fabiana Salas
-### * [michaelcw02](https://github.com/michaelcw02) - Michael Chen W.
+### [ChrisF9](https://github.com/ChrisF9) - Christian Fuentes 
+### [fmsv](https://github.com/fmsv) - Fabiana Salas
+### [michaelcw02](https://github.com/michaelcw02) - Michael Chen W.
 
 
