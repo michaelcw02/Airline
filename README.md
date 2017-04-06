@@ -7,9 +7,9 @@ Desarrollar una aplicación en web que permita la compra y reserva de tiquetes a
 
 #### Integrantes:
 
-### [ChrisF9](https://github.com/ChrisF9) - Christian Fuentes C.
-### [fmsv](https://github.com/fmsv) - Fabiana Salas V.
-### [michaelcw02](https://github.com/michaelcw02) - Michael Chen W.
+### Christian Fuentes C. - ([ChrisF9](https://github.com/ChrisF9))
+### Fabiana Salas V. - ([fmsv](https://github.com/fmsv))
+### Michael Chen W. - ([michaelcw02](https://github.com/michaelcw02))
 
 ### Specifications 
 
