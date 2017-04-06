@@ -13,8 +13,8 @@ Desarrollar una aplicación en web que permita la compra y reserva de tiquetes a
 
 ### Specifications 
 
-* Use of 4 spaces for identations.
-* Use of camelCase for everything.
+* **Use of 4 spaces for identations.**
+* **Use of camelCase for everything.**
 
 ![alt tag](http://forthebadge.com/images/badges/built-with-love.svg) 
 ![alt tag](http://forthebadge.com/images/badges/built-by-developers.svg)
