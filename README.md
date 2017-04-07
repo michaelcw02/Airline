@@ -14,7 +14,9 @@ Desarrollar una aplicación en web que permita la compra y reserva de tiquetes a
 ### Specifications 
 
 * **Use of 4 spaces for identations.**
-* **Use of _camelCase for everything, except for classes or constants.**
+* **Use of PascalCasing for Classes.**
+* **Use CAPITALIZED for CONSTANTS**
+* **Use of _camelCase for everything else.**
 * **DO NOT ¡GIT MERGE! ONLY GIT REBASE** 
 
 ![alt tag](http://forthebadge.com/images/badges/built-with-love.svg) 
