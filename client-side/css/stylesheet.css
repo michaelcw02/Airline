@@ -4,6 +4,6 @@ header {
 
 
 /*CLASSES*/
-.center-text {
-    text-align: center;
+.navbar-brand {
+    font-size: 40px !important;
 }
