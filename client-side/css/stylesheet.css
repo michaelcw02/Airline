@@ -7,3 +7,7 @@ header {
 .navbar-brand {
     font-size: 40px !important;
 }
+.icon {
+    width: 22px;
+    height: auto;
+}
