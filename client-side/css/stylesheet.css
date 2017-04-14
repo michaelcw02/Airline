@@ -1,7 +1,11 @@
-header {
-    background-color: lightgreen;
-}
+body {
 
+}
+nav {
+    z-index: 3000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 7px;
+}
 
 /*CLASSES*/
 .navbar-brand {
@@ -15,4 +19,9 @@ header {
 .navbar-nav > li > a {
   /* NEW ADDITION BY MCW */
   font-size: 20px;
+}
+.top-container {
+    height: 600px;
+    background-image: url('../images/background-01.jpg');
+    background-size: cover;
 }
