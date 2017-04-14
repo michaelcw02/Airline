@@ -11,3 +11,8 @@ header {
     width: 22px;
     height: auto;
 }
+
+.navbar-nav > li > a {
+  /* NEW ADDITION BY MCW */
+  font-size: 20px;
+}
