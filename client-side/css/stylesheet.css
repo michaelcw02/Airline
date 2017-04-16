@@ -27,7 +27,8 @@ nav {
     background-size: cover;
 }
 
-.login {
+.sign-in {
+    background-color: #606468;
     width: 500px;
 }
 /*
