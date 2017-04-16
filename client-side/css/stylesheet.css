@@ -22,6 +22,14 @@ nav {
 }
 .top-container {
     height: 600px;
-    background-image: url('../images/background-02.jpg');
+    width: 95%;
+    background-image: url('../images/background-01.jpg');
     background-size: cover;
 }
+/*
+@media screen and (max-width: 768px) {
+    .text-login {
+        display: none;
+    }
+}
+*/
