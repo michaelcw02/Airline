@@ -26,6 +26,10 @@ nav {
     background-image: url('../images/background-01.jpg');
     background-size: cover;
 }
+
+.login {
+    width: 500px;
+}
 /*
 @media screen and (max-width: 768px) {
     .text-login {
