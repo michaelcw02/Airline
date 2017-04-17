@@ -31,6 +31,10 @@ nav {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.carousel {
+    margin-top: -30px;
+    z-index: 1500;
+}
 
 .sign-in {
     background-color: #606468;
@@ -48,3 +52,4 @@ nav {
     }
 }
 */
+
