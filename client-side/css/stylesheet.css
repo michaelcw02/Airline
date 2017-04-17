@@ -26,8 +26,13 @@ nav {
 .top-container {
     height: 600px;
     width: 95%;
-    background-image: url('../images/background-01.jpg');
+    background-image: url('../images/background-04.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    /*
     background-size: cover;
+    */
+
 }
 
 .sign-in {
