@@ -8,11 +8,14 @@ nav {
 }
 
 /*CLASSES*/
+.text-white {
+    color: #fff;
+}
 .navbar-brand {
     font-size: 40px !important;
 }
 .icon {
-    width: 22px;
+    width: 28px;
     height: auto;
 }
 
@@ -30,6 +33,10 @@ nav {
 .sign-in {
     background-color: #606468;
     width: 500px;
+}
+.register {
+    font-size: 22px;
+    margin-bottom: 4px;
 }
 /*
 @media screen and (max-width: 768px) {
