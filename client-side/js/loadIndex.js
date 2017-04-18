@@ -18,8 +18,10 @@ function loadOfferList() {
 function loadCarousel() {
     offerList = loadOfferList();
     for (let i in offerList) {
-        $('<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>').appendTo('.carousel-indicators')
-        $('<div class="item"><img src="' + offerList[i].pathToImg + '"><div class="carousel-caption h1">' + offerList[i].description + '</div>   </div>').appendTo('.carousel-inner');
+        let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>'; 
+        $(element).appendTo('.carousel-indicators');
+        element = '<div class="item"><img src="' + offerList[i].pathToImg + '"><div class="carousel-caption h1">' + offerList[i].description + '</div>   </div>';
+        $(element).appendTo('.carousel-inner');
     }
     $('.item').first().addClass('active');
     $('.carousel-indicators > li').first().addClass('active');
