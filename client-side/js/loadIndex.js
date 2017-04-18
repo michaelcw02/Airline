@@ -3,7 +3,7 @@ function loadPage() {
     loadCarousel();
 }
 
-//CONEXION A BACKEND PARA RETRIEVE LAS OFERTAS
+//THIS WILL BE THE CONEXION TO THE BACKEND IN ORDER TO RETRIEVE OFFERS
 function loadOfferList() {
     let array = [];
     array.push(new Offer('SJO', 'LHR', '$746', 'How about London?', 'images/background-1.jpg'));
