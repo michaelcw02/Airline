@@ -34,7 +34,7 @@ nav {
     */
 }
 .carousel-container {
-    
+    margin-top: -89px; 
     z-index: 1500;
 }
 
