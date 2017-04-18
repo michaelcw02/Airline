@@ -26,11 +26,20 @@ nav {
 .top-container {
     height: 600px;
     width: 95%;
+    /*
     background-image: url('../images/background-4.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    */
 }
+.carousel-container {
+    margin-top: -89px; 
+    z-index: 1500;
+}
+
+.carousel,.item,.active{height:100%;}
+.carousel-inner{height:100%;}
 
 .sign-in {
     background-color: #606468;
@@ -48,3 +57,4 @@ nav {
     }
 }
 */
+
