@@ -28,5 +28,27 @@ function loadCarousel() {
     $('#advertisement-carousel').carousel();
 }
 
+function hideShow(){
+    $("#btnOneWay").click(function(){
+       $("#returning").hide();
+    });
+    $("#btnRoundTrip").click(function(){
+        $("#returning").show();
+    });
+}
+
+function increase(){
+    var valueSelected=$('select[id=flightsFormAdults]').val();
+    if(valueSelected != "6"){   
+        $('select[id=flightsFormAdults]').val(newValue);
+    }    
+}
+
+function decrease(){
+    var valueSelected=$('select[id=flightsFormAdults]').val();
+    if(valueSelected != "1"){   
+        $('select[id=flightsFormAdults]').val(newValue);
+    }    
+}
 
 $(loadPage);
