@@ -1,37 +1,36 @@
-body {
+html {
+    position:relative; 
+    min-height: 100%;
+}
 
+
+/*CLASSES*/
+.text-white {
+    color: #fff;
+}
+.icon {
+    width: 28px;
+    height: auto;
+}
+header {
+    padding-left: 2%;
+    padding-right: 2%;
 }
 nav {
     z-index: 3000;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin-top: 7px;
 }
-
-/*CLASSES*/
-.text-white {
-    color: #fff;
-}
 .navbar-brand {
     font-size: 40px !important;
 }
-.icon {
-    width: 28px;
-    height: auto;
-}
-
 .navbar-nav > li > a {
   /* NEW ADDITION BY MCW */
   font-size: 20px;
 }
 .top-container {
-    height: 600px;
+    height: auto;
     width: 95%;
-    /*
-    background-image: url('../images/background-4.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    */
 }
 .carousel-container {
     margin-top: -89px; 
@@ -58,3 +57,28 @@ nav {
 }
 */
 
+.carousel-control > img {
+    position: relative;
+    margin: auto;
+    top: 50%;
+}
+.carousel-control > .right{
+    left: 39%;
+}
+.carousel-control > .left{
+    right: 39%;
+}
+
+
+
+.body-container {
+    margin-bottom:100px;
+}
+.footer-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height:100px;
+    background:#ccc;
+}
