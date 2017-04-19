@@ -20,7 +20,7 @@ function loadCarousel() {
     for (let i in offerList) {
         let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>'; 
         $(element).appendTo('.carousel-indicators');
-        element = '<div class="item"><img src="' + offerList[i].pathToImg + '"><div class="carousel-caption h1">' + offerList[i].description + '</div>   </div>';
+        element = '<div class="item"><img class="img-rounded" src="' + offerList[i].pathToImg + '"><div class="carousel-caption h1">' + offerList[i].description + '</div>   </div>';
         $(element).appendTo('.carousel-inner');
     }
     $('.item').first().addClass('active');
