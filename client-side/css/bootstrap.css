@@ -1280,7 +1280,8 @@ h4,
 }
 h5,
 .h5 {
-  font-size: 14px;
+  /*MODIFICATION 14 TO 16*/
+  font-size: 16px;
 }
 h6,
 .h6 {
