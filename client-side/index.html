@@ -98,9 +98,10 @@
                 </div>
             </nav>
         </header>
+       
         
         <div class="carousel-container">
-            <div id="advertisement-carousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <div id="advertisement-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">    </ol>
                 <!-- Wrapper for slides -->
@@ -115,8 +116,69 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-        </div>
+        </div><br>
+        
+        <div class="container center-container">
+            <div class="tab navbar-inverse">
+                <button class="active"><img class="icon" src="images/airplane-4-48.png" alt="Flights"><br> Flights</button>
+            </div>
+            <div class="tabcontent text-center">
+                    <form action="javascript:searchFlights();" class="form-horizontal">
+                        <div class="row">                   
+                            <div class="btn-group-md"><br>
+                                <button type="button" class="btn btn-secondary" id="btnRoundTrip" onclick="hideShow()">Round-trip</button> 
+                                <button type="button" class="btn btn-secondary" id="btnOneWay" onclick="hideShow()">One-way</button>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="text" id="from" class="form-control" placeholder="From" required> 
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="to" class="form-control" placeholder="To" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="date" class="form-control"  placeholder="Departing" id="departing" required>
 
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control"  placeholder="Returning" id="returning" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                           <div class="col-md-12">
+                               <div class="input-group lh-dropdown-spinner">
+                                   <span class="input-group-btn">
+                                        <button type="button" class="btn btn-secondary" id="btnDecrease" onclick="decrease()">-</button>
+                                   </span>
+                                   <div class="">
+                                   <select class="form-control" id="flightsFormAdults">
+                                       <option selected="selected" value="1">1 Adult</option>
+                                       <option value="2">2 Adults</option>
+                                       <option value="3">3 Adults</option>
+                                       <option value="4">4 Adults</option>
+                                       <option value="5">5 Adults</option>
+                                       <option value="6">6 Adults</option>
+                                   </select>
+                                   </div>
+                                   <span class="input-group-btn">
+                                        <button type="button" class="btn btn-secondary" id="btnIncrease" onclick="increase()">+</button>
+                                   </span>
+                           
+                                </div>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" id="btnSearchFlights" class="btn btn-success">Search Flights</button>
+                            </div>
+                        </div>                     
+                    </form>
+                </div>
     </div>
 
     <div class="container body-container">
