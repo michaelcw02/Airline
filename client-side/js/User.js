@@ -11,7 +11,7 @@ User.prototype = {
         this.lastname = lastname;
         this.email = email;
         this.birthdate = birthdate;
-        this, address = address;
+        this.address = address;
         this.phone = phone;
         this.celular = celular;
     }
