@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/stylesheet.css">
-
 </head>
 
 <body>
@@ -46,7 +45,7 @@
                                         <div class="container-fluid text-center">
                                             <form action="javascript:signIn();" class="form-horizontal">
 
-                                                <div class="text-center">
+                                                <div class="row text-center">
                                                     <h2 class="text-white">Sign in at Star Airlines</h2>
                                                 </div>
 
@@ -79,16 +78,18 @@
 
                                             </form>
                                         </div>
-                                        <div class="row register">
-                                            <div class="col-md-offset-3 text-white">
-                                                Not registered yet?
+                                        <div class="register">
+                                            <div class="row">
+                                                <div class="col-md-offset-3 col-md-6 text-center text-white">
+                                                    Not registered yet?
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-offset-3 register">
-                                                <a href="#">
-                                                    <img src="images/edit-8-48.png" alt="Register"> Register
-                                                </a>
+                                            <div class="row">
+                                                <div class="col-md-offset-3  col-md-6 text-center register">
+                                                    <a class="hvr-grow" href="./register.html">
+                                                        <img class="icon-register" src="images/edit-8-48.png" alt="Register">Register
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
@@ -183,35 +184,37 @@
     </div>
 
     <div class="container footer-container">
-        <div class="row footer-text">
-            <div class="col-md-4">
-                <h4 class="text-center">CONTACT US</h4>
-                <div>
-                    <dl class="dl-horizontal text-center">
-                        <dt>Phone:</dt>
-                        <dd><a href="tel:+506-2244-6688">(506) 2244-6688</a></dd>
-                        <dt>Email:</dt>
-                        <dd><a href="mailto:contact@starair.com">contact@starair.com</a></dd>
-                    </dl>
+        <footer>
+            <div class="row footer-text">
+                <div class="col-md-4">
+                    <h4 class="text-center">CONTACT US</h4>
+                    <div>
+                        <dl class="dl-horizontal text-center">
+                            <dt>Phone:</dt>
+                            <dd><a href="tel:+506-2244-6688">(506) 2244-6688</a></dd>
+                            <dt>Email:</dt>
+                            <dd><a href="mailto:contact@starair.com">contact@starair.com</a></dd>
+                        </dl>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <h4 class="text-center">HEADQUARTERS</h4>
-                <div>
-                    <h5 class="text-center">Universidad Nacional, Lagunilla, Heredia, Costa Rica</h5>
+                <div class="col-md-4">
+                    <h4 class="text-center">HEADQUARTERS</h4>
+                    <div>
+                        <h5 class="text-center">Universidad Nacional, Lagunilla, Heredia, Costa Rica</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-center">FOLLOW US ON</h4>
+                    <div class="text-center">
+                        <a class="hvr-grow" href="https://www.linkedin.com/"><img src="images/linkedin-3-48.png" alt="LinkedIn"></a>
+                        <a class="hvr-grow" href="https://www.facebook.com/"><img src="images/facebook-3-48.png" alt="Facebook"></a>
+                        <a class="hvr-grow" href="https://www.instagram.com"><img src="images/instagram-48.png" alt="Instagram"></a>
+                        <a class="hvr-grow" href="https://www.twitter.com"><img src="images/twitter-48.png" alt="Instagram"></a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <h4 class="text-center">FOLLOW US ON</h4>
-                <div class="text-center">
-                    <a class="hvr-grow" href="https://www.linkedin.com/"><img src="images/linkedin-3-48.png" alt="LinkedIn"></a>
-                    <a class="hvr-grow" href="https://www.facebook.com/"><img src="images/facebook-3-48.png" alt="Facebook"></a>
-                    <a class="hvr-grow" href="https://www.instagram.com"><img src="images/instagram-48.png" alt="Instagram"></a>
-                    <a class="hvr-grow" href="https://www.twitter.com"><img src="images/twitter-48.png" alt="Instagram"></a>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
 
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
