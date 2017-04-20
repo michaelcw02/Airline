@@ -94,6 +94,8 @@ nav {
 .body-container {
     position: relative;
     margin-top: 10px;
+    padding-left: 2% !important;
+    padding-right: 2% !important;
 }
 .footer-container {
     position: relative;
@@ -158,3 +160,6 @@ div .tab button {
     color: #000;
 }
 
+.invalid {
+    box-shadow: 0 0 5px 1px #E53935;
+}
