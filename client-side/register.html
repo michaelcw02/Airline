@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
@@ -42,9 +43,46 @@
     <div class="container body-container">
         <div class="registration">
             <div class="row text-center">
-                <h1>Registration</h1>
+                <h1 class="text-success">Registration</h1>
             </div>
-            
+            <form action="javascript:submitRegistration();" class="form-horizontal" id="registrationForm">
+                
+                <div class="form-group">
+                    <label for="name" class="col-md-offset-4 col-md-2 text-center">Name: </label>
+                    <div class="col-md-2">
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname" class="col-md-offset-4 col-md-2 text-center">Lastname: </label>
+                    <div class="col-md-2">
+                        <input type="text" id="lastname" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate" class="col-md-offset-4 col-md-2 text-center">Birthdate: </label>
+                    <div class="col-md-2">
+                        <input type="text" id="birthdate" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="aCtryCode" class="col-md-offset-4 col-md-2 text-center">Country Code: </label>
+                    <div class="col-md-2">
+                        <input type="text" id="ctryCode" class="form-control" value="US">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-2">
+                        <button type="submit" id="btnSubmit" class="btn btn-default" data-toggle="collapse" data-target="#calendar">Show</button>
+                    </div>
+                    
+                </div>
+
+            </form>
         </div>
     </div>
 
@@ -83,6 +121,10 @@
             </div>
         </footer>
     </div>
+    
+    <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/loadRegister.js"></script>
 </body>
 
 </html>
