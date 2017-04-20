@@ -1,6 +1,8 @@
+let attributes;
 
 function loadPage() {
     loadCarousel();
+    attributes = new Preload();
 }
 
 //THIS WILL BE THE CONEXION TO THE BACKEND IN ORDER TO RETRIEVE OFFERS
