@@ -70,10 +70,15 @@ nav {
     right: 39%;
 }
 
-
+@media screen and (min-width: 768px) {
+    .body-container {
+        margin-top: -10px !important;
+    }
+}
 
 .body-container {
-
+    position: relative;
+    margin-top: 10px;
 }
 .footer-container {
     position: relative;

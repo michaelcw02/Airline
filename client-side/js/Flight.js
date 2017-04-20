@@ -9,5 +9,5 @@ Flight.prototype = {
         this.countryTo = countryTo;
         this.price = price;
     },
-    completo: function (sep) { return this.code + sep + this.price; }
+    title: function (sep) { return this.countryFrom.code + sep + this.countryTo.code; }
 }

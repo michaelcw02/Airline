@@ -7,7 +7,7 @@ Preload.prototype = {
     Preload: function() {
         this.cities = loadCities();
         this.flights = loadFlights(this.cities);
-        this.promotions = loadPromotions(this.flights);
+        this.discounts = loadDiscounts(this.flights);
     }
 }
 
@@ -38,22 +38,22 @@ function loadFlights(cities = []) {
     return flights;
 }
 
-function loadPromotions(flights) {
-    let promotions = [];
+function loadDiscounts(flights) {
+    let discounts = [];
     
     for (let i in flights) {
         console.log(i, flights[i].countryFrom.code, flights[i].countryTo.code);
     }
 
-    promotions.push(new Promotion(flights[0], getRandomInt(10, 40), 'Let\'s go to Los Angeles!', 'images/background-3.jpg'));
-    promotions.push(new Promotion(flights[2], getRandomInt(10, 40), 'Let us take you to Boston!', 'images/background-6.jpg'));
-    promotions.push(new Promotion(flights[4], getRandomInt(10, 40), 'Wanna go to Miami?', 'images/background-2.jpg'));
-    promotions.push(new Promotion(flights[8], getRandomInt(10, 40), 'Have you thought about Atlanta?', 'images/background-5.jpg'));
-    promotions.push(new Promotion(flights[12], getRandomInt(10, 40), 'Taipei is just Amazing!', 'images/background-4.jpg'));
-    promotions.push(new Promotion(flights[16], getRandomInt(10, 40), 'How about London?', 'images/background-1.jpg'));
+    discounts.push(new Discount(flights[0], getRandomInt(10, 40), 'Let\'s go to Los Angeles!', 'images/background-3.jpg'));
+    discounts.push(new Discount(flights[2], getRandomInt(10, 40), 'Let us take you to Boston!', 'images/background-6.jpg'));
+    discounts.push(new Discount(flights[4], getRandomInt(10, 40), 'Wanna go to Miami?', 'images/background-2.jpg'));
+    discounts.push(new Discount(flights[8], getRandomInt(10, 40), 'Have you thought about Atlanta?', 'images/background-5.jpg'));
+    discounts.push(new Discount(flights[12], getRandomInt(10, 40), 'Taipei is just Amazing!', 'images/background-4.jpg'));
+    discounts.push(new Discount(flights[16], getRandomInt(10, 40), 'How about London?', 'images/background-1.jpg'));
 
 
-    return promotions;
+    return discounts;
 }
 
 function getRandomInt(min, max) {
