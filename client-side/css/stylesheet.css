@@ -41,9 +41,11 @@ nav {
 .carousel-inner{height:100%;}
 
 .sign-in {
+    /*
     background-color: #606468;
+    */
+    background: rgba(51, 51, 51, .8);
     width: 500px;
-	
 }
 .register {
     font-size: 22px;
