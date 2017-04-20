@@ -1,15 +1,13 @@
 
-function Flight(codigo, countryFrom, countryTo, departureDate, arrivalDate, price) {
-    this.Flight(codigo, countryFrom, countryTo, departureDate, arrivalDate, price);
+function Flight(code, countryFrom, countryTo, price) {
+    this.Flight(code, countryFrom, countryTo, price);
 }
 Flight.prototype = {
-    Flight: function (codigo, countryFrom, countryTo, departureDate, arrivalDate, price) {
-        this.codigo = codigo;
+    Flight: function (code, countryFrom, countryTo, price) {
+        this.code = code;
         this.countryFrom = countryFrom;
         this.countryTo = countryTo;
-        this.arrivalDate = arrivalDate;
-        this.departureDate = departureDate;
         this.price = price;
     },
-    completo: function (sep) { return this.codigo + sep + this.price; }
+    completo: function (sep) { return this.code + sep + this.price; }
 }
