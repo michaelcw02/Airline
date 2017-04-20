@@ -11,8 +11,17 @@ html {
 .icon {
     width: 28px;
     height: auto;
+
+}
+.icon-register {
+    margin-right: 8px;
+    width: 34px;
 }
 header {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+footer {
     padding-left: 2%;
     padding-right: 2%;
 }
@@ -48,8 +57,11 @@ nav {
     width: 500px;
 }
 .register {
-    font-size: 22px;
+    font-size: 18px;
     margin-bottom: 4px;
+}
+.register > img {
+    margin-right: 50px;
 }
 
 /*
