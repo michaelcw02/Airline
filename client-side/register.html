@@ -45,43 +45,97 @@
             <div class="row text-center">
                 <h1 class="text-success">Registration</h1>
             </div>
-            <form action="javascript:submitRegistration();" class="form-horizontal" id="registrationForm">
-                
-                <div class="form-group">
-                    <label for="name" class="col-md-offset-4 col-md-2 text-center">Name: </label>
-                    <div class="col-md-2">
-                        <input type="text" id="name" class="form-control" required>
+            <form action='javascript:submitRegistration();' method='POST' id='registrationForm'>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Name:</div>
+                        <div class='col-sm-4'><input type='text' id='name' class='form-control' placeholder="John"></div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="lastname" class="col-md-offset-4 col-md-2 text-center">Lastname: </label>
-                    <div class="col-md-2">
-                        <input type="text" id="lastname" class="form-control" required>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Lastname:</div>
+                        <div class='col-sm-4'><input type='text' id='lastname' class='form-control' placeholder="Doe"></div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="birthdate" class="col-md-offset-4 col-md-2 text-center">Birthdate: </label>
-                    <div class="col-md-2">
-                        <input type="text" id="birthdate" class="form-control" required>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 label'>Sex:</div>
+                        <div class='col-sm-4'>
+                            <div class='btn-group radio' data-toggle='buttons'>
+                                <label class='btn btn-default btn-radio' id='lblMasc'>
+                                    <input type='radio' name='sex' id='sexMasc' value='M'>
+                                    <img src='images/glyphicons-4-user.png' alt='Male'>
+                                    Male
+                                </label>
+                                <label class='btn btn-default btn-radio' id='lblFem'>
+                                    <input type='radio' name='sex' id='sexFem' value='F'>
+                                    <img src='images/glyphicons-5-girl.png' alt='Female'>
+                                    Female
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="aCtryCode" class="col-md-offset-4 col-md-2 text-center">Country Code: </label>
-                    <div class="col-md-2">
-                        <input type="text" id="ctryCode" class="form-control" value="US">
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Birthdate:</div>
+                        <div class='col-sm-4'><input type='text' id='birthdate' class='form-control'></div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-5 col-md-2">
-                        <button type="submit" id="btnSubmit" class="btn btn-default" data-toggle="collapse" data-target="#calendar">Show</button>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Email:</div>
+                        <div class='col-sm-4'><input type='text' id='canton' class='form-control' placeholder="johndoe@email.com"></div>
                     </div>
-                    
                 </div>
-
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Password:</div>
+                        <div class='col-sm-4'><input type='password' id='password' class='form-control'></div>
+                    </div>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Repeat Password:</div>
+                        <div class='col-sm-4'><input type='password' id='passwordRepeat' class='form-control'></div>
+                    </div>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Telephone:</div>
+                        <div class='col-sm-4'><input type='text' id='telephone' class='form-control' placeholder="8888-8888"></div>
+                    </div>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Celular:</div>
+                        <div class='col-sm-4'><input type='text' id='telephone' class='form-control' placeholder="8888-8888"></div>
+                    </div>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="checkbox" id="agree">
+                            I have read and agree to the Terms and Conditions and Privacy Policy
+                        </label>
+                    </div>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='col-md-12 text-center'>
+                        <input type='submit' class='btn btn-primary' id='submit'>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -121,8 +175,9 @@
             </div>
         </footer>
     </div>
-    
+
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/loadRegister.js"></script>
 </body>
