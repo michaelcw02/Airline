@@ -8,11 +8,6 @@ function loadRegister() {
 function addEventListeners() {
     $('#registrationForm').on('submit', doValidate);
     $('#getDirection').on('click', getLocation);
-    $('#direction').on('focus', showMap);
-}
-
-function showMap(event) {
-    $('.map-container').show();
 }
 
 function doValidate() {
