@@ -7,6 +7,7 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+var key = 'AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts';
 var divElemMap = document.getElementById('map');
 var map;
 var myOptions = {
@@ -33,6 +34,10 @@ function setLocation(position) {
     let lon = position.coords.longitude;
     let latlon = new google.maps.LatLng(lat, lon);
 
+    let object = getRequest(lat, lon).results;
+    console.log(object);
+    setDirection(object);
+
     myOptions.center = latlon;
     
     var map = new google.maps.Map(document.getElementById("map"), myOptions);
@@ -44,7 +49,38 @@ function setLocation(position) {
 
     var marker = new google.maps.Marker(markOpc);
 }
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            divElemMap.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            divElemMap.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            divElemMap.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            divElemMap.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
 
+function getRequest(lat, lng) {
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + lng +'&key=' + key;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return JSON.parse(xmlHttp.responseText);
+}
+
+function setDirection(array) {
+    $('#direction').val(array[1].formatted_address);
+}
+
+
+/*
+//THIS SHIT WORKS ONLY ON A REALWEBSITE
 function initAutocomplete() {
 
     // Create the search box and link it to the UI element.
@@ -56,7 +92,7 @@ function initAutocomplete() {
     map.addListener('bounds_changed', function () {
         searchBox.setBounds(map.getBounds());
     });
-
+    console.log('is it working?')
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
@@ -106,20 +142,4 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
-
-function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            divElemMap.innerHTML = "User denied the request for Geolocation."
-            break;
-        case error.POSITION_UNAVAILABLE:
-            divElemMap.innerHTML = "Location information is unavailable."
-            break;
-        case error.TIMEOUT:
-            divElemMap.innerHTML = "The request to get user location timed out."
-            break;
-        case error.UNKNOWN_ERROR:
-            divElemMap.innerHTML = "An unknown error occurred."
-            break;
-    }
-}
+*/
