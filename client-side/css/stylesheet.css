@@ -163,3 +163,14 @@ div .tab button {
 .invalid {
     box-shadow: 0 0 5px 1px #E53935;
 }
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+.map-container {
+    margin-top: 8px;
+    width: 80%;
+    height: 400px;
+    display: none;
+}
