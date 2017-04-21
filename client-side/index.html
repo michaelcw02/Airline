@@ -6,9 +6,9 @@
     <title>StarAir</title>
     <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
-
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
@@ -123,18 +123,17 @@
     </div>
 
     <div class="container body-container">
-        <div class="tab navbar-inverse">
-            <button class="active"><img class="icon" src="images/airplane-4-48.png" alt="Flights"><br> Flights</button>
+        <div class="tab navbar-inverse text-center">
+            <a class="hvr-grow" href="#flightsContent"><img src="images/airplane-4-48.png" alt="Flights"> Flights</a>        
         </div>
-        <div class="tabcontent text-center">
+        <div class="tabcontent text-center" id="flightsContent">
             <form action="javascript:searchFlights();" class="form-horizontal">
                 <div class="row">
-                    <div class="btn-group-md"><br>
-                        <button type="button" class="btn btn-secondary" id="btnRoundTrip" onclick="hideShow()">Round-trip</button>
-                        <button type="button" class="btn btn-secondary" id="btnOneWay" onclick="hideShow()">One-way</button>
+                    <div class="btn-group-md col-md-3"><br>
+                        <button type="button" class="btn btn-primary" id="btnRoundTrip" onclick="showReturning()">Round-trip</button>
+                        <button type="button" class="btn btn-primary" id="btnOneWay" onclick="hideReturning()">One-way</button>
                     </div>
-                    <hr>
-                </div>
+                </div><hr>
                 <div class="form-group row">
                     <div class="col-md-6">
                         <input type="text" id="from" class="form-control" placeholder="From" required>
@@ -145,31 +144,29 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="date" class="form-control" placeholder="Departing" id="departing" required>
+                        <input type="text" class="form-control" placeholder="Departing" id="departing" required>    
                     </div>
                     <div class="col-md-6">
-                        <input type="date" class="form-control" placeholder="Returning" id="returning" required>
+                        <input type="text" class="form-control" placeholder="Returning" id="returning" required>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-12">
-                        <div class="input-group lh-dropdown-spinner">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="input-group lh-dropdown-spinner back">
                             <span class="input-group-btn">
-                                    <button type="button" class="btn btn-secondary" id="btnDecrease" onclick="decrease()">-</button>
-                                </span>
-                            <div class="">
-                                <select class="form-control" id="flightsFormAdults">
-                                        <option selected="selected" value="1">1 Adult</option>
-                                        <option value="2">2 Adults</option>
-                                        <option value="3">3 Adults</option>
-                                        <option value="4">4 Adults</option>
-                                        <option value="5">5 Adults</option>
-                                        <option value="6">6 Adults</option>
-                                    </select>
-                            </div>
+                                <button type="button" class="btn btn-primary" id="btnDecrease" onclick="decreaseAdults()">-</button>
+                            </span>
+                            <select class="form-control" id="flightsFormAdults">
+                                <option selected="selected" value="1">1 Adult</option>
+                                <option value="2">2 Adults</option>
+                                <option value="3">3 Adults</option>
+                                <option value="4">4 Adults</option>
+                                <option value="5">5 Adults</option>
+                                <option value="6">6 Adults</option>
+                            </select>
                             <span class="input-group-btn">
-                                    <button type="button" class="btn btn-secondary" id="btnIncrease" onclick="increase()">+</button>
-                                </span>
+                                <button type="button" class="btn btn-primary" id="btnIncrease" onclick="increaseAdults()">+</button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -221,6 +218,7 @@
 
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/Offer.js"></script>
     <script type="text/javascript" src="js/loadIndex.js"></script>
     <script type="text/javascript" src="js/City.js"></script>

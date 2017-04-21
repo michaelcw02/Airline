@@ -17,6 +17,7 @@ function showMap(event) {
 
 function doValidate() {
     if (areBlanks) {
+        window.alert("blanco");
         //make the pop up!
     }
 

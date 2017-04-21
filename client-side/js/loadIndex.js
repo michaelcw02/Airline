@@ -3,6 +3,9 @@ let attributes;
 function loadPage() {
     attributes = new Preload();
     loadCarousel();
+    $("#departing").datepicker({ minDate: new Date() });
+    $("#returning").datepicker({ minDate: new Date() });
+
 }
 
 //THIS WILL BE THE CONEXION TO THE BACKEND IN ORDER TO RETRIEVE OFFERS
@@ -51,26 +54,27 @@ function loadCarousel() {
     $('#advertisement-carousel').carousel();
 }
 
-function hideShow(){
-    $("#btnOneWay").click(function(){
-       $("#returning").hide();
-    });
-    $("#btnRoundTrip").click(function(){
-        $("#returning").show();
-    });
+function hideReturning(){
+    $("#returning").hide();
 }
 
-function increase(){
-    var valueSelected=$('select[id=flightsFormAdults]').val();
-    if(valueSelected != "6"){   
-        $('select[id=flightsFormAdults]').val(newValue);
-    }    
+function showReturning(){
+    $("#returning").show();
 }
 
-function decrease(){
+function increaseAdults(){
+    var valueSelected = $('select[id=flightsFormAdults]').val();
+    if(valueSelected != "6"){
+        var newValue = parseInt(valueSelected);
+        $('select[id=flightsFormAdults]').val(newValue+1);
+    }
+}
+
+function decreaseAdults(){   
     var valueSelected=$('select[id=flightsFormAdults]').val();
     if(valueSelected != "1"){   
-        $('select[id=flightsFormAdults]').val(newValue);
+        var newValue = parseInt(valueSelected);
+        $('select[id=flightsFormAdults]').val(newValue-1);
     }    
 }
 
