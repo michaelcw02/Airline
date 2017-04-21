@@ -147,5 +147,14 @@ h1,h3{
     background-color: #606468;
     width: 200px;
     color:white;
-	
 }
+.text-big{
+  font-size: 20px;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  text-decoration: none;
+  color: white;
+  background-color: black;}
