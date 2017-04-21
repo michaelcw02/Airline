@@ -3,7 +3,6 @@ html {
     min-height: 100%;
 }
 
-
 /*CLASSES*/
 .text-white {
     color: #fff;
@@ -140,4 +139,13 @@ div.tab button {
     position: relative;
     font-size: 0;
     white-space: nowrap;
+}
+h1,h3{
+    font-weight: bold;
+}
+.dropMenu {
+    background-color: #606468;
+    width: 200px;
+    color:white;
+	
 }
