@@ -16,6 +16,7 @@ var myOptions = {
     zoom: 17,
     mapTypeId: 'roadmap'
 }
+var geolocationOption = {maximumAge:60000, timeout:5000, enableHighAccuracy:true}
 
 function initMap() {
     map = new google.maps.Map(divElemMap, myOptions);
@@ -24,7 +25,7 @@ function initMap() {
 function getLocation(event) {
     $('.map-container').show();
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setLocation, showError);
+        navigator.geolocation.getCurrentPosition(setLocation, showError, geolocationOption);
     } else { 
         divElemMap.innerHTML = "Geolocation is not supported by this browser.";
     }
