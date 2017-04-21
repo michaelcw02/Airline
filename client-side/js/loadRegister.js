@@ -1,8 +1,8 @@
 
 function loadRegister() {
-    $('#birthdate').datepicker({ minDate: new Date() });
-    initAutocomplete();
+    $('#birthdate').datepicker({});
     addEventListeners();
+   // initAutocomplete();
 }
 
 function addEventListeners() {

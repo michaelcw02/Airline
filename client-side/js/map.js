@@ -7,40 +7,48 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+var divElemMap = document.getElementById('map');
+var map;
+var myOptions = {
+    center: { lat: 9.998563, lng: -84.123851 },
+    zoom: 17,
+    mapTypeId: 'roadmap'
+}
+
+function initMap() {
+    map = new google.maps.Map(divElemMap, myOptions);
+}
+
 function getLocation(event) {
-    let msg = document.getElementById('map');
     $('.map-container').show();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation, showError);
     } else { 
-        msg.innerHTML = "Geolocation is not supported by this browser.";
+        divElemMap.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
+
 function setLocation(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let latlon = new google.maps.LatLng(lat, lon);
 
-    var myOptions = {
-    center:latlon,zoom:14,
-    mapTypeId:google.maps.MapTypeId.ROADMAP,
-    mapTypeControl:false,
-    navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-    }
+    myOptions.center = latlon;
     
     var map = new google.maps.Map(document.getElementById("map"), myOptions);
-    var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
+
+    markOpc = { position:latlon,
+                map:map,
+                title:"You are here!"
+            };
+
+    var marker = new google.maps.Marker(markOpc);
 }
 
 function initAutocomplete() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -33.8688, lng: 151.2195 },
-        zoom: 13,
-        mapTypeId: 'roadmap'
-    });
 
     // Create the search box and link it to the UI element.
-    var input = document.getElementById('direction');
+    var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -100,19 +108,18 @@ function initAutocomplete() {
 }
 
 function showError(error) {
-    let msg = document.getElementById('map');
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            msg.innerHTML = "User denied the request for Geolocation."
+            divElemMap.innerHTML = "User denied the request for Geolocation."
             break;
         case error.POSITION_UNAVAILABLE:
-            msg.innerHTML = "Location information is unavailable."
+            divElemMap.innerHTML = "Location information is unavailable."
             break;
         case error.TIMEOUT:
-            msg.innerHTML = "The request to get user location timed out."
+            divElemMap.innerHTML = "The request to get user location timed out."
             break;
         case error.UNKNOWN_ERROR:
-            msg.innerHTML = "An unknown error occurred."
+            divElemMap.innerHTML = "An unknown error occurred."
             break;
     }
 }
