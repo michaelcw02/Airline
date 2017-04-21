@@ -124,6 +124,22 @@
                 <br>
                 <div class='row'>
                     <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center label'>Direction:</div>
+                        <div class='col-sm-3'><input type='text' id='direction' class='form-control' placeholder="Alajuela, Costa Rica"></div>
+                        <div class="col-sm-1"><button type="button" class="btn btn-success" id="getDirection">Get Direction</button></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container map-container">
+                        <div id="map">
+                            <!-- THE MAP WILL GO HERE -->
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
                         <label class="checkbox-inline">
                             <input type="checkbox" name="checkbox" id="agree">
                             I have read and agree to the Terms and Conditions and Privacy Policy
@@ -179,7 +195,9 @@
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts"></script>
     <script type="text/javascript" src="js/loadRegister.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
 </body>
 
 </html>
