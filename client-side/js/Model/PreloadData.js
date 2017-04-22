@@ -41,10 +41,6 @@ function loadFlights(cities = []) {
 function loadDiscounts(flights) {
     let discounts = [];
     
-    for (let i in flights) {
-        console.log(i, flights[i].countryFrom.code, flights[i].countryTo.code);
-    }
-
     discounts.push(new Discount(flights[0], getRandomInt(10, 40), 'Let\'s go to Los Angeles!', 'images/background-3.jpg'));
     discounts.push(new Discount(flights[2], getRandomInt(10, 40), 'Let us take you to Boston!', 'images/background-6.jpg'));
     discounts.push(new Discount(flights[4], getRandomInt(10, 40), 'Wanna go to Miami?', 'images/background-2.jpg'));
