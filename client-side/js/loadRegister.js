@@ -9,13 +9,10 @@ function loadRegister() {
 function addEventListeners() {
     $('#registrationForm').on('submit', doValidate);
     $('#getDirection').on('click', getLocation);
-<<<<<<< HEAD
 }
 
 function showMap(event) {
     $('.map-container').show();
-=======
->>>>>>> 3edc2eeafc1cdd4173648c63a54fdf9104fa1c72
 }
 
 function doValidate() {
