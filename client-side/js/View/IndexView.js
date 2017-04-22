@@ -7,12 +7,12 @@ function loadPage() {
 }
 
 function addElementsProperties() {
-    $('#btnRoundTrip').click( controller.showReturning() );
-    $('#btnOneWay').click( controller.hideReturning() );
+    $('#btnRoundTrip').click( () => $("#returning").show() );
+    $('#btnOneWay').click( () => $("#returning").hide() );
     $("#departing").datepicker({ minDate: new Date() });
-    $("#returning").datepicker( controller.returningDate() );
-    $('#btnDecrease').click( controller.decreaseAdults() );
-    $('#btnIncrease').click( controller.increaseAdults() );
+    $("#returning").datepicker( () => controller.returningDate() );
+    $('#btnDecrease').click( () =>  controller.decreaseAdults() );
+    $('#btnIncrease').click( () => controller.increaseAdults() );
 }
 
 $(loadPage);

@@ -9,7 +9,6 @@ IndexController.prototype = {
     },
     showCarousel: function () {
         discounts = this.airlineController.discounts();
-        console.log(discounts);
         for (let i in discounts) {
             let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
             $(element).appendTo( this.view.$('.carousel-indicators') );
