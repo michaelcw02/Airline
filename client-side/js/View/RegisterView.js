@@ -1,13 +1,17 @@
-
-
 var model;
 var controller;
 
-function pageLoad(event){
+function loadPage(event){
     model = new RegisterModel();
     controller = new RegisterController(model, window);
+    addElementsProperties();
 
-    $('#birthdate').datepicker();
-    $('#registrationForm').on('submit', doValidate);
-    $('#getDirection').on('click', getLocation);
 }
+
+function addElementsProperties() {
+    $('#birthdate').datepicker({ minDate: new Date() });
+    $('#registrationForm').submit( () => controller.doValidate() );
+    $('#getDirection').click( () => controller.location() )
+}
+
+$(loadPage);
