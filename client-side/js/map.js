@@ -7,7 +7,6 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-
 var key = 'AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts';
 var divElemMap = document.getElementById('map');
 var map;
