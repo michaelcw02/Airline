@@ -9,5 +9,6 @@ City.prototype = {
         this.name = name;
         this.country = country;
     },
-    completo: function (sep) { return this.code + sep + this.name; }
+    completo: function (sep) { return this.code + sep + this.name; },
+    nameCountry: function (sep) { return this.name + sep + this.country; }
 }
