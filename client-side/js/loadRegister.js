@@ -1,15 +1,14 @@
 
 
 function loadRegister() {
-    $('#birthdate').datepicker({ minDate: new Date() });
-   // initAutocomplete();
+    $('#birthdate').datepicker({});
     addEventListeners();
+   // initAutocomplete();
 }
 
 function addEventListeners() {
     $('#registrationForm').on('submit', doValidate);
     $('#getDirection').on('click', getLocation);
-    $('#direction').on('focus', showMap);
 }
 
 function showMap(event) {
@@ -30,8 +29,9 @@ function doValidate() {
       alert("This is not a valid phone number");
       return false;
   }
-    
 }
+
+
 
 function areBlanks() {
     let blanks = false;
@@ -73,7 +73,6 @@ function samePassword(){
 		}
 	});
 }
-
 
 function submitRegistration() {
 
