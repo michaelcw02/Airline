@@ -1,8 +1,8 @@
 var controller;
 
 function loadPage() {
-    addElementsProperties();
     controller = new IndexController(window);
+    addElementsProperties();
     controller.showCarousel();
 }
 
