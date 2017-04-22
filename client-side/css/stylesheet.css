@@ -171,9 +171,7 @@ nav {
 .back{
     z-index: 0;
 }
-h1,h3{
-    font-weight: bold;
-}
+
 .dropMenu {
     background-color: #606468;
     width: 200px;
