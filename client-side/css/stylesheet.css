@@ -151,6 +151,10 @@ h1,h3{
 .text-big{
   font-size: 20px;
 }
+.img-small{
+  width: 250px; height: 200px;
+}
+
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
@@ -158,3 +162,5 @@ h1,h3{
   text-decoration: none;
   color: white;
   background-color: black;}
+
+ 
