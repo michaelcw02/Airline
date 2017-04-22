@@ -1,8 +1,14 @@
+
+
 let attributes;
 
-function loadPage() {
+function loadPage(event) {
     attributes = new Preload();
     loadCarousel();
+    var roundTrip= document.getElementById("btnRoundTrip");
+    roundTrip.addEventListener("click",showReturning);
+    var oneWay= document.getElementById("btnOneWay");
+    oneWay.addEventListener("click",hideReturning);
     $("#departing").datepicker({ minDate: new Date() });
     $("#returning").datepicker({ minDate: new Date() });
 
@@ -71,7 +77,7 @@ function increaseAdults(){
 }
 
 function decreaseAdults(){   
-    var valueSelected=$('select[id=flightsFormAdults]').val();
+    var valueSelected = $('select[id=flightsFormAdults]').val();
     if(valueSelected != "1"){   
         var newValue = parseInt(valueSelected);
         $('select[id=flightsFormAdults]').val(newValue-1);

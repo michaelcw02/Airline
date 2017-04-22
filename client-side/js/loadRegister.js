@@ -1,7 +1,8 @@
 
+
 function loadRegister() {
     $('#birthdate').datepicker({ minDate: new Date() });
-    initAutocomplete();
+   // initAutocomplete();
     addEventListeners();
 }
 
@@ -16,11 +17,20 @@ function showMap(event) {
 }
 
 function doValidate() {
-    if (areBlanks) {
-        window.alert("blanco");
-        //make the pop up!
+   // if (areBlanks) 
+   //    window.alert("ESPACIOS EN BLANCO");   //make the pop up!
+  //  if (!samePassword)
+   //     window.alert("CONTRASEÑAS DIFERENTES"); 
+    var regex = /^\(?\d{3}\)?-?\s*-?\d{4}$/;
+    if(regex.test($('#telephone').val())){
+  
+     return true;
     }
-
+    else{
+      alert("This is not a valid phone number");
+      return false;
+  }
+    
 }
 
 function areBlanks() {
@@ -40,6 +50,30 @@ function isBlank(element) {
         return true;
     }
 }
+
+function isNumber(){
+    var regex = /^\(?\d{3}\)?-?\s*-?\d{4}$/;
+    if(regex.test(phno.telephone.value)){
+  
+    return true;
+    }
+    else{
+      alert("This is not a valid phone number");
+      return false;
+  }
+}
+
+
+function samePassword(){
+   	$('#passwordRepeat').keyup(function(){
+		var pass_1 = $('#password').val();
+		var pass_2 = $('#passwordRepeat').val();
+		if(pass_1 != pass_2 && pass_2 != ''){
+			return true;
+		}
+	});
+}
+
 
 function submitRegistration() {
 
