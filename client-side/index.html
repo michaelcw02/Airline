@@ -229,11 +229,103 @@
         </footer>
     </div>
 
+    <script>    //Model
+        
+        let attributes;
+        function IndexModel(){
+            this.IndexModel();
+        }
+
+        IndexModel.prototype = {
+            IndexModel: function(){
+                this.array = this.loadDiscounts();
+                //this.citys = this.initCitys();
+                //this.flights = this.initFlights();
+                //this.buscados = [];
+            },
+
+            loadDiscounts: function () {
+                var array = [
+                new Offer('SJO', 'LHR', '$746', 'How about London?', 'images/background-1.jpg'),
+                new Offer('SJO', 'MIA', '$292', 'Wanna go to Miami?', 'images/background-2.jpg'),
+                new Offer('SJO', 'LAX', '$419', 'Let\'s go to Los Angeles!', 'images/background-3.jpg'),
+                new Offer('SJO', 'NRT', '$954', 'Japan is just Amazing!', 'images/background-4.jpg'),
+                new Offer('SJO', 'BOG', '$317', 'Have you thought about Bogotá?', 'images/background-5.jpg'),
+                new Offer('SJO', 'BOS', '$426', 'Let us take you to Boston!', 'images/background-6.jpg')
+                ];
+            },
+
+            initCitys: function() {
+                
+            }
+        }
+
+    </script>
+    <script>    //Controller
+
+        function IndexController(model,view){
+            this.IndexController(model,view)
+        }
+
+        IndexController.prototype = {
+            IndexController: function(model,view){
+                this.model = model;
+                this.view = view;
+            },
+
+            hideReturning: function(){
+                $("#returning").hide();
+            },
+
+            showReturning: function(){
+                $("#returning").show();
+            },
+
+            increaseAdults: function(){
+                var valueSelected = $('select[id=flightsFormAdults]').val();
+                if(valueSelected != "6"){
+                    var newValue = parseInt(valueSelected);
+                    $('select[id=flightsFormAdults]').val(newValue+1);
+                }
+            },
+
+            decreaseAdults: function(){   
+                var valueSelected = $('select[id=flightsFormAdults]').val();
+                if(valueSelected != "1"){   
+                    var newValue = parseInt(valueSelected);
+                    $('select[id=flightsFormAdults]').val(newValue-1);
+                }   
+            }
+        }
+
+    </script>
+    <script>    //View
+        
+        var model;
+        var controller;
+        function pageLoad(event){
+            model = new IndexModel();
+            controller = new IndexController(model, window);
+
+            //attributes = new Preload();
+            //loadCarousel();
+            $("#btnRoundTrip").click(function() {controller.showReturning()});
+            $("#btnOneWay").click(function() {controller.hideReturning()});
+            jQuery(function() { $("#departing").datepicker(); })
+            jQuery(function() { $("#returning").datepicker(); })
+
+        }
+
+        IndexView.prototype = {
+
+        }
+
+    </script>
+
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/Offer.js"></script>
-    <script type="text/javascript" src="js/loadIndex.js"></script>
     <script type="text/javascript" src="js/City.js"></script>
     <script type="text/javascript" src="js/Flight.js"></script>
     <script type="text/javascript" src="js/Discount.js"></script>
