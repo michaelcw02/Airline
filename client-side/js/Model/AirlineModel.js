@@ -1,9 +1,9 @@
-function IndexModel() {
-    this.IndexModel();
+function AirlineModel() {
+    this.AirlineModel();
 }
 
-IndexModel.prototype = {
-    IndexModel: function() {
+AirlineModel.prototype = {
+    AirlineModel: function() {
         var preload = new PreloadData();
         this.cities = preload.cities;
         this.flights = preload.flights;
