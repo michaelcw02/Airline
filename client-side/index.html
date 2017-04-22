@@ -146,22 +146,24 @@
                         <button type="button" class="btn btn-primary" id="btnRoundTrip">Round-trip</button>
                         <button type="button" class="btn btn-primary" id="btnOneWay">One-way</button>
                     </div>
-                </div><hr>
-
+                </div>
+                <hr>
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <!-- AUTOCOMPLETE FROM -->
-                        <select name="ctryFrom" id="ctryFrom">
-                            
-                        </select>
-                        <input type="text" id="from" class="form-control" placeholder="From" required>
+                        <div class="input-group">
+                            <span class="input-group-addon"><b>From</b></span>
+                            <select class='form-control' name="ctryFrom" id='ctryFrom'>
+                                <option value="0">All cities</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <!-- AUTOCOMPLETE TO -->
-                        <select name="ctryTo" id="ctryTo">
-                            
-                        </select>
-                        <input type="text" id="to" class="form-control" placeholder="To" required>
+                        <div class="input-group">
+                            <span class="input-group-addon"><b>To</b></span>
+                            <select class='form-control' name="ctryTo" id='ctryTo'>
+                                <option value="0">All cities</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">

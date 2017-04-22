@@ -20,15 +20,7 @@ function doValidate() {
    //    window.alert("ESPACIOS EN BLANCO");   //make the pop up!
   //  if (!samePassword)
    //     window.alert("CONTRASEÑAS DIFERENTES"); 
-    var regex = /^\(?\d{3}\)?-?\s*-?\d{4}$/;
-    if(regex.test($('#telephone').val())){
-  
-     return true;
-    }
-    else{
-      alert("This is not a valid phone number");
-      return false;
-  }
+    window.alert("hola");
 }
 
 
