@@ -3,7 +3,6 @@ html {
     min-height: 100%;
 }
 
-
 /*CLASSES*/
 .text-white {
     color: #fff;
@@ -150,7 +149,6 @@ nav {
     font-size: 0;
     white-space: nowrap;
 }
-
 .label {
     font-size: 18px;
     color: #000;
@@ -173,3 +171,21 @@ nav {
 .back{
     z-index: 0;
 }
+
+.dropMenu {
+    background-color: #606468;
+    width: 200px;
+    color:white;
+}
+.text-big{
+    font-size: 20px;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+}
+
