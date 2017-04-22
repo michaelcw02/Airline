@@ -10,7 +10,8 @@ function addElementsProperties() {
     $('#btnRoundTrip').click( () => $("#returning").show() );
     $('#btnOneWay').click( () => $("#returning").hide() );
     $("#departing").datepicker({ minDate: new Date() });
-    $("#returning").datepicker( () => controller.returningDate() );
+    $("#departing").change( () => controller.setMinReturnDate() );
+    $("#returning").datepicker({ minDate: new Date() } );
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
 }

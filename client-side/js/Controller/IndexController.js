@@ -45,9 +45,11 @@ IndexController.prototype = {
             this.view.$('select[id=flightsFormAdults]').val(newValue - 1);
         }
     },
-    returningDate: function() {
+    setMinReturnDate: function() {
         let departDate = this.view.$('#departing').val();
+        console.log(departDate);
         //AQUI DEBE VALIDAR SI departDate TIENE REALMENTE EL FORMATO ESPERADO.
-        return new Date(departDate);
+        this.view.$('#returning').datepicker('destroy');
+        this.view.$('#returning').datepicker( { minDate: new Date(departDate) } );
     }
 }
