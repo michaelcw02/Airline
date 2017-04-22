@@ -8,11 +8,11 @@ IndexController.prototype = {
         this.airlineController = new AirlineController();
     },
     showCarousel: function () {
-        discounts = this.airlineController.discounts;
+        discounts = this.airlineController.discounts();
         console.log(discounts);
         for (let i in discounts) {
             let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
-            $(element).appendTo('.carousel-indicators');
+            $(element).appendTo( this.view.$('.carousel-indicators') );
             element = '<div class="item"><img class="img-rounded" src="' + discounts[i].path + '">';
             element += '<div class="carousel-caption">';
             let flight = discounts[i].flight;
@@ -20,11 +20,11 @@ IndexController.prototype = {
             element += '<h3>' + discounts[i].description + '</h3>';
             element += '<h3><a href="">' + 'Limited offer for ' + discounts[i].discount + '% </a></h3>'
             element += '</div>   </div>';
-            $(element).appendTo('.carousel-inner');
+            $(element).appendTo( this.view.$('.carousel-inner') );
         }
-        $('.item').first().addClass('active');
-        $('.carousel-indicators > li').first().addClass('active');
-        $('#advertisement-carousel').carousel();
+        this.view.$('.item').first().addClass('active');
+        this.view.$('.carousel-indicators > li').first().addClass('active');
+        this.view.$('#advertisement-carousel').carousel();
     },
     hideReturning: function () {
         this.view.$("#returning").hide();
@@ -45,5 +45,10 @@ IndexController.prototype = {
             var newValue = parseInt(valueSelected);
             this.view.$('select[id=flightsFormAdults]').val(newValue - 1);
         }
+    },
+    returningDate: function() {
+        let departDate = this.view.$('#departing').val();
+        //AQUI DEBE VALIDAR SI departDate TIENE REALMENTE EL FORMATO ESPERADO.
+        return new Date(departDate);
     }
 }
