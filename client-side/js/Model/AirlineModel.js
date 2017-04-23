@@ -7,6 +7,7 @@ AirlineModel.prototype = {
         this.cities = this.loadCities();
         this.flights = this.loadFlights(this.cities);
         this.discounts = this.loadDiscounts(this.flights);
+        this.search = [];
     },
     loadCities: function() {
         let cities = [];

@@ -10,23 +10,21 @@ function loadPage() {
 function addElementsProperties() {
     //BASIC ELEMENTS
     $("#departing").datepicker({ minDate: new Date() });
-    $("#returning").datepicker({ minDate: new Date() } );
+    $("#returning").datepicker({ minDate: new Date() });
     $('#ctryFrom').autocomplete( () => controller.setUpCountriesFrom() );
 
     //EVENT HANDLERS
     $('#btnRoundTrip').click( () => $("#returning").show() );
     $('#btnOneWay').click( () => $("#returning").hide() );
     $("#departing").change( () => controller.setMinReturnDate() );
-    $("#departing").datepicker({ minDate: new Date() });
-    //showCities($("#from").first());
-    //showCities($("#to").first());
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
+    $('#btnSearchFlights').click( () => controller.searchFlights() );
     $('#from').change( () => controller.setUpCountriesTo() );
 }
 
-function showCities(){
-    window.alert("hello");
+function showSearchFlights(){
+    
 }
 
 $(loadPage);

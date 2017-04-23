@@ -12,5 +12,9 @@ AirlineController.prototype = {
     },
     discounts: function() {
         return this.model.discounts;
+    },
+    flights: function() {
+        return this.model.flights;
     }
+
 }

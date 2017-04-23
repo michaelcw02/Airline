@@ -8,7 +8,7 @@ IndexController.prototype = {
         this.airlineController = new AirlineController();
     },
     loadCities: function () {
-        let cities = this.airlineController.cities();
+        let cities = this.airlineController.cities(); 
         fillWithCities(this.view.$('#ctryFrom'), cities);
         fillWithCities(this.view.$('#ctryTo'), cities);
         this.setUpCitiesFrom();
@@ -32,6 +32,11 @@ IndexController.prototype = {
         this.view.$('.carousel-indicators > li').first().addClass('active');
         this.view.$('#advertisement-carousel').carousel();
     },
+    showSearchFlights: function () {
+        flights = this.airlineController.flights();
+        
+    },
+    
     hideReturning: function () {
         this.view.$("#returning").hide();
     },
@@ -59,6 +64,15 @@ IndexController.prototype = {
             this.view.$('#returning').datepicker('destroy');
             this.view.$('#returning').datepicker({ minDate: new Date(departDate) });
         }
+    },
+    searchFlights: function() { 
+      let flights = this.airlineController.flights();
+      let cityFrom = this.view.$('#cityFrom').code; 
+      let cityTo = this.view.$('#cityTo').code;
+      this.airlineController.search = flights.filter(
+          function (x) { return ( (x.cityFrom == flights.cityFrom) && (x.cityTo == flights.cityTo) ) }
+      );
+      this.view.showSearchFlights();
     },
     setUpCitiesFrom: function () {
 
