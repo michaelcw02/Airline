@@ -3,9 +3,13 @@ html {
     min-height: 100%;
 }
 
+
 /*CLASSES*/
 .text-white {
     color: #fff;
+}
+.bg-black{
+     background:rgba(0,0,0,.5);
 }
 
 .icon {
@@ -188,4 +192,51 @@ nav {
     text-decoration: none;
     color: white;
     background-color: black;
+}
+
+
+.contact-us-body {
+	background:url(wallpaper.jpg); /* Nuestra imagen de fondo */
+	background-repeat:no-repeat; /* Indicamos que no se repetira */
+	background-size:cover; /* Encajamos la imagen al 100% del ancho */
+	background-attachment: fixed; /* Establecemos una posicion fija para la imagen */
+	font-family:helvetica, arial, sans-serif;
+	line-height:20px;
+}
+
+article {
+	background:rgba(0,0,0,.5);
+	padding:20px;
+	margin:20px 0;
+	color:white;
+	box-shadow:0 5px 5px 3px rgba(0, 0, 0, 0.25);
+}
+
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+{
+	color: white;
+}
+
+article hr {
+	background:grey;
+	height:3px;
+	border:none;
+}
+
+article p {
+	line-height: 25px;
+}
+
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article p, 
+article hr {
+	margin-bottom: 20px;
 }
