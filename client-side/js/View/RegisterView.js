@@ -9,7 +9,10 @@ function loadPage(event){
 }
 
 function addElementsProperties() {
-    $('#birthdate').datepicker({ minDate: new Date() });
+    //BASIC ELEMENTS
+    $('#birthdate').datepicker();
+
+    //EVENT HANDLERS
     $('#registrationForm').submit( () => controller.doValidate() );
     $('#getDirection').click( () => controller.location() )
 }

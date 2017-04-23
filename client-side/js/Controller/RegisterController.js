@@ -1,8 +1,15 @@
 
-
 function RegisterController(model,view){
     this.RegisterController(model,view)
 }
+/*
+//ONE OF THESE IS THE RIGHT OPTION
+function RegisterController(view) {
+    this.view = view;
+    this.airlineModel = new AirlineModel();
+    this.registerModel = new RegisterModel();
+}
+*/
 
 RegisterController.prototype = {
     RegisterController: function(model,view){
