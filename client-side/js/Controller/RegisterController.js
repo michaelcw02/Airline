@@ -1,23 +1,21 @@
-
+//ONE OF THESE CONSTRUCTORS IS THE RIGHT OPTION
+/*
 function RegisterController(model,view){
     this.RegisterController(model,view)
 }
-/*
-//ONE OF THESE IS THE RIGHT OPTION
-function RegisterController(view) {
-    this.view = view;
-    this.airlineModel = new AirlineModel();
-    this.registerModel = new RegisterModel();
-}
 */
+function RegisterController(view) {
+    this.RegisterController(view);
+}
 
 RegisterController.prototype = {
-    RegisterController: function(model,view){
-        this.model = model;
+    RegisterController: function(view){
         this.view = view;
+        this.airlineController = new AirlineController();
+        this.registerModel = new RegisterModel();
     },
-    location: function() {
-        return getLocation();
+    getLocation: function() {
+        return registerModel.getLocation();
     },
     areBlanks: function() {
         let blanks = false;
