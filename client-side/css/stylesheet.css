@@ -149,6 +149,7 @@ nav {
     font-size: 0;
     white-space: nowrap;
 }
+
 .label {
     font-size: 18px;
     color: #000;
@@ -168,6 +169,7 @@ nav {
     height: 400px;
     display: none;
 }
+
 .back{
     z-index: 0;
 }
