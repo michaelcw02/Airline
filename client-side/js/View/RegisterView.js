@@ -1,11 +1,8 @@
-var model;
 var controller;
 
 function loadPage(event){
-    model = new RegisterModel();
-    controller = new RegisterController(model, window);
+    controller = new RegisterController(window);
     addElementsProperties();
-
 }
 
 function addElementsProperties() {
@@ -13,8 +10,8 @@ function addElementsProperties() {
     $('#birthdate').datepicker();
 
     //EVENT HANDLERS
+    $('#getDirection').click( () => controller.getLocation() )
     $('#registrationForm').submit( () => controller.doValidate() );
-    $('#getDirection').click( () => controller.location() )
 }
 
 $(loadPage);
