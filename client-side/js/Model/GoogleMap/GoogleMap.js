@@ -1,13 +1,3 @@
-const geolocationOption = {
-    maximumAge:60000, 
-    timeout:5000, 
-    enableHighAccuracy:true
-}
-var defaultMapOptions = {
-    center: { lat: 9.998563, lng: -84.123851 },
-    zoom: 17,
-    mapTypeId: 'roadmap'
-}
 
 function GoogleMap(key, divElement, mapOptions = defaultMapOptions) {
     this.GoogleMap(key, divElement, mapOptions);
@@ -18,38 +8,58 @@ GoogleMap.prototype = {
         this.key = key;
         this.divElement = divElement;
         this.mapOptions = mapOptions;
-        this.initMap();
+        //this.initMap();
     },
     initMap: function() {
-        this.map = new GoogleMap.maps.Map(divElement, myOptions);
+        this.map = new GoogleMap.maps.Map(this.divElement, this.mapOptions);
     },
     setLocation: function(position) {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         let latlon = new google.maps.LatLng(lat, lon);
-/*
-//FOR LATER USES
-        let object = getRequest(lat, lon).results;
-        console.log(object);
-        setDirection(object);
-*/
 
-        myOptions.center = latlon;
+        console.log(latlon);
         
-        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+        this.mapOptions.center = latlon;
+        
+        var map = new google.maps.Map(this.divElement, this.mapOptions);
 
-        markOpc = { position:latlon,
-                    map:map,
-                    title:"You are here!"
-                };
-
+        markOpc = { 
+            position: latlng,
+            map: map,
+            title: "You are here!"
+        };
         var marker = new google.maps.Marker(markOpc);
     },
-    getLocationName: function(lat, lng) {
+    showError: function(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                divElemMap.innerHTML = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                divElemMap.innerHTML = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                divElemMap.innerHTML = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                divElemMap.innerHTML = "An unknown error occurred."
+                break;
+        }
+    },
+    getLocationName: function(latlng) {
+        let lat = latlng.lat;
+        let lng = latlng.lng;
         let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + lng +'&key=' + key;
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", url, false ); // false for synchronous request
         xmlHttp.send( null );
-        return JSON.parse(xmlHttp.responseText);
+        return JSON.parse(xmlHttp.responseText).results;
     }
+}
+
+var defaultMapOptions = {
+    center: { lat: 9.998563, lng: -84.123851 },
+    zoom: 17,
+    mapTypeId: 'roadmap'
 }
