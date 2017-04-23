@@ -7,10 +7,10 @@
 }
 
 body {
-	background:url(wallpaper.jpg); /* Nuestra imagen de fondo */
-	background-repeat:no-repeat; /* Indicamos que no se repetira */
-	background-size:cover; /* Encajamos la imagen al 100% del ancho */
-	background-attachment: fixed; /* Establecemos una posicion fija para la imagen */
+	background:url(wallpaper.jpg); 
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-attachment: fixed; 
 	font-family:helvetica, arial, sans-serif;
 	line-height:20px;
 }

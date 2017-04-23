@@ -185,7 +185,15 @@ nav {
 .img-small{
   width: 250px; height: 200px;
 }
-
+.back{
+     background:rgba(0,0,0,.5);
+}
+.button{
+	margin-top:15px;
+}
+.text-med{
+	 font-size: 16px;
+}
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
