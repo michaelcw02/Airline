@@ -1,43 +1,36 @@
 const GoogleMapKey = 'AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts';
-var geolocationOption = {maximumAge:60000, timeout:5000, enableHighAccuracy:true}
-
-
-//ONE OF THESE CONSTRUCTORS IS THE RIGHT OPTION
-/*
-function RegisterController(model,view){
-    this.RegisterController(model,view)
-}
-*/
 function RegisterController(view) {
     this.RegisterController(view);
 }
 
 RegisterController.prototype = {
-    RegisterController: function(view){
+    RegisterController: function (view) {
         this.view = view;
-        //this.airlineController = new AirlineController();
-        //this.registerModel = new RegisterModel();
         var divElemMap = document.getElementById('map');
         this.gMap = new GoogleMap(GoogleMapKey, divElemMap);
-        console.log(this.gMap);
+        //this.airlineController = new AirlineController();
+        //this.registerModel = new RegisterModel();
     },
-    getLocation: function() {
+    completeLocation: () => {
+
+    },
+    getLocation: function () {
         $('.map-container').show(); //CONTROLLER
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(   this.gMap.setLocation, 
-                                                        this.gMap.showError, 
-                                                        this.geolocationOption
-                                                     );
-        } else { 
+            navigator.geolocation.getCurrentPosition(
+                (position) => this.gMap.setLocation(position, () => this.setLocationName() ),
+                (error) => this.gMap.showError(error)
+            );
+        } else {
             $('#map').innerHTML = "<h2>Geolocation is not supported by this browser.</h2>";
         }
     },
     setLocationName: function () {
-        let latlng = map.mapOptions.center;
-        let results = map.getLocationName(latlng);
-        $('#direction').val(array[1].formatted_address);
+        let latlng = this.gMap.mapOptions.center;
+        let results = this.gMap.getLocationName(latlng);
+        $('#direction').val(results[0].formatted_address);
     },
-    areBlanks: function() {
+    areBlanks: function () {
         let blanks = false;
         blanks = isBlank($('#name')[0]);
         blanks = isBlank($('#lastname')[0]);
@@ -47,14 +40,14 @@ RegisterController.prototype = {
         blanks = isBlank($('#passwordRepeat')[0]);
         return blanks;
     },
-    doValidate: function() {
-    // if (areBlanks) 
-    //    window.alert("ESPACIOS EN BLANCO");   //make the pop up!
-    //  if (!samePassword)
-    //     window.alert("CONTRASEÑAS DIFERENTES"); 
+    doValidate: function () {
+        // if (areBlanks) 
+        //    window.alert("ESPACIOS EN BLANCO");   //make the pop up!
+        //  if (!samePassword)
+        //     window.alert("CONTRASEÑAS DIFERENTES"); 
         window.alert("hola");
     },
-    isBlank: function(element) {
+    isBlank: function (element) {
         element.classList.remove('invalid');
         if (element.value.length == 0) {
             element.classList.add('invalid');
@@ -62,24 +55,36 @@ RegisterController.prototype = {
         }
     },
 
-    isNumber: function(){
+    isNumber: function () {
         var regex = /^\(?\d{3}\)?-?\s*-?\d{4}$/;
-        if(regex.test(phno.telephone.value)){
+        if (regex.test(phno.telephone.value)) {
             return true;
         }
-        else{
+        else {
             alert("This is not a valid phone number");
             return false;
         }
     },
 
-    samePassword: function(){
-        $('#passwordRepeat').keyup(function(){
+    samePassword: function () {
+        $('#passwordRepeat').keyup(function () {
             var pass_1 = $('#password').val();
             var pass_2 = $('#passwordRepeat').val();
-            if(pass_1 != pass_2 && pass_2 != ''){
+            if (pass_1 != pass_2 && pass_2 != '') {
                 return true;
             }
         });
+    }
+}
+
+
+function setLocation(gMap) {
+    return function (position) {
+        gMap.setLocation(position);
+    }
+}
+function showError(gMap) {
+    return function (error) {
+        gMap.showError(error);
     }
 }

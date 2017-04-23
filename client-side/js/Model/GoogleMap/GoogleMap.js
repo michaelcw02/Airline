@@ -8,20 +8,15 @@ GoogleMap.prototype = {
         this.key = key;
         this.divElement = divElement;
         this.mapOptions = mapOptions;
-        //this.initMap();
     },
     initMap: function() {
         this.map = new GoogleMap.maps.Map(this.divElement, this.mapOptions);
     },
-    setLocation: function(position) {
+    setLocation: function(position, callback) {
         let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-        let latlon = new google.maps.LatLng(lat, lon);
-
-        console.log(latlon);
-        
-        this.mapOptions.center = latlon;
-        
+        let lng = position.coords.longitude;
+        let latlng = {lat, lng}
+        this.mapOptions.center = latlng;
         var map = new google.maps.Map(this.divElement, this.mapOptions);
 
         markOpc = { 
@@ -30,27 +25,28 @@ GoogleMap.prototype = {
             title: "You are here!"
         };
         var marker = new google.maps.Marker(markOpc);
+        callback();
     },
     showError: function(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                divElemMap.innerHTML = "User denied the request for Geolocation."
+                this.divElement.innerHTML = "User denied the request for Geolocation."
                 break;
             case error.POSITION_UNAVAILABLE:
-                divElemMap.innerHTML = "Location information is unavailable."
+                this.divElement.innerHTML = "Location information is unavailable."
                 break;
             case error.TIMEOUT:
-                divElemMap.innerHTML = "The request to get user location timed out."
+                this.divElement.innerHTML = "The request to get user location timed out."
                 break;
             case error.UNKNOWN_ERROR:
-                divElemMap.innerHTML = "An unknown error occurred."
+                this.divElement.innerHTML = "An unknown error occurred."
                 break;
         }
     },
     getLocationName: function(latlng) {
         let lat = latlng.lat;
         let lng = latlng.lng;
-        let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + lng +'&key=' + key;
+        let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat + ',' + lng +'&key=' + this.key;
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", url, false ); // false for synchronous request
         xmlHttp.send( null );
