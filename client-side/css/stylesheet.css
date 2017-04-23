@@ -140,7 +140,7 @@ div.tab button {
     font-size: 0;
     white-space: nowrap;
 }
-h1,h3{
+h1,h3,h2{
     font-weight: bold;
 }
 .dropMenu {

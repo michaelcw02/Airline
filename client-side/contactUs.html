@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/styleContact.css">
 
 </head>
 
 <body>
+
     <div class="container top-container">
 
         <header>
@@ -112,125 +114,112 @@
             </nav>
         </header>
 
-
-        <div class="carousel-container">
-            <div id="advertisement-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-                <!-- Indicators -->
-                <ol class="carousel-indicators"> </ol>
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner"> </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#advertisement-carousel" role="button" data-slide="prev">
-                    <img class="left" src="images/arrow-left-88-48.png" alt="left">
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#advertisement-carousel" role="button" data-slide="next">
-                    <img class="right" src="images/arrow-right-24-48.png" alt="right">
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="container body-container">
-        <div class="tab navbar-inverse">
-            <button class="active"><img class="icon" src="images/airplane-4-48.png" alt="Flights"><br> Flights</button>
-        </div>
-        <div class="tabcontent text-center">
-            <form action="javascript:searchFlights();" class="form-horizontal">
+        <div class="box">
+            <article>
+                <h1 class="text-center">CONTACT</h1>
+                <hr>
+                <h4>INFORMATION</h4>
                 <div class="row">
-                    <div class="btn-group-md"><br>
-                        <button type="button" class="btn btn-secondary" id="btnRoundTrip" onclick="hideShow()">Round-trip</button>
-                        <button type="button" class="btn btn-secondary" id="btnOneWay" onclick="hideShow()">One-way</button>
-                    </div>
-                    <hr>
-                </div>
-                <div class="form-group row">
                     <div class="col-md-6">
-                        <input type="text" id="from" class="form-control" placeholder="From" required>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" id="to" class="form-control" placeholder="To" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input type="date" class="form-control" placeholder="Departing" id="departing" required>
+                        <div>
+                            <dl>
+                                <dt>Central Office Address:</dt>
+                                <dd>Central Street Alfredo Volio, Province of San José, San José, Costa Rica.</dd>
+                                <dt>Phone:</dt>
+                                <dd><a href="tel:+506-2244-6688">+(506) 2244-6688</a></dd>
+                                <dt>Email:</dt>
+                                <dd><a href="email:contact@starair.com">contact@starair.com</a></dd>
+                            </dl>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <input type="date" class="form-control" placeholder="Returning" id="returning" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <div class="input-group lh-dropdown-spinner">
-                            <span class="input-group-btn">
-                                    <button type="button" class="btn btn-secondary" id="btnDecrease" onclick="decrease()">-</button>
-                                </span>
-                            <div class="">
-                                <select class="form-control" id="flightsFormAdults">
-                                        <option selected="selected" value="1">1 Adult</option>
-                                        <option value="2">2 Adults</option>
-                                        <option value="3">3 Adults</option>
-                                        <option value="4">4 Adults</option>
-                                        <option value="5">5 Adults</option>
-                                        <option value="6">6 Adults</option>
-                                    </select>
-                            </div>
-                            <span class="input-group-btn">
-                                    <button type="button" class="btn btn-secondary" id="btnIncrease" onclick="increase()">+</button>
-                                </span>
+                        <div class="text-center">
+                            <a class="hvr-grow" href="https://www.linkedin.com/"><img src="images/linkedin-3-48.png" alt="LinkedIn"></a>
+                            <a class="hvr-grow" href="https://www.facebook.com/"><img src="images/facebook-3-48.png" alt="Facebook"></a>
+                            <a class="hvr-grow" href="https://www.instagram.com"><img src="images/instagram-48.png" alt="Instagram"></a>
+                            <a class="hvr-grow" href="https://www.twitter.com"><img src="images/twitter-48.png" alt="Instagram"></a>
                         </div>
                     </div>
                 </div>
+                <hr>
+                <h4>CONTACT FORM</h4>
+                <div>
+                    <form>
+                        <div class="form-group row ">
+                            <div class="col-md-6">
+                                <input type="text" id="Name" class="form-control back" placeholder="Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="LastName" class="form-control back" placeholder="LastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="text" id="Country" class="form-control back" placeholder="Country" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="Email" class="form-control back" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <input type="text" id="Subject" class="form-control back" placeholder="Subject" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <textarea id="Question" class="form-control back" placeholder="Your Question" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 align">
+                                    <button type="submit" id="btnSubmit" class="btn btn-primary ">Send your message</button>
+                                </div>
+                            </div>
+                    </form>
+                    </div>
 
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <button type="submit" id="btnSearchFlights" class="btn btn-success">Search Flights</button>
+
+            </article>
+            </div>
+
+
+
+
+            <div class="container footer-container">
+                <div class="row footer-text">
+                    <div class="col-md-4">
+                        <h4 class="text-center">CONTACT US</h4>
+                        <div>
+                            <dl class="dl-horizontal text-center">
+                                <dt>Phone:</dt>
+                                <dd><a href="tel:+506-2244-6688">(506) 2244-6688</a></dd>
+                                <dt>Email:</dt>
+                                <dd><a href="mailto:contact@starair.com">contact@starair.com</a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="text-center">HEADQUARTERS</h4>
+                        <div>
+                            <h5 class="text-center">Universidad Nacional, Lagunilla, Heredia, Costa Rica</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="text-center">FOLLOW US ON</h4>
+                        <div class="text-center">
+                            <a class="hvr-grow" href="https://www.linkedin.com/"><img src="images/linkedin-3-48.png" alt="LinkedIn"></a>
+                            <a class="hvr-grow" href="https://www.facebook.com/"><img src="images/facebook-3-48.png" alt="Facebook"></a>
+                            <a class="hvr-grow" href="https://www.instagram.com"><img src="images/instagram-48.png" alt="Instagram"></a>
+                            <a class="hvr-grow" href="https://www.twitter.com"><img src="images/twitter-48.png" alt="Instagram"></a>
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="container footer-container">
-        <div class="row footer-text">
-            <div class="col-md-4">
-                <h4 class="text-center">CONTACT US</h4>
-                <div>
-                    <dl class="dl-horizontal text-center">
-                        <dt>Phone:</dt>
-                        <dd><a href="tel:+506-2244-6688">(506) 2244-6688</a></dd>
-                        <dt>Email:</dt>
-                        <dd><a href="mailto:contact@starair.com">contact@starair.com</a></dd>
-                    </dl>
-                </div>
             </div>
 
-            <div class="col-md-4">
-                <h4 class="text-center">HEADQUARTERS</h4>
-                <div>
-                    <h5 class="text-center">Universidad Nacional, Lagunilla, Heredia, Costa Rica</h5>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h4 class="text-center">FOLLOW US ON</h4>
-                <div class="text-center">
-                    <a class="hvr-grow" href="https://www.linkedin.com/"><img src="images/linkedin-3-48.png" alt="LinkedIn"></a>
-                    <a class="hvr-grow" href="https://www.facebook.com/"><img src="images/facebook-3-48.png" alt="Facebook"></a>
-                    <a class="hvr-grow" href="https://www.instagram.com"><img src="images/instagram-48.png" alt="Instagram"></a>
-                    <a class="hvr-grow" href="https://www.twitter.com"><img src="images/twitter-48.png" alt="Instagram"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-    <script type="text/javascript" src="js/Offer.js"></script>
-    <script type="text/javascript" src="js/loadIndex.js"></script>
+            <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
+            <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+            <script type="text/javascript" src="js/Offer.js"></script>
+            <script type="text/javascript" src="js/loadIndex.js"></script>
 </body>
 
 </html>
