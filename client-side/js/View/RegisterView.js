@@ -10,7 +10,7 @@ function addElementsProperties() {
     $('#birthdate').datepicker();
 
     //EVENT HANDLERS
-    $('#getDirection').click( () => controller.getLocation() )
+    $('#getDirection').click( () => controller.getLocation() );
     $('#registrationForm').submit( () => controller.doValidate() );
 }
 
