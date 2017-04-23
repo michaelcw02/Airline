@@ -5472,7 +5472,10 @@ button.list-group-item-danger.active:focus {
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
+  /*
+  MODIFICATION
   font-size: 16px;
+  */
   color: inherit;
 }
 .panel-title > a,
