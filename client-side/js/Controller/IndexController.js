@@ -9,10 +9,8 @@ IndexController.prototype = {
     },
     loadCities: function () {
         let cities = this.airlineController.cities();
-        fillWithCities(this.view.$('#ctryFrom'), cities);
-        fillWithCities(this.view.$('#ctryTo'), cities);
-        this.setUpCitiesFrom();
-        this.setUpCitiesTo();
+        fillWithCities(this.view.$('#cityFrom'), cities);
+        fillWithCities(this.view.$('#cityTo'), cities);
     },
     showCarousel: function () {
         discounts = this.airlineController.discounts();
@@ -94,11 +92,12 @@ IndexController.prototype = {
 
     },
     setUpCitiesTo: function () {
-
+        let cityFrom = this.view.$('#cityFrom').val();
+        this.airlineController.searchFlights(cityFrom);
     },
     moveToFlights: function () {
         $('html, body').animate({
-            scrollTop: $('#flightsFormAdults').offset().top - 8
+            scrollTop: this.view.$('#flightsFormAdults').offset().top - 8
         }, '2000');
     }
 }

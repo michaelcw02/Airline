@@ -15,7 +15,7 @@ function addElementsProperties() {
     $("#returning").datepicker({ minDate: new Date() });
     
     //EVENT HANDLERS
-    $('#ctryFrom').autocomplete( () => controller.setUpCitiesFrom() );
+    $('#cityFrom').autocomplete( () => controller.setUpCitiesFrom() );
     $("#departing").change( () => controller.setMinReturnDate() );
 
     $('#btnRoundTrip').click( () => $("#returning").show() );
@@ -24,7 +24,7 @@ function addElementsProperties() {
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
 
-    $('#from').change( () => controller.setUpCitiesTo() );
+    $('#cityFrom').change( () => controller.setUpCitiesTo() );
 
     $('#btnSearchFlights').click( () => controller.moveToFlights() );
 }
