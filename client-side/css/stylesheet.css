@@ -273,4 +273,6 @@ article hr {
     border-radius: 25px;
     border: 1px solid gray;
 }
-.hoverDiv:hover {background: #709bdb;}
+.hoverDiv:hover {
+    background: #709bdb;
+}

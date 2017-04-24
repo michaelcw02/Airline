@@ -5,7 +5,7 @@ function loadPage() {
     controller.loadCities();
     addElementsProperties();
     controller.showCarousel();
-    controller.showSearchFlights(1);
+    controller.showSearchFlights();
     controller.printButtons();
 }
 
@@ -13,20 +13,29 @@ function addElementsProperties() {
     //BASIC ELEMENTS
     $("#departing").datepicker({ minDate: new Date() });
     $("#returning").datepicker({ minDate: new Date() });
-    $('#ctryFrom').autocomplete( () => controller.setUpCountriesFrom() );
-
+    
     //EVENT HANDLERS
+    $('#ctryFrom').autocomplete( () => controller.setUpCitiesFrom() );
+    $("#departing").change( () => controller.setMinReturnDate() );
+
     $('#btnRoundTrip').click( () => $("#returning").show() );
     $('#btnOneWay').click( () => $("#returning").hide() );
-    $("#departing").change( () => controller.setMinReturnDate() );
+    
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
-    $('#from').change( () => controller.setUpCountriesTo() );
+
+    $('#from').change( () => controller.setUpCitiesTo() );
+
+    $('#btnSearchFlights').click( () => controller.moveToFlights() );
 }
 
 function addListenersButtons(idButton, num){
     $(idButton).click( () => clearSearchFlights() );
     $(idButton).click( () => controller.showSearchFlights((num)) );
+}
+
+function searchFlights() {
+    console.log('search');
 }
 
 function clearSearchFlights(){

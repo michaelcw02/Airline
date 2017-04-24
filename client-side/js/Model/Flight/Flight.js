@@ -1,19 +1,19 @@
 
-function Flight(code, countryFrom, countryTo, price) {
-    this.Flight(code, countryFrom, countryTo, price);
+function Flight(code, cityFrom, cityTo, price) {
+    this.Flight(code, cityFrom, cityTo, price);
 }
 Flight.prototype = {
-    Flight: function (code, countryFrom, countryTo, price) {
+    Flight: function (code, cityFrom, cityTo, price) {
         this.code = code;
-        this.countryFrom = countryFrom;
-        this.countryTo = countryTo;
+        this.cityFrom = cityFrom;
+        this.cityTo = cityTo;
         this.price = price;
     },
-    getCountryFrom: function(){
-        return this.countryFrom;
+    getCityFrom: function(){
+        return this.cityFrom;
     },
-    getCountryTo: function(){
-        return this.countryTo;
+    getCityTo: function(){
+        return this.cityTo;
     },
-    title: function (sep) { return this.countryFrom.code + sep + this.countryTo.code; }
+    title: function (sep) { return this.cityFrom.code + sep + this.cityTo.code; }
 }
