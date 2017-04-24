@@ -35,6 +35,7 @@ function addListenersButtons(idButton, num){
 }
 
 function searchFlights() {
+    //THIS IS WHERE IT HAS TO GET THE FLIGHTS
     console.log('search');
 }
 
