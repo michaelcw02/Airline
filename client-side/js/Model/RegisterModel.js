@@ -4,7 +4,7 @@ function RegisterModel(){
 
 RegisterModel.prototype = {
     RegisterModel: function(){
-
+        
     }
 
 }

@@ -1,3 +1,7 @@
+const GoogleMapKey = 'AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts';
+var geolocationOption = {maximumAge:60000, timeout:5000, enableHighAccuracy:true}
+
+
 //ONE OF THESE CONSTRUCTORS IS THE RIGHT OPTION
 /*
 function RegisterController(model,view){
@@ -11,11 +15,27 @@ function RegisterController(view) {
 RegisterController.prototype = {
     RegisterController: function(view){
         this.view = view;
-        this.airlineController = new AirlineController();
-        this.registerModel = new RegisterModel();
+        //this.airlineController = new AirlineController();
+        //this.registerModel = new RegisterModel();
+        var divElemMap = document.getElementById('map');
+        this.gMap = new GoogleMap(GoogleMapKey, divElemMap);
+        console.log(this.gMap);
     },
     getLocation: function() {
-        return registerModel.getLocation();
+        $('.map-container').show(); //CONTROLLER
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(   this.gMap.setLocation, 
+                                                        this.gMap.showError, 
+                                                        this.geolocationOption
+                                                     );
+        } else { 
+            $('#map').innerHTML = "<h2>Geolocation is not supported by this browser.</h2>";
+        }
+    },
+    setLocationName: function () {
+        let latlng = map.mapOptions.center;
+        let results = map.getLocationName(latlng);
+        $('#direction').val(array[1].formatted_address);
     },
     areBlanks: function() {
         let blanks = false;

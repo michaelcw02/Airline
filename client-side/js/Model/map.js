@@ -27,7 +27,6 @@ function setLocation(position) {
     let lon = position.coords.longitude;
     let latlon = new google.maps.LatLng(lat, lon);
 
-    console.log(latlon);
     let object = getRequest(lat, lon).results;
     console.log(object);
     setDirection(object);
