@@ -15,7 +15,7 @@ function addElementsProperties() {
     $("#returning").datepicker({ minDate: new Date() });
     
     //EVENT HANDLERS
-    $('#cityFrom').autocomplete( () => controller.setUpCitiesFrom() );
+    //$('#cityFrom').autocomplete( () => controller.setUpCitiesFrom() );
     $("#departing").change( () => controller.setMinReturnDate() );
 
     $('#btnRoundTrip').click( () => $("#returning").show() );

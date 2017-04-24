@@ -135,6 +135,7 @@ function fillWithCities($select, cities) {
         $select.append('<option value="undefined">No Cities</option>');
 }
 
+//NOT IN USE
 function setUpWidget(view, element) {
     $.widget("custom.combobox", {
         _create: function () {
