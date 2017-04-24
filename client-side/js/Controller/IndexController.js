@@ -34,7 +34,7 @@ IndexController.prototype = {
     },
     showSearchFlights: function (x) {
         flights = this.airlineController.flights();   //cambiar por los elementos de la busqueda
-        for (let i = 10 * (x - 1); i < (10 * x) && i < flights.length; i++) {
+        for (let i = 10*(x-1); i < (10*x) && i < flights.length; i++) {
             let element = '<div class="row hoverDiv">';
             element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flights[i].title(' - ') + '<strong></h3>';
             element += 'From: ' + flights[i].getCountryFrom() + '<br>To: ' + flights[i].getCountryTo() + '</div>';
@@ -43,12 +43,11 @@ IndexController.prototype = {
             $(element).appendTo(this.view.$('.flights-container'));
         }
     },
-
-    printButtons: function () {
+    printButtons: function(){
         flights = this.airlineController.flights();   //cambiar por los elementos de la busqueda
         let quantity = flights.length / 10;
         for (let i = 0; i < quantity; i++) {
-            let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
+            let element = '<button type="button" class="btn btn-primary" id="page' + (i+1) + '">' + (i+1) + '</button>';
             $(element).appendTo(this.view.$('.pagination'));
             var idButton = "#page" + String(i + 1);
             this.view.addListenersButtons(idButton, (i + 1));
@@ -97,11 +96,10 @@ IndexController.prototype = {
     setUpCitiesTo: function () {
 
     }
-
 }
 
-function onlyShowTen() {
-
+function onlyShowTen(){
+    
 }
 
 function fillWithCities(jQuerySelect, cities) {

@@ -2,6 +2,7 @@ var controller;
 
 function loadPage() {
     controller = new IndexController(window);
+    controller.loadCities();
     addElementsProperties();
     controller.showCarousel();
     controller.showSearchFlights(1);
