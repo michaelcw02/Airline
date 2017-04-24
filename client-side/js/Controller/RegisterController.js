@@ -38,6 +38,15 @@ RegisterController.prototype = {
         blanks = isBlank($('#password'));
         blanks = isBlank($('#passwordRepeat'));
 
+        let $sex = $('input[name="sex"]:checked');
+        removeInvalid($('#sex-radio-btn'));
+        if(!$sex.length)
+            setInvalid($('#sex-radio-btn'));        
+
+        if ($('#agree:checked').length === 0) {
+            $('#agree').addClass('invalid');
+            blanks = true;
+        }
         $('#agree').removeClass('invalid');
         if ($('#agree:checked').length === 0) {
             $('#agree').addClass('invalid');
@@ -80,6 +89,13 @@ RegisterController.prototype = {
         console.log('password check')
     },
     submitRegistration: function() {
+        let name = $('#name').val();
+        let lastname = $('#lastname').val();
+        let birthdate = $('#birthdate').val();
+        let username = $('#username').val();
+        let email = $('#email').val();
+        let password = $('#password').val();
+
         let msg = 'thank you for registering (THIS IS JUST A PLACEHOLDER!)';
         console.log(msg)
         window.alert(msg);
