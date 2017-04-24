@@ -92,10 +92,6 @@ IndexController.prototype = {
     setUpCitiesFrom: function () {
 
     },
-    cityFromHandler: function () {
-        $('#flights-container').hide('slow');
-        this.setUpCitiesTo();
-    },
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         let cities = this.airlineController.cities();
