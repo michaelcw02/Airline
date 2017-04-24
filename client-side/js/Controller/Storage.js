@@ -1,4 +1,5 @@
-Storage.prototype = {
+
+Storage = {
     store: function (id, object) {
         return localStorage.setItem(id, JSON.stringify(object, this.replacer));
     },
@@ -17,19 +18,19 @@ Storage.prototype = {
         if (value instanceof Object && value._class == 'Flight') {
             return new Flight(value.code, value.cityFrom, value.cityTo, value.price);
         }
-        if (v instanceof Object && value._class == 'City') {
+        if (value instanceof Object && value._class == 'City') {
             return new City(value.code, value.name, value.country);
         }
-        return v;
+        return value;
     },
 
     replacer: function (key, value) {
         if (value instanceof Flight) {
-            v._class = 'Flight';
+            value._class = 'Flight';
         }
         if (value instanceof City) {
-            v._class = 'City';
+            value._class = 'City';
         }
-        return v;
+        return value;
     }
 };

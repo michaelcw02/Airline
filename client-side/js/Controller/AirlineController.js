@@ -30,7 +30,17 @@ AirlineController.prototype = {
             }
         }
         let object = {search, jsonFlights};
-        Storage.store('search', object);
+        Storage.store(search, jsonFlights);
+    },
+    getSearch: function(cityFrom, cityTo) {
+        let key = 'all';
+        if(typeof cityFrom !== 'undefined') {
+            if(typeof cityTo !== 'undefined')
+                key = cityFrom + '-' + cityTo;
+            else 
+                key = cityFrom;
+        }
+        return Storage.retrieve(key);
     }
 
 }

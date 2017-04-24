@@ -30,8 +30,8 @@ IndexController.prototype = {
         this.view.$('.carousel-indicators > li').first().addClass('active');
         this.view.$('#advertisement-carousel').carousel();
     },
-    showSearchFlights: function (numPage = 1) {
-        flights = this.airlineController.flights();   //cambiar por los elementos de la busqueda
+    showSearchFlights: function (numPage = 1, flights = this.airlineController.flights()) {
+        
         for (let i = 10 * (numPage - 1); i < (10 * numPage) && i < flights.length; i++) {
             let element = '<div class="row hoverDiv">';
             element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flights[i].title(' - ') + '<strong></h3>';
@@ -40,9 +40,9 @@ IndexController.prototype = {
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
         }
+        
     },
-    printButtons: function () {
-        flights = this.airlineController.flights();   //cambiar por los elementos de la busqueda
+    printButtons: function (flights = this.airlineController.flights()) {
         let quantity = flights.length / 10;
         for (let i = 0; i < quantity; i++) {
             let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
@@ -94,6 +94,9 @@ IndexController.prototype = {
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         this.airlineController.searchFlights(cityFrom);
+        let results = this.airlineController.getSearch(cityFrom);
+        let cities = getFlightCitiesTo(results);
+        fillWithCities( this.view.$('#cityTo'), cities );
     },
     moveToFlights: function () {
         $('html, body').animate({
@@ -106,8 +109,20 @@ function onlyShowTen() {
 
 }
 
-function fillWithCities($select, cities) {
+function getFlightCitiesTo(flights) {
+    let citiesTo = [];
+    for(let i in flights) {
+        let flight = flights[i];
+        console.log(flight);
+        console.log(flight.cityTo);
+        citiesTo.push(flight.cityTo);
+    }
+    return citiesTo;
+}
 
+function fillWithCities($select, cities) {
+    $select.find('option').remove().end();
+    $select.append('<option value="0">Cities</option>');
     for (let i in cities) {
         let city = cities[i];
         let element = '';
@@ -116,7 +131,8 @@ function fillWithCities($select, cities) {
         element += '<span class=".h4">' + city.nameCountry(", ") + '</span></option>';
         $(element).appendTo($select);
     }
-
+    if( !$select.has('option').length > 1 )
+        $select.append('<option value="undefined">No Cities</option>');
 }
 
 function setUpWidget(view, element) {
