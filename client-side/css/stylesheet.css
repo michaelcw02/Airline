@@ -148,11 +148,16 @@ input {
 
 .label {
     font-size: 18px;
-    color: #000;
+    color: #fff;
+    margin-right: 8px;
 }
 
 .invalid {
-    box-shadow: 0 0 5px 1px #E53935;
+    box-shadow: 0 0 5px 1px #FFA500;
+}
+.alert {
+    display: none;
+    color: #FFA500;
 }
 
 #map {
@@ -206,10 +211,19 @@ input {
 }
 
 .contact-us-body {
-	background:url(wallpaper.jpg); /* Nuestra imagen de fondo */
+	background:url('../images/wallpaper.jpg'); /* Nuestra imagen de fondo */
 	background-repeat:no-repeat; /* Indicamos que no se repetira */
 	background-size:cover; /* Encajamos la imagen al 100% del ancho */
 	background-attachment: fixed; /* Establecemos una posicion fija para la imagen */
+	font-family:helvetica, arial, sans-serif;
+	line-height:20px;
+}
+
+.register-body {
+	background:url('../images/background-12.jpg'); 
+	background-repeat:no-repeat; 
+	background-size:cover; 
+	background-attachment: fixed; 
 	font-family:helvetica, arial, sans-serif;
 	line-height:20px;
 }
@@ -241,10 +255,6 @@ article p,
 article hr {
 	color: white;
 	margin-bottom: 20px;
-}
-.alert {
-    display: none;
-    color: #E53935;
 }
 .flights-container{
     margin-top: 30px;
