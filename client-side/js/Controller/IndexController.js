@@ -7,6 +7,13 @@ IndexController.prototype = {
         this.view = view;
         this.airlineController = new AirlineController();
     },
+    loadCities: function () {
+        let cities = this.airlineController.cities(); 
+        fillWithCities(this.view.$('#ctryFrom'), cities);
+        fillWithCities(this.view.$('#ctryTo'), cities);
+        this.setUpCitiesFrom();
+        this.setUpCitiesTo();
+    },
     showCarousel: function () {
         discounts = this.airlineController.discounts();
         for (let i in discounts) {
@@ -25,6 +32,11 @@ IndexController.prototype = {
         this.view.$('.carousel-indicators > li').first().addClass('active');
         this.view.$('#advertisement-carousel').carousel();
     },
+    showSearchFlights: function () {
+        flights = this.airlineController.flights();
+        
+    },
+    
     hideReturning: function () {
         this.view.$("#returning").hide();
     },
@@ -47,9 +59,25 @@ IndexController.prototype = {
     },
     setMinReturnDate: function() {
         let departDate = this.view.$('#departing').val();
-        console.log(departDate);
-        //AQUI DEBE VALIDAR SI departDate TIENE REALMENTE EL FORMATO ESPERADO.
-        this.view.$('#returning').datepicker('destroy');
-        this.view.$('#returning').datepicker( { minDate: new Date(departDate) } );
+        let validateRegex = /\d{2}\/\d{2}\/\d{4}/;
+        if (validateRegex.test(departDate)) {
+            this.view.$('#returning').datepicker('destroy');
+            this.view.$('#returning').datepicker({ minDate: new Date(departDate) });
+        }
+    },
+    searchFlights: function() { 
+      let flights = this.airlineController.flights();
+      let cityFrom = this.view.$('#cityFrom').code; 
+      let cityTo = this.view.$('#cityTo').code;
+      this.airlineController.search = flights.filter(
+          function (x) { return ( (x.cityFrom == flights.cityFrom) && (x.cityTo == flights.cityTo) ) }
+      );
+      this.view.showSearchFlights();
+    },
+    setUpCitiesFrom: function () {
+
+    },
+    setUpCitiesTo: function () {
+
     }
 }

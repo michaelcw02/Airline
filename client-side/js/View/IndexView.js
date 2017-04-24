@@ -7,17 +7,23 @@ function loadPage() {
 }
 
 function addElementsProperties() {
+    //BASIC ELEMENTS
+    $("#departing").datepicker({ minDate: new Date() });
+    $("#returning").datepicker({ minDate: new Date() });
+    $('#ctryFrom').autocomplete( () => controller.setUpCountriesFrom() );
+
+    //EVENT HANDLERS
     $('#btnRoundTrip').click( () => $("#returning").show() );
     $('#btnOneWay').click( () => $("#returning").hide() );
-    $("#departing").datepicker({ minDate: new Date() });
     $("#departing").change( () => controller.setMinReturnDate() );
-    $("#returning").datepicker({ minDate: new Date() } );
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
+    $('#btnSearchFlights').click( () => controller.searchFlights() );
+    $('#from').change( () => controller.setUpCountriesTo() );
 }
 
-function showCities(){
-    window.alert("hello");
+function showSearchFlights(){
+    
 }
 
 $(loadPage);
