@@ -24,23 +24,19 @@ function addElementsProperties() {
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
 
-    $('#cityFrom').change( () => controller.setUpCitiesTo() );
+    $('#cityFrom').change( () => controller.cityFromHandler() );
 
     $('#btnSearchFlights').click( () => controller.moveToFlights() );
 }
 
 function addListenersButtons(idButton, num){
-    $(idButton).click( () => clearSearchFlights() );
     $(idButton).click( () => controller.showSearchFlights((num)) );
 }
 
 function searchFlights() {
     //THIS IS WHERE IT HAS TO GET THE FLIGHTS
+    controller.searchFlights();
     console.log('search');
-}
-
-function clearSearchFlights(){
-    $("#flights").empty();
 }
 
 $(loadPage);
