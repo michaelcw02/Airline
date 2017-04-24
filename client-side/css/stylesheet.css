@@ -205,7 +205,6 @@ input {
     background-color: black;
 }
 
-<<<<<<< HEAD
 .contact-us-body {
 	background:url(wallpaper.jpg); /* Nuestra imagen de fondo */
 	background-repeat:no-repeat; /* Indicamos que no se repetira */
@@ -247,7 +246,6 @@ article hr {
     display: none;
     color: #E53935;
 }
-=======
 .flights-container{
     margin-top: 30px;
     margin-bottom: 15px;
@@ -266,4 +264,3 @@ article hr {
     border: 1px solid gray;
 }
 .hoverDiv:hover {background: #709bdb;}
->>>>>>> paginacion
