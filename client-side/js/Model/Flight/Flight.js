@@ -9,5 +9,11 @@ Flight.prototype = {
         this.countryTo = countryTo;
         this.price = price;
     },
+    getCountryFrom: function(){
+        return this.countryFrom;
+    },
+    getCountryTo: function(){
+        return this.countryTo;
+    },
     title: function (sep) { return this.countryFrom.code + sep + this.countryTo.code; }
 }

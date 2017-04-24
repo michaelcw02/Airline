@@ -196,3 +196,21 @@ input {
     display: none;
     color: #E53935;
 }
+.flights-container{
+    margin-top: 30px;
+    margin-bottom: 15px;
+    width: 80%;
+    height: 80%;
+}
+.info-Flights{
+    background-color: #fff;
+    border-radius: 25px;
+    border: 1px solid gray;
+    padding-bottom: 10px;
+}
+.hoverDiv {
+    background: #d6d6c2;
+    border-radius: 25px;
+    border: 1px solid gray;
+}
+.hoverDiv:hover {background: #709bdb;}
