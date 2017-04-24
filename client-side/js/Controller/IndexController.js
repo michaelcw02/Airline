@@ -32,11 +32,28 @@ IndexController.prototype = {
         this.view.$('.carousel-indicators > li').first().addClass('active');
         this.view.$('#advertisement-carousel').carousel();
     },
-    showSearchFlights: function () {
-        flights = this.airlineController.flights();
-        
+    showSearchFlights: function (x) {
+        flights = this.airlineController.flights();   //cambiar por los elementos de la busqueda
+        for (let i = 10*(x-1); i < (10*x) && i < flights.length; i++) {
+            let element = '<div class="row hoverDiv">';
+            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flights[i].title(' - ') + '<strong></h3>';
+            element += 'From: ' + flights[i].getCountryFrom() + '<br>To: ' + flights[i].getCountryTo() + '</div>';
+            element += '<div class="col-md-4"><h3><strong> $' + flights[i].price + '<strong></h3></div>';
+            element += '</div>';
+            $(element).appendTo(this.view.$('.flights-container'));
+        }
     },
-    
+
+    printButtons: function(){
+        flights = this.airlineController.flights();   //cambiar por los elementos de la busqueda
+        let quantity = flights.length / 10;
+        for (let i = 0; i < quantity; i++) {
+            let element = '<button type="button" class="btn btn-primary" id="page' + (i+1) + '">' + (i+1) + '</button>';
+            $(element).appendTo(this.view.$('.pagination'));
+            var idButton = "#page" + String(i + 1);
+            this.view.addListenersButtons(idButton, (i + 1));
+        }
+    },
     hideReturning: function () {
         this.view.$("#returning").hide();
     },
@@ -65,7 +82,7 @@ IndexController.prototype = {
             this.view.$('#returning').datepicker({ minDate: new Date(departDate) });
         }
     },
-    searchFlights: function() { 
+    /*searchFlights: function() { 
       let flights = this.airlineController.flights();
       let cityFrom = this.view.$('#cityFrom').code; 
       let cityTo = this.view.$('#cityTo').code;
@@ -73,13 +90,17 @@ IndexController.prototype = {
           function (x) { return ( (x.cityFrom == flights.cityFrom) && (x.cityTo == flights.cityTo) ) }
       );
       this.view.showSearchFlights();
-    },
+    },*/
     setUpCitiesFrom: function () {
 
     },
     setUpCitiesTo: function () {
 
     }
+}
+
+function onlyShowTen(){
+
 }
 
 function fillWithCities(jQuerySelect, cities) {
