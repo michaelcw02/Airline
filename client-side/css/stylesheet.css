@@ -211,7 +211,7 @@ input {
 }
 
 .contact-us-body {
-	background:url('../images/wallpaper.jpg'); /* Nuestra imagen de fondo */
+	background:url('../images/background-16.jpg'); /* Nuestra imagen de fondo */
 	background-repeat:no-repeat; /* Indicamos que no se repetira */
 	background-size:cover; /* Encajamos la imagen al 100% del ancho */
 	background-attachment: fixed; /* Establecemos una posicion fija para la imagen */
