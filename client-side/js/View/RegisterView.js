@@ -15,4 +15,7 @@ function addElementsProperties() {
     $('#username').on( 'keypress change', () => controller.checkUsername() );
 }
 
+function submitRegistration() {
+    controller.submitRegistration();
+}
 $(loadPage);
