@@ -4,6 +4,8 @@ function loadPage() {
     controller = new IndexController(window);
     addElementsProperties();
     controller.showCarousel();
+    controller.showSearchFlights(1);
+    controller.printButtons();
 }
 
 function addElementsProperties() {
@@ -18,12 +20,16 @@ function addElementsProperties() {
     $("#departing").change( () => controller.setMinReturnDate() );
     $('#btnDecrease').click( () =>  controller.decreaseAdults() );
     $('#btnIncrease').click( () => controller.increaseAdults() );
-    $('#btnSearchFlights').click( () => controller.searchFlights() );
     $('#from').change( () => controller.setUpCountriesTo() );
 }
 
-function showSearchFlights(){
-    
+function addListenersButtons(idButton, num){
+    $(idButton).click( () => clearSearchFlights() );
+    $(idButton).click( () => controller.showSearchFlights((num)) );
+}
+
+function clearSearchFlights(){
+    $("#flights").empty();
 }
 
 $(loadPage);
