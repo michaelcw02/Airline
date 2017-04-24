@@ -45,7 +45,10 @@ nav {
     margin-top: -89px; 
     z-index: 1500;
 }
-
+input {
+    position: relative;
+    z-index: 1500;
+}
 .carousel,.item,.active{height:100%;}
 .carousel-inner{height:100%;}
 
@@ -187,4 +190,9 @@ nav {
     text-decoration: none;
     color: white;
     background-color: black;
+}
+
+.alert {
+    display: none;
+    color: #E53935;
 }

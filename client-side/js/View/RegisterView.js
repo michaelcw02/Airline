@@ -12,6 +12,7 @@ function addElementsProperties() {
     //EVENT HANDLERS
     $('#getDirection').click( () => controller.getLocation() );
     $('#registrationForm').submit( () => controller.doValidate() );
+    $('#username').on( 'keypress change', () => controller.checkUsername() );
 }
 
 $(loadPage);

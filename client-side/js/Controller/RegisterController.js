@@ -11,14 +11,11 @@ RegisterController.prototype = {
         //this.airlineController = new AirlineController();
         //this.registerModel = new RegisterModel();
     },
-    completeLocation: () => {
-
-    },
     getLocation: function () {
         $('.map-container').show(); //CONTROLLER
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                (position) => this.gMap.setLocation(position, () => this.setLocationName() ),
+                (position) => this.gMap.setLocation(position, () => this.setLocationName()),
                 (error) => this.gMap.showError(error)
             );
         } else {
@@ -30,61 +27,93 @@ RegisterController.prototype = {
         let results = this.gMap.getLocationName(latlng);
         $('#direction').val(results[0].formatted_address);
     },
-    areBlanks: function () {
+    isSomethingBlank: function () {
         let blanks = false;
-        blanks = isBlank($('#name')[0]);
-        blanks = isBlank($('#lastname')[0]);
-        blanks = isBlank($('#birthdate')[0]);
-        blanks = isBlank($('#email')[0]);
-        blanks = isBlank($('#password')[0]);
-        blanks = isBlank($('#passwordRepeat')[0]);
+        
+        blanks = isBlank($('#name'));
+        blanks = isBlank($('#lastname'));
+        blanks = isBlank($('#birthdate'));
+        blanks = isBlank($('#username'));
+        blanks = isBlank($('#email'));
+        blanks = isBlank($('#password'));
+        blanks = isBlank($('#passwordRepeat'));
+
+        $('#agree').removeClass('invalid');
+        if ($('#agree:checked').length === 0) {
+            $('#agree').addClass('invalid');
+            blanks = true;
+        }
+        
         return blanks;
     },
     doValidate: function () {
-        // if (areBlanks) 
-        //    window.alert("ESPACIOS EN BLANCO");   //make the pop up!
-        //  if (!samePassword)
-        //     window.alert("CONTRASEÑAS DIFERENTES"); 
-        window.alert("hola");
-    },
-    isBlank: function (element) {
-        element.classList.remove('invalid');
-        if (element.value.length == 0) {
-            element.classList.add('invalid');
-            return true;
+        $('.alert').hide();
+        let error = false;
+        if (this.isSomethingBlank()) {
+            showAlert('There is something you missed, please fill it up!');
+            error = true;
         }
-    },
-
-    isNumber: function () {
-        var regex = /^\(?\d{3}\)?-?\s*-?\d{4}$/;
-        if (regex.test(phno.telephone.value)) {
-            return true;
+        else if (!this.isPasswordOK()) {
+            showAlert('The passwords doesn\'t match, please check them out!');
+            error = true;
         }
-        else {
-            alert("This is not a valid phone number");
-            return false;
+        else if($('#telephone').val()) {
+            phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' );
+            error = true;
         }
+        else if($('#cellphone').val()) {
+            phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' );
+            error = true;
+        }
+        if(error)
+            event.preventDefault();
     },
 
-    samePassword: function () {
-        $('#passwordRepeat').keyup(function () {
-            var pass_1 = $('#password').val();
-            var pass_2 = $('#passwordRepeat').val();
-            if (pass_1 != pass_2 && pass_2 != '') {
-                return true;
-            }
-        });
+    isPasswordOK: function () {
+        var pass_1 = $('#password').val();
+        var pass_2 = $('#passwordRepeat').val();
+        if (pass_1 === pass_2)
+            return true;
+        return false;
+    },
+    checkUsername: function(event) {
+        console.log('password check')
+    },
+    submitRegistration: function() {
+        let msg = 'thank you for registering (THIS IS JUST A PLACEHOLDER!)';
+        console.log(msg)
+        window.alert(msg);
     }
 }
 
 
-function setLocation(gMap) {
-    return function (position) {
-        gMap.setLocation(position);
+
+//AUXILIAR FUNCTIONS
+function isBlank(element) {
+    removeInvalid(element);
+    if (!element.val()) {
+        setInvalid(element);
+        return true;
     }
 }
-function showError(gMap) {
-    return function (error) {
-        gMap.showError(error);
+function removeInvalid(element) {
+    element.removeClass('invalid');
+}
+function setInvalid(element) {
+    element.addClass('invalid');
+}
+function showAlert(msg) {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
+    $('#alert').text(msg)
+    $('.alert').show();
+}
+function phoneCheck(element, errorMsg) {
+    var regex = /^\d{4}[-\s]?\d{4}$/;
+    removeInvalid( element );
+    if (!regex.test(element.val())) {
+        setInvalid(element);
+        showAlert(errorMsg);
+        return false;
     }
+    return true;
 }
