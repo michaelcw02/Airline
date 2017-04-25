@@ -21,6 +21,23 @@ AirlineModel.prototype = {
         cities.push(new City('TPE', 'Taipei', 'Taiwan'));
         cities.push(new City('NRT', 'Narita', 'Japan'));
         cities.push(new City('LHR', 'London', 'United Kingdom'));
+        cities.push(new City('MAD', 'Madrid', 'España'));
+        cities.push(new City('ROS', 'Rosario', 'Argentina'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
+        cities.push(new City('BCN', 'Barcelona', 'España'));
         return cities;
     },
 

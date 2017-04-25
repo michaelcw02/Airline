@@ -39,18 +39,19 @@ IndexController.prototype = {
             element += '<div class="col-md-4"><h2><strong> $' + flights[i].price + '<strong></h2></div>';
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
-        }
-        
+        } 
+        this.printButtons(flights);
     },
     printButtons: function (flights = this.airlineController.flights()) {
         let quantity = flights.length / 10;
-        $("#pagination-buttons").empty();
-        for (let i = 0; i < quantity; i++) {
-            let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
-            $(element).appendTo(this.view.$('.pagination'));
-            var idButton = "#page" + String(i + 1);
-            this.view.addListenersButtons(idButton, (i + 1));
-        }
+        $("#pagination").empty();
+        if(quantity > 1)
+            for (let i = 0; i < quantity; i++) {
+                let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
+                $(element).appendTo(this.view.$('.pagination'));
+                var idButton = "#page" + String(i + 1);
+                this.view.addListenersButtons(idButton, (i + 1));
+            }
     },
     hideReturning: function () {
         this.view.$("#returning").hide();
@@ -89,8 +90,15 @@ IndexController.prototype = {
       );
       this.view.showSearchFlights();
     },*/
+    
     setUpCitiesFrom: function () {
 
+    },
+    cityFromHandlerHide: function () {
+        $('#search-container').hide();
+    },
+    cityFromHandlerShow: function () {
+        $('#search-container').show();
     },
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();
@@ -106,6 +114,7 @@ IndexController.prototype = {
         $('html, body').animate({
             scrollTop: this.view.$('#flightsFormAdults').offset().top - 8
         }, '2000');
+        this.cityFromHandlerShow();
     },
     searchFlights: function() {
         let cityFrom = this.view.$('#cityFrom').val();
@@ -115,15 +124,12 @@ IndexController.prototype = {
             this.airlineController.searchFlights(cityFrom, cityTo);
             results = this.airlineController.getSearch(cityFrom, cityTo);
         }
+        //$("#flights").empty();
+        //$("#pagination-buttons").empty();
         this.showSearchFlights(1, results);
-        this.printButtons(results);
+        //this.printButtons(results);
     }
 }
-
-function onlyShowTen() {
-
-}
-
 function getFlightCitiesTo(flights) {
     let citiesTo = [];
     for(let i in flights) {

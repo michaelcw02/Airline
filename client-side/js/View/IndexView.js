@@ -6,7 +6,6 @@ function loadPage() {
     addElementsProperties();
     controller.showCarousel();
     controller.showSearchFlights();
-    controller.printButtons();
 }
 
 function addElementsProperties() {
@@ -27,9 +26,12 @@ function addElementsProperties() {
     $('#cityFrom').change( () => controller.setUpCitiesTo() );
 
     $('#btnSearchFlights').click( () => controller.moveToFlights() );
+    $('#cityTo').change( () => controller.cityFromHandlerHide() );
+    $('#cityFrom').change( () => controller.cityFromHandlerHide() );
 }
 
 function addListenersButtons(idButton, num){
+    //$(idButton).off();
     $(idButton).click( () => controller.showSearchFlights((num)) );
 }
 
