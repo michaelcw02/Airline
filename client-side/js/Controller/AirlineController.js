@@ -36,16 +36,22 @@ AirlineController.prototype = {
             return results.citiesTo;
     },
     searchFlights: function (codeCityFrom, codeCityTo) {
-        let trip = this.findTrip(codeCityFrom, codeCityTo);
         let flights = this.flights();
-
-        let results = flights.filter((flight) => { return (flight.trip === trip); });
-        let codeCityFromTo = trip.travel();
-
+        let codeCityFromTo = '';
+        if(codeCityTo != 0) {
+            let trip = this.findTrip(codeCityFrom, codeCityTo);
+            let results = flights.filter((flight) => { return (flight.trip === trip); });
+            let codeCityFromTo = trip.travel();
+        } else {
+            results = flights.filter( (flight) => { return (flight.trip.cityFrom.code == codeCityFrom)});
+            codeCityFromTo = codeCityFrom + ' - ' + 'All';
+        }
         Storage.store('searchFlights', { codeCityFromTo, results });
     },
     getSearch: function (codeCityFrom, codeCityTo) {
         let results = Storage.retrieve('searchFlights');
+        if(codeCityTo == 0)
+            codeCityTo = 'All';
         if (results.codeCityFromTo == (codeCityFrom + ' - ' + codeCityTo))
             return results.results;
     },
