@@ -3,60 +3,55 @@ function AirlineController() {
 }
 
 AirlineController.prototype = {
-    
-    AirlineController: function() {
-        this.model = new AirlineModel();    
+
+    AirlineController: function () {
+        this.model = new AirlineModel();
     },
-    cities: function() {
+    cities: function () {
         return this.model.cities;
     },
-    discounts: function() {
+    discounts: function () {
         return this.model.discounts;
     },
-    flights: function() {
+    flights: function () {
         return this.model.flights;
     },
-    searchTrips: function(codeCityFrom) {
+    trips: function () {
+        return this.model.trips;
+    },
+    searchTrips: function (codeCityFrom) {
         let citiesTo = [];
-        if(codeCityFrom != 0) {
+        if (codeCityFrom != 0) {
             let trips = this.model.trips;
-            let results = trips.filter( (trip) => { return (trip.cityFrom.code === codeCityFrom); });
-            results.forEach( (result) => { citiesTo.push(result.cityTo); });
+            let results = trips.filter((trip) => { return (trip.cityFrom.code === codeCityFrom); });
+            results.forEach((result) => { citiesTo.push(result.cityTo); });
         } else {
             citiesTo = this.model.cities;
         }
-        Storage.store('searchTrips', {codeCityFrom, citiesTo});
+        Storage.store('searchTrips', { codeCityFrom, citiesTo });
     },
-    getSearchTrips: function(codeCityFrom) {
+    getSearchTrips: function (codeCityFrom) {
         let results = Storage.retrieve('searchTrips');
-        if(results.codeCityFrom === codeCityFrom)
+        if (results.codeCityFrom === codeCityFrom)
             return results.citiesTo;
     },
-    searchFlights: function(cityFrom, cityTo) {
-        let search = 'all'
-        let jsonFlights = this.flights();
-        if(typeof cityFrom !== 'undefined') {
-            if(typeof cityTo !== 'undefined') {
-                jsonFlights = jsonFlights.filter( (flight) => { return (flight.cityFrom.code === cityFrom) && (flight.cityTo.code === cityTo) } );
-                search = cityFrom + '-' + cityTo;
-            }
-            else {
-                jsonFlights = jsonFlights.filter( (flight) => { return flight.cityFrom.code === cityFrom } );
-                search = cityFrom;
-            }
-        }
-        let object = {search, jsonFlights};
-        Storage.store(search, jsonFlights);
+    searchFlights: function (codeCityFrom, codeCityTo) {
+        let trip = this.findTrip(codeCityFrom, codeCityTo);
+        let flights = this.flights();
+
+        let results = flights.filter((flight) => { return (flight.trip === trip); });
+        let codeCityFromTo = trip.travel();
+
+        Storage.store('searchFlights', { codeCityFromTo, results });
     },
-    getSearch: function(cityFrom, cityTo) {
-        let key = 'all';
-        if(typeof cityFrom !== 'undefined') {
-            if(typeof cityTo !== 'undefined')
-                key = cityFrom + '-' + cityTo;
-            else 
-                key = cityFrom;
-        }
-        return Storage.retrieve(key);
+    getSearch: function (codeCityFrom, codeCityTo) {
+        let results = Storage.retrieve('searchFlights');
+        if (results.codeCityFromTo == (codeCityFrom + ' - ' + codeCityTo))
+            return results.results;
+    },
+    findTrip: function (codeCityFrom, codeCityTo) {
+        let trip = this.trips().filter((trip) => { return (trip.cityFrom.code === codeCityFrom) && (trip.cityTo.code === codeCityTo) });
+        return trip[0];
     }
 
 }

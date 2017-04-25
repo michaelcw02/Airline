@@ -37,7 +37,7 @@ IndexController.prototype = {
             let flight = flights[i];
             let element = '<div class="row hoverDiv">';
             element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flight.trip.travel() + '<strong></h3>';
-            element += 'From: ' + flight.trip.cityFrom.name + '<br>To: ' + flight.trip.cityFrom.name + '</div>';
+            element += 'From: ' + flight.trip.cityFrom.name + '<br>To: ' + flight.trip.cityTo.name + '</div>';
             element += '<div class="col-md-4"><h2><strong> $' + flight.price + '<strong></h2></div>';
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
