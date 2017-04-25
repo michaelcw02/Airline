@@ -16,6 +16,22 @@ AirlineController.prototype = {
     flights: function() {
         return this.model.flights;
     },
+    searchTrips: function(codeCityFrom) {
+        let citiesTo = [];
+        if(codeCityFrom != 0) {
+            let trips = this.model.trips;
+            let results = trips.filter( (trip) => { return (trip.cityFrom.code === codeCityFrom); });
+            results.forEach( (result) => { citiesTo.push(result.cityTo); });
+        } else {
+            citiesTo = this.model.cities;
+        }
+        Storage.store('searchTrips', {codeCityFrom, citiesTo});
+    },
+    getSearchTrips: function(codeCityFrom) {
+        let results = Storage.retrieve('searchTrips');
+        if(results.codeCityFrom === codeCityFrom)
+            return results.citiesTo;
+    },
     searchFlights: function(cityFrom, cityTo) {
         let search = 'all'
         let jsonFlights = this.flights();

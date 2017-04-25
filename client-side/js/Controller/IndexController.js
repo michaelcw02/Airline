@@ -98,9 +98,8 @@ IndexController.prototype = {
         let cityFrom = this.view.$('#cityFrom').val();
         let cities = this.airlineController.cities();
         if(cityFrom != 0) {
-            this.airlineController.searchFlights(cityFrom);
-            let results = this.airlineController.getSearch(cityFrom);
-            cities = getFlightCitiesTo(results);
+            this.airlineController.searchTrips(cityFrom);
+            cities = this.airlineController.getSearchTrips(cityFrom);
         }
         fillWithCities( this.view.$('#cityTo'), cities );
     },
