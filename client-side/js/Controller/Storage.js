@@ -22,7 +22,7 @@ Storage = {
             return new City(value.code, value.name, value.country);
         }
         if (value instanceof Object && value._class == 'Trip') {
-            return new City(value.cityFrom, value.cityTo, value.duration);
+            return new Trip(value.cityFrom, value.cityTo, value.duration);
         }
         return value;
     },
