@@ -285,6 +285,11 @@ article hr {
     width: 80%;
     height: 80%;
 }
+.pagination-container{
+    margin-top: 25px;
+    width: 80%;
+    height: 80%;
+}
 .info-Flights{
     background-color: #fff;
     border-radius: 25px;

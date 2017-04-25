@@ -52,7 +52,7 @@ IndexController.prototype = {
         if (quantity > 1)
             for (let i = 0; i < quantity; i++) {
                 let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
-                $(element).appendTo(this.view.$('.pagination'));
+                $(element).appendTo(this.view.$('.pagination-container'));
                 var idButton = "#page" + String(i + 1);
                 this.view.addListenersButtons(idButton, (i + 1));
             }
@@ -91,10 +91,12 @@ IndexController.prototype = {
         this.showSearchFlights(pageNum, results);
     },
     cityFromHandlerHide: function () {
-        $('#search-container').hide();
+        //$('#search-container').hide();
+        $('#flights, #pagination').hide();
     },
     cityFromHandlerShow: function () {
-        $('#search-container').show();
+        //$('#search-container').show();
+        $('#flights, #pagination').show();
     },
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();

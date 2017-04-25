@@ -31,7 +31,6 @@ function addElementsProperties() {
 }
 
 function addListenersButtons(idButton, num){
-    //$(idButton).off();
     $(idButton).click( () => controller.pageButtonsHandler(num) );
 }
 
