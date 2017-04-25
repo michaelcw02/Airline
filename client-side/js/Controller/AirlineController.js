@@ -35,7 +35,18 @@ AirlineController.prototype = {
         if (results.codeCityFrom === codeCityFrom)
             return results.citiesTo;
     },
-    searchFlights: function (codeCityFrom, codeCityTo) {
+    searchFlights: function (codeCityFrom, codeCityTo, departDate) {
+        resultsObject = this.searchAndFilterCities(codeCityFrom, codeCityTo);
+
+        if(departDate) {
+            let flights = resultsObject.results;
+            flights = flights.filter( (flight) => { return flight.date() == departDate.getTime() } )
+            resultsObject.results = flights;
+        }
+        
+        Storage.store('searchFlights', resultsObject);
+    },
+    searchAndFilterCities: function(codeCityFrom, codeCityTo) {
         let flights = this.flights();
         let codeCityFromTo = '';
         let results = [];
@@ -52,7 +63,7 @@ AirlineController.prototype = {
             results = flights.filter((flight) => { return (flight.trip === trip); });
             codeCityFromTo = trip.travel();
         }
-        Storage.store('searchFlights', { codeCityFromTo, results });
+        return {codeCityFromTo, results};
     },
     getSearch: function (codeCityFrom, codeCityTo) {
         let results = Storage.retrieve('searchFlights');

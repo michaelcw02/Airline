@@ -19,5 +19,12 @@ Flight.prototype = {
         this.trip = trip;
         this.departureDate = departureDate;
         this.price = price;
+    },
+    date: function() {
+        let d = new Date(this.departureDate);
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var date = d.getDate();
+        return new Date(year+'/'+month+'/'+date).getTime();
     }
 }

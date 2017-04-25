@@ -38,7 +38,7 @@ AirlineModel.prototype = {
         let flights = [];
         for (let i in trips) {
             let code = 'ST' + i;
-            flights.push( new Flight(code + 1, trips[i], randomDate(), getRandomInt(320, 1600)));
+            flights.push( new Flight(code + 1, trips[i], new Date().getTime(), getRandomInt(320, 1600)));
             flights.push( new Flight(code + 2, trips[i], randomDate(), getRandomInt(320, 1600)));
             flights.push( new Flight(code + 3, trips[i], randomDate(), getRandomInt(320, 1600)));
         }
@@ -69,5 +69,5 @@ function findCity(code, cities = []) {
     return result[0];
 }
 function randomDate(start = new Date(), end = new Date('2017/06/30')) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).getTime();
 }

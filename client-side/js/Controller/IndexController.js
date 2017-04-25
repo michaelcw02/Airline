@@ -121,11 +121,14 @@ IndexController.prototype = {
     searchFlights: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         let cityTo = this.view.$('#cityTo').val();
-        
+
+        if( !isBlank(this.view.$('#departing')) )
+            var departDate = new Date( this.view.$('#departing').val() );
+
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
         cityTo = (cityTo != '0') ? cityTo : 'All';
 
-        this.airlineController.searchFlights(cityFrom, cityTo);
+        this.airlineController.searchFlights(cityFrom, cityTo, departDate);
         let results = this.airlineController.getSearch(cityFrom, cityTo);
         this.showSearchFlights(1, results);
     }
@@ -152,6 +155,12 @@ function fillWithCities($select, cities) {
     }
     if (!$select.has('option').length > 1)
         $select.append('<option value="undefined">No Cities</option>');
+}
+
+function isBlank(element) {
+    if (!element.val())
+        return true;
+    return false;
 }
 
 //NOT IN USE
