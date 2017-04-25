@@ -2,8 +2,6 @@ html {
     position:relative; 
     min-height: 100%;
 }
-
-
 /*CLASSES*/
 .text-white {
     color: #fff;
@@ -15,24 +13,10 @@ html {
 .icon {
     width: 28px;
     height: auto;
-
 }
 .icon-register {
     margin-right: 8px;
     width: 34px;
-}
-header {
-    padding-left: 2%;
-    padding-right: 2%;
-}
-footer {
-    padding-left: 2%;
-    padding-right: 2%;
-}
-nav {
-    z-index: 3000;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin-top: 7px;
 }
 .navbar-brand {
     font-size: 40px !important;
@@ -41,14 +25,68 @@ nav {
   /* NEW ADDITION BY MCW */
   font-size: 20px;
 }
+/* SCREEN SMALLER THAN 768PX */
 .top-container {
     height: auto;
-    width: 95%;
+    width: 100%;
 }
 .carousel-container {
-    margin-top: -89px; 
+    margin-top: 0; 
     z-index: 1500;
 }
+.body-container {
+    margin-top: 1px;
+}
+
+/* SCREEN BIGGER THAN 768PX */
+@media (min-width: 768px) {
+    .top-container {
+        height: auto;
+        width: 95%;
+    }
+    .carousel-container {
+        margin-top: -89px; 
+        z-index: 1500;
+    }
+    header {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    footer {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .body-container {
+        position: relative;
+        margin-top: 10px;
+        padding-left: 2% !important;
+        padding-right: 2% !important;
+        margin-top: -10px !important;
+    }
+    .footer-container {
+        position: relative;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        height: auto;
+        width: 95%;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-top: 20px;
+    }
+    nav {
+        z-index: 3000;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        margin-top: 7px;
+    }
+
+
+}
+
+
+
 input {
     position: relative;
     z-index: 1500;
@@ -80,31 +118,6 @@ input {
     right: 39%;
 }
 
-@media screen and (min-width: 768px) {
-    .body-container {
-        margin-top: -10px !important;
-    }
-}
-
-.body-container {
-    position: relative;
-    margin-top: 10px;
-    padding-left: 2% !important;
-    padding-right: 2% !important;
-}
-.footer-container {
-    position: relative;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    height: auto;
-    width: 95%;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-top: 20px;
-}
 .footer-text {
     color: #9d9d9d;
 }
