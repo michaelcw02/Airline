@@ -41,13 +41,13 @@ IndexController.prototype = {
             element += '<div class="col-md-4"><h2><strong> $' + flight.price + '<strong></h2></div>';
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
-        } 
+        }
         this.printButtons(flights);
     },
     printButtons: function (flights = this.airlineController.flights()) {
         let quantity = flights.length / 10;
         $("#pagination").empty();
-        if(quantity > 1)
+        if (quantity > 1)
             for (let i = 0; i < quantity; i++) {
                 let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
                 $(element).appendTo(this.view.$('.pagination'));
@@ -92,10 +92,9 @@ IndexController.prototype = {
       );
       this.view.showSearchFlights();
     },*/
-    
-    pageButtons: function (pageNum) {
+
+    pageButtonsHandler: function (pageNum) {
         let results = this.airlineController.retrieveSearchFlights();
-        console.log(pageNum);
         this.showSearchFlights(pageNum, results);
     },
     cityFromHandlerHide: function () {
@@ -107,11 +106,11 @@ IndexController.prototype = {
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         let cities = this.airlineController.cities();
-        if(cityFrom != 0) {
+        if (cityFrom != 0) {
             this.airlineController.searchTrips(cityFrom);
             cities = this.airlineController.getSearchTrips(cityFrom);
         }
-        fillWithCities( this.view.$('#cityTo'), cities );
+        fillWithCities(this.view.$('#cityTo'), cities);
     },
     moveToFlights: function () {
         $('html, body').animate({
@@ -119,11 +118,11 @@ IndexController.prototype = {
         }, '2000');
         this.cityFromHandlerShow();
     },
-    searchFlights: function() {
+    searchFlights: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         let cityTo = this.view.$('#cityTo').val();
         let results = this.airlineController.flights();
-        if(cityFrom != 0) {
+        if (cityFrom != 0) {
             this.airlineController.searchFlights(cityFrom, cityTo);
             results = this.airlineController.getSearch(cityFrom, cityTo);
         }
@@ -131,11 +130,22 @@ IndexController.prototype = {
         //$("#pagination-buttons").empty();
         this.showSearchFlights(1, results);
         //this.printButtons(results);
+    },
+    searchFlights: function () {
+        let cityFrom = this.view.$('#cityFrom').val();
+        let cityTo = this.view.$('#cityTo').val();
+        
+        cityFrom = (cityFrom != '0') ? cityFrom : 'All';
+        cityTo = (cityTo != '0') ? cityTo : 'All';
+
+        this.airlineController.searchFlights(cityFrom, cityTo);
+        let results = this.airlineController.getSearch(cityFrom, cityTo);
+        this.showSearchFlights(1, results);
     }
 }
 function getFlightCitiesTo(flights) {
     let citiesTo = [];
-    for(let i in flights) {
+    for (let i in flights) {
         let flight = flights[i];
         citiesTo.push(flight.cityTo);
     }
@@ -153,7 +163,7 @@ function fillWithCities($select, cities) {
         element += '<span class=".h4">' + city.nameCountry(", ") + '</span></option>';
         $(element).appendTo($select);
     }
-    if( !$select.has('option').length > 1 )
+    if (!$select.has('option').length > 1)
         $select.append('<option value="undefined">No Cities</option>');
 }
 

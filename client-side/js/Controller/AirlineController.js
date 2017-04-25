@@ -39,13 +39,18 @@ AirlineController.prototype = {
         let flights = this.flights();
         let codeCityFromTo = '';
         let results = [];
-        if(codeCityTo != 0) {
+
+        if(codeCityFrom == 'All' && codeCityTo == 'All') {
+            results = flights;
+            codeCityFromTo = 'All - All';
+        }
+        else if(codeCityFrom != 'All' && codeCityTo == 'All') {
+            results = flights.filter( (flight) => { return (flight.trip.cityFrom.code == codeCityFrom)});
+            codeCityFromTo = codeCityFrom + ' - ' + 'All';
+        } else {
             let trip = this.findTrip(codeCityFrom, codeCityTo);
             results = flights.filter((flight) => { return (flight.trip === trip); });
             codeCityFromTo = trip.travel();
-        } else {
-            results = flights.filter( (flight) => { return (flight.trip.cityFrom.code == codeCityFrom)});
-            codeCityFromTo = codeCityFrom + ' - ' + 'All';
         }
         Storage.store('searchFlights', { codeCityFromTo, results });
     },

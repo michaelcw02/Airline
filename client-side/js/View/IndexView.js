@@ -32,7 +32,7 @@ function addElementsProperties() {
 
 function addListenersButtons(idButton, num){
     //$(idButton).off();
-    $(idButton).click( () => controller.pageButtons(num) );
+    $(idButton).click( () => controller.pageButtonsHandler(num) );
 }
 
 function searchFlights() {
