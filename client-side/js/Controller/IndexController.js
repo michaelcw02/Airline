@@ -46,7 +46,6 @@ IndexController.prototype = {
     },
     printButtons: function (flights = this.airlineController.flights()) {
         let quantity = flights.length / 10;
-<<<<<<< HEAD
         $("#pagination").empty();
         if(quantity > 1)
             for (let i = 0; i < quantity; i++) {
@@ -55,15 +54,6 @@ IndexController.prototype = {
                 var idButton = "#page" + String(i + 1);
                 this.view.addListenersButtons(idButton, (i + 1));
             }
-=======
-        $("#pagination-buttons").empty();
-        for (let i = 0; i < quantity; i++) {
-            let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
-            $(element).appendTo(this.view.$('.pagination'));
-            var idButton = '#page' + i + '1';
-            this.view.addListenersButtons(idButton, (i + 1));
-        }
->>>>>>> 89d5e44a44ae1d72ddf695cc3c73d0d9af292fc1
     },
     hideReturning: function () {
         this.view.$("#returning").hide();
