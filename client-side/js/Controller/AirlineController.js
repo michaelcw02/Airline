@@ -38,10 +38,11 @@ AirlineController.prototype = {
     searchFlights: function (codeCityFrom, codeCityTo) {
         let flights = this.flights();
         let codeCityFromTo = '';
+        let results = [];
         if(codeCityTo != 0) {
             let trip = this.findTrip(codeCityFrom, codeCityTo);
-            let results = flights.filter((flight) => { return (flight.trip === trip); });
-            let codeCityFromTo = trip.travel();
+            results = flights.filter((flight) => { return (flight.trip === trip); });
+            codeCityFromTo = trip.travel();
         } else {
             results = flights.filter( (flight) => { return (flight.trip.cityFrom.code == codeCityFrom)});
             codeCityFromTo = codeCityFrom + ' - ' + 'All';
