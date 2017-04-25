@@ -56,6 +56,10 @@ AirlineController.prototype = {
         if (results.codeCityFromTo == (codeCityFrom + ' - ' + codeCityTo))
             return results.results;
     },
+    retrieveSearchFlights: function() {
+        let results = Storage.retrieve('searchFlights');
+        return results.results;
+    },
     findTrip: function (codeCityFrom, codeCityTo) {
         let trip = this.trips().filter((trip) => { return (trip.cityFrom.code === codeCityFrom) && (trip.cityTo.code === codeCityTo) });
         return trip[0];

@@ -93,8 +93,10 @@ IndexController.prototype = {
       this.view.showSearchFlights();
     },*/
     
-    setUpCitiesFrom: function () {
-
+    pageButtons: function (pageNum) {
+        let results = this.airlineController.retrieveSearchFlights();
+        console.log(pageNum);
+        this.showSearchFlights(pageNum, results);
     },
     cityFromHandlerHide: function () {
         $('#search-container').hide();
