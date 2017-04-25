@@ -20,11 +20,22 @@ Flight.prototype = {
         this.departureDate = departureDate;
         this.price = price;
     },
-    date: function() {
+    getTime: function() {
         let d = new Date(this.departureDate);
         var year = d.getFullYear();
         var month = d.getMonth() + 1;
         var date = d.getDate();
         return new Date(year+'/'+month+'/'+date).getTime();
+    },
+    getDate: function() {
+        let d = new Date(this.departureDate);
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var date = d.getDate();
+        return year + '/' + pad(month) + '/' + pad(date);
     }
+}
+
+function pad(num) {
+    return (num < 10 ? '0' : '') + num;
 }

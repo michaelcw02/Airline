@@ -40,10 +40,10 @@ AirlineController.prototype = {
 
         if(departDate) {
             let flights = resultsObject.results;
-            flights = flights.filter( (flight) => { return flight.date() == departDate.getTime() } )
+            flights = flights.filter( (flight) => { return flight.getTime() == departDate.getTime() } )
             resultsObject.results = flights;
         }
-        
+
         Storage.store('searchFlights', resultsObject);
     },
     searchAndFilterCities: function(codeCityFrom, codeCityTo) {
