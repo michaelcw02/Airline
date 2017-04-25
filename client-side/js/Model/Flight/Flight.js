@@ -1,19 +1,23 @@
-
-function Flight(code, cityFrom, cityTo, price) {
-    this.Flight(code, cityFrom, cityTo, price);
+/** Universidad Nacional de Costa Rica
+ *      Proyecto Aerolínea
+ *     Desarrollado por:
+ *          Christian Fuentes
+ *          Fabiana Salas
+ *          Michael Chen W.
+ * 
+ * @param {String} code 
+ * @param {Trip} trip 
+ * @param {Date} departureDate
+ * @param {double} price 
+ */
+function Flight(code, trip, departureDate, price) {
+    this.Flight(code, trip, departureDate, price);
 }
 Flight.prototype = {
-    Flight: function (code, cityFrom, cityTo, price) {
+    Flight: function (code, trip, departureDate, price) {
         this.code = code;
-        this.cityFrom = cityFrom;
-        this.cityTo = cityTo;
+        this.trip = trip;
+        this.departureDate = departureDate;
         this.price = price;
-    },
-    getCityFrom: function(){
-        return this.cityFrom;
-    },
-    getCityTo: function(){
-        return this.cityTo;
-    },
-    title: function (sep) { return this.cityFrom.code + sep + this.cityTo.code; }
+    }
 }

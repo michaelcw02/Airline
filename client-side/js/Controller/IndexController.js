@@ -15,14 +15,15 @@ IndexController.prototype = {
     showCarousel: function () {
         discounts = this.airlineController.discounts();
         for (let i in discounts) {
+            let discount = discounts[i];
             let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
             $(element).appendTo(this.view.$('.carousel-indicators'));
-            element = '<div class="item"><img class="img-rounded" src="' + discounts[i].path + '">';
+            element = '<div class="item"><img class="img-rounded" src="' + discount.path + '">';
             element += '<div class="carousel-caption">';
-            let flight = discounts[i].flight;
-            element += '<h1>' + flight.title(' - ') + '</h1>';
-            element += '<h3>' + discounts[i].description + '</h3>';
-            element += '<h3><a href="">' + 'Limited offer for ' + discounts[i].discount + '% </a></h3>'
+            let trip = discount.flight.trip;
+            element += '<h1>' + trip.travel() + '</h1>';
+            element += '<h3>' + discount.description + '</h3>';
+            element += '<h3><a href="">' + 'Limited offer for ' + discount.discount + '% </a></h3>'
             element += '</div>   </div>';
             $(element).appendTo(this.view.$('.carousel-inner'));
         }
@@ -33,10 +34,11 @@ IndexController.prototype = {
     showSearchFlights: function (numPage = 1, flights = this.airlineController.flights()) {
         $("#flights").empty();
         for (let i = 10 * (numPage - 1); i < (10 * numPage) && i < flights.length; i++) {
+            let flight = flights[i];
             let element = '<div class="row hoverDiv">';
-            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flights[i].title(' - ') + '<strong></h3>';
-            element += 'From: ' + flights[i].getCityFrom().name + '<br>To: ' + flights[i].getCityTo().name + '</div>';
-            element += '<div class="col-md-4"><h2><strong> $' + flights[i].price + '<strong></h2></div>';
+            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flight.trip.travel() + '<strong></h3>';
+            element += 'From: ' + flight.trip.cityFrom.name + '<br>To: ' + flight.trip.cityFrom.name + '</div>';
+            element += '<div class="col-md-4"><h2><strong> $' + flight.price + '<strong></h2></div>';
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
         }
@@ -48,7 +50,7 @@ IndexController.prototype = {
         for (let i = 0; i < quantity; i++) {
             let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
             $(element).appendTo(this.view.$('.pagination'));
-            var idButton = "#page" + String(i + 1);
+            var idButton = '#page' + i + '1';
             this.view.addListenersButtons(idButton, (i + 1));
         }
     },
