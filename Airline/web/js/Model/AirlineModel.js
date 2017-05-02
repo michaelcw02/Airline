@@ -53,8 +53,8 @@ AirlineModel.prototype = {
         discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'Wanna go to Miami?', 'images/background-2.jpg'));
         discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'Have you thought about Atlanta?', 'images/background-5.jpg'));
         discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'The City That Never Sleeps?', 'images/background-17.jpg'));
-        discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'Taipei is just Amazing!', 'images/background-4.jpg'));
-        discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'How about London?', 'images/background-1.jpg'));
+        discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'Taipei is just Amazing!', 'images/background-4.JPG'));
+        discounts.push(new Discount(flights[i += 6], getRandomInt(10, 40), 'How about London?', 'images/background-1.JPG'));
         return discounts;
     }
 }

@@ -1,19 +1,24 @@
+<%-- 
+    Document   : index
+    Created on : May 1, 2017, 10:23:04 PM
+    Author     : michaelcw02
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>StarAir</title>
-    <link rel="icon" href="images/airplane-4-48.png" type="image/png">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="css/hover.css">
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>StarAir</title>
+        <link rel="icon" href="images/airplane-4-48.png" type="image/png">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/hover.css">
+        <link rel="stylesheet" href="css/stylesheet.css">
+    </head>
+    <body>
     <div class="container top-container">
 
         <header>
@@ -268,6 +273,5 @@
     <script type="text/javascript" src="js/Controller/IndexController.js"></script>
     <!-- VIEW -->
     <script type="text/javascript" src="js/View/IndexView.js"></script>
-</body>
-
+    </body>
 </html>
