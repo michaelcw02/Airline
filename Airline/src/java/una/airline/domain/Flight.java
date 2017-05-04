@@ -6,7 +6,6 @@
 package una.airline.domain;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  *

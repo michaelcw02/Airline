@@ -4,12 +4,15 @@ Proxy.getCities = (callback) => {
     $.ajax({
         url: 'CitiesServlet',
         data: {
-            accion: "getAllCities"
+            action: "getAllCities"
         },
-        error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar la información de las personas en la base de datos");
+        error: function (ts) { //si existe un error en la respuesta del ajax
+            alert(ts.responseText);
+            //alert("Se presento un error a la hora de cargar las ciudades de la base de datos");
         },
-        success: callback(data),
+        success: (data) => {
+            callback(data);
+        },
         type: 'GET',
         dataType: "json"
     });

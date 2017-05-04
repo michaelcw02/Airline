@@ -12,7 +12,6 @@ IndexController.prototype = {
             fillWithCities(this.view.$('#cityFrom'), result);
             fillWithCities(this.view.$('#cityTo'), result);    
         } );
-        
     },
     showCarousel: function () {
         discounts = this.airlineController.discounts();
