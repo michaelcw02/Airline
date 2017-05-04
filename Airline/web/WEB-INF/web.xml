@@ -4,9 +4,25 @@
         <servlet-name>CitiesServlet</servlet-name>
         <servlet-class>una.airline.services.CitiesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DiscountsServlet</servlet-name>
+        <servlet-class>una.airline.services.DiscountsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FlightsServlet</servlet-name>
+        <servlet-class>una.airline.services.FlightsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CitiesServlet</servlet-name>
         <url-pattern>/CitiesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DiscountsServlet</servlet-name>
+        <url-pattern>/DiscountsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FlightsServlet</servlet-name>
+        <url-pattern>/FlightsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -266,7 +266,6 @@
     <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>
     <script type="text/javascript" src="js/Model/Flight/Flight.js"></script>
     <script type="text/javascript" src="js/Model/Discount/Discount.js"></script>
-    <script type="text/javascript" src="js/Model/AirlineModel.js"></script>
     <!-- NEW -->
     <script src="js/Model/Proxy.js" type="text/javascript"></script>
     

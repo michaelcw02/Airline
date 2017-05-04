@@ -5,16 +5,22 @@ function AirlineController() {
 AirlineController.prototype = {
 
     AirlineController: function () {
-        this.model = new AirlineModel();
+
     },
     getAllCities: function (callback) {
         Proxy.getCities( (data) => {
-            let result = JSON.parse(data, JsonUtils.reviver);
-            callback(result);
+            callback(data);
         } )
     },
-    discounts: function () {
-        return this.model.discounts;
+    getAllDiscounts: function (callback) {
+        Proxy.getDiscounts( (data) => {
+            callback(data);
+        })
+    },
+    getAllFlights: function (callback) {
+        Proxy.getFlights( (data) => {
+            callback(data);
+        })
     },
     flights: function () {
         return this.model.flights;

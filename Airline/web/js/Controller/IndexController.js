@@ -8,29 +8,37 @@ IndexController.prototype = {
         this.airlineController = new AirlineController();
     },
     loadCities: function () {
-        this.airlineController.getAllCities( (result) => {
-            fillWithCities(this.view.$('#cityFrom'), result);
-            fillWithCities(this.view.$('#cityTo'), result);    
+        this.airlineController.getAllCities( (results) => {
+            fillWithCities(this.view.$('#cityFrom'), results);
+            fillWithCities(this.view.$('#cityTo'), results);    
         } );
     },
     showCarousel: function () {
-        discounts = this.airlineController.discounts();
-        for (let i in discounts) {
-            let discount = discounts[i];
-            let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
-            $(element).appendTo(this.view.$('.carousel-indicators'));
-            element = '<div class="item"><img class="img-rounded" src="' + discount.path + '">';
-            element += '<div class="carousel-caption">';
-            let trip = discount.flight.trip;
-            element += '<h1>' + trip.travel() + '</h1>';
-            element += '<h3>' + discount.description + '</h3>';
-            element += '<h3><a href="">' + 'Limited offer for ' + discount.discount + '% </a></h3>'
-            element += '</div>   </div>';
-            $(element).appendTo(this.view.$('.carousel-inner'));
-        }
-        this.view.$('.item').first().addClass('active');
-        this.view.$('.carousel-indicators > li').first().addClass('active');
-        this.view.$('#advertisement-carousel').carousel();
+
+        this.airlineController.getAllDiscounts( (results) => {
+            for (let i in results) {
+                let discount = results[i];
+                let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
+                $(element).appendTo(this.view.$('.carousel-indicators'));
+                element = '<div class="item"><img class="img-rounded" src="' + discount.path + '">';
+                element += '<div class="carousel-caption">';
+                let trip = discount.flight.trip;
+                element += '<h1>' + trip.cityFrom.code + ' - ' + trip.cityTo.code + '</h1>';
+                element += '<h3>' + discount.description + '</h3>';
+                element += '<h3><a href="">' + 'Limited offer for ' + discount.discount + '% </a></h3>'
+                element += '</div>   </div>';
+                $(element).appendTo(this.view.$('.carousel-inner'));
+            }
+            this.view.$('.item').first().addClass('active');
+            this.view.$('.carousel-indicators > li').first().addClass('active');
+            this.view.$('#advertisement-carousel').carousel();
+        })
+
+    },
+    getAllFlights: function (callback) {
+        this.airlineController.getAllFlights( (result) => {
+            callback(result);
+        })
     },
     showSearchFlights: function (numPage = 1, flights = this.airlineController.flights()) {
         $("#flights").empty();
@@ -146,7 +154,7 @@ function fillWithCities($select, cities) {
         let element = '';
         element += '<option value="' + city.code + '">';
         element += '<span class=".h3">' + city.code + '</span> - ';
-        element += '<span class=".h4">' + city.nameCountry(", ") + '</span></option>';
+        element += '<span class=".h4">' + city.name + ', ' + city.country + '</span></option>';
         $(element).appendTo($select);
     }
     if (!$select.has('option').length > 1)
