@@ -60,11 +60,13 @@ public final class AirlineModel {
     
     public void loadTrips() {
         City sjo = findCity("SJO");
-        for (City city : cities) {
-            int duration = getRandomInt(200, 500); //MINUTES
-            trips.add(new Trip(sjo, city, duration));
-            trips.add(new Trip(city, sjo, duration));
-        }
+        cities.forEach((city) -> {
+            if(city != sjo) {
+                int duration = getRandomInt(200, 500); //MINUTES
+                trips.add(new Trip(sjo, city, duration));
+                trips.add(new Trip(city, sjo, duration));
+            }
+        });
     }
     
     public void loadFlights() {

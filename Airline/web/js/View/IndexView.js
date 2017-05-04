@@ -5,7 +5,7 @@ function loadPage() {
     controller.loadCities();
     addElementsProperties();
     controller.showCarousel();
-    controller.showSearchFlights();
+    //controller.showSearchFlights();
 }
 
 function addElementsProperties() {

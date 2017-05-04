@@ -14,7 +14,7 @@
         <link rel="icon" href="images/airplane-4-48.png" type="image/png">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/hover.css">
         <link rel="stylesheet" href="css/stylesheet.css">
     </head>
@@ -260,7 +260,8 @@
     <!-- LIBRARIES -->
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/lib/jquery-ui.js" type="text/javascript"></script>
+    <link href="js/lib/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
     <!-- MODEL -->
     <script type="text/javascript" src="js/Model/City/City.js"></script>
     <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>

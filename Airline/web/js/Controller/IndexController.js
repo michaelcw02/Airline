@@ -109,12 +109,9 @@ IndexController.prototype = {
     },
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();
-        let cities = this.airlineController.cities();
         if (cityFrom != 0) {
-            this.airlineController.searchTrips(cityFrom);
-            cities = this.airlineController.getSearchTrips(cityFrom);
+            this.airlineController.searchTrips(cityFrom, (cities) => { fillWithCities(this.view.$('#cityTo'), cities); });
         }
-        fillWithCities(this.view.$('#cityTo'), cities);
     },
     moveToFlights: function () {
         $('html, body').animate({
