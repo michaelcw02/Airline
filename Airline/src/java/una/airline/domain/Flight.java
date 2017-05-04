@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Flight {
 
-    public Flight(String code, Trip trip, Date departureDate, double price) {
+    public Flight(String code, Trip trip, long departureDate, double price) {
         this.code = code;
         this.trip = trip;
         this.departureDate = departureDate;
@@ -29,7 +29,7 @@ public class Flight {
         return trip;
     }
 
-    public Date getDepartureDate() {
+    public long getDepartureDate() {
         return departureDate;
     }
 
@@ -45,18 +45,14 @@ public class Flight {
         this.trip = trip;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(long departureDate) {
         this.departureDate = departureDate;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
-    
-    public long getTime() {
-        return departureDate.getDate();
-    }
-    
+        
     public String getDateFormatted() {
         SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
         return dt.format(departureDate);
@@ -64,6 +60,6 @@ public class Flight {
     
     String code;
     Trip trip;
-    Date departureDate;
+    long departureDate;
     double price; 
 }

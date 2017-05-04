@@ -267,10 +267,16 @@
     <script type="text/javascript" src="js/Model/Flight/Flight.js"></script>
     <script type="text/javascript" src="js/Model/Discount/Discount.js"></script>
     <script type="text/javascript" src="js/Model/AirlineModel.js"></script>
+    <!-- NEW -->
+    <script src="js/Model/Proxy.js" type="text/javascript"></script>
+    
     <!-- CONTROLLER -->
     <script type="text/javascript" src="js/Controller/Storage.js"></script>
     <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
     <script type="text/javascript" src="js/Controller/IndexController.js"></script>
+    <!-- NEW -->
+    <script src="js/Controller/JsonUtils.js" type="text/javascript"></script>
+    
     <!-- VIEW -->
     <script type="text/javascript" src="js/View/IndexView.js"></script>
     </body>
