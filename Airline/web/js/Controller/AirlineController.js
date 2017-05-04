@@ -7,8 +7,11 @@ AirlineController.prototype = {
     AirlineController: function () {
         this.model = new AirlineModel();
     },
-    cities: function () {
-        return this.model.cities;
+    getAllCities: function (callback) {
+        Proxy.getCities( (data) => {
+            let result = JSON.parse(data, JsonUtils.reviver);
+            callback(result);
+        } )
     },
     discounts: function () {
         return this.model.discounts;

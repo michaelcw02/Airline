@@ -8,9 +8,11 @@ IndexController.prototype = {
         this.airlineController = new AirlineController();
     },
     loadCities: function () {
-        let cities = this.airlineController.cities();
-        fillWithCities(this.view.$('#cityFrom'), cities);
-        fillWithCities(this.view.$('#cityTo'), cities);
+        this.airlineController.getAllCities( (result) => {
+            fillWithCities(this.view.$('#cityFrom'), result);
+            fillWithCities(this.view.$('#cityTo'), result);    
+        } );
+        
     },
     showCarousel: function () {
         discounts = this.airlineController.discounts();
