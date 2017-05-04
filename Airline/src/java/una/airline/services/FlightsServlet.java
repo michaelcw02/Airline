@@ -55,7 +55,13 @@ public class FlightsServlet extends HttpServlet {
                     json = new Gson().toJson(airlineModel.getFlights());
                     out.print(json);
                     break;
-                
+                case "searchFlights":
+                    String cityFrom = request.getParameter("cityFrom");
+                    String cityTo = request.getParameter("cityTo");
+                    String departDate = request.getParameter("departDate");
+                    String returnDate = request.getParameter("returnDate");
+                    System.out.println(cityFrom + ", " + cityTo + ", " + departDate + ", " + returnDate);
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;

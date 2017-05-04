@@ -14,7 +14,7 @@
         <link rel="icon" href="images/airplane-4-48.png" type="image/png">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
-        <link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="css/hover.css">
         <link rel="stylesheet" href="css/stylesheet.css">
     </head>
@@ -274,8 +274,7 @@
     <script type="text/javascript" src="js/Controller/Storage.js"></script>
     <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
     <script type="text/javascript" src="js/Controller/IndexController.js"></script>
-    <!-- NEW -->
-    <script src="js/Controller/JsonUtils.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
     <!-- VIEW -->
     <script type="text/javascript" src="js/View/IndexView.js"></script>
