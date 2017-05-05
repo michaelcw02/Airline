@@ -5,7 +5,6 @@
  */
 package una.airline.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +14,8 @@ import java.util.List;
 public class RoundTripFlights {
 
     public RoundTripFlights() {
-        this.outboundFlights = new ArrayList<>();
-        this.returnFlights = new ArrayList<>();
+        this.outboundFlights = null;
+        this.returnFlights = null;
     }
     
     public RoundTripFlights(List<Flight> outboundFlights, List<Flight> returnFlights) {
