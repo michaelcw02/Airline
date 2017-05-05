@@ -37,7 +37,7 @@ public class CitiesServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             
-            AirlineModel airlineModel = new AirlineModel();
+            AirlineModel airlineModel = AirlineModel.getInstance();
 
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
