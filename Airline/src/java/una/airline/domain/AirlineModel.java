@@ -81,8 +81,8 @@ public final class AirlineModel {
         for (int i = 0; i < trips.size(); i++) {
             String code = "ST" + i;
             flights.add(new Flight(code + 1, trips.get(i), System.currentTimeMillis(), getRandomInt(320, 1600)));
-            flights.add(new Flight(code + 1, trips.get(i), getRandomTime(), getRandomInt(320, 1600)));
-            flights.add(new Flight(code + 1, trips.get(i), getRandomTime(), getRandomInt(320, 1600)));
+            flights.add(new Flight(code + 2, trips.get(i), getRandomTime(), getRandomInt(320, 1600)));
+            flights.add(new Flight(code + 3, trips.get(i), getRandomTime(), getRandomInt(320, 1600)));
         }
 
     }
