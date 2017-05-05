@@ -1,3 +1,5 @@
+/* global Proxy */
+
 function AirlineController() {
     this.AirlineController();
 }
@@ -31,9 +33,6 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    trips: function () {
-        return this.model.trips;
-    },
     searchTrips: function (codeCityFrom, callback) {
         let citiesTo = [];
         this.getAllTrips( (data) => {
@@ -47,7 +46,13 @@ AirlineController.prototype = {
             //Storage.store('searchTrips', { codeCityFrom, citiesTo });
         } )
     },
-    searchFlights: function (codeCityFrom, codeCityTo, departDate) {
+    searchFlights: function (codeCityFrom, codeCityTo, departDate, returnDate) {
+
+        Proxy.searchForFlights(codeCityFrom, codeCityTo, departDate, returnDate, (data) => {
+            console.log(data);
+        });
+        /*
+        //THE FOLLOWING LINE IS JAVA'S JOB
         resultsObject = this.searchAndFilterCities(codeCityFrom, codeCityTo);
 
         if(departDate) {
@@ -57,6 +62,7 @@ AirlineController.prototype = {
         }
 
         Storage.store('searchFlights', resultsObject);
+        */
     },
     searchAndFilterCities: function(codeCityFrom, codeCityTo) {
         let flights = this.flights();

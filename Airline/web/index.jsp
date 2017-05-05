@@ -260,8 +260,7 @@
     <!-- LIBRARIES -->
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-    <script src="js/lib/jquery-ui.js" type="text/javascript"></script>
-    <link href="js/lib/jquery-ui.theme.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!-- MODEL -->
     <script type="text/javascript" src="js/Model/City/City.js"></script>
     <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>
@@ -274,7 +273,6 @@
     <script type="text/javascript" src="js/Controller/Storage.js"></script>
     <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
     <script type="text/javascript" src="js/Controller/IndexController.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     
     <!-- VIEW -->
     <script type="text/javascript" src="js/View/IndexView.js"></script>

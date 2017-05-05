@@ -73,10 +73,10 @@ Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) =>
         url: 'FlightsServlet',
         data: {
             action: 'searchFlights',
-            cityFrom,
-            cityTo,
-            departDate,
-            returnDate
+            cityFrom: cityFrom,
+            cityTo: cityTo,
+            departDate: departDate,
+            returnDate: returnDate
         },
         error: function () { //si existe un error en la respuesta del ajax
             alert("Se presento un error a la hora de cargar las ciudades de la base de datos");

@@ -36,7 +36,7 @@ public class FlightsServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             
-            AirlineModel airlineModel = new AirlineModel();
+            AirlineModel airlineModel = AirlineModel.getInstance();
 
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
@@ -60,7 +60,9 @@ public class FlightsServlet extends HttpServlet {
                     String cityTo = request.getParameter("cityTo");
                     String departDate = request.getParameter("departDate");
                     String returnDate = request.getParameter("returnDate");
-                    System.out.println(cityFrom + ", " + cityTo + ", " + departDate + ", " + returnDate);
+                    
+                    
+                    
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

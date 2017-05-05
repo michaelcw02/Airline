@@ -124,14 +124,14 @@ IndexController.prototype = {
         let cityTo = this.view.$('#cityTo').val();
 
         if( !isBlank(this.view.$('#departing')) )
-            var departDate = new Date( this.view.$('#departing').val() );
+            var departDate = new Date( this.view.$('#departing').val() ).getTime();
 
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
         cityTo = (cityTo != '0') ? cityTo : 'All';
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate);
-        let results = this.airlineController.getSearch(cityFrom, cityTo);
-        this.showSearchFlights(1, results);
+        //let results = this.airlineController.getSearch(cityFrom, cityTo);
+        //this.showSearchFlights(1, results);
     }
 }
 function getFlightCitiesTo(flights) {
