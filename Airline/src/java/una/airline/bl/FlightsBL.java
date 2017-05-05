@@ -8,7 +8,6 @@ package una.airline.bl;
 import java.util.List;
 import java.util.stream.Collectors;
 import una.airline.domain.AirlineModel;
-import una.airline.domain.City;
 import una.airline.domain.Flight;
 import una.airline.domain.RoundTripFlights;
 
@@ -40,7 +39,7 @@ public class FlightsBL {
             //If there is no 'cityTo', is NOT a ROUND TRIP
             List<Flight> returnFlights;
             if(!"All".equalsIgnoreCase(cityTo)) {
-                returnFlights = searchOneWayFlights(cityFrom, cityTo, returnDate);
+                returnFlights = searchOneWayFlights(cityTo, cityFrom, returnDate);
                 roundTripFlights.setReturnFlights(returnFlights);
             }
         }
