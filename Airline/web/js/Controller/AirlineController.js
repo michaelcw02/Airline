@@ -46,42 +46,11 @@ AirlineController.prototype = {
             //Storage.store('searchTrips', { codeCityFrom, citiesTo });
         } )
     },
-    searchFlights: function (codeCityFrom, codeCityTo, departDate, returnDate) {
-
+    searchFlights: function (codeCityFrom, codeCityTo, departDate, returnDate, callback) {
         Proxy.searchForFlights(codeCityFrom, codeCityTo, departDate, returnDate, (data) => {
-            console.log(data);
+            Storage.store('searchFlights', data);
+            callback(data);
         });
-        /*
-        //THE FOLLOWING LINE IS JAVA'S JOB
-        resultsObject = this.searchAndFilterCities(codeCityFrom, codeCityTo);
-
-        if(departDate) {
-            let flights = resultsObject.results;
-            flights = flights.filter( (flight) => { return flight.getTime() == departDate.getTime() } )
-            resultsObject.results = flights;
-        }
-
-        Storage.store('searchFlights', resultsObject);
-        */
-    },
-    searchAndFilterCities: function(codeCityFrom, codeCityTo) {
-        let flights = this.flights();
-        let codeCityFromTo = '';
-        let results = [];
-
-        if(codeCityFrom == 'All' && codeCityTo == 'All') {
-            results = flights;
-            codeCityFromTo = 'All - All';
-        }
-        else if(codeCityFrom != 'All' && codeCityTo == 'All') {
-            results = flights.filter( (flight) => { return (flight.trip.cityFrom.code == codeCityFrom)});
-            codeCityFromTo = codeCityFrom + ' - ' + 'All';
-        } else {
-            let trip = this.findTrip(codeCityFrom, codeCityTo);
-            results = flights.filter((flight) => { return (flight.trip === trip); });
-            codeCityFromTo = trip.travel();
-        }
-        return {codeCityFromTo, results};
     },
     getSearch: function (codeCityFrom, codeCityTo) {
         let results = Storage.retrieve('searchFlights');

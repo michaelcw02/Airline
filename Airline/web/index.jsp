@@ -216,8 +216,43 @@
                 <div class="container-fluid collapse pagination-container"  id="pagination">
                     <!-- Pagination -->
                 </div>
-            </div>   
-            
+            </div>
+            <!--
+            <div class="container-fluid" id="outbound-flights">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1>Outbound Flights</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="results" id="results">
+                            !-- Table with flights --  
+                        </div>
+                        <div class="" id="">
+                            <div class=""  id="">
+                                !-- Pagination --
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid" id="return-flights">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1>Return Flights</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="results" id="results">
+                            !-- Table with flights -- 
+                        </div>
+                        <div class="" id="">
+                            <div class=""  id="">
+                                !-- Pagination --
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
         </div>
     </div>
 

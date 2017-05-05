@@ -8,14 +8,14 @@ IndexController.prototype = {
         this.airlineController = new AirlineController();
     },
     loadCities: function () {
-        this.airlineController.getAllCities( (results) => {
+        this.airlineController.getAllCities((results) => {
             fillWithCities(this.view.$('#cityFrom'), results);
-            fillWithCities(this.view.$('#cityTo'), results);    
-        } );
+            fillWithCities(this.view.$('#cityTo'), results);
+        });
     },
     showCarousel: function () {
 
-        this.airlineController.getAllDiscounts( (results) => {
+        this.airlineController.getAllDiscounts((results) => {
             for (let i in results) {
                 let discount = results[i];
                 let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
@@ -36,35 +36,9 @@ IndexController.prototype = {
 
     },
     getAllFlights: function (callback) {
-        this.airlineController.getAllFlights( (result) => {
+        this.airlineController.getAllFlights((result) => {
             callback(result);
         })
-    },
-    showSearchFlights: function (numPage = 1, flights = this.airlineController.flights()) {
-        $("#flights").empty();
-        for (let i = 10 * (numPage - 1); i < (10 * numPage) && i < flights.length; i++) {
-            let flight = flights[i];
-            let element = '';
-            element  = '<div class="row hoverDiv">';
-            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + flight.trip.travel() + '<strong></h3>';
-            element += flight.trip.cityFrom.name + ' to ' + flight.trip.cityTo.name + '<br>';
-            element += 'Date of departure: <h4>' + flight.getDate() + '</h4> </div>';
-            element += '<div class="col-md-4"><h1><strong>$ ' + flight.price + '<strong></h1></div>';
-            element += '</div>';
-            $(element).appendTo(this.view.$('.flights-container'));
-        } 
-        this.printButtons(flights);
-    },
-    printButtons: function (flights = this.airlineController.flights()) {
-        let quantity = flights.length / 10;
-        $("#pagination").empty();
-        if (quantity > 1)
-            for (let i = 0; i < quantity; i++) {
-                let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
-                $(element).appendTo(this.view.$('.pagination-container'));
-                var idButton = "#page" + String(i + 1);
-                this.view.addListenersButtons(idButton, (i + 1));
-            }
     },
     hideReturning: function () {
         this.view.$("#returning").hide();
@@ -123,17 +97,73 @@ IndexController.prototype = {
         let cityFrom = this.view.$('#cityFrom').val();
         let cityTo = this.view.$('#cityTo').val();
 
-        if( !isBlank(this.view.$('#departing')) )
-            var departDate = new Date( this.view.$('#departing').val() ).getTime();
+        if (!isBlank(this.view.$('#departing')))
+            var departDate = new Date(this.view.$('#departing').val()).getTime();
+        if (!isBlank(this.view.$('#returning')))
+            var returnDate = new Date(this.view.$('#returning').val()).getTime();
 
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
         cityTo = (cityTo != '0') ? cityTo : 'All';
 
-        this.airlineController.searchFlights(cityFrom, cityTo, departDate);
-        //let results = this.airlineController.getSearch(cityFrom, cityTo);
-        //this.showSearchFlights(1, results);
-    }
+        this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
+            let outboundFlights = jsonResults.outboundFlights;
+            let returnFlights = jsonResults.returnFlights;
+
+            console.log(outboundFlights);
+
+            this.showSearchFlights(1, outboundFlights);
+            /*
+            //NOT WORKING YET
+            showResult(this.view.$('#outbound-flights'), outboundFlights);
+            showResult(this.view.$('#return-flights'), returnFlights);
+            */
+        });
+    },
+    showFlightsResults: (jsonResults) => {
+        let outboundFlights = jsonResults.outboundFlights;
+        let returnFlights = jsonResults.returnFlights;
+
+        showResult(this.view.$('#outbound-flights'), outboundFlights);
+        showResult(this.view.$('#return-flights'), returnFlights);
+    },
+    showSearchFlights: function (numPage = 1, flights) {
+        $("#flights").empty();
+        for (let i = 10 * (numPage - 1); i < (10 * numPage) && i < flights.length; i++) {
+            let flight = flights[i];
+            let element = '';
+            element = '<div class="row hoverDiv">';
+            let trip = flight.trip;
+            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + trip.cityFrom.code + ' - ' + trip.cityTo.code + '<strong></h3>';
+            element += trip.cityFrom.name + ' to ' + trip.cityTo.name + '<br>';
+            element += 'Date of departure: <h4>' + parseMillisToDate(flight.departureDate) + '</h4> </div>';
+            element += '<div class="col-md-4"><h1><strong>$ ' + flight.price + '<strong></h1></div>';
+            element += '</div>';
+            $(element).appendTo(this.view.$('.flights-container'));
+        }
+        this.printButtons(flights);
+    },
+    printButtons: function (flights) {
+        let quantity = flights.length / 10;
+        $("#pagination").empty();
+        if (quantity > 1)
+            for (let i = 0; i < quantity; i++) {
+                let element = '<button type="button" class="btn btn-primary" id="page' + (i + 1) + '">' + (i + 1) + '</button>';
+                $(element).appendTo(this.view.$('.pagination-container'));
+                var idButton = "#page" + String(i + 1);
+                this.view.addListenersButtons(idButton, (i + 1));
+            }
+    },
 }
+
+function showResult($container, jsonFlights) {
+    $container.empty();
+    $container.show();
+    $container.css('z-index', 4000);
+
+    $container.find('div.results').text(jsonFlights);
+    console.log(jsonFlights);
+}
+
 function getFlightCitiesTo(flights) {
     let citiesTo = [];
     for (let i in flights) {
@@ -156,6 +186,11 @@ function fillWithCities($select, cities) {
     }
     if (!$select.has('option').length > 1)
         $select.append('<option value="undefined">No Cities</option>');
+}
+
+function parseMillisToDate(millis) {
+    let date = new Date(millis);
+    return date.toDateString();
 }
 
 function isBlank(element) {

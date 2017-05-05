@@ -5,13 +5,16 @@ function loadPage() {
     controller.loadCities();
     addElementsProperties();
     controller.showCarousel();
-    //controller.showSearchFlights();
 }
 
 function addElementsProperties() {
     //BASIC ELEMENTS
     $("#departing").datepicker({ minDate: new Date() });
     $("#returning").datepicker({ minDate: new Date() });
+    
+    //NEW ELEMENTS!!
+    //$('#outbound-flights').hide();
+    //$('#return-flights').hide();
     
     //EVENT HANDLERS
     //$('#cityFrom').autocomplete( () => controller.setUpCitiesFrom() );
@@ -28,6 +31,8 @@ function addElementsProperties() {
     $('#btnSearchFlights').click( () => controller.moveToFlights() );
     $('#cityTo').change( () => controller.cityFromHandlerHide() );
     $('#cityFrom').change( () => controller.cityFromHandlerHide() );
+
+
 }
 
 function addListenersButtons(idButton, num){
