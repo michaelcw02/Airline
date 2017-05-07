@@ -41,10 +41,6 @@
         <servlet-name>TripsServlet</servlet-name>
         <url-pattern>/TripsServlet</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
