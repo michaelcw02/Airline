@@ -180,7 +180,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 --INSERT USER
 INSERT INTO `mydb`.`user` (`username`, `password`, `name`, `lastname1`, `lastname2`, `email`, `phone`, `celular`, `address`, `birthday`, `administrator`, `cliente`) 
-VALUES ('superuser', 'superuser', 'Sistemas', 'Ingenieria', 'UNA', 'superuser@est.una.ac.cr', '22334455', '88776655', 'Lagunilla, Heredia', '02/01/1996', '1', '1');
+VALUES ('superuser', 'superuser', 'Sistemas', 'Ingenieria', 'UNA', 'superuser@est.una.ac.cr', '22334455', '88776655', 'Lagunilla, Heredia', '1996-01-02', '1', '1');
 
 --INSERT TYPE/PLANE
 --QTY SEATS IS ACTUAL, QTY OF ROWS IS NOT.
