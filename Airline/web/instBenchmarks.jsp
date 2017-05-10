@@ -21,7 +21,7 @@
 
 <body>
     <div class="container top-container">
-        <jsp:include page="footer.jsp"/>
+        <jsp:include page="header.jsp"/>
     </div>
 
     <div class="container body-container text-justify">

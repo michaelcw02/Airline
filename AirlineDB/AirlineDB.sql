@@ -178,16 +178,16 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
---INSERT USER
+-- INSERT USER
 INSERT INTO `mydb`.`user` (`username`, `password`, `name`, `lastname1`, `lastname2`, `email`, `phone`, `celular`, `address`, `birthday`, `administrator`, `cliente`) 
 VALUES ('superuser', 'superuser', 'Sistemas', 'Ingenieria', 'UNA', 'superuser@est.una.ac.cr', '22334455', '88776655', 'Lagunilla, Heredia', '1996-01-02', '1', '1');
 
---INSERT TYPE/PLANE
---QTY SEATS IS ACTUAL, QTY OF ROWS IS NOT.
+-- INSERT TYPE/PLANE
+-- QTY SEATS IS ACTUAL, QTY OF ROWS IS NOT.
 INSERT INTO `mydb`.`typeairplane` (`type_airline`, `year`, `brand`, `qty_of_seats`, `qty_of_rows`, `seats_per_row`) 
 VALUES ('A380-800', '2013', 'AIRBUS', '489', '88', '9');
 
---INSERT PLANE
+-- INSERT PLANE
 INSERT INTO `mydb`.`airplane` (`id_airplane`, `type_airplane`) VALUES ('A001', 'A380-800');
 INSERT INTO `mydb`.`airplane` (`id_airplane`, `type_airplane`) VALUES ('A002', 'A380-800');
 INSERT INTO `mydb`.`airplane` (`id_airplane`, `type_airplane`) VALUES ('A003', 'A380-800');

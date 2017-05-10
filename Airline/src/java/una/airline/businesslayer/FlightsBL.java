@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package una.airline.bl;
+package una.airline.businesslayer;
 
 import java.util.List;
 import java.util.stream.Collectors;

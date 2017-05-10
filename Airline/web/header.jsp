@@ -35,10 +35,10 @@
                                         <h3 class="text-center text-white">Corporate Profile ✵</h3>
                                     </li>
                                     <ul>
-                                        <li class="text-white"> <h5> <a href="companyInfo.html">History of us</a> </h5> </li>
-                                        <li class="text-white"> <h5> <a href="contactUs.html">Contact us</a></h5> </li>
-                                        <li class="text-white"> <h5> <a href="instBenchmarks.html">Institutional Benchmarks</a></h5> </li>
-                                        <li class="text-white"> <h5> <a href="aboutUs.html">About us</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="companyInfo.jsp">History of us</a> </h5> </li>
+                                        <li class="text-white"> <h5> <a href="contactUs.jsp">Contact us</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="instBenchmarks.jsp">Institutional Benchmarks</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="aboutUs.jsp">About us</a></h5> </li>
                                     </ul>
                                 </ul>
                             </li>
@@ -96,7 +96,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-offset-3  col-md-6 text-center register">
-                                                    <a class="hvr-grow" href="./register.html" target="_blank">
+                                                    <a class="hvr-grow" href="./register.jsp" target="_blank">
                                                         <img class="icon-register" src="images/edit-8-48.png" alt="Register">Register
                                                     </a>
                                                 </div>
