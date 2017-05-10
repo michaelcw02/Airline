@@ -17,6 +17,12 @@ public class City {
         this.country = country;
     }
 
+    public City() {
+        this.code = "Nothing";
+        this.name = "Nothing";
+        this.country = "Nothing";
+    }
+
     public void setCode(String code) {
         this.code = code;
     }

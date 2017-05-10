@@ -45,6 +45,8 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
+                            <!------------- SUPER IMPORTANT --------------->
+                            <!-- This place is supposed to have 2 different kinds,one for log in and 1 for user logged -->
                             <li class="dropdown">
                                 <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
                                     <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
