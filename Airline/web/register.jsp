@@ -1,3 +1,10 @@
+<%-- 
+    Document   : register
+    Created on : May 10, 2017, 9:00:32 AM
+    Author     : michaelcw02
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -15,41 +22,7 @@
 
 <body class="register-body">
     <div class="container top-container">
-        <header>
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">Star Airlines<strong>✵</strong></a>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="navbar-collapse collapse">
-
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Check In</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">Our Company</a>
-                                <ul class="dropdown-menu dropdown-profile">
-                                    <li>
-                                        <h3 class="text-center text-white">Corporate Profile ✵</h3>
-                                    </li>
-                                    <ul>
-                                        <li class="text-white"> <h5> <a href="companyInfo.html">History of us</a> </h5> </li>
-                                        <li class="text-white"> <h5> <a href="contactUs.html">Contact us</a></h5> </li>
-                                        <li class="text-white"> <h5> <a href="instBenchmarks.html">Institutional Benchmarks</a></h5> </li>
-                                        <li class="text-white"> <h5> <a href="aboutUs.html">About us</a></h5> </li>
-                                    </ul>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        <jsp:include page="header.jsp"/>
     </div>
 
     <div class="container body-container">
@@ -181,39 +154,7 @@
     </div>
 
     <div class="container footer-container">
-        <footer>
-            <div class="navbar-inverse">
-                <div class="row footer-text">
-                    <div class="col-md-4">
-                        <h4 class="text-center">CONTACT US</h4>
-                        <div>
-                            <dl class="dl-horizontal text-center">
-                                <dt>Phone:</dt>
-                                <dd><a href="tel:+506-2244-6688">(506) 2244-6688</a></dd>
-                                <dt>Email:</dt>
-                                <dd><a href="mailto:contact@starair.com">contact@starair.com</a></dd>
-                            </dl>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h4 class="text-center">HEADQUARTERS</h4>
-                        <div>
-                            <h5 class="text-center">Universidad Nacional, Lagunilla, Heredia, Costa Rica</h5>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <h4 class="text-center">FOLLOW US ON</h4>
-                        <div class="text-center">
-                            <a class="hvr-grow" href="https://www.linkedin.com/" target="_blank"><img src="images/linkedin-3-48.png" alt="LinkedIn"></a>
-                            <a class="hvr-grow" href="https://www.facebook.com/" target="_blank"><img src="images/facebook-3-48.png" alt="Facebook"></a>
-                            <a class="hvr-grow" href="https://www.instagram.com" target="_blank"><img src="images/instagram-48.png" alt="Instagram"></a>
-                            <a class="hvr-grow" href="https://www.twitter.com" target="_blank"><img src="images/twitter-48.png" alt="Instagram"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <jsp:include page="footer.jsp"/>
     </div>
 
     <!-- LIBRARIES -->
