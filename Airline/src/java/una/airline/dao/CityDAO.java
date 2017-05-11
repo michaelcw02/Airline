@@ -34,13 +34,23 @@ public class CityDAO extends BaseDAO {
         return listaResultado;
     }
 
+    public void addCity(City city) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`city` (`code`, `name`, `country`) VALUES ('%s', '%s', '%s');";
+        query = String.format(query, city.getCode(), city.getName(), city.getCountry());
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("City already exists.");
+        }
+    }
+
     private City city(ResultSet rs) {
         try {
             City city = new City();
             city.setCode(rs.getString("Code"));
             city.setName(rs.getString("Name"));
             city.setCountry(rs.getString("Country"));
-            return city;            
+            return city;
         } catch (SQLException ex) {
             return null;
         }
