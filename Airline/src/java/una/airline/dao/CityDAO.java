@@ -35,7 +35,7 @@ public class CityDAO extends BaseDAO {
     }
 
     public void addCity(City city) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`city` (`id_city`, `name_city`, `country`) VALUES ('%s', '%s', '%s');";
+        String query = "INSERT INTO `airlinedb`.`city` (`code`, `name`, `country`) VALUES ('%s', '%s', '%s');";
         query = String.format(query, city.getCode(), city.getName(), city.getCountry());
         System.out.println(query);
         int result = connection.executeUpdate(query);

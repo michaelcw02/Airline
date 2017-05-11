@@ -11,10 +11,11 @@ package una.airline.domain;
  */
 public class Trip {
 
-    public Trip(City cityFrom, City cityTo, int duration) {
+    public Trip(City cityFrom, City cityTo, int duration, float distance) {
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
         this.duration = duration;
+        this.distance = distance;
     }
 
     public void setCityFrom(City cityFrom) {
@@ -29,6 +30,10 @@ public class Trip {
         this.duration = duration;
     }
 
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
     public City getCityFrom() {
         return cityFrom;
     }
@@ -41,6 +46,10 @@ public class Trip {
         return duration;
     }
 
+    public float getDistance() {
+        return distance;
+    }
+
     @Override
     public String toString() {
         return cityFrom.getCode() + " - " + cityTo.getCode();
@@ -49,4 +58,5 @@ public class Trip {
     City cityFrom; 
     City cityTo; 
     int duration; //in minutes
+    float distance; //in miles
 }

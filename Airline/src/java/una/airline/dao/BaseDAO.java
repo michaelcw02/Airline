@@ -25,8 +25,8 @@ public class BaseDAO {
     protected City city(ResultSet rs) {
         try {
             City city = new City();
-            city.setCode(rs.getString("id_city"));
-            city.setName(rs.getString("name_city"));
+            city.setCode(rs.getString("code"));
+            city.setName(rs.getString("name"));
             city.setCountry(rs.getString("country"));
             return city;
         } catch (SQLException ex) {
