@@ -6,42 +6,40 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedList;
-import una.airline.domain.City;
+import una.airline.domain.Trip;
 
 /**
  *
  * @author micha
  */
-public class CityDAO extends BaseDAO {
-
-    public CityDAO() {
+public class TripDAO extends BaseDAO {
+    public TripDAO() {
         super();
     }
-
-    public LinkedList<City> getAllCities() {
-        LinkedList<City> listaResultado = new LinkedList<>();
+    
+    
+    public LinkedList<Trip> getAllFlights() {
+        LinkedList<Trip> listaResultado = new LinkedList<>();
         try {
-            String query = "SELECT * FROM City;";
+            String query = "SELECT * FROM Trip;";
             query = String.format(query);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
-                listaResultado.add(city(rs));
+                listaResultado.add(trip(rs));
             }
         } catch (Exception e) {
         }
         return listaResultado;
     }
 
-    public void addCity(City city) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`city` (`id_city`, `name_city`, `country`) VALUES ('%s', '%s', '%s');";
-        query = String.format(query, city.getCode(), city.getName(), city.getCountry());
+    public void addCity(Trip trip) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`trip` (`code`, `name`, `country`) VALUES ('%s', '%s', '%s');";
+        query = String.format(query, trip.getCityFrom(), trip.getCityTo(), trip.getDuration());
         System.out.println(query);
         int result = connection.executeUpdate(query);
         if (result == 0) {
             throw new Exception("City already exists.");
         }
     }
-
 }

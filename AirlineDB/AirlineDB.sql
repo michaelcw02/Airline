@@ -68,10 +68,10 @@ ENGINE = InnoDB;
 -- Table `AirlineDB`.`City`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AirlineDB`.`City` (
-  `id_city` VARCHAR(20) NOT NULL,
-  `name_city` VARCHAR(20) NOT NULL,
+  `code` VARCHAR(3) NOT NULL,
+  `name` VARCHAR(20) NOT NULL,
   `country` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id_city`))
+  PRIMARY KEY (`code`))
 ENGINE = InnoDB;
 
 
@@ -79,22 +79,22 @@ ENGINE = InnoDB;
 -- Table `AirlineDB`.`Trip`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AirlineDB`.`Trip` (
-  `id_trip` VARCHAR(20) NOT NULL,
+  `id_trip` INT NOT NULL AUTO_INCREMENT,
   `distance` INT NOT NULL,
   `duration` INT NOT NULL,
-  `departure_city` VARCHAR(20) NOT NULL,
-  `arrival_city` VARCHAR(20) NOT NULL,
+  `departure_city` VARCHAR(3) NOT NULL,
+  `arrival_city` VARCHAR(3) NOT NULL,
   PRIMARY KEY (`id_trip`),
   INDEX `departure_city_idx` (`departure_city` ASC),
   INDEX `arrival_city_idx` (`arrival_city` ASC),
   CONSTRAINT `departure_city`
     FOREIGN KEY (`departure_city`)
-    REFERENCES `AirlineDB`.`City` (`id_city`)
+    REFERENCES `AirlineDB`.`City` (`code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `arrival_city`
     FOREIGN KEY (`arrival_city`)
-    REFERENCES `AirlineDB`.`City` (`id_city`)
+    REFERENCES `AirlineDB`.`City` (`code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -109,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `AirlineDB`.`Flight` (
   `departure_date` MEDIUMTEXT NOT NULL,
   `arrival_date` MEDIUMTEXT NOT NULL,
   `available_seats` INT NOT NULL,
-  `id_trip` VARCHAR(255) NOT NULL,
-  `id_airplane` VARCHAR(255) NOT NULL,
+  `id_trip` INT NOT NULL,
+  `id_airplane` VARCHAR(20) NOT NULL,
   `discount` INT NULL,
   `discount_description` VARCHAR(45) NULL,
   `discount_image_path` VARCHAR(45) NULL,
@@ -134,14 +134,14 @@ ENGINE = InnoDB;
 -- Table `AirlineDB`.`Ticket`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AirlineDB`.`Ticket` (
-  `ticket_num` INT NOT NULL AUTO_INCREMENT,
-  `user_id` VARCHAR(20) NOT NULL,
-  `flight_num` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`ticket_num`),
-  INDEX `id_user_idx` (`user_id` ASC),
+  `number` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(20) NOT NULL,
+  `flight_num` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`number`),
+  INDEX `id_user_idx` (`username` ASC),
   INDEX `flight_num_idx` (`flight_num` ASC),
   CONSTRAINT `fk_ticket1`
-    FOREIGN KEY (`user_id`)
+    FOREIGN KEY (`username`)
     REFERENCES `AirlineDB`.`User` (`username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -162,12 +162,11 @@ CREATE TABLE IF NOT EXISTS `AirlineDB`.`Passenger` (
   `name` VARCHAR(20) NULL,
   `lastname` VARCHAR(20) NULL,
   `seat` VARCHAR(5) NULL,
-  `Passengercol` VARCHAR(45) NULL,
   PRIMARY KEY (`passport`, `ticket_num`),
   INDEX `ticket_num_idx` (`ticket_num` ASC),
   CONSTRAINT `fk_passenger1`
     FOREIGN KEY (`ticket_num`)
-    REFERENCES `AirlineDB`.`Ticket` (`ticket_num`)
+    REFERENCES `AirlineDB`.`Ticket` (`number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
