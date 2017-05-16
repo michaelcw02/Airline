@@ -248,6 +248,22 @@ input {
 	font-family:helvetica, arial, sans-serif;
 	line-height:20px;
 }
+.benchmarks-body {
+	background:url('../images/background-17.jpg'); 
+	background-repeat:no-repeat; 
+	background-size:cover; 
+	background-attachment: fixed; 
+	font-family:helvetica, arial, sans-serif;
+	line-height:20px;
+}
+.company-body {
+	background:url('../images/background-11.jpg'); 
+	background-repeat:no-repeat; 
+	background-size:cover; 
+	background-attachment: fixed; 
+	font-family:helvetica, arial, sans-serif;
+	line-height:20px;
+}
 
 article {
 	background:rgba(0,0,0,.5);
@@ -307,4 +323,10 @@ article hr {
 .face-picture {
     width: 250px;
     height: auto;
+}
+.bold{
+    font-weight: bold;
+}
+.panel-transparent{
+    background: rgba(122, 130, 136, 0.2)!important;
 }
