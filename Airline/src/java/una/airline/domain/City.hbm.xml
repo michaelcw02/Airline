@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 15, 2017 11:25:46 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="una.airline.domain.City" table="city" catalog="airlinedb" optimistic-lock="version">
+        <id name="code" type="string">
+            <column name="code" length="3" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="20" not-null="true" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="20" not-null="true" />
+        </property>
+        <bag name="tripsForArrivalCity" table="trip" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="arrival_city" length="3" not-null="true" />
+            </key>
+            <one-to-many class="una.airline.domain.Trip" />
+        </bag>
+        <bag name="tripsForDepartureCity" table="trip" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="departure_city" length="3" not-null="true" />
+            </key>
+            <one-to-many class="una.airline.domain.Trip" />
+        </bag>
+    </class>
+</hibernate-mapping>
