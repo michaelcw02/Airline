@@ -83,5 +83,15 @@ public class TripDAO extends HibernateUtil implements IBaseDAO<Trip, Integer> {
         return listTrips;
     }
     
+    public List<Trip> findByDepartureCity(String cityCode) {
+        List<Trip> listTrips;
+        try {
+            startOperation();
+            listTrips = getSession().createQuery("from Trip where departure_city = " + cityCode).list();
+        } finally {
+            getSession().close();
+        }
+        return listTrips;
+    }
 }
 
