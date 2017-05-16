@@ -83,4 +83,19 @@ public class FlightDAO extends HibernateUtil implements IBaseDAO<Flight, String>
         return listFlights;
     }
     
+    public List<Flight> findFlightByCityFromCityTo(String cityFrom, String cityTo) {
+        List<Flight> listFlights;
+        try {
+            startOperation();
+            listFlights = getSession()
+                .createSQLQuery("SELECT flight_num, cost, departure_date, available_seats, id_trip, id_airplane, discount, discount_description, discount_image_path "
+                            +   "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = 'SJO' AND ARRIVAL_CITY = 'LAX')alias1  "
+                            +   "WHERE FLIGHT.ID_TRIP = TRIP").list();
+        } finally {
+            getSession().close();
+        }
+        return listFlights;
+    }
+    
+    
 }

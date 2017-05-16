@@ -33,10 +33,10 @@ public class Test {
         }
     }
 
-    public static long getRandomTime() {
+    public static String getRandomTime() {
         long date1 = new Date().getTime();
         long date2 = parseDate("2017-06-30").getTime();
-        return new Date(ThreadLocalRandom.current().nextLong(date1, date2)).getTime();
+        return Long.toString(new Date(ThreadLocalRandom.current().nextLong(date1, date2)).getTime());
     }
 
     public static void main(String[] arg) {
@@ -99,17 +99,60 @@ public class Test {
         });
 
         List<Trip> trips = tripDAO.findAll();
-        /*
+        
         //NOT FUNCTIONAL
         FlightDAO flightDAO = new FlightDAO();
         for (int i = 0; i < trips.size(); i++) {
             String number = String.format("%02d", i);
             String code = "ST" + number;
-            flightDAO.save(new Flight(code + 1, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 1)),trips.get(i), System.currentTimeMillis(), getRandomInt(320, 1600)));
-            flightDAO.save(new Flight(code + 2, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 2)),trips.get(i), getRandomTime(), getRandomInt(320, 1600)));
-            flightDAO.save(new Flight(code + 3, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 3)),trips.get(i), getRandomTime(), getRandomInt(320, 1600)));
-        }
-*       */
-
+            flightDAO.save(new Flight(code + 1, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 1)),trips.get(i), getRandomInt(320, 1600), Long.toString(System.currentTimeMillis()), 800, 0, "No", "No", null));
+            flightDAO.save(new Flight(code + 2, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 2)),trips.get(i), getRandomInt(320, 1600), getRandomTime(), 800,  0, "No", "No", null));
+            flightDAO.save(new Flight(code + 3, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 3)),trips.get(i), getRandomInt(320, 1600), getRandomTime(), 800,  0, "No", "No", null));
+        }   
+        
+        
+        
+        int i = 0;
+        Flight flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "LAX");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("Let's go to Los Angeles!");
+        flight.setDiscountImagePath("images/background-3.jpg");
+        flightDAO.merge(flight);
+        
+        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "BOS");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("Let us take you to Boston!");
+        flight.setDiscountImagePath("images/background-6.jpg");
+        flightDAO.merge(flight);
+        
+        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "MIA");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("Wanna go to Miami?");
+        flight.setDiscountImagePath("images/background-2.jpg");
+        flightDAO.merge(flight);
+        
+        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "ATL");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("Have you thought about Atlanta?");
+        flight.setDiscountImagePath("images/background-5.jpg");
+        flightDAO.merge(flight);
+        
+        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "JFK");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("The City That Never Sleeps?");
+        flight.setDiscountImagePath("images/background-17.jpg");
+        flightDAO.merge(flight);
+        
+        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "TPE");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("Taipei is just Amazing!");
+        flight.setDiscountImagePath("images/background-17.jpg");
+        flightDAO.merge(flight);
+        
+        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "LHR");
+        flight.setDiscount(getRandomInt(10, 40));
+        flight.setDiscountDescription("How about London?");
+        flight.setDiscountImagePath("images/background-1.jpg");
+        flightDAO.merge(flight);
     }
 }
