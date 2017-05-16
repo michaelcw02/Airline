@@ -96,6 +96,4 @@ public class FlightDAO extends HibernateUtil implements IBaseDAO<Flight, String>
         }
         return listFlights;
     }
-    
-    
 }
