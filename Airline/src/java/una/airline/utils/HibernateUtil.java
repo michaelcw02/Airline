@@ -49,4 +49,13 @@ public class HibernateUtil {
         transac.rollback();
         throw new HibernateException("An error ocurred in the Data Access Layer", he);
     }
+
+    public Transaction getTransac() {
+        return transac;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+    
 }
