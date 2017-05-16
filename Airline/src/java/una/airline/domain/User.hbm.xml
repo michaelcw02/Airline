@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 15, 2017 11:25:46 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="una.airline.domain.User" table="user" catalog="airlinedb" optimistic-lock="version">
+        <id name="username" type="string">
+            <column name="username" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="20" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="20" not-null="true" />
+        </property>
+        <property name="lastname1" type="string">
+            <column name="lastname1" length="20" not-null="true" />
+        </property>
+        <property name="lastname2" type="string">
+            <column name="lastname2" length="20" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="40" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="20" not-null="true" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="20" not-null="true" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="50" not-null="true" />
+        </property>
+        <property name="birthday" type="date">
+            <column name="birthday" length="10" not-null="true" />
+        </property>
+        <property name="administrator" type="boolean">
+            <column name="administrator" not-null="true" />
+        </property>
+        <property name="cliente" type="boolean">
+            <column name="cliente" not-null="true" />
+        </property>
+        <bag name="tickets" table="ticket" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="username" length="20" not-null="true" />
+            </key>
+            <one-to-many class="una.airline.domain.Ticket" />
+        </bag>
+    </class>
+</hibernate-mapping>
