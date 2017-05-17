@@ -8,6 +8,7 @@ package una.airline.services;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,8 +41,6 @@ public class CitiesServlet extends HttpServlet {
             
             CityBL cityBL = new CityBL();
             
-            
-            
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
             
@@ -56,7 +55,8 @@ public class CitiesServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllCities":
-                    json = new Gson().toJson(cityBL.findAll(City.class.getName()));
+                    List<City> list = cityBL.findAll(City.class.getName());
+                    json = new Gson().toJson(list);
                     out.print(json);
                     break;
                 
