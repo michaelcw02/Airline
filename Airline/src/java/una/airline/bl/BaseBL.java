@@ -17,7 +17,14 @@ public class BaseBL {
     
     public BaseBL() {
         daos = new LinkedHashMap();
-        daos.put("una.airline.domain.Typeairline", new TypeAirplaneDAO() );
+        daos.put("una.airline.domain.Typeairline", new TypeAirplaneDAO());
+        daos.put("una.airline.domain.Airplane", new AirplaneDAO());
+        daos.put("una.airline.domain.City", new CityDAO());
+        daos.put("una.airline.domain.Trip", new TripDAO());
+        daos.put("una.airline.domain.Flight", new FlightDAO());
+        daos.put("una.airline.domain.User", new UserDAO());
+        daos.put("una.airline.domain.Ticket", new TicketDAO());
+        daos.put("una.airline.domain.Passenger", new TypeAirplaneDAO());        
     }
     
     public IBaseDAO getDao(String className){
