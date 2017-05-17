@@ -19,7 +19,7 @@ import una.airline.domain.*;
  *
  * @author michaelcw02
  */
-public class Test {
+public class InitialSetUp {
 
     public static int getRandomInt(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
@@ -40,7 +40,7 @@ public class Test {
     }
 
     public static void main(String[] arg) {
-
+        
         TypeAirplaneDAO typeAirplaneDAO = new TypeAirplaneDAO();
 
         //ALL PASSED
@@ -100,7 +100,6 @@ public class Test {
 
         List<Trip> trips = tripDAO.findAll();
         
-        //NOT FUNCTIONAL
         FlightDAO flightDAO = new FlightDAO();
         for (int i = 0; i < trips.size(); i++) {
             String number = String.format("%02d", i);
@@ -110,46 +109,50 @@ public class Test {
             flightDAO.save(new Flight(code + 3, airplaneDAO.findById("ASA-" + String.format("%03d", (i * 3 ) + 3)),trips.get(i), getRandomInt(320, 1600), getRandomTime(), 800,  0, "No", "No", null));
         }   
         
-        
-        
-        int i = 0;
-        Flight flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "LAX");
+        List<Flight> list = flightDAO.findFlightByCityFromCityTo("SJO", "LAX");
+        Flight flight = (Flight) list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("Let's go to Los Angeles!");
         flight.setDiscountImagePath("images/background-3.jpg");
         flightDAO.merge(flight);
         
-        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "BOS");
+        list = flightDAO.findFlightByCityFromCityTo("SJO", "BOS");
+        flight = list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("Let us take you to Boston!");
         flight.setDiscountImagePath("images/background-6.jpg");
         flightDAO.merge(flight);
         
-        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "MIA");
+        list = flightDAO.findFlightByCityFromCityTo("SJO", "MIA");
+        flight = list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("Wanna go to Miami?");
         flight.setDiscountImagePath("images/background-2.jpg");
         flightDAO.merge(flight);
         
-        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "ATL");
+        list = flightDAO.findFlightByCityFromCityTo("SJO", "ATL");
+        flight = list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("Have you thought about Atlanta?");
         flight.setDiscountImagePath("images/background-5.jpg");
         flightDAO.merge(flight);
         
-        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "JFK");
+        list = flightDAO.findFlightByCityFromCityTo("SJO", "JFK");
+        flight = list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("The City That Never Sleeps?");
         flight.setDiscountImagePath("images/background-17.jpg");
         flightDAO.merge(flight);
         
-        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "TPE");
+        list = flightDAO.findFlightByCityFromCityTo("SJO", "TPE");
+        flight = list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("Taipei is just Amazing!");
         flight.setDiscountImagePath("images/background-17.jpg");
         flightDAO.merge(flight);
         
-        flight = (Flight) flightDAO.findFlightByCityFromCityTo("SJO", "LHR");
+        list = flightDAO.findFlightByCityFromCityTo("SJO", "LHR");
+        flight = list.get(0);
         flight.setDiscount(getRandomInt(10, 40));
         flight.setDiscountDescription("How about London?");
         flight.setDiscountImagePath("images/background-1.jpg");
