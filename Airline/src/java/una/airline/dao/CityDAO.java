@@ -73,14 +73,14 @@ public class CityDAO extends HibernateUtil implements IBaseDAO<City, String> {
 
     @Override
     public List<City> findAll() {
-        List<City> listCitys;
+        List<City> listCities;
         try {
             startOperation();
-            listCitys = getSession().createQuery("from City").list();
+            listCities = getSession().createQuery("from City").list();
         } finally {
             getSession().close();
         }
-        return listCitys;
+        return listCities;
     }
     
 }
