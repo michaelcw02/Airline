@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import una.airline.domain.AirlineModel;
+import una.airline.bl.CityBL;
+import una.airline.domain.City;
 
 /**
  *
@@ -37,8 +38,10 @@ public class CitiesServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             
-            AirlineModel airlineModel = AirlineModel.getInstance();
-
+            CityBL cityBL = new CityBL();
+            
+            
+            
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
             
@@ -53,7 +56,7 @@ public class CitiesServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllCities":
-                    json = new Gson().toJson(airlineModel.getCities());
+                    json = new Gson().toJson(cityBL.findAll(City.class.getName()));
                     out.print(json);
                     break;
                 
