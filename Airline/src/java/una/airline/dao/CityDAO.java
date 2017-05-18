@@ -6,7 +6,6 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import una.airline.domain.City;
 
@@ -18,6 +17,16 @@ public class CityDAO extends BaseDAO {
 
     public CityDAO() {
         super();
+    }
+
+    public void addCity(City city) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`city` (`code`, `name`, `country`) VALUES ('%s', '%s', '%s');";
+        query = String.format(query, city.getCode(), city.getName(), city.getCountry());
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("E~City already exists.");
+        }
     }
 
     public LinkedList<City> getAllCities() {
@@ -33,14 +42,15 @@ public class CityDAO extends BaseDAO {
         }
         return listaResultado;
     }
-
-    public void addCity(City city) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`city` (`code`, `name`, `country`) VALUES ('%s', '%s', '%s');";
-        query = String.format(query, city.getCode(), city.getName(), city.getCountry());
-        System.out.println(query);
-        int result = connection.executeUpdate(query);
-        if (result == 0) {
-            throw new Exception("City already exists.");
+    public City getCityByCode(String code) throws Exception {
+        String query = "SELECT * FROM City WHERE code = '%s';";
+        query = String.format(query, code);
+        ResultSet rs = connection.executeQuery(query);
+        if(rs.next()) {
+            return city(rs);
+        }
+        else {
+            throw new Exception("E~City not found.");
         }
     }
 

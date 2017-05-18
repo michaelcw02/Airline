@@ -36,7 +36,20 @@ public class BaseDAO {
     protected Trip trip(ResultSet rs) {
         try {
             rs.getString("something");
-            return null;
+            float distance = rs.getFloat("distance");
+            int duration = rs.getInt("duraton");
+            String cityFromCode = rs.getString("departure_city");
+            String cityToCode = rs.getString("arrival_city");
+            City cityFrom;
+            City cityTo;
+            try {
+                CityDAO cityDao = new CityDAO();
+                cityFrom = cityDao.getCityByCode(cityFromCode);
+                cityTo = cityDao.getCityByCode(cityToCode);
+            } catch(Exception ex) {
+                return null;
+            }
+            return new Trip(cityFrom, cityTo, duration, distance);
         } catch (SQLException ex) {
             return null;
         }
