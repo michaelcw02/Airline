@@ -19,12 +19,12 @@ Proxy.getCities = (callback) => {
 }
 Proxy.getDiscounts = (callback) => {
     $.ajax({
-        url: 'DiscountsServlet',
+        url: 'FlightsServlet',
         data: {
             action: "getAllDiscounts"
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar las ciudades de la base de datos");
+            alert("Se presento un error a la hora de cargar los descuentos de la base de datos");
         },
         success: (data) => {
             console.log(data);

@@ -66,7 +66,9 @@ public class FlightsServlet extends HttpServlet {
                     //out.print(json);
                     
                     break;
-                case "getDiscounts":
+                case "getAllDiscounts":
+                    json = new Gson().toJson(flightBL.findDiscounts());
+                    out.print(json);
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

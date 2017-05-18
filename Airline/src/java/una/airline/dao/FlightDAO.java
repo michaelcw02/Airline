@@ -100,4 +100,20 @@ public class FlightDAO extends HibernateUtil implements IBaseDAO<Flight, String>
         }
         return listFlights;
     }
+    
+    public List<Flight> findDiscounts() {
+        List<Flight> listFlights;
+        try {
+            startOperation();
+            listFlights = getSession()
+                    .createSQLQuery("SELECT * FROM FLIGHT WHERE DISCOUNT <> 0")
+                    .addEntity(Flight.class)
+                    .list();
+        } finally {
+            getSession().close();
+        }
+        return listFlights;
+    }
+    
+    
 }

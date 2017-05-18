@@ -11,11 +11,11 @@ import java.util.List;
 public class City  implements java.io.Serializable {
 
 
-     private String code;
-     private String name;
-     private String country;
-     private List<Trip> tripsForArrivalCity = new LinkedList<>();
-     private List<Trip> tripsForDepartureCity = new LinkedList<>();
+    private String code;
+    private String name;
+    private String country;
+    transient private List<Trip> tripsForArrivalCity = new LinkedList<>();
+    transient private List<Trip> tripsForDepartureCity = new LinkedList<>();
 
     public City() {
     }
