@@ -17,7 +17,7 @@
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html">Star Airlines<strong>✵</strong></a>
+                        <a class="navbar-brand" href="index.jsp">Star Airlines<strong>✵</strong></a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
