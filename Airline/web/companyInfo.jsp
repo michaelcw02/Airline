@@ -1,60 +1,51 @@
 <%-- 
-    Document   : companyInfo
-    Created on : May 10, 2017, 9:12:12 AM
-    Author     : micha
+    Document   : extra
+    Created on : 15/05/2017, 11:03:15 PM
+    Author     : Fabiana
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>About us</title>
-    <link rel="icon" href="images/airplane-4-48.png" type="image/png">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="css/hover.css">
-    <link rel="stylesheet" href="css/stylesheet.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>About us</title>
+        <link rel="icon" href="images/airplane-4-48.png" type="image/png">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.css">
+        <link rel="stylesheet" href="css/hover.css">
+        <link rel="stylesheet" href="css/stylesheet.css">
+    </head>
+    <body class="company-body">
 
-<body>
-    <div class="container top-container">
-        <jsp:include page="header.jsp"/>
-    </div>
+        <div class="container top-container">
+            <jsp:include page="header.jsp"/>
+        </div>
 
-    <div class="container body-container text-justify">
-        <div class="thumbnail">
-            <img src="images/airplane.jpg" alt="Airplane">
-            <div class="caption">
-                <p class="text-big text-justify">If you’d like to learn more about StarAir, you’re certainly in the right place. Here, you’ll find all those
-                    things you’ve wanted to know about us. And who knows? You might even learn something new.</p>
-                <p class="text-big text-justify">If you’d like to learn more about StarAir, you’re certainly in the right place. Here, you’ll find all those
-                    things you’ve wanted to know about us. And who knows? You might even learn something new.</p>
-            </div>
-        </div>
-        <br>
-        <div>
-            <div class="container text-justify">
-                <h1 class="strong">Corpora​te Information</h1>
-                <p class="text-big text-justify">StarAir is the commercial brand that represents the Latin American airlines integrated in Star Holdings S.A.
-                    <p class="text-big text-justify">StarAir is the commercial brand that represents the Latin American airlines integrated in Star Holdings
-                        S.A. Its workforce of over 20,000 employees have been recognized to provide an excellent world class
-                        service. The Star Airlines, specialized in air cargo and passenger transportation, serve more than
-                        100 direct destinations in 28 countries throughout all the continents with its modern fleet of 180
-                        short, medium, and long haul aircraft. Through its membership with Star Alliance​,Star Airlines offers
-                        the possibility to connect to more than 1,300 destinations in 192 countries globally. Through LifeMiles​,
-                        the loyalty program, the airline offers a wide range of benefits and travel options to its more than
-                        6 million registered members.
-                    </p>
-            </div>
-        </div>
-        <div>
-            <div class="container text-justify">
-                <h1 class="strong">Star Airlines through the years</h1>
-                <div class="thumbnail">
-                    <img src="images/StarAirplane.jpg" alt="Airplane">
-                    <div class="caption">
+        <div class="container body-container">
+            <div class="">
+                <article>
+                    <h1 class="text-center">STAR AIRLINES</h1>
+                    <div>
+                        <p class="text-big text-justify">If you’d like to learn more about Star Airlines, you’re certainly in the right place. Here, you’ll find all those
+                            things you’ve wanted to know about us. And who knows? You might even learn something new.</p>
+                    </div>
+                    <hr>
+                    <h2 class="bold">CORPORATE INFORMATION</h2>
+                    <div>
+                        <p class="text-big text-justify">StarAir is the commercial brand that represents the Latin American airlines integrated in Star Holdings
+                            S.A. Its workforce of over 20,000 employees have been recognized to provide an excellent world class
+                            service. The Star Airlines, specialized in air cargo and passenger transportation, serve more than
+                            100 direct destinations in 28 countries throughout all the continents with its modern fleet of 180
+                            short, medium, and long haul aircraft. Through its membership with Star Alliance​,Star Airlines offers
+                            the possibility to connect to more than 1,300 destinations in 192 countries globally. Through LifeMiles​,
+                            the loyalty program, the airline offers a wide range of benefits and travel options to its more than
+                            6 million registered members.
+                        </p>
+                    </div>
+                    <hr>
+                    <h2 class="bold">STAR AIRLINES THROUGH THE YEARS</h2>
+                    <div>
                         <ul class="text-big text-justify">
                             <li>In 1960 the company was constituted.The first routes Star Air operated where: Bogota-Colombia,
                                 Managua-Nicaragua, Mexico city and Panama.</li>
@@ -87,19 +78,20 @@
                             <li>In 2016, the company added destinations to various parts of Asia including: Taipei in Taiwan,
                                 Tokio in Japan, Pekin in China and New Delhi in India.</li>
                         </ul>
+
                     </div>
-                </div>
+                </article>
             </div>
         </div>
 
-    </div>
 
-    <div class="container footer-container">
-        <jsp:include page="footer.jsp"/>
-    </div>
-    <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+        <div class="container footer-container">
+            <jsp:include page="footer.jsp"/>
+        </div>
 
-</body>
+        <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+
+    </body>
 
 </html>
