@@ -6,6 +6,7 @@
 package una.airline.bl;
 
 import java.util.List;
+import una.airline.dao.FlightDAO;
 import una.airline.domain.Flight;
 
 /**
@@ -41,6 +42,11 @@ public class FlightBL extends BaseBL implements IBaseBL<Flight, String>{
     @Override
     public List<Flight> findAll(String className) {
         return this.getDao(className).findAll();
+    }
+    
+    public List<Flight> findDiscounts() {
+        List<Flight> list = new FlightDAO().findDiscounts();
+        return list;
     }
     
 }
