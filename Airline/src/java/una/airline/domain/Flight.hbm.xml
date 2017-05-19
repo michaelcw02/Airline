@@ -8,10 +8,10 @@
             <column name="flight_num" length="10" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="airplane" class="una.airline.domain.Airplane" fetch="select">
+        <many-to-one name="airplane" class="una.airline.domain.Airplane" lazy="false">
             <column name="id_airplane" length="20" not-null="true" />
         </many-to-one>
-        <many-to-one name="trip" class="una.airline.domain.Trip" fetch="select">
+        <many-to-one name="trip" class="una.airline.domain.Trip" lazy="false">
             <column name="id_trip" not-null="true" />
         </many-to-one>
         <property name="cost" type="int">
@@ -32,7 +32,7 @@
         <property name="discountImagePath" type="string">
             <column name="discount_image_path" length="45" />
         </property>
-        <bag name="tickets" table="ticket" inverse="true" lazy="false" fetch="select">
+        <bag name="tickets" table="ticket" inverse="true" lazy="false">
             <key>
                 <column name="flight_num" length="10" not-null="true" />
             </key>

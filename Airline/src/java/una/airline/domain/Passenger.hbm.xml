@@ -12,7 +12,7 @@
                 <column name="ticket_num" />
             </key-property>
         </composite-id>
-        <many-to-one name="ticket" class="una.airline.domain.Ticket" update="false" insert="false" fetch="select">
+        <many-to-one name="ticket" class="una.airline.domain.Ticket" update="false" insert="false" lazy="false">
             <column name="ticket_num" not-null="true" />
         </many-to-one>
         <property name="name" type="string">

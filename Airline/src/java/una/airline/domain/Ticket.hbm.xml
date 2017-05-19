@@ -8,13 +8,13 @@
             <column name="number" />
             <generator class="identity" />
         </id>
-        <many-to-one name="flight" class="una.airline.domain.Flight" fetch="select">
+        <many-to-one name="flight" class="una.airline.domain.Flight" lazy="false">
             <column name="flight_num" length="10" not-null="true" />
         </many-to-one>
-        <many-to-one name="user" class="una.airline.domain.User" fetch="select">
+        <many-to-one name="user" class="una.airline.domain.User" lazy="false">
             <column name="username" length="20" not-null="true" />
         </many-to-one>
-        <bag name="passengers" table="passenger" inverse="true" lazy="false" fetch="select">
+        <bag name="passengers" table="passenger" inverse="true" lazy="false">
             <key>
                 <column name="ticket_num" not-null="true" />
             </key>

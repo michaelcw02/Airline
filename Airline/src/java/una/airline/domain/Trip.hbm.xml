@@ -8,10 +8,10 @@
             <column name="id_trip" />
             <generator class="identity" />
         </id>
-        <many-to-one name="cityByArrivalCity" class="una.airline.domain.City" fetch="select">
+        <many-to-one name="cityByArrivalCity" class="una.airline.domain.City" lazy="false">
             <column name="arrival_city" length="3" not-null="true" />
         </many-to-one>
-        <many-to-one name="cityByDepartureCity" class="una.airline.domain.City" fetch="select">
+        <many-to-one name="cityByDepartureCity" class="una.airline.domain.City" lazy="false">
             <column name="departure_city" length="3" not-null="true" />
         </many-to-one>
         <property name="distance" type="int">
@@ -20,7 +20,7 @@
         <property name="duration" type="int">
             <column name="duration" not-null="true" />
         </property>
-        <bag name="flights" table="flight" inverse="true" lazy="false" fetch="select">
+        <bag name="flights" table="flight" inverse="true" lazy="false">
             <key>
                 <column name="id_trip" not-null="true" />
             </key>

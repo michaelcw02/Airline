@@ -14,13 +14,13 @@
         <property name="country" type="string">
             <column name="country" length="20" not-null="true" />
         </property>
-        <bag name="tripsForArrivalCity" table="trip" inverse="true" lazy="false" fetch="select">
+        <bag name="tripsForArrivalCity" table="trip" inverse="true" lazy="false">
             <key>
                 <column name="arrival_city" length="3" not-null="true" />
             </key>
             <one-to-many class="una.airline.domain.Trip" />
         </bag>
-        <bag name="tripsForDepartureCity" table="trip" inverse="true" lazy="false" fetch="select">
+        <bag name="tripsForDepartureCity" table="trip" inverse="true" lazy="false">
             <key>
                 <column name="departure_city" length="3" not-null="true" />
             </key>

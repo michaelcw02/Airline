@@ -8,10 +8,10 @@
             <column name="id_airplane" length="20" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="typeairplane" class="una.airline.domain.Typeairplane" fetch="select">
+        <many-to-one name="typeairplane" class="una.airline.domain.Typeairplane" lazy="false">
             <column name="type_airplane" length="20" not-null="true" />
         </many-to-one>
-        <bag name="flights" table="flight" inverse="true" lazy="false" fetch="select">
+        <bag name="flights" table="flight" inverse="true" lazy="false">
             <key>
                 <column name="id_airplane" length="20" not-null="true" />
             </key>

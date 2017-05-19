@@ -23,7 +23,7 @@
         <property name="seatsPerRow" type="int">
             <column name="seats_per_row" not-null="true" />
         </property>
-        <bag name="airplanes" table="airplane" inverse="true" lazy="false" fetch="select">
+        <bag name="airplanes" table="airplane" inverse="true" lazy="false">
             <key>
                 <column name="type_airplane" length="20" not-null="true" />
             </key>
