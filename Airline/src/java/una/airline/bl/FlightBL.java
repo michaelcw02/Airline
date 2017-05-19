@@ -36,7 +36,7 @@ public class FlightBL extends BaseBL implements IBaseBL<Flight, String>{
 
     @Override
     public Flight findById(String o) {
-        return (Flight) this.getDao(o.getClass().getName()).findById(o);
+        return (Flight) this.getDao("una.airline.domain.Flight").findById(o);
     }
 
     @Override

@@ -61,14 +61,14 @@ public class FlightDAO extends HibernateUtil implements IBaseDAO<Flight, String>
 
     @Override
     public Flight findById(String id) {
-        Flight Flight = null;
+        Flight flight = null;
         try {
             startOperation();
-            Flight = (Flight) getSession().get(Flight.class, id);
+            flight = (Flight) getSession().get(Flight.class, id);
         } finally {
             getSession().close();
         }
-        return Flight;
+        return flight;
     }
 
     @Override
