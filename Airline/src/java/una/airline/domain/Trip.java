@@ -11,7 +11,7 @@ package una.airline.domain;
  */
 public class Trip {
 
-    private Integer idTrip;
+    private int idTrip;
     private City cityByArrivalCity;
     private City cityByDepartureCity;
     private int distance;

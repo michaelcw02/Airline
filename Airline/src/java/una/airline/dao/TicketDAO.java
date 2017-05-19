@@ -16,10 +16,10 @@ import una.airline.domain.Ticket;
  */
 public class TicketDAO extends BaseDAO {
     
-    public void addUser(Ticket ticket) throws Exception {
-        String query = "INSERT INTO ticket VALUES ('%s', '%s');";
-        String.format(query, ticket.getFlight().getFlightNum(),
-                             ticket.getUser().getUsername()
+    public void addTicket(Ticket ticket) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`) VALUES ('%s', '%s');";
+        query = String.format(query, ticket.getUser().getUsername(),
+                                     ticket.getFlight().getFlightNum()                             
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);

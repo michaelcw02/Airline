@@ -18,9 +18,9 @@ import una.airline.domain.PassengerID;
  */
 public class PassengerDAO extends BaseDAO {
 
-    public void addUser(Passenger passenger) throws Exception {
-        String query = "INSERT INTO ticket VALUES ('%s', '%s', '%s', '%s', '%s');";
-        String.format(query, passenger.getID().getPassport(),
+    public void addPassenger(Passenger passenger) throws Exception {
+        String query = "INSERT INTO passenger VALUES ('%s', '%s', '%s', '%s', '%s');";
+        query = String.format(query, passenger.getID().getPassport(),
                              passenger.getTicket().getNumber(),
                              passenger.getName(),
                              passenger.getLastname(),

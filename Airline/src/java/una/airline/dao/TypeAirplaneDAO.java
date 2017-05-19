@@ -21,8 +21,8 @@ public class TypeAirplaneDAO extends BaseDAO {
     }
     
     public void addTypeAirplane(TypeAirplane typeAirplane) throws Exception {
-        String query = "INSERT INTO typeairline VALUES ('%s', '%s', '%s', '%d', '%d', '%d');";
-        String.format(query, typeAirplane.getTypeAirline(), 
+        String query = "INSERT INTO `airlinedb`.`typeairplane` VALUES ('%s', '%s', '%s', '%d', '%d', '%d');";
+        query = String.format(query, typeAirplane.getTypeAirline(), 
                              typeAirplane.getYear(), 
                              typeAirplane.getBrand(), 
                              typeAirplane.getQtyOfSeats(), 

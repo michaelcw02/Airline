@@ -19,7 +19,7 @@ import una.airline.domain.*;
 public class BaseDAO {
 
     public BaseDAO() {
-        connection = new Database("AirlineDB", "root", "root");
+        connection = new Database(null, null, null);
     }
 
     protected City city(ResultSet rs) {

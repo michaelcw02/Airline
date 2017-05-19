@@ -12,7 +12,7 @@ public class Flight {
     private int cost;
     private long departureDate;
     private int availableSeats;
-    private Integer discount;
+    private int discount;
     private String discountDescription;
     private String discountImagePath;
 
@@ -28,7 +28,7 @@ public class Flight {
         this.availableSeats = availableSeats;
     }
 
-    public Flight(String flightNum, Airplane airplane, Trip trip, int cost, long departureDate, int availableSeats, Integer discount, String discountDescription, String discountImagePath) {
+    public Flight(String flightNum, Airplane airplane, Trip trip, int cost, long departureDate, int availableSeats, int discount, String discountDescription, String discountImagePath) {
         this.flightNum = flightNum;
         this.airplane = airplane;
         this.trip = trip;
@@ -88,7 +88,7 @@ public class Flight {
         this.availableSeats = availableSeats;
     }
 
-    public Integer getDiscount() {
+    public int getDiscount() {
         return this.discount;
     }
 

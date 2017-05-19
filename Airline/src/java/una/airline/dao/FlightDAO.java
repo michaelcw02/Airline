@@ -20,7 +20,7 @@ public class FlightDAO extends BaseDAO {
         super();
     }
 
-    public void addCity(Flight flight) throws Exception {
+    public void addFlight(Flight flight) throws Exception {
         String query = "INSERT INTO `airlinedb`.`flight` "
                 + "(`flight_num`, `cost`, `departure_date`, `available_seats`, `id_trip`, `id_airplane`, `discount`, `discount_description`, `discount_image_path`) "
                 + "VALUES ('%s', '%d', '%d', '%d', '%d', '%s', '%d', '%s', '%s');";

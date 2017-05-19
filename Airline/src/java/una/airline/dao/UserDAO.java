@@ -6,6 +6,7 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import una.airline.domain.User;
@@ -17,8 +18,8 @@ import una.airline.domain.User;
 public class UserDAO extends BaseDAO {
 
     public void addUser(User user) throws Exception {
-        String query = "INSERT INTO user VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%b', '%b');";
-        String.format(query, user.getUsername(), 
+        String query = "INSERT INTO user VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d');";
+        query = String.format(query, user.getUsername(), 
                              user.getPassword(),
                              user.getName(),
                              user.getLastname1(),
@@ -27,9 +28,9 @@ public class UserDAO extends BaseDAO {
                              user.getPhone(),
                              user.getCelular(),
                              user.getAddress(),
-                             user.getBirthday(),
-                             user.isAdministrator(),
-                             user.isCliente()
+                             dateToSQL(user.getBirthday()),
+                             (user.isAdministrator())? 1 : 0,
+                             (user.isCliente())? 1 : 0
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);
@@ -66,4 +67,11 @@ public class UserDAO extends BaseDAO {
         }
         return listResult;
     }
+    private String dateToSQL(Date date) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
+    }
+    private int booleanToInt(boolean b) {
+        return (b) ? 1 : 0;
+    } 
 }
