@@ -6,40 +6,40 @@
 package una.airline.bl;
 
 import java.util.List;
-import una.airline.domain.Typeairplane;
+import una.airline.domain.TypeAirplane;
 
 /**
  *
  * @author michaelcw02
  */
-public class TypeAirplaneBL extends BaseBL implements IBaseBL<Typeairplane, String>{
+public class TypeAirplaneBL extends BaseBL implements IBaseBL<TypeAirplane, String>{
 
     public TypeAirplaneBL() {
         super();
     }
 
     @Override
-    public void save(Typeairplane o) {
+    public void save(TypeAirplane o) {
         this.getDao(o.getClass().getName()).save(o);
     }
 
     @Override
-    public Typeairplane merge(Typeairplane o) {
-        return (Typeairplane) this.getDao(o.getClass().getName()).merge(o);
+    public TypeAirplane merge(TypeAirplane o) {
+        return (TypeAirplane) this.getDao(o.getClass().getName()).merge(o);
     }
 
     @Override
-    public void delete(Typeairplane o) {
+    public void delete(TypeAirplane o) {
         this.getDao(o.getClass().getName()).delete(o);
     }
 
     @Override
-    public Typeairplane findById(String o) {
-        return (Typeairplane) this.getDao(o.getClass().getName()).findById(o);
+    public TypeAirplane findById(String o) {
+        return (TypeAirplane) this.getDao(o.getClass().getName()).findById(o);
     }
 
     @Override
-    public List<Typeairplane> findAll(String className) {
+    public List<TypeAirplane> findAll(String className) {
         return this.getDao(className).findAll();
     }
     

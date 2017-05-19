@@ -5,115 +5,98 @@
  */
 package una.airline.dao;
 
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
 import una.airline.domain.Flight;
-import una.airline.database.HibernateUtil;
 
 /**
  *
  * @author michaelcw02
  */
-public class FlightDAO extends HibernateUtil implements IBaseDAO<Flight, String> {
+public class FlightDAO extends BaseDAO {
 
-    @Override
-    public void save(Flight o) {
-        try {
-            startOperation();
-            getSession().save(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+    public FlightDAO() {
+        super();
+    }
+
+    public void addCity(Flight flight) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`flight` "
+                + "(`flight_num`, `cost`, `departure_date`, `available_seats`, `id_trip`, `id_airplane`, `discount`, `discount_description`, `discount_image_path`) "
+                + "VALUES ('%s', '%d', '%d', '%d', '%d', '%s', '%d', '%s', '%s');";
+        query = String.format(query, flight.getFlightNum(),
+                flight.getCost(),
+                flight.getDepartureDate(),
+                flight.getAvailableSeats(),
+                flight.getTrip().getIdTrip(),
+                flight.getAirplane().getIdAirplane(),
+                flight.getDiscount(),
+                flight.getDiscountDescription(),
+                flight.getDiscountImagePath());
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("Flight already exists.");
         }
     }
 
-    @Override
-    public Flight merge(Flight o) {
+    public LinkedList<Flight> getAllFlights() {
+        LinkedList<Flight> listaResultado = new LinkedList<>();
         try {
-            startOperation();
-            o = (Flight)getSession().merge(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+            String query = "SELECT * FROM flight;";
+            query = String.format(query);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listaResultado.add(flight(rs));
+            }
+        } catch (Exception e) {
         }
-        return o;
-    }
-
-    @Override
-    public void delete(Flight o) {
-        try {
-            startOperation();
-            getSession().delete(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
-        }
-    }
-
-    @Override
-    public Flight findById(String id) {
-        Flight flight = null;
-        try {
-            startOperation();
-            flight = (Flight) getSession().get(Flight.class, id);
-        } finally {
-            getSession().close();
-        }
-        return flight;
-    }
-
-    @Override
-    public List<Flight> findAll() {
-        List<Flight> listFlights;
-        try {
-            startOperation();
-            listFlights = getSession().createQuery("from Flight").list();
-        } finally {
-            getSession().close();
-        }
-        return listFlights;
+        return listaResultado;
     }
     
+    public List<Flight> findByID(String flightNum) {
+        List<Flight> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT FROM flight WHERE flight_num = %s;";
+            String.format(query, flightNum);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(flight(rs));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return listResult;
+    }
+
     public List<Flight> findFlightByCityFromCityTo(String cityFrom, String cityTo) {
-        List<Flight> listFlights;
+        List<Flight> listFlights = new LinkedList<>();
         try {
-            startOperation();
-            listFlights = getSession()
-                .createSQLQuery("SELECT * "
-                            +   "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = :cityFrom AND ARRIVAL_CITY = :cityTo)alias1  "
-                            +   "WHERE FLIGHT.ID_TRIP = TRIP")
-                    .addEntity(Flight.class)
-                    .setParameter("cityFrom", cityFrom)
-                    .setParameter("cityTo", cityTo)
-                    .list();
-        } finally {
-            getSession().close();
+            String query = "SELECT * "
+                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = %d AND ARRIVAL_CITY = %d)alias1  "
+                    + "WHERE FLIGHT.ID_TRIP = TRIP";
+            String.format(query, cityFrom, cityTo);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listFlights.add(flight(rs));
+            }
+        } catch (Exception e) {
+            return null;
         }
         return listFlights;
     }
-    
+
     public List<Flight> findDiscounts() {
-        List<Flight> listFlights;
+        List<Flight> listResult = new LinkedList<>();
         try {
-            startOperation();
-            listFlights = getSession()
-                    .createSQLQuery("SELECT * FROM FLIGHT WHERE DISCOUNT <> 0")
-                    .addEntity(Flight.class)
-                    .list();
-        } finally {
-            getSession().close();
+            String query = "SELECT * FROM FLIGHT WHERE DISCOUNT <> 0;";
+            ResultSet rs = connection.executeQuery(query);
+            while(rs.next()) {
+                listResult.add((flight(rs)));
+            }
+        } catch(Exception e) {
+            return null;
         }
-        return listFlights;
+        return listResult;
     }
-    
-    
 }

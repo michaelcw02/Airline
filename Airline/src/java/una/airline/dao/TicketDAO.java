@@ -5,83 +5,56 @@
  */
 package una.airline.dao;
 
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
 import una.airline.domain.Ticket;
-import una.airline.database.HibernateUtil;
 
 /**
  *
  * @author michaelcw02
  */
-public class TicketDAO extends HibernateUtil implements IBaseDAO<Ticket, Integer> {
-
-    @Override
-    public void save(Ticket o) {
-        try {
-            startOperation();
-            getSession().save(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+public class TicketDAO extends BaseDAO {
+    
+    public void addUser(Ticket ticket) throws Exception {
+        String query = "INSERT INTO ticket VALUES ('%s', '%s');";
+        String.format(query, ticket.getFlight().getFlightNum(),
+                             ticket.getUser().getUsername()
+        );
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("Ticket already exists.");
         }
-    }
-
-    @Override
-    public Ticket merge(Ticket o) {
-        try {
-            startOperation();
-            o = (Ticket)getSession().merge(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
-        }
-        return o;
-    }
-
-    @Override
-    public void delete(Ticket o) {
-        try {
-            startOperation();
-            getSession().delete(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
-        }
-    }
-
-    @Override
-    public Ticket findById(Integer id) {
-        Ticket Ticket = null;
-        try {
-            startOperation();
-            Ticket = (Ticket) getSession().get(Ticket.class, id);
-        } finally {
-            getSession().close();
-        }
-        return Ticket;
-    }
-
-    @Override
-    public List<Ticket> findAll() {
-        List<Ticket> listTickets;
-        try {
-            startOperation();
-            listTickets = getSession().createQuery("from Ticket").list();
-        } finally {
-            getSession().close();
-        }
-        return listTickets;
     }
     
+    public LinkedList<Ticket> getAllAirplanes() {
+        LinkedList<Ticket> listResult=  new LinkedList<>();
+        try {
+            String query = "SELECT * FROM ticket;";
+            query = String.format(query);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(ticket(rs));
+            }
+        } catch (Exception e) {
+        }
+        return listResult;
+    }
+    
+    public List<Ticket> findByID(int number) {
+        List<Ticket> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT FROM user WHERE number = %d;";
+            String.format(query, number);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(ticket(rs));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return listResult;
+    }
 }
 

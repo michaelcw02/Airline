@@ -5,82 +5,56 @@
  */
 package una.airline.dao;
 
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
 import una.airline.domain.Airplane;
-import una.airline.database.HibernateUtil;
 
 /**
  *
  * @author michaelcw02
  */
-public class AirplaneDAO extends HibernateUtil implements IBaseDAO<Airplane, String> {
+public class AirplaneDAO extends BaseDAO {
 
-    @Override
-    public void save(Airplane o) {
-        try {
-            startOperation();
-            getSession().save(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+    public void addTypeAirplane(Airplane airplane) throws Exception {
+        String query = "INSERT INTO airplane VALUES ('%s', '%s');";
+        String.format(query, airplane.getIdAirplane(), 
+                             airplane.getTypeairplane()
+        );
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("Airplane already exists.");
         }
     }
-
-    @Override
-    public Airplane merge(Airplane o) {
+    
+    public LinkedList<Airplane> getAllAirplanes() {
+        LinkedList<Airplane> listResult=  new LinkedList<>();
         try {
-            startOperation();
-            o = (Airplane)getSession().merge(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+            String query = "SELECT * FROM airplane;";
+            query = String.format(query);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(airplane(rs));
+            }
+        } catch (Exception e) {
         }
-        return o;
+        return listResult;
     }
-
-    @Override
-    public void delete(Airplane o) {
+    
+    public List<Airplane> findAirplaneByID(String idAirplane) {
+        List<Airplane> listResult = new LinkedList<>();
         try {
-            startOperation();
-            getSession().delete(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+            String query = "SELECT FROM airplane WHERE id_airplane = %s;";
+            String.format(query, idAirplane);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(airplane(rs));
+            }
+        } catch (Exception e) {
+            return null;
         }
-    }
-
-    @Override
-    public Airplane findById(String id) {
-        Airplane Airplane = null;
-        try {
-            startOperation();
-            Airplane = (Airplane) getSession().get(Airplane.class, id);
-        } finally {
-            getSession().close();
-        }
-        return Airplane;
-    }
-
-    @Override
-    public List<Airplane> findAll() {
-        List<Airplane> listAirplanes;
-        try {
-            startOperation();
-            listAirplanes = getSession().createQuery("from Airplane").list();
-        } finally {
-            getSession().close();
-        }
-        return listAirplanes;
+        return listResult;
     }
     
 }

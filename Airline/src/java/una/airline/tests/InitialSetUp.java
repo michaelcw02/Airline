@@ -44,7 +44,7 @@ public class InitialSetUp {
         TypeAirplaneDAO typeAirplaneDAO = new TypeAirplaneDAO();
 
         //ALL PASSED
-        Typeairplane ta1 = new Typeairplane("A380-800", "2009", "Airbus", 800, 88, 9);
+        TypeAirplane ta1 = new TypeAirplane("A380-800", "2009", "Airbus", 800, 88, 9);
         typeAirplaneDAO.save(ta1);
         //ta1.setYear("2010");
         //typeAirplaneDAO.merge(ta1);

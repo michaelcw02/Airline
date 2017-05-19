@@ -7,10 +7,10 @@ package una.airline.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import una.airline.bl.TripBL;
 import una.airline.database.Database;
-import una.airline.domain.City;
-import una.airline.domain.Flight;
-import una.airline.domain.Trip;
+import una.airline.domain.*;
 
 /**
  *
@@ -33,15 +33,8 @@ public class BaseDAO {
             return null;
         }
     }
-    
-         private Integer idTrip;
-     private City cityByArrivalCity;
-     private City cityByDepartureCity;
-     private int distance;
-     private int duration;
 
-    
-    protected Trip trip(ResultSet rs) {
+    protected Trip trip(ResultSet rs) throws Exception {
         try {
             int idTrip = rs.getInt("idTrip");
             int distance = rs.getInt("distance");
@@ -54,19 +47,128 @@ public class BaseDAO {
                 CityDAO cityDao = new CityDAO();
                 cityFrom = cityDao.getCityByCode(cityFromCode);
                 cityTo = cityDao.getCityByCode(cityToCode);
-            } catch(Exception ex) {
-                return null;
+            } catch (Exception ex) {
+                throw new Exception("E~There was an issue in cities of trip", ex);
             }
             return new Trip(idTrip, cityFrom, cityTo, duration, distance);
         } catch (SQLException ex) {
             return null;
         }
     }
-    protected Flight flight(ResultSet rs) {
+
+    protected Flight flight(ResultSet rs) throws Exception {
         try {
-            rs.getString("something");
-            return null;
+            String flightNum = rs.getString("flight_num");
+            String airplaneId = rs.getString("id_airplane");
+            int tripId = rs.getInt("id_trip");
+            int cost = rs.getInt("cost");
+            long departureDate = rs.getLong("departure_date");
+            int availableSeats = rs.getInt("available_seats");
+            int discount = rs.getInt("discount");
+            String discountDescription = rs.getString("discount_description");
+            String discountImagePath = rs.getString("discountImagePath");
+            Airplane airplane = null;
+            Trip trip = null;
+            try {
+                AirplaneDAO airplaneDAO = new AirplaneDAO();
+                airplane = (Airplane) airplaneDAO.findAirplaneByID(airplaneId);
+                TripDAO tripDAO = new TripDAO();
+                trip = tripDAO.getTripByCode(tripId);
+            } catch (Exception ex) {
+                throw new Exception("E~There was an issue in airplane or trips of flight", ex);
+            }
+            return new Flight(flightNum, airplane, trip, cost, departureDate, availableSeats, discount, discountDescription, discountImagePath);
         } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    protected TypeAirplane typeAirplane(ResultSet rs) throws Exception {
+        try {
+            String typeAirline = rs.getString("type_airplane");
+            String year = rs.getString("year");
+            String brand = rs.getString("brand");
+            int qtyOfSeats = rs.getInt("qty_of_seats");
+            int qtyOfRows = rs.getInt("qty_of_rows");
+            int seatsPerRow = rs.getInt("seats_per_row");
+            return new TypeAirplane(typeAirline, year, brand, qtyOfSeats, qtyOfRows, seatsPerRow);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    protected Airplane airplane(ResultSet rs) throws Exception {
+        try {
+            String idAirplane = rs.getString("id_airplane");
+            String idTypeAirplane = rs.getString("type_airplane");
+            TypeAirplane typeAirplane = null;
+            try {
+                typeAirplane = (TypeAirplane) new TypeAirplaneDAO().findTypeAirplaneByType(idTypeAirplane);
+            } catch (Exception e) {
+                throw new Exception("E~There was an issue with TypeAirplane of Airplane", e);
+            }
+            return new Airplane(idAirplane, typeAirplane);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    protected User user(ResultSet rs) throws Exception {
+        try {
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            String name = rs.getString("name");
+            String lastname1 = rs.getString("lastname1");
+            String lastname2 = rs.getString("lastname2");
+            String email = rs.getString("email");
+            String phone = rs.getString("phone");
+            String celular = rs.getString("celular");
+            String address = rs.getString("address");
+            Date birthday = rs.getDate("birthday");
+            boolean administrator = rs.getBoolean("administrator");
+            boolean cliente = rs.getBoolean("cliente");
+            return new User(username, password, name, lastname1, lastname2, email, phone, celular, address, birthday, administrator, cliente);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    protected Ticket ticket(ResultSet rs) throws Exception {
+       try {
+            int number = rs.getInt("number");
+            String username = rs.getString("username");
+            String flightNum = rs.getString("flight_num");
+            User user = null;
+            Flight flight = null;
+            try {
+                user = (User) new UserDAO().findByUsername(username);
+                flight = (Flight) new FlightDAO().findByID(flightNum);
+            } catch (Exception e) {
+                throw new Exception("E~There was an issue with User or Flight of Ticket", e);
+            }
+            return new Ticket(number, flight, user);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    protected Passenger passenger(ResultSet rs) throws Exception {
+       try {
+            String passport = rs.getString("passport");
+            int number = rs.getInt("ticket_num");
+            PassengerID passengerID = new PassengerID(passport, number);
+            String name = rs.getString("name");
+            String lastname = rs.getString("lastname");
+            String seat = rs.getString("seat");
+            
+            Ticket ticket = null;
+            try {
+                ticket = (Ticket) new TicketDAO().findByID(number);
+            } catch (Exception e) {
+                throw new Exception("E~There was an issue with the Ticket of Passenger", e);
+            }
+            return new Passenger(passengerID, ticket, name, lastname, seat);
+        } catch (SQLException e) {
             return null;
         }
     }

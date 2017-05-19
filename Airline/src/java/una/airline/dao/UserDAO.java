@@ -5,82 +5,65 @@
  */
 package una.airline.dao;
 
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
 import una.airline.domain.User;
-import una.airline.database.HibernateUtil;
 
 /**
  *
  * @author michaelcw02
  */
-public class UserDAO extends HibernateUtil implements IBaseDAO<User, String> {
+public class UserDAO extends BaseDAO {
 
-    @Override
-    public void save(User o) {
-        try {
-            startOperation();
-            getSession().save(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+    public void addUser(User user) throws Exception {
+        String query = "INSERT INTO user VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%b', '%b');";
+        String.format(query, user.getUsername(), 
+                             user.getPassword(),
+                             user.getName(),
+                             user.getLastname1(),
+                             user.getLastname2(),
+                             user.getEmail(),
+                             user.getPhone(),
+                             user.getCelular(),
+                             user.getAddress(),
+                             user.getBirthday(),
+                             user.isAdministrator(),
+                             user.isCliente()
+        );
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("User already exists.");
         }
-    }
-
-    @Override
-    public User merge(User o) {
-        try {
-            startOperation();
-            o = (User)getSession().merge(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
-        }
-        return o;
-    }
-
-    @Override
-    public void delete(User o) {
-        try {
-            startOperation();
-            getSession().delete(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
-        }
-    }
-
-    @Override
-    public User findById(String id) {
-        User User = null;
-        try {
-            startOperation();
-            User = (User) getSession().get(User.class, id);
-        } finally {
-            getSession().close();
-        }
-        return User;
-    }
-
-    @Override
-    public List<User> findAll() {
-        List<User> listUsers;
-        try {
-            startOperation();
-            listUsers = getSession().createQuery("from User").list();
-        } finally {
-            getSession().close();
-        }
-        return listUsers;
     }
     
+    public LinkedList<User> getAllAirplanes() {
+        LinkedList<User> listResult=  new LinkedList<>();
+        try {
+            String query = "SELECT * FROM user;";
+            query = String.format(query);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(user(rs));
+            }
+        } catch (Exception e) {
+        }
+        return listResult;
+    }
+    
+    public List<User> findByUsername(String username) {
+        List<User> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT FROM user WHERE username = %s;";
+            String.format(query, username);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(user(rs));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return listResult;
+    }
 }

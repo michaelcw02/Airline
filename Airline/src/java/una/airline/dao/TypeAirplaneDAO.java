@@ -5,82 +5,64 @@
  */
 package una.airline.dao;
 
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.HibernateException;
-import una.airline.domain.Typeairplane;
-import una.airline.database.HibernateUtil;
+import una.airline.domain.TypeAirplane;
 
 /**
  *
  * @author michaelcw02
  */
-public class TypeAirplaneDAO extends HibernateUtil implements IBaseDAO<Typeairplane, String> {
+public class TypeAirplaneDAO extends BaseDAO {
 
-    @Override
-    public void save(Typeairplane o) {
-        try {
-            startOperation();
-            getSession().save(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+    public TypeAirplaneDAO() {
+        super();
+    }
+    
+    public void addTypeAirplane(TypeAirplane typeAirplane) throws Exception {
+        String query = "INSERT INTO typeairline VALUES ('%s', '%s', '%s', '%d', '%d', '%d');";
+        String.format(query, typeAirplane.getTypeAirline(), 
+                             typeAirplane.getYear(), 
+                             typeAirplane.getBrand(), 
+                             typeAirplane.getQtyOfSeats(), 
+                             typeAirplane.getQtyOfRows(), 
+                             typeAirplane.getSeatsPerRow()
+        );
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("TypeAirplane already exists.");
         }
     }
-
-    @Override
-    public Typeairplane merge(Typeairplane o) {
+    
+    public LinkedList<TypeAirplane> getAllFlights() {
+        LinkedList<TypeAirplane> listaResultado = new LinkedList<>();
         try {
-            startOperation();
-            o = (Typeairplane)getSession().merge(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+            String query = "SELECT * FROM typeairline;";
+            query = String.format(query);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listaResultado.add(typeAirplane(rs));
+            }
+        } catch (Exception e) {
         }
-        return o;
+        return listaResultado;
     }
-
-    @Override
-    public void delete(Typeairplane o) {
+    
+    public List<TypeAirplane> findTypeAirplaneByType(String typeAirline) {
+        List<TypeAirplane> listResult = new LinkedList<>();
         try {
-            startOperation();
-            getSession().delete(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+            String query = "SELECT FROM typeairline WHERE type_airline = %s;";
+            String.format(query, typeAirline);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(typeAirplane(rs));
+            }
+        } catch (Exception e) {
+            return null;
         }
-    }
-
-    @Override
-    public Typeairplane findById(String id) {
-        Typeairplane typeAirplane = null;
-        try {
-            startOperation();
-            typeAirplane = (Typeairplane) getSession().get(Typeairplane.class, id);
-        } finally {
-            getSession().close();
-        }
-        return typeAirplane;
-    }
-
-    @Override
-    public List<Typeairplane> findAll() {
-        List<Typeairplane> listTypeAirplanes;
-        try {
-            startOperation();
-            listTypeAirplanes = getSession().createQuery("from Typeairplanes").list();
-        } finally {
-            getSession().close();
-        }
-        return listTypeAirplanes;
+        return listResult;
     }
     
 }
