@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import una.airline.bl.TripBL;
+import una.airline.bl.TripsBL;
 import una.airline.domain.Trip;
 
 /**
@@ -37,7 +37,7 @@ public class TripsServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             
-            TripBL tripBL = new TripBL();
+            TripsBL tripsBL = new TripsBL();
 
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
@@ -53,7 +53,7 @@ public class TripsServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllTrips":
-                    json = new Gson().toJson(tripBL.findAll(Trip.class.getName()));
+                    json = new Gson().toJson(tripsBL.getAllTrips());
                     out.print(json);
                     break;
                 

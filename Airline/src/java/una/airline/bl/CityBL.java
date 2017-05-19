@@ -6,41 +6,23 @@
 package una.airline.bl;
 
 import java.util.List;
+import una.airline.dao.CityDAO;
 import una.airline.domain.City;
 
 /**
  *
  * @author michaelcw02
  */
-public class CityBL extends BaseBL implements IBaseBL<City, String>{
+public class CityBL {
+    
+    private CityDAO cityDAO;
 
     public CityBL() {
-        super();
+        cityDAO = new CityDAO();
     }
-
-    @Override
-    public void save(City o) {
-        this.getDao(o.getClass().getName()).save(o);
-    }
-
-    @Override
-    public City merge(City o) {
-        return (City) this.getDao(o.getClass().getName()).merge(o);
-    }
-
-    @Override
-    public void delete(City o) {
-        this.getDao(o.getClass().getName()).delete(o);
-    }
-
-    @Override
-    public City findById(String o) {
-        return (City) this.getDao(o.getClass().getName()).findById(o);
-    }
-
-    @Override
-    public List<City> findAll(String className) {
-        return this.getDao(className).findAll();
+    
+    public List<City> getAllCities() {
+        return cityDAO.getAllCities();
     }
     
 }

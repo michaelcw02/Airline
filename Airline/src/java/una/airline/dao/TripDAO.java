@@ -42,7 +42,7 @@ public class TripDAO extends BaseDAO {
         return listaResultado;
     }
     public Trip getTripByCode(int code) throws Exception {
-        String query = "SELECT * FROM TRIP WHERE ID_TRIP = %d;";
+        String query = "SELECT * FROM TRIP WHERE ID_TRIP = '%d';";
         query = String.format(query, code);
         ResultSet rs = connection.executeQuery(query);
         if(rs.next()) {

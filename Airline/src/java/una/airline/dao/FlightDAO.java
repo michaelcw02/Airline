@@ -89,7 +89,7 @@ public class FlightDAO extends BaseDAO {
     public List<Flight> findDiscounts() {
         List<Flight> listResult = new LinkedList<>();
         try {
-            String query = "SELECT * FROM FLIGHT WHERE DISCOUNT <> 0;";
+            String query = "SELECT * FROM FLIGHT WHERE DISCOUNT <> '0';";
             ResultSet rs = connection.executeQuery(query);
             while(rs.next()) {
                 listResult.add((flight(rs)));

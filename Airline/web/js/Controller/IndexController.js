@@ -17,22 +17,22 @@ IndexController.prototype = {
 
         this.airlineController.getAllDiscounts((results) => {
             for (let i in results) {
-                let discount = results[i];
+                let flight = results[i];
                 let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
                 $(element).appendTo(this.view.$('.carousel-indicators'));
-                element = '<div class="item"><img class="img-rounded" src="' + discount.path + '">';
+                element = '<div class="item"><img class="img-rounded" src="' + flight.discountImagePath + '">';
                 element += '<div class="carousel-caption">';
-                let trip = discount.flight.trip;
-                element += '<h1>' + trip.cityFrom.code + ' - ' + trip.cityTo.code + '</h1>';
-                element += '<h3>' + discount.description + '</h3>';
-                element += '<h3><a href="">' + 'Limited offer for ' + discount.discount + '% </a></h3>'
+                let trip = flight.trip;
+                element += '<h1>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '</h1>';
+                element += '<h3>' + flight.discountDescription + '</h3>';
+                element += '<h3><a href="">' + 'Limited offer for ' + flight.discount + '% </a></h3>';  
                 element += '</div>   </div>';
                 $(element).appendTo(this.view.$('.carousel-inner'));
             }
             this.view.$('.item').first().addClass('active');
             this.view.$('.carousel-indicators > li').first().addClass('active');
             this.view.$('#advertisement-carousel').carousel();
-        })
+        });
 
     },
     getAllFlights: function (callback) {

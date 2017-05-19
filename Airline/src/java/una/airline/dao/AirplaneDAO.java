@@ -18,8 +18,8 @@ public class AirplaneDAO extends BaseDAO {
 
     public void addTypeAirplane(Airplane airplane) throws Exception {
         String query = "INSERT INTO airplane VALUES ('%s', '%s');";
-        query = String.format(query, airplane.getIdAirplane(), 
-                             airplane.getTypeairplane().getTypeAirline()
+        query = String.format(query, airplane.getIdAirplane(),
+                airplane.getTypeairplane().getTypeAirline()
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);
@@ -27,9 +27,9 @@ public class AirplaneDAO extends BaseDAO {
             throw new Exception("Airplane already exists.");
         }
     }
-    
+
     public LinkedList<Airplane> getAllAirplanes() {
-        LinkedList<Airplane> listResult=  new LinkedList<>();
+        LinkedList<Airplane> listResult = new LinkedList<>();
         try {
             String query = "SELECT * FROM airplane;";
             query = String.format(query);
@@ -41,20 +41,16 @@ public class AirplaneDAO extends BaseDAO {
         }
         return listResult;
     }
-    
-    public List<Airplane> findAirplaneByID(String idAirplane) {
-        List<Airplane> listResult = new LinkedList<>();
-        try {
-            String query = "SELECT FROM airplane WHERE id_airplane = %s;";
-            String.format(query, idAirplane);
-            ResultSet rs = connection.executeQuery(query);
-            while (rs.next()) {
-                listResult.add(airplane(rs));
-            }
-        } catch (Exception e) {
-            return null;
+
+    public Airplane findAirplaneByID(String idAirplane) throws Exception {
+        String query = "SELECT * FROM airplane WHERE id_airplane = '%s';";
+        query = String.format(query, idAirplane);
+        ResultSet rs = connection.executeQuery(query);
+        if (rs.next()) {
+            return airplane(rs);
+        } else {
+            throw new Exception("E~Trip does not exists");
         }
-        return listResult;
     }
-    
+
 }

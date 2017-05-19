@@ -8,7 +8,6 @@ package una.airline.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import una.airline.bl.TripBL;
 import una.airline.database.Database;
 import una.airline.domain.*;
 
@@ -36,11 +35,11 @@ public class BaseDAO {
 
     protected Trip trip(ResultSet rs) throws Exception {
         try {
-            int idTrip = rs.getInt("idTrip");
+            int idTrip = rs.getInt("id_trip");
             int distance = rs.getInt("distance");
-            int duration = rs.getInt("duraton");
-            String cityFromCode = rs.getString("cityByDepartureCity");
-            String cityToCode = rs.getString("cityByArrivalCity");
+            int duration = rs.getInt("duration");
+            String cityFromCode = rs.getString("departure_city");
+            String cityToCode = rs.getString("arrival_city");
             City cityFrom;
             City cityTo;
             try {
@@ -66,14 +65,14 @@ public class BaseDAO {
             int availableSeats = rs.getInt("available_seats");
             int discount = rs.getInt("discount");
             String discountDescription = rs.getString("discount_description");
-            String discountImagePath = rs.getString("discountImagePath");
+            String discountImagePath = rs.getString("discount_image_path");
             Airplane airplane = null;
             Trip trip = null;
             try {
                 AirplaneDAO airplaneDAO = new AirplaneDAO();
                 airplane = (Airplane) airplaneDAO.findAirplaneByID(airplaneId);
                 TripDAO tripDAO = new TripDAO();
-                trip = tripDAO.getTripByCode(tripId);
+                trip = (Trip) tripDAO.getTripByCode(tripId);
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in airplane or trips of flight", ex);
             }
@@ -85,7 +84,7 @@ public class BaseDAO {
 
     protected TypeAirplane typeAirplane(ResultSet rs) throws Exception {
         try {
-            String typeAirline = rs.getString("type_airplane");
+            String typeAirline = rs.getString("type_airline");
             String year = rs.getString("year");
             String brand = rs.getString("brand");
             int qtyOfSeats = rs.getInt("qty_of_seats");

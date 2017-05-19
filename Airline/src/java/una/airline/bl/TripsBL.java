@@ -6,15 +6,23 @@
 package una.airline.bl;
 
 import java.util.List;
+import una.airline.dao.TripDAO;
+import una.airline.domain.Trip;
 
 /**
  *
  * @author michaelcw02
  */
-public interface IBaseBL <T,K> {
-    public abstract void save (T o);
-    public abstract T merge (T o);
-    public abstract void delete (T o);
-    public abstract T findById (K o);
-    public abstract  List<T> findAll(String className);
+public class TripsBL {
+    
+    TripDAO tripDAO;
+
+    public TripsBL() {
+        tripDAO = new TripDAO();
+    }
+    
+    public List<Trip> getAllTrips() {
+        return tripDAO.getAllTrips();
+    }
+    
 }

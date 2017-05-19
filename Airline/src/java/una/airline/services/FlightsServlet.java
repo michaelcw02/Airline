@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import una.airline.bl.FlightBL;
+import una.airline.bl.FlightsBL;
 import una.airline.domain.Flight;
 
 /**
@@ -37,7 +37,7 @@ public class FlightsServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             
-            FlightBL flightBL = new FlightBL();
+            FlightsBL flightsBL = new FlightsBL();
 
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
@@ -53,7 +53,7 @@ public class FlightsServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllFlights":
-                    json = new Gson().toJson(flightBL.findAll(Flight.class.getName()));
+                    json = new Gson().toJson(flightsBL.getAllFlights());
                     out.print(json);
                     break;
                 case "searchFlights":
@@ -67,7 +67,7 @@ public class FlightsServlet extends HttpServlet {
                     
                     break;
                 case "getAllDiscounts":
-                    json = new Gson().toJson(flightBL.findDiscounts());
+                    json = new Gson().toJson(flightsBL.findDiscounts());
                     out.print(json);
                     break;
                 default:

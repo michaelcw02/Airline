@@ -8,9 +8,7 @@ package una.airline.tests;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
-import una.airline.bl.FlightBL;
 import una.airline.domain.Flight;
-import una.airline.utils.HibernateProxyTypeAdapter;
 
 /**
  *
@@ -19,12 +17,13 @@ import una.airline.utils.HibernateProxyTypeAdapter;
 public class TestBL {
 
     public static void main(String[] arg) {
+        
+        /*
 
         FlightBL flightBL = new FlightBL();
 
         List<Flight> list = flightBL.findDiscounts();
 
-        
         
         for (Flight i : list) {
             GsonBuilder b = new GsonBuilder();
@@ -32,6 +31,7 @@ public class TestBL {
             Gson gson = b.create();
             System.out.println(gson.toJson(i));
         }
+*/
     }
 
 }

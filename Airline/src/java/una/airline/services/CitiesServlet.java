@@ -55,7 +55,7 @@ public class CitiesServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllCities":
-                    List<City> list = cityBL.findAll(City.class.getName());
+                    List<City> list = cityBL.getAllCities();
                     json = new Gson().toJson(list);
                     out.print(json);
                     break;

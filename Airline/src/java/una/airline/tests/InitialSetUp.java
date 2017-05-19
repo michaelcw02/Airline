@@ -40,7 +40,7 @@ public class InitialSetUp {
     }
 
     public static void main(String[] arg) {
-        
+        /*
         TypeAirplaneDAO typeAirplaneDAO = new TypeAirplaneDAO();
 
         //ALL PASSED
@@ -67,7 +67,7 @@ public class InitialSetUp {
             System.out.println(airplane.getIdAirplane());
         }
          */
-
+        /*
         CityDAO cityDAO = new CityDAO();
 
         //ALL PASSED
@@ -157,5 +157,6 @@ public class InitialSetUp {
         flight.setDiscountDescription("How about London?");
         flight.setDiscountImagePath("images/background-1.jpg");
         flightDAO.merge(flight);
+*/
     }
 }
