@@ -9,7 +9,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import una.airline.domain.Passenger;
 import una.airline.domain.PassengerId;
-import una.airline.utils.HibernateUtil;
+import una.airline.database.HibernateUtil;
 
 /**
  *

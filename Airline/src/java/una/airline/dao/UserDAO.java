@@ -8,7 +8,7 @@ package una.airline.dao;
 import java.util.List;
 import org.hibernate.HibernateException;
 import una.airline.domain.User;
-import una.airline.utils.HibernateUtil;
+import una.airline.database.HibernateUtil;
 
 /**
  *

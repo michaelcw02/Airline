@@ -5,82 +5,53 @@
  */
 package una.airline.dao;
 
-import java.util.List;
-import org.hibernate.HibernateException;
+import java.sql.ResultSet;
+import java.util.LinkedList;
 import una.airline.domain.City;
-import una.airline.utils.HibernateUtil;
 
 /**
  *
  * @author michaelcw02
  */
-public class CityDAO extends HibernateUtil implements IBaseDAO<City, String> {
+public class CityDAO extends BaseDAO {
 
-    @Override
-    public void save(City o) {
-        try {
-            startOperation();
-            getSession().save(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+    public CityDAO() {
+        super();
+    }
+
+    public void addCity(City city) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`city` (`code`, `name`, `country`) VALUES ('%s', '%s', '%s');";
+        query = String.format(query, city.getCode(), city.getName(), city.getCountry());
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("E~City already exists.");
         }
     }
 
-    @Override
-    public City merge(City o) {
+    public LinkedList<City> getAllCities() {
+        LinkedList<City> listaResultado = new LinkedList<>();
         try {
-            startOperation();
-            o = (City)getSession().merge(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+            String query = "SELECT * FROM City;";
+            query = String.format(query);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listaResultado.add(city(rs));
+            }
+        } catch (Exception e) {
         }
-        return o;
+        return listaResultado;
     }
-
-    @Override
-    public void delete(City o) {
-        try {
-            startOperation();
-            getSession().delete(o);
-            getTransac().commit();
-        } catch (HibernateException he) {
-            handleException(he);
-            throw he;
-        } finally {
-            getSession().close();
+    public City getCityByCode(String code) throws Exception {
+        String query = "SELECT * FROM City WHERE code = '%s';";
+        query = String.format(query, code);
+        ResultSet rs = connection.executeQuery(query);
+        if(rs.next()) {
+            return city(rs);
         }
-    }
-
-    @Override
-    public City findById(String id) {
-        City City = null;
-        try {
-            startOperation();
-            City = (City) getSession().get(City.class, id);
-        } finally {
-            getSession().close();
+        else {
+            throw new Exception("E~City not found.");
         }
-        return City;
-    }
-
-    @Override
-    public List<City> findAll() {
-        List<City> listCities;
-        try {
-            startOperation();
-            listCities = getSession().createQuery("from City").list();
-        } finally {
-            getSession().close();
-        }
-        return listCities;
     }
     
 }
