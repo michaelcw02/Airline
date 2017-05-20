@@ -15,11 +15,11 @@ import una.airline.domain.Ticket;
  * @author michaelcw02
  */
 public class TicketDAO extends BaseDAO {
-    
+
     public void addTicket(Ticket ticket) throws Exception {
         String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`) VALUES ('%s', '%s');";
         query = String.format(query, ticket.getUser().getUsername(),
-                                     ticket.getFlight().getFlightNum()                             
+                ticket.getFlight().getFlightNum()
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);
@@ -27,9 +27,9 @@ public class TicketDAO extends BaseDAO {
             throw new Exception("Ticket already exists.");
         }
     }
-    
+
     public LinkedList<Ticket> getAllAirplanes() {
-        LinkedList<Ticket> listResult=  new LinkedList<>();
+        LinkedList<Ticket> listResult = new LinkedList<>();
         try {
             String query = "SELECT * FROM ticket;";
             query = String.format(query);
@@ -41,20 +41,14 @@ public class TicketDAO extends BaseDAO {
         }
         return listResult;
     }
-    
-    public List<Ticket> findByID(int number) {
-        List<Ticket> listResult = new LinkedList<>();
-        try {
-            String query = "SELECT FROM user WHERE number = %d;";
-            String.format(query, number);
-            ResultSet rs = connection.executeQuery(query);
-            while (rs.next()) {
-                listResult.add(ticket(rs));
-            }
-        } catch (Exception e) {
-            return null;
+
+    public Ticket findByID(int number) throws Exception {
+        String query = "SELECT * FROM ticket WHERE number = %d;";
+        query = String.format(query, number);
+        ResultSet rs = connection.executeQuery(query);
+        if (rs.next()) {
+            return ticket(rs);
         }
-        return listResult;
+        throw new Exception("E~Ticket doesnt exists");
     }
 }
-

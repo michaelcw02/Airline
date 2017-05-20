@@ -45,11 +45,9 @@ public class TripDAO extends BaseDAO {
         String query = "SELECT * FROM TRIP WHERE ID_TRIP = '%d';";
         query = String.format(query, code);
         ResultSet rs = connection.executeQuery(query);
-        if(rs.next()) {
+        if(rs.next())
             return trip(rs);
-        } else {
-            throw new Exception("E~Trip does not exists");
-        }
+        throw new Exception("E~Trip does not exists");
     }
     public LinkedList<Trip> getTripByCityFrom(String code) throws Exception{
         LinkedList<Trip> listaResultado = new LinkedList<>();
