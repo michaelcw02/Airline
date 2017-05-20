@@ -1,16 +1,15 @@
 
 Storage = {
     store: function (id, object) {
-        return localStorage.setItem(id, JSON.stringify(object, this.replacer));
+        return localStorage.setItem(id, JSON.stringify(object));
     },
 
     retrieve: function (id) {
         var jsonObject = localStorage.getItem(id);
         if (jsonObject === null) {
             return null;
-        }
-        else {
-            return JSON.parse(jsonObject, this.revive);
+        } else {
+            return JSON.parse(jsonObject);
         }
     },
 
@@ -24,6 +23,9 @@ Storage = {
         if (value instanceof Object && value._class == 'Trip') {
             return new Trip(value.cityFrom, value.cityTo, value.duration);
         }
+        if (value instanceof Object && value._class == 'TypeAirplane') {
+            return new TypeAirplane(value.type_airplane, value.year, value.brand, value.qtySeats, value.rows, value.seatsRow);
+        }
         return value;
     },
 
@@ -36,6 +38,9 @@ Storage = {
         }
         if (value instanceof Trip) {
             value._class = 'Trip';
+        }
+        if (value instanceof TypeAirplane) {
+            value._class = 'TypeAirplane';
         }
         return value;
     }

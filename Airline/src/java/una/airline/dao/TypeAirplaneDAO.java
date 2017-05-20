@@ -36,7 +36,7 @@ public class TypeAirplaneDAO extends BaseDAO {
         }
     }
 
-    public LinkedList<TypeAirplane> getAllFlights() {
+    public LinkedList<TypeAirplane> getAllTypeAirplane() {
         LinkedList<TypeAirplane> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * FROM typeairline;";
@@ -46,6 +46,7 @@ public class TypeAirplaneDAO extends BaseDAO {
                 listaResultado.add(typeAirplane(rs));
             }
         } catch (Exception e) {
+            return null;
         }
         return listaResultado;
     }
@@ -66,3 +67,4 @@ public class TypeAirplaneDAO extends BaseDAO {
     }
 
 }
+
