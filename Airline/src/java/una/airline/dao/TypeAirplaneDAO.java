@@ -65,4 +65,18 @@ public class TypeAirplaneDAO extends BaseDAO {
         }
     }
 
+    public int updateTypeAirplane(TypeAirplane nTypeAirplane) {
+       String query = "UPDATE typeairplane SET year='%s', qty_of_seats='%d', qty_of_rows='%d', seats_per_row='%d' WHERE type_airline='%s'";
+       query = String.format(query, nTypeAirplane.getYear(), nTypeAirplane.getQtyOfSeats(), nTypeAirplane.getQtyOfRows(), nTypeAirplane.getSeatsPerRow(), nTypeAirplane.getTypeAirline());
+       int result = connection.executeUpdate(query);
+       return result;
+    }
+    
+    public void deleteTypeAirplane(TypeAirplane dTypeAirplane) throws Exception {
+        String query = "DELETE FROM typeairplane WHERE type_airline = '%s'";
+        query = String.format(query, dTypeAirplane.getTypeAirline());
+        int result = connection.executeUpdate(query);
+        if (result == 0)
+            throw new Exception("E~TypeAirplane doesnt exists");
+    }
 }
