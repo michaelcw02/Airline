@@ -62,10 +62,10 @@ IndexController.prototype = {
     },
     setMinReturnDate: function () {
         let departDate = this.view.$('#departing').val();
-        let validateRegex = /\d{2}\/\d{2}\/\d{4}/;
+        let validateRegex = /\d{4}-\d{2}-\d{2}/;
         if (validateRegex.test(departDate)) {
             this.view.$('#returning').datepicker('destroy');
-            this.view.$('#returning').datepicker({ minDate: new Date(departDate) });
+            this.view.$('#returning').datepicker({ minDate: new Date(departDate), dateFormat: "yy-mm-dd" });
         }
     },
 
@@ -98,14 +98,15 @@ IndexController.prototype = {
         let cityTo = this.view.$('#cityTo').val();
 
         if (!isBlank(this.view.$('#departing')))
-            var departDate = new Date(this.view.$('#departing').val()).getTime();
+            var departDate = this.view.$('#departing').val();
         if (!isBlank(this.view.$('#returning')))
-            var returnDate = new Date(this.view.$('#returning').val()).getTime();
+            var returnDate = this.view.$('#returning').val();
 
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
         cityTo = (cityTo != '0') ? cityTo : 'All';
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
+            
             let outboundFlights = jsonResults.outboundFlights;
             let returnFlights = jsonResults.returnFlights;
 

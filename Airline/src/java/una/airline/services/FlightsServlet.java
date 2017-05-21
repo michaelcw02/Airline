@@ -62,8 +62,9 @@ public class FlightsServlet extends HttpServlet {
                     String departDate = request.getParameter("departDate");
                     String returnDate = request.getParameter("returnDate");
                     
-                    //json = new Gson().toJson(flightBL.searchFlights(cityFrom, cityTo, departDate, returnDate) );
-                    //out.print(json);
+                    
+                    json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate) );
+                    out.print(json);
                     
                     break;
                 case "getAllDiscounts":

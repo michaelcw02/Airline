@@ -9,8 +9,8 @@ function loadPage() {
 
 function addElementsProperties() {
     //BASIC ELEMENTS
-    $("#departing").datepicker({ minDate: new Date() });
-    $("#returning").datepicker({ minDate: new Date() });
+    $("#departing").datepicker({ minDate: new Date(), dateFormat: "yy-mm-dd" });
+    $("#returning").datepicker({ minDate: new Date(), dateFormat: "yy-mm-dd" });
     
     //NEW ELEMENTS!!
     //$('#outbound-flights').hide();

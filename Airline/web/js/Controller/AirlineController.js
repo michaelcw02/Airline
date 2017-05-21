@@ -37,8 +37,8 @@ AirlineController.prototype = {
         let citiesTo = [];
         this.getAllTrips( (data) => {
             if (codeCityFrom != 0) {
-                let results = data.filter((trip) => { return (trip.cityFrom.code === codeCityFrom); });
-                results.forEach((result) => { citiesTo.push(result.cityTo); });
+                let results = data.filter((trip) => { return (trip.cityByDepartureCity.code === codeCityFrom); });
+                results.forEach((result) => { citiesTo.push(result.cityByArrivalCity); });
             } else {
                 citiesTo = this.retrieveAllCities();
             }

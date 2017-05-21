@@ -6,6 +6,7 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import una.airline.domain.Flight;
@@ -59,7 +60,7 @@ public class FlightDAO extends BaseDAO {
         List<Flight> listResult = new LinkedList<>();
         try {
             String query = "SELECT FROM flight WHERE flight_num = %s;";
-            String.format(query, flightNum);
+            query = String.format(query, flightNum);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
                 listResult.add(flight(rs));
@@ -74,9 +75,59 @@ public class FlightDAO extends BaseDAO {
         List<Flight> listFlights = new LinkedList<>();
         try {
             String query = "SELECT * "
-                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = %d AND ARRIVAL_CITY = %d)alias1  "
+                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = '%s' AND ARRIVAL_CITY = '%s')alias1  "
                     + "WHERE FLIGHT.ID_TRIP = TRIP";
-            String.format(query, cityFrom, cityTo);
+            query = String.format(query, cityFrom, cityTo);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listFlights.add(flight(rs));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return listFlights;
+    }
+    public List<Flight> findFlightByCityFromCityToNDate(String cityFrom, String cityTo, String departDate) {
+        List<Flight> listFlights = new LinkedList<>();
+        try {
+            String query = "SELECT * "
+                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = '%s' AND ARRIVAL_CITY = '%s')alias1  "
+                    + "WHERE FLIGHT.ID_TRIP = TRIP AND DEPARTURE_DATE = '%s'";
+            query = String.format(query, cityFrom, cityTo, departDate);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listFlights.add(flight(rs));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return listFlights;
+    }
+    
+    public List<Flight> findFlightByCityFrom(String cityFrom) {
+        List<Flight> listFlights = new LinkedList<>();
+        try {
+            String query = "SELECT * "
+                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = '%s')alias1 "
+                    + "WHERE FLIGHT.ID_TRIP = TRIP";
+            query = String.format(query, cityFrom);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listFlights.add(flight(rs));
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return listFlights;
+    }
+    
+    public List<Flight> findFlightByCityFromNDate(String cityFrom, String departDate) {
+        List<Flight> listFlights = new LinkedList<>();
+        try {
+            String query = "SELECT * "
+                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = '%s')alias1 "
+                    + "WHERE FLIGHT.ID_TRIP = TRIP AND DEPARTURE_DATE = '%s'";
+            query = String.format(query, cityFrom, departDate);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
                 listFlights.add(flight(rs));
