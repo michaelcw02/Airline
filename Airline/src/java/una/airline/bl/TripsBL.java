@@ -25,4 +25,8 @@ public class TripsBL {
         return tripDAO.getAllTrips();
     }
     
+    public Trip getTripByCode(int code) throws Exception {
+        return tripDAO.getTripByCode(code);
+    }
+    
 }
