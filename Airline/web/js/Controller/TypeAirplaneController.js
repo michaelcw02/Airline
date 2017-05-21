@@ -1,10 +1,10 @@
 
-function AdministrationController(view) {
-    this.AdministrationController(view);
+function TypeAirplaneController(view) {
+    this.TypeAirplaneController(view);
 }
 
-AdministrationController.prototype = {
-    AdministrationController: function (view) {
+TypeAirplaneController.prototype = {
+    TypeAirplaneController: function (view) {
         this.view = view;
         this.airlineController = new AirlineController();
     },
@@ -48,9 +48,8 @@ AdministrationController.prototype = {
             showResult(this.view.$('#typeAirplaneReturn'), returnTypeAirplane);
 
         });
+        
     },
-
-   
     cleanForm: () => {
         $('#identifier').focus();
         $("#identifier").removeAttr("readonly");

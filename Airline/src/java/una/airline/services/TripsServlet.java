@@ -36,17 +36,15 @@ public class TripsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-            
+
             TripsBL tripsBL = new TripsBL();
 
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
-            
             //**********************************************************************
             //se toman los datos de la session
             //**********************************************************************
             //HttpSession session = request.getSession();
-            
             //**********************************************************************
             //se consulta cual accion se desea realizar
             //**********************************************************************
@@ -57,11 +55,10 @@ public class TripsServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "getTripByCode":
-                    int idTrip= Integer.parseInt(request.getParameter("idTrip"));
-                    
-                    //json = new Gson().toJson(TripsBL.getTripByCode(idTrip));
-                    //out.print(json);
-                    
+                    int idTrip = Integer.parseInt(request.getParameter("idTrip"));
+                    json = new Gson().toJson(tripsBL.getTripByCode(idTrip));
+                    out.print(json);
+
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");

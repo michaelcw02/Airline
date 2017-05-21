@@ -78,6 +78,12 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-  
+    
+  getTripByCode: function (idTrip, callback) {
+        Proxy.searchTripByCode(idTrip, (data) => {
+            Storage.store('searchTripByCode', data);
+            callback(data);
+        });
+    },
 
 }

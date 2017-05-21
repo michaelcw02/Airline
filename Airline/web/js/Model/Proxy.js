@@ -125,3 +125,21 @@ Proxy.getAllTypeAirline = (callback) => {
     });
 
 }
+Proxy.searchTripByCode = (idTrip, callback) => {
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "getTripByCode",
+            idTrip: idTrip
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            alert("Se presento un error a la hora de cargar las rutas de la base de datos");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}

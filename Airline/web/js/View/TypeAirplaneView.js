@@ -1,6 +1,6 @@
 var controller;
 function loadPage(event) {
-    controller = new AdministrationController(window);
+    controller = new TypeAirplaneController(window);
     addElementsProperties();
 }
 

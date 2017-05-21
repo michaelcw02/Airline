@@ -95,32 +95,33 @@
                 <h1>Management <small>System for the administration of type of airplanes</small></h1>
             </div>
         </div>
-
-        <div class="panel panel-primary">
-            <div class="panel-heading"></div>
-            <div class="panel-body">
-                <center>
-                    <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalFormulario" id="btShowForm">Insert</button>
-                </center><br>
-                <div class="col-sm-12">
-                    <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">
-                        <div class="form-group" id="groupIdentifier">
-                            <div class="col-sm-4" style="text-align: right; vertical-align: middle;">
-                                <h4 class="bold">Search type of airplane per indentifier:</h4>
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h3>Type Airplane Management</h3></div>
+                <div class="panel-body">
+                    <center>
+                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalFormulario" id="btShowForm">Insert Type Airplane</button>
+                    </center><br>
+                    <div class="col-sm-12">
+                        <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">
+                            <div class="form-group" id="groupIdentifier">
+                                <div class="col-sm-4" style="text-align: right; vertical-align: middle;">
+                                    <h4 class="bold">Search type of airplane per indentifier:</h4>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="search" placeholder="Enter the identifier">
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-info centered"  id="btSearch">            
+                                        Search <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="search" placeholder="Enter the identifier">
-                            </div>
-                            <div class="col-sm-4">
-                                <button type="button" class="btn btn-info centered"  id="btSearch">            
-                                    Search <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="container-fluid" id="typeAirlineReturn">
-                    <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>
+                        </form>
+                    </div>
+                    <div class="container-fluid" id="typeAirlineReturn">
+                        <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,8 +136,8 @@
         <!-- CONTROLLER -->
         <script type="text/javascript" src="js/Controller/Storage.js"></script>
         <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
-        <script type="text/javascript" src="js/Controller/AdministrationController.js"></script>
+        <script type="text/javascript" src="js/Controller/TypeAirplaneController.js"></script>
         <!-- VIEW -->
-        <script type="text/javascript" src="js/View/AdministrationView.js"></script>
+        <script type="text/javascript" src="js/View/TypeAirplaneView.js"></script>
     </body>
 </html>
