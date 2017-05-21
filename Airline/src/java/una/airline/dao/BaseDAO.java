@@ -40,6 +40,7 @@ public class BaseDAO {
             int duration = rs.getInt("duration");
             String cityFromCode = rs.getString("departure_city");
             String cityToCode = rs.getString("arrival_city");
+            int departureTime = rs.getInt("departure_time");
             City cityFrom;
             City cityTo;
             try {
@@ -49,7 +50,7 @@ public class BaseDAO {
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in cities of trip", ex);
             }
-            return new Trip(idTrip, cityFrom, cityTo, duration, distance);
+            return new Trip(idTrip, cityFrom, cityTo, duration, distance, departureTime);
         } catch (SQLException ex) {
             return null;
         }
@@ -61,7 +62,7 @@ public class BaseDAO {
             String airplaneId = rs.getString("id_airplane");
             int tripId = rs.getInt("id_trip");
             int cost = rs.getInt("cost");
-            long departureDate = rs.getLong("departure_date");
+            Date departureDate = rs.getDate("departure_date");
             int availableSeats = rs.getInt("available_seats");
             int discount = rs.getInt("discount");
             String discountDescription = rs.getString("discount_description");
@@ -131,9 +132,9 @@ public class BaseDAO {
             return null;
         }
     }
-    
+
     protected Ticket ticket(ResultSet rs) throws Exception {
-       try {
+        try {
             int number = rs.getInt("number");
             String username = rs.getString("username");
             String flightNum = rs.getString("flight_num");
@@ -152,14 +153,14 @@ public class BaseDAO {
     }
 
     protected Passenger passenger(ResultSet rs) throws Exception {
-       try {
+        try {
             String passport = rs.getString("passport");
             int number = rs.getInt("ticket_num");
             PassengerID passengerID = new PassengerID(passport, number);
             String name = rs.getString("name");
             String lastname = rs.getString("lastname");
             String seat = rs.getString("seat");
-            
+
             Ticket ticket = null;
             try {
                 ticket = (Ticket) new TicketDAO().findByID(number);
@@ -170,6 +171,11 @@ public class BaseDAO {
         } catch (SQLException e) {
             return null;
         }
+    }
+
+    protected String dateToSQL(Date date) {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
     }
 
     protected Database connection;

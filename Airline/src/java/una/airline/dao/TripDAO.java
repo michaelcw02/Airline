@@ -20,8 +20,8 @@ public class TripDAO extends BaseDAO {
     }
  
     public void addTrip(Trip trip) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`) VALUES ('%d', '%d', '%s', '%s');";
-        query = String.format(query, trip.getDistance(), trip.getDuration(), trip.getCityByArrivalCity().getCode(), trip.getCityByDepartureCity().getCode());
+        String query = "INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('%d', '%d', '%s', '%s', '%d');";
+        query = String.format(query, trip.getDistance(), trip.getDuration(), trip.getCityByArrivalCity().getCode(), trip.getCityByDepartureCity().getCode(), trip.getDepartureTime());
         System.out.println(query);
         int result = connection.executeUpdate(query);
         if (result == 0) {

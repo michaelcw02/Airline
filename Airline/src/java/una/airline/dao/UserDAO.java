@@ -67,10 +67,7 @@ public class UserDAO extends BaseDAO {
         }
         return listResult;
     }
-    private String dateToSQL(Date date) {
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return sdf.format(date);
-    }
+
     private int booleanToInt(boolean b) {
         return (b) ? 1 : 0;
     } 

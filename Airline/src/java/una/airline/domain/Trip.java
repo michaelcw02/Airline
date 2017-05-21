@@ -16,23 +16,26 @@ public class Trip {
     private City cityByDepartureCity;
     private int distance;
     private int duration;
+    private int departureTime;
 
     public Trip() {
     }
-
-    public Trip(int idTrip, City cityByArrivalCity, City cityByDepartureCity, int distance, int duration) {
+    // THIS CONSTRUCTOR IS FOR DAO ONLY
+    public Trip(int idTrip, City cityByArrivalCity, City cityByDepartureCity, int distance, int duration, int departureTime) {
         this.idTrip = idTrip;
         this.cityByArrivalCity = cityByArrivalCity;
         this.cityByDepartureCity = cityByDepartureCity;
         this.distance = distance;
         this.duration = duration;
+        this.departureTime = departureTime;
     }
-
-    public Trip(City cityByArrivalCity, City cityByDepartureCity, int distance, int duration) {
+    // THIS CONSTRUCTOR IS FOR NORMAL USE ONLY
+    public Trip(City cityByArrivalCity, City cityByDepartureCity, int distance, int duration, int departureTime) {
         this.cityByArrivalCity = cityByArrivalCity;
         this.cityByDepartureCity = cityByDepartureCity;
         this.distance = distance;
         this.duration = duration;
+        this.departureTime = departureTime;
     }
 
     public Integer getIdTrip() {
@@ -74,4 +77,13 @@ public class Trip {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    public int getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(int departureTime) {
+        this.departureTime = departureTime;
+    }
+    
 }

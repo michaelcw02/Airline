@@ -22,14 +22,14 @@ public class FlightDAO extends BaseDAO {
 
     public void addFlight(Flight flight) throws Exception {
         String query = "INSERT INTO `airlinedb`.`flight` "
-                + "(`flight_num`, `cost`, `departure_date`, `available_seats`, `id_trip`, `id_airplane`, `discount`, `discount_description`, `discount_image_path`) "
+                + "(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) "
                 + "VALUES ('%s', '%d', '%d', '%d', '%d', '%s', '%d', '%s', '%s');";
         query = String.format(query, flight.getFlightNum(),
-                flight.getCost(),
-                flight.getDepartureDate(),
-                flight.getAvailableSeats(),
-                flight.getTrip().getIdTrip(),
                 flight.getAirplane().getIdAirplane(),
+                flight.getTrip().getIdTrip(),   
+                flight.getCost(),
+                dateToSQL(flight.getDepartureDate()),
+                flight.getAvailableSeats(),
                 flight.getDiscount(),
                 flight.getDiscountDescription(),
                 flight.getDiscountImagePath());
@@ -38,6 +38,7 @@ public class FlightDAO extends BaseDAO {
         if (result == 0) {
             throw new Exception("Flight already exists.");
         }
+
     }
 
     public LinkedList<Flight> getAllFlights() {
