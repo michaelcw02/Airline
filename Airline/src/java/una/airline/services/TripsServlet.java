@@ -56,9 +56,15 @@ public class TripsServlet extends HttpServlet {
                     json = new Gson().toJson(tripsBL.getAllTrips());
                     out.print(json);
                     break;
-                
+                case "getTripByCode":
+                    int idTrip= Integer.parseInt(request.getParameter("idTrip"));
+                    
+                    //json = new Gson().toJson(TripsBL.getTripByCode(idTrip));
+                    //out.print(json);
+                    
+                    break;
                 default:
-                    out.print("E~No se indico la acción que se desea realizare");
+                    out.print("E~No se indico la acción que se desea realizar");
                     break;
             }
 
