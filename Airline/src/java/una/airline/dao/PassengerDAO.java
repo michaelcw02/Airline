@@ -11,7 +11,6 @@ import java.util.List;
 import una.airline.domain.Passenger;
 import una.airline.domain.PassengerID;
 
-
 /**
  *
  * @author michaelcw02
@@ -21,10 +20,10 @@ public class PassengerDAO extends BaseDAO {
     public void addPassenger(Passenger passenger) throws Exception {
         String query = "INSERT INTO passenger VALUES ('%s', '%s', '%s', '%s', '%s');";
         query = String.format(query, passenger.getID().getPassport(),
-                             passenger.getTicket().getNumber(),
-                             passenger.getName(),
-                             passenger.getLastname(),
-                             passenger.getSeat()
+                passenger.getTicket().getNumber(),
+                passenger.getName(),
+                passenger.getLastname(),
+                passenger.getSeat()
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);
@@ -32,9 +31,9 @@ public class PassengerDAO extends BaseDAO {
             throw new Exception("Passenger already exists.");
         }
     }
-    
+
     public LinkedList<Passenger> getAllPassengers() {
-        LinkedList<Passenger> listResult=  new LinkedList<>();
+        LinkedList<Passenger> listResult = new LinkedList<>();
         try {
             String query = "SELECT * FROM passenger;";
             query = String.format(query);
@@ -46,20 +45,15 @@ public class PassengerDAO extends BaseDAO {
         }
         return listResult;
     }
-    
-    public List<Passenger> findByID(PassengerID passengerID) {
-        List<Passenger> listResult = new LinkedList<>();
-        try {
-            String query = "SELECT FROM passenger WHERE passport = %s AND ticket_num = %s;";
-            String.format(query, passengerID.getPassport(), passengerID.getTicketNum());
-            ResultSet rs = connection.executeQuery(query);
-            while (rs.next()) {
-                listResult.add(passenger(rs));
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return listResult;
+
+    public Passenger findByID(PassengerID passengerID) throws Exception {
+        String query = "SELECT FROM passenger WHERE passport = %s AND ticket_num = %s;";
+        query = String.format(query, passengerID.getPassport(), passengerID.getTicketNum());
+        ResultSet rs = connection.executeQuery(query);
+        if (rs.next()) {
+            return passenger(rs);
+        } 
+        throw new Exception("E~Passenger doesnt exist");
     }
-    
+
 }

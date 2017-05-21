@@ -13,7 +13,7 @@ AirlineController.prototype = {
         Proxy.getCities( (data) => {
             Storage.store('allCities', data);
             callback(data);
-        } )
+        } );
     },
     retrieveAllCities: function () {
         return Storage.retrieve('allCities');
@@ -66,6 +66,18 @@ AirlineController.prototype = {
     findTrip: function (codeCityFrom, codeCityTo) {
         let trip = this.trips().filter((trip) => { return (trip.cityFrom.code === codeCityFrom) && (trip.cityTo.code === codeCityTo) });
         return trip[0];
-    }
+    },
+    searchTypeAirplane: function (type_airline,callback) {
+        Proxy.searchForTypeAirplane(type_airline, (data) => {
+            Storage.store('searchTypeAirplane', data);
+            callback(data);
+        });
+    },
+      getAllTypeAirline: function (callback) {
+        Proxy.getAllTypeAirline( (data) => {
+            callback(data);
+        });
+    },
+  
 
 }

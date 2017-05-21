@@ -42,6 +42,21 @@
                                     </ul>
                                 </ul>
                             </li>
+                            <!--only for test-->
+                            <li class="dropdown">
+                                <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">Administration</a>
+                                <ul class="dropdown-menu dropdown-profile">
+                                    <li>
+                                        <h3 class="text-center text-white">Management ✵</h3>
+                                    </li>
+                                    <ul>
+                                        <li class="text-white"> <h5> <a href="typeAirplaneAdm.jsp">Type Airplanes</a> </h5> </li>
+                                        <li class="text-white"> <h5> <a href="#">Airplanes</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="#">Schedules</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="routeAdm.jsp">Routes</a></h5> </li>
+                                    </ul>
+                                </ul>
+                            </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">

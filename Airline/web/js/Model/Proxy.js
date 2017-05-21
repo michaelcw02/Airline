@@ -89,3 +89,39 @@ Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) =>
         dataType: "json"
     });
 }
+Proxy.searchForTypeAirplane = (type_airline, callback) => {
+    $.ajax({
+        url: 'TypeAirplaneServlet',
+        data: {
+            action: 'findTypeAirplane',
+            type_airline: type_airline 
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            alert("Se presento un error a la hora de cargar los tipos de avion de la base de datos");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.getAllTypeAirline = (callback) => {
+    $.ajax({
+        url: 'TypeAirplaneServlet',
+        data: {
+            action: "getAllTypeAirplane"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            alert("Se presento un error a la hora de cargar los descuentos de la base de datos");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+
+}
