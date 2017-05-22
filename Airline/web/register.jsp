@@ -163,14 +163,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts"></script>
     <!-- MODEL -->
-    <script type="text/javascript" src="js/model/RegisterModel.js"></script>
-    <script type="text/javascript" src="js/model/AirlineModel.js"></script>
-    <script type="text/javascript" src="js/Model/GoogleMap/GoogleMap.js"></script>
+    <script src="js/Model/GoogleMap/GoogleMap.js" type="text/javascript"></script>
+    <script src="js/Model/RegisterModel.js" type="text/javascript"></script>
+    <script src="js/Model/AirlineModel.js" type="text/javascript"></script>
     <!-- CONTROLLER -->
-    <script type="text/javascript" src="js/controller/RegisterController.js"></script>
-    <script type="text/javascript" src="js/controller/AirlineController.js"></script>
+    <script src="js/Controller/RegisterController.js" type="text/javascript"></script>
+    <script src="js/Controller/AirlineController.js" type="text/javascript"></script>
     <!-- VIEW -->
-    <script type="text/javascript" src="js/view/RegisterView.js"></script>
+    <script src="js/View/RegisterView.js" type="text/javascript"></script>
 
 </body>
 
