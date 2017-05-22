@@ -54,17 +54,17 @@
                                 <input type="text" class="form-control" id="year" placeholder="Year" >
                             </div>
 
-                            <div class="form-group" id="brand">
+                            <div class="form-group" id="groupBrand">
                                 <label for="brand">Brand:</label>
                                 <input type="text" class="form-control" id="brand" placeholder="Brand">
                             </div>
 
-                            <div class="form-group" id="passengerQuantity">
+                            <div class="form-group" id="groupPassengerQuantity">
                                 <label for="passengerQuantity">Passenger quantity:</label>
                                 <input type="text" class="form-control" id="passengerQuantity" placeholder="Passenger quantity">
                             </div>
 
-                            <div class="form-group" id="rows">
+                            <div class="form-group" id="groupRows">
                                 <label for="rows">Rows quantity:</label>
                                 <select class="form-control" id="rows">
                                     <option value="1" selected="selected">6</option>
@@ -74,7 +74,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group" id="seatsRow">
+                            <div class="form-group" id="groupSeatsRow">
                                 <label for="seatsRow">Seats per row:</label>
                                 <input type="text" class="form-control" id="seatsRow" placeholder="SeatsPerRow">
                             </div>

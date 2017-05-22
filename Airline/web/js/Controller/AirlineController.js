@@ -78,6 +78,12 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+      addTypeAirplane: function (type_airline, year, brand, qtySeats, rows, seatsRow) {
+        Proxy.addTypeAirplane(type_airline, year, brand, qtySeats, rows, seatsRow);
+        //, (data) => {
+        //callback(data);
+        //});
+    },
     
   getTripByCode: function (idTrip, callback) {
         Proxy.searchTripByCode(idTrip, (data) => {
