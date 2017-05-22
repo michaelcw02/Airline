@@ -18,6 +18,7 @@ function addElementsProperties() {
     
     //EVENT HANDLERS
     //$('#cityFrom').autocomplete( () => controller.setUpCitiesFrom() );
+
     $("#departing").change( () => controller.setMinReturnDate() );
 
     $('#btnRoundTrip').click( () => $("#returning").show() );
@@ -27,11 +28,10 @@ function addElementsProperties() {
     $('#btnIncrease').click( () => controller.increaseAdults() );
 
     $('#cityFrom').change( () => controller.setUpCitiesTo() );
-
+    
     $('#btnSearchFlights').click( () => controller.moveToFlights() );
     $('#cityTo').change( () => controller.cityFromHandlerHide() );
     $('#cityFrom').change( () => controller.cityFromHandlerHide() );
-
 
 }
 

@@ -110,7 +110,8 @@ IndexController.prototype = {
             let outboundFlights = jsonResults.outboundFlights;
             let returnFlights = jsonResults.returnFlights;
 
-            console.log(outboundFlights);
+            console.log("outboundFlights", outboundFlights);
+            console.log("returnFlights", returnFlights);
 
             this.showSearchFlights(1, outboundFlights);
             /*
@@ -134,10 +135,10 @@ IndexController.prototype = {
             let element = '';
             element = '<div class="row hoverDiv">';
             let trip = flight.trip;
-            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + trip.cityFrom.code + ' - ' + trip.cityTo.code + '<strong></h3>';
-            element += trip.cityFrom.name + ' to ' + trip.cityTo.name + '<br>';
-            element += 'Date of departure: <h4>' + parseMillisToDate(flight.departureDate) + '</h4> </div>';
-            element += '<div class="col-md-4"><h1><strong>$ ' + flight.price + '<strong></h1></div>';
+            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '<strong></h3>';
+            element += trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br>';
+            element += 'Date of departure: <h4>' + flight.departureDate + '</h4> </div>';
+            element += '<div class="col-md-4"><h1><strong>$ ' + flight.cost + '<strong></h1></div>';
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
         }
