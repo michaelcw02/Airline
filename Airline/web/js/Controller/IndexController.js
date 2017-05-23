@@ -65,7 +65,7 @@ IndexController.prototype = {
         let validateRegex = /\d{4}-\d{2}-\d{2}/;
         if (validateRegex.test(departDate)) {
             this.view.$('#returning').datepicker('destroy');
-            this.view.$('#returning').datepicker({ minDate: new Date(departDate), dateFormat: "yy-mm-dd" });
+            this.view.$('#returning').datepicker({ minDate: new Date(departDate.replace(/-/g, '\/')), dateFormat: "yy-mm-dd" });
         }
     },
 
