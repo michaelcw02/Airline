@@ -76,6 +76,13 @@ html {
 .hiddenDiv{
     display: none;
 }
+.invalid {
+    box-shadow: 0 0 5px 1px #FFA500;
+}
+.alert {
+    display: none;
+    color: #FFA500;
+}
 
    
 

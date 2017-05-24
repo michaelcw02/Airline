@@ -12,6 +12,7 @@ function addElementsProperties() {
 }
 function searchTypeAirplane() {
     controller.searchTypeAirplane();
+    
 }
     $(loadPage);
 

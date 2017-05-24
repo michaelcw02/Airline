@@ -16,19 +16,28 @@ import una.airline.domain.TypeAirplane;
 public class TypeAirplaneBL {
 
     private TypeAirplaneDAO typeAirplaneDAO;
-    
+
     public TypeAirplaneBL() {
         typeAirplaneDAO = new TypeAirplaneDAO();
     }
-    
+
     public List<TypeAirplane> getAllTypeAirplane() {
         return typeAirplaneDAO.getAllTypeAirplane();
     }
-    
+
     public TypeAirplane findTypeAirplaneByType(String type_airline) throws Exception {
         return typeAirplaneDAO.findTypeAirplaneByType(type_airline);
     }
-    public void addTypeAirplane(TypeAirplane typeAirplane) throws Exception{
-         typeAirplaneDAO.addTypeAirplane(typeAirplane);
+
+    public void addTypeAirplane(TypeAirplane typeAirplane) throws Exception {
+        typeAirplaneDAO.addTypeAirplane(typeAirplane);
+    }
+
+    public void updateTypeAirplane(TypeAirplane ntypeAirplane) {
+        typeAirplaneDAO.updateTypeAirplane(ntypeAirplane);
+    }
+
+    public void deleteTypeAirplane(TypeAirplane dTypeAirplane) throws Exception {
+        typeAirplaneDAO.deleteTypeAirplane(dTypeAirplane);
     }
 }
