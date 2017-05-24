@@ -57,7 +57,6 @@ function toDataTable($table) {
             "order": [[1, "desc"]]
         });
     }
-
 }
 
 $(loadPage);

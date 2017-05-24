@@ -169,7 +169,7 @@ function toList($table, flight) {
     var trip = flight.trip;
     console.log(flight);
     var tr = $('<tr></tr>', {
-        id: flight.flightNum,
+        "id": flight.flightNum,
         "data-toggle": "modal",
         "data-target": "flight-detail",
         class: "tr-flights"
