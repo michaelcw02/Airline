@@ -27,8 +27,8 @@ function addElementsProperties() {
 
     $("#departing").change(() => controller.setMinReturnDate());
 
-    $('#btnRoundTrip').click(() => $("#returning").show());
-    $('#btnOneWay').click(() => $("#returning").hide());
+    $('#btnRoundTrip').click(() => $("#returning").fadeIn());
+    $('#btnOneWay').click(() => $("#returning").fadeOut());
 
     $('#btnDecrease').click(() => controller.decreaseAdults());
     $('#btnIncrease').click(() => controller.increaseAdults());
@@ -42,6 +42,11 @@ function addElementsProperties() {
 
 function addListenersButtons(idButton, num) {
     $(idButton).click(() => controller.pageButtonsHandler(num));
+}
+function addListenerTable() {
+    $('#outbound-flights').on('click', 'tr', () => {
+        
+    });
 }
 
 function searchFlights() {
