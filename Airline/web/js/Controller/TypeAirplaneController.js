@@ -121,7 +121,8 @@ function isSomethingBlank() {
 function validateYear() {
     let text = $('#year');
     let error = false;
-    if (!/^([1600-2018])*$/.test(text)) {
+    let regex = /^(194[0-9]|19[5-9]\d|200\d|201[0-7])$/
+    if(regex.test(text)) {
         error = true;
     }
     return error;

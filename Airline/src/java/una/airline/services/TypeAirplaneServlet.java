@@ -59,7 +59,7 @@ public class TypeAirplaneServlet extends HttpServlet {
                     ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
                     ta.calculateQtyOfSeats();
                     typeAirBL.addTypeAirplane(ta);
-                    out.print("C~El tipo de avion fue ingresado correctamente");
+                    out.print("{\"data\":\"C~El tipo de avion fue ingresado correctamente\"}");
                     break;
                 case "updateTypeAirplane":
                     ta.setTypeAirline(request.getParameter("type_airline"));
