@@ -94,7 +94,7 @@ Proxy.searchForTypeAirplane = (type_airline, callback) => {
         url: 'TypeAirplaneServlet',
         data: {
             action: 'findTypeAirplane',
-            type_airline: type_airline 
+            type_airline: type_airline
         },
         error: function () { //si existe un error en la respuesta del ajax
             alert("Se presento un error a la hora de cargar los tipos de avion de la base de datos");
@@ -138,6 +138,32 @@ Proxy.searchTripByCode = (idTrip, callback) => {
         success: (data) => {
             console.log(data);
             callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.addTypeAirplane = (type_airline, year, brand, qtySeats, rows, seatsRow) => {
+    console.log(type_airline, year, brand, qtySeats, rows, seatsRow);
+    $.ajax({
+        url: 'TypeAirplaneServlet',
+        data: {
+            action: "addTypeAirplane",
+            type_airline: type_airline,
+            year: year,
+            brand: brand,
+            qty_of_seats: qtySeats,
+            qty_of_rows: rows,
+            seats_per_row: seatsRow
+        },
+        error: function () {
+            alert("Se presento un error a la hora de insertar el tipo de avion a la base de datos");
+
+        },
+        success: (data) => {
+            console.log(data);
+            alert("Se inserto el tipo de avion a la base de datos");
+            //callback(data);
         },
         type: 'POST',
         dataType: "json"

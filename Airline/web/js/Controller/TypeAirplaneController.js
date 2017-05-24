@@ -17,38 +17,47 @@ TypeAirplaneController.prototype = {
         let type_airline = this.view.$('#search').val();
         this.airlineController.searchTypeAirplane(type_airline, (jsonResults) => {
             let returnTypeAirplane = jsonResults.brand;
-            console.log( returnTypeAirplane);
-        $("#tableTypeAirplane").html("");
-        var head = $("<thead />");
-        var row = $("<tr/>");
-        head.append(row);
-        $("#tableTypeAirplane").append(head);
-        row.append($("<th><b>IDENTIFIER</b></th>"));
-        row.append($("<th><b>YEAR</b></th>"));
-        row.append($("<th><b>BRAND</b></th>"));
-        row.append($("<th><b>QUANTITY OF SEATS</b></th>"));
-        row.append($("<th><b>ROWS</b></th>"));
-        row.append($("<th><b>ROWS PER SEAT</th>"));
-        row.append($("<th><b>ACTION</th>"));
-       var row = $("<tr />");
-        $("#tableTypeAirplane").append(row);
-        row.append($("<td>" + jsonResults.typeAirline + "</td>"));
-        row.append($("<td>" + jsonResults.year + "</td>"));
-        row.append($("<td>" + jsonResults.brand + "</td>"));
-        row.append($("<td>" + jsonResults.qtyOfSeats + "</td>"));
-        row.append($("<td>" + jsonResults.qtyOfRows + "</td>"));
-        row.append($("<td>" + jsonResults.seatsPerRow + "</td>"));
-        row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'modify\');">' +
-                '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
-                '</button>' +
-                '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'eliminate\');">' +
-                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
-                '</button></td>'));
-           
+            console.log(returnTypeAirplane);
+            $("#tableTypeAirplane").html("");
+            var head = $("<thead />");
+            var row = $("<tr/>");
+            head.append(row);
+            $("#tableTypeAirplane").append(head);
+            row.append($("<th><b>IDENTIFIER</b></th>"));
+            row.append($("<th><b>YEAR</b></th>"));
+            row.append($("<th><b>BRAND</b></th>"));
+            row.append($("<th><b>QUANTITY OF SEATS</b></th>"));
+            row.append($("<th><b>ROWS</b></th>"));
+            row.append($("<th><b>ROWS PER SEAT</th>"));
+            row.append($("<th><b>ACTION</th>"));
+            var row = $("<tr />");
+            $("#tableTypeAirplane").append(row);
+            row.append($("<td>" + jsonResults.typeAirline + "</td>"));
+            row.append($("<td>" + jsonResults.year + "</td>"));
+            row.append($("<td>" + jsonResults.brand + "</td>"));
+            row.append($("<td>" + jsonResults.qtyOfSeats + "</td>"));
+            row.append($("<td>" + jsonResults.qtyOfRows + "</td>"));
+            row.append($("<td>" + jsonResults.seatsPerRow + "</td>"));
+            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'modify\');">' +
+                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'eliminate\');">' +
+                    '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+                    '</button></td>'));
+
             showResult(this.view.$('#typeAirplaneReturn'), returnTypeAirplane);
 
         });
-        
+
+    },
+    addTypeAirplane: function () {
+        let type_airplane = this.view.$('#identifier').val();
+        let year = this.view.$('#year').val();
+        let brand = this.view.$('#brand').val();
+        let qtySeats = this.view.$('#passengerQuantity').val();
+        let rows = this.view.$('#rows').val();
+        let seatsPerRow = this.view.$('#seatsRow').val();
+        this.airlineController.addTypeAirplane(type_airplane, year, brand, qtySeats, rows, seatsPerRow);
     },
     cleanForm: () => {
         $('#identifier').focus();

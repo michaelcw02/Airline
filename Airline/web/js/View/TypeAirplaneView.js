@@ -5,7 +5,7 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $("#send").click(() => controller.enviar());
+    $("#send").click(() => controller.addTypeAirplane());
     $("#cancel").click(() => controller.cleanForm());
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(() => controller.searchTypeAirplane());

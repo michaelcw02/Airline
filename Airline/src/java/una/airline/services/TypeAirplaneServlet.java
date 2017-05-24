@@ -52,12 +52,13 @@ public class TypeAirplaneServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "addTypeAirplane":
-                    ta.setTypeAirline(request.getParameter("type_airlitne"));
+                    ta.setTypeAirline(request.getParameter("type_airline"));
                     ta.setYear(request.getParameter("year"));
                     ta.setBrand(request.getParameter("brand"));
                     ta.setQtyOfSeats(Integer.parseInt(request.getParameter("qty_of_seats")));
                     ta.setQtyOfRows(Integer.parseInt(request.getParameter("qty_of_rows")));
                     ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
+                    out.print(ta.getTypeAirline());
                     typeAirBL.addTypeAirplane(ta);
                     out.print("C~El tipo de avion fue ingresado correctamente");
                     break;
