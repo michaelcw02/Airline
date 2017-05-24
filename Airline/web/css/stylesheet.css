@@ -330,3 +330,8 @@ article hr {
 .panel-transparent{
     background: rgba(122, 130, 136, 0.2)!important;
 }
+
+.outbound-flights-div,
+.return-flights-div {
+    display: none;
+}

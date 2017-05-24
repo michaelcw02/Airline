@@ -107,38 +107,27 @@ IndexController.prototype = {
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
             
-            let outboundFlights = jsonResults.outboundFlights;
-            let returnFlights = jsonResults.returnFlights;
+            this.showFlightsResults(jsonResults);
 
-            console.log("outboundFlights", outboundFlights);
-            console.log("returnFlights", returnFlights);
-
-            this.showSearchFlights(1, outboundFlights);
-            /*
-            //NOT WORKING YET
-            showResult(this.view.$('#outbound-flights'), outboundFlights);
-            showResult(this.view.$('#return-flights'), returnFlights);
-            */
         });
     },
     showFlightsResults: (jsonResults) => {
         let outboundFlights = jsonResults.outboundFlights;
         let returnFlights = jsonResults.returnFlights;
-
-        showResult(this.view.$('#outbound-flights'), outboundFlights);
-        showResult(this.view.$('#return-flights'), returnFlights);
+        if(outboundFlights != undefined) {
+            showResult($('#outbound-flights'), outboundFlights);
+            $('.outbound-flights-div').show();
+        }
+        if(returnFlights != undefined) {
+            showResult($('#return-flights'), returnFlights);
+            $('.return-flights-div').show();
+        }
     },
     showSearchFlights: function (numPage = 1, flights) {
-        $("#flights").empty();
+        this.view.$("#flights").empty();
         for (let i = 10 * (numPage - 1); i < (10 * numPage) && i < flights.length; i++) {
             let flight = flights[i];
             let element = '';
-            element = '<div class="row hoverDiv">';
-            let trip = flight.trip;
-            element += '<div class= "col-md-8 info-Flights"><h3><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '<strong></h3>';
-            element += trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br>';
-            element += 'Date of departure: <h4>' + flight.departureDate + '</h4> </div>';
-            element += '<div class="col-md-4"><h1><strong>$ ' + flight.cost + '<strong></h1></div>';
             element += '</div>';
             $(element).appendTo(this.view.$('.flights-container'));
         }
@@ -157,13 +146,30 @@ IndexController.prototype = {
     },
 }
 
-function showResult($container, jsonFlights) {
-    $container.empty();
-    $container.show();
-    $container.css('z-index', 4000);
+function showResult($table, jsonFlights) {
+    $table.empty();
+    $table.show();
+    for(let i in jsonFlights) {
+        toList($table, jsonFlights[i]);
+    }
 
-    $container.find('div.results').text(jsonFlights);
     console.log(jsonFlights);
+}
+
+function toList($table, flight) {
+    var trip = flight.trip;
+    var tr = $("<tr></tr>", {id: flight.flight_num, "data-toggle": "modal",  "data-target": "#", class:"tr-flights"});
+    $(tr).appendTo($table);
+    var td = "";
+    td += '<div><h2><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '<strong></h2></div>';
+    td += '<div>' + trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br> </div>';
+    td += '<div><h4> Date of departure: ' + flight.departureDate + '<h4></div>';
+    td += '<div><h4> Time of departure: ' + trip.departure_time +'</h4></div>';
+    $(td).appendTo($(tr));
+    
+    var precio = flight.cost + " USD";
+    td = '<h3>' + precio + '</h3>';
+    $(td).appendTo($(tr));
 }
 
 function getFlightCitiesTo(flights) {

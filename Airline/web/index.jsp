@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap-theme.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/dataTables.bootstrap.css" type="text/css"/>
         <link rel="stylesheet" href="css/hover.css">
         <link rel="stylesheet" href="css/stylesheet.css">
     </head>
@@ -108,52 +109,60 @@
                     </div>
                 </div>                
             </form>
+
+            <!--
             <div class="container-fluid" id="search-container">
                 <div class="container-fluid collapse flights-container" id="flights">
-                    <!-- Table with flights -->    
+                    <!-- Table with flights --    
                 </div>
             </div>
              <div class="container-fluid" id="pagination-container">
                 <div class="container-fluid collapse pagination-container"  id="pagination">
-                    <!-- Pagination -->
+                    <!-- Pagination --
                 </div>
             </div>
-            <!--
-            <div class="container-fluid" id="outbound-flights">
+            -->
+            
+            <div class="container-fluid outbound-flights-div">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1>Outbound Flights</h1>
                     </div>
                     <div class="panel-body">
-                        <div class="results" id="results">
-                            !-- Table with flights --  
-                        </div>
-                        <div class="" id="">
-                            <div class=""  id="">
-                                !-- Pagination --
-                            </div>
-                        </div>
+                        <table class="table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Information</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="outbound-flights">
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid" id="return-flights">
+            <div class="container-fluid return-flights-div">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1>Return Flights</h1>
                     </div>
                     <div class="panel-body">
-                        <div class="results" id="results">
-                            !-- Table with flights -- 
-                        </div>
-                        <div class="" id="">
-                            <div class=""  id="">
-                                !-- Pagination --
-                            </div>
-                        </div>
+                        <table class="table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Information</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody  id="return-flights">
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            -->
         </div>
     </div>
 
@@ -165,6 +174,9 @@
     <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/lib/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="js/lib/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="js/Model/utils.js" type="text/javascript"></script>
     <!-- MODEL -->
     <script type="text/javascript" src="js/Model/City/City.js"></script>
     <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>

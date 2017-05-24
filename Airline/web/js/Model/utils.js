@@ -13,5 +13,3 @@
      $("#"+idDiv+"Title").html(titulo);
      $("#"+idDiv+"Message").html(mensaje);
  }
-
-
