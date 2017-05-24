@@ -164,11 +164,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts"></script>
     <!-- MODEL -->
     <script src="js/Model/GoogleMap/GoogleMap.js" type="text/javascript"></script>
-    <script src="js/Model/RegisterModel.js" type="text/javascript"></script>
     <script src="js/Model/AirlineModel.js" type="text/javascript"></script>
+    <script src="js/Model/RegisterModel.js" type="text/javascript"></script>
     <!-- CONTROLLER -->
-    <script src="js/Controller/RegisterController.js" type="text/javascript"></script>
     <script src="js/Controller/AirlineController.js" type="text/javascript"></script>
+    <script src="js/Controller/RegisterController.js" type="text/javascript"></script>
     <!-- VIEW -->
     <script src="js/View/RegisterView.js" type="text/javascript"></script>
 

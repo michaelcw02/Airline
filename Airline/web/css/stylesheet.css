@@ -1,3 +1,5 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 html {
     position:relative; 
     min-height: 100%;
@@ -36,6 +38,7 @@ html {
 }
 .body-container {
     margin-top: 1px;
+    width: 95%;
 }
 
 /* SCREEN BIGGER THAN 768PX */
@@ -329,4 +332,9 @@ article hr {
 }
 .panel-transparent{
     background: rgba(122, 130, 136, 0.2)!important;
+}
+
+.outbound-flights-div,
+.return-flights-div {
+    display: none;
 }

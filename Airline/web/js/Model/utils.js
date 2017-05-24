@@ -1,4 +1,3 @@
-
 function showModal(idDiv, titulo, mensaje) {
     $("#" + idDiv + "Title").html(titulo);
     $("#" + idDiv + "Message").html(mensaje);
@@ -13,5 +12,3 @@ function changeMessageModal(idDiv, title, message) {
     $("#" + idDiv + "Title").html(title);
     $("#" + idDiv + "Message").html(message);
 }
-
-

@@ -22,7 +22,7 @@ GoogleMap.prototype = {
         markOpc = { 
             position: latlng,
             map: map,
-            title: "You are here!"
+            title: "You are here!",
         };
         var marker = new google.maps.Marker(markOpc);
         callback();
