@@ -73,7 +73,7 @@ public class TypeAirplaneServlet extends HttpServlet {
                 case "deleteTypeAirplane":
                     ta.setTypeAirline(request.getParameter("type_airline"));
                     typeAirBL.deleteTypeAirplane(ta);
-                    out.print("La persona fue eliminada correctamente");
+                    out.print("{\"data\": \"C~La persona fue eliminada correctamente\"}");
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

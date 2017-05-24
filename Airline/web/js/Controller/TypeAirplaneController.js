@@ -28,7 +28,7 @@ TypeAirplaneController.prototype = {
             row.append($("<th><b>ROWS</b></th>"));
             row.append($("<th><b>ROWS PER SEAT</th>"));
             row.append($("<th><b>ACTION</th>"));
-            var row = $("<tr />");
+            var row = $("<tr/>");
             $("#tableTypeAirplane").append(row);
             row.append($("<td>" + jsonResults.typeAirline + "</td>"));
             row.append($("<td>" + jsonResults.year + "</td>"));
@@ -39,7 +39,7 @@ TypeAirplaneController.prototype = {
             row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'eliminate\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane('+jsonResults+');">' +
+                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + jsonResults.typeAirline + '\');">' +
                     '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
                     '</button></td>'));
         });
@@ -61,8 +61,8 @@ TypeAirplaneController.prototype = {
         $("#typeAirplaneAction").val("addTypeAirplane");
         $('#formTypeAirplane').trigger("reset");
     },
-    deleteTypeAirplane: function (typeAirplane) {
-        this.airlineController.deleteTypeAirplane(typeAirplane.typeAirline);
+    deleteTypeAirplane: function (typeAirline) {
+        this.airlineController.deleteTypeAirplane(typeAirline);
     },
     updateTypeAirplane: function () {
         let type_airplane = this.view.$('#identifier').val();
