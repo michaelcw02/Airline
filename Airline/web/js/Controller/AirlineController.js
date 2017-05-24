@@ -85,11 +85,25 @@ AirlineController.prototype = {
         //});
     },
     
-  getTripByCode: function (idTrip, callback) {
+    getTripByCode: function (idTrip, callback) {
         Proxy.searchTripByCode(idTrip, (data) => {
             Storage.store('searchTripByCode', data);
             callback(data);
         });
     },
+    searchAirplane: function (airplane,callback) {
+        Proxy.searchForAirplane(airplane, (data) => {
+            Storage.store('searchAirplane', data);
+            callback(data);
+        });
+    },
+    
+    addAirplane: function (identifier ,type_airline) {
+        Proxy.addAirplane(identifier, type_airline);
+        //, (data) => {
+        //callback(data);
+        //});
+    },
+    
 
 }

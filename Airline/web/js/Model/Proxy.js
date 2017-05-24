@@ -168,4 +168,47 @@ Proxy.addTypeAirplane = (type_airline, year, brand, qtySeats, rows, seatsRow) =>
         type: 'POST',
         dataType: "json"
     });
+ }
+    
+Proxy.searchForAirplane = (id_airplane, callback) => {
+    $.ajax({
+        url: 'AirplaneServlet',
+        data: {
+            action: 'findAirplane',
+            id_airplane: id_airplane
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            alert("Se presento un error a la hora de cargar los aviones de la base de datos");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }
+
+Proxy.addAirplane = (id_airplane, type_airplane) => {
+    console.log(id_airplane, type_airplane);
+    $.ajax({
+        url: 'AirplaneServlet',
+        data: {
+            action: "addAirplane",
+            id_airplane: id_airplane,
+            type_airplane: type_airplane
+        },
+        error: function () {
+            alert("Se presento un error a la hora de insertar el avion a la base de datos");
+
+        },
+        success: (data) => {
+            console.log(data);
+            alert("Se inserto el avion a la base de datos");
+            //callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    }); 
+}
+   
