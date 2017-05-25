@@ -8,6 +8,7 @@ package una.airline.services;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +49,9 @@ public class TypeAirplaneServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "getAllTypeAirplane":
-                    json = new Gson().toJson(typeAirBL.getAllTypeAirplane());
+                     List<TypeAirplane> list;
+            list = typeAirBL.getAllTypeAirplane();
+                    json = new Gson().toJson(list);
                     out.print(json);
                     break;
                 case "addTypeAirplane":
@@ -69,6 +72,7 @@ public class TypeAirplaneServlet extends HttpServlet {
                     ta.setQtyOfRows(Integer.parseInt(request.getParameter("qty_of_rows")));
                     ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
                     typeAirBL.updateTypeAirplane(ta);
+                    out.print("{\"data\": \"C~La persona fue modificada correctamente\"}");
                     break;
                 case "deleteTypeAirplane":
                     ta.setTypeAirline(request.getParameter("type_airline"));
