@@ -9,17 +9,18 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import una.airline.bl.FlightsBL;
-import una.airline.domain.Flight;
+import una.airline.bl.AirplaneBL;
+import una.airline.domain.Airplane;
 
 /**
  *
- * @author michaelcw02
+ * @author cfuen
  */
-public class FlightsServlet extends HttpServlet {
+public class AirplaneServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,43 +37,30 @@ public class FlightsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-            
-            FlightsBL flightsBL = new FlightsBL();
+            Airplane ta = new Airplane();
+            AirplaneBL typeAirBL = new AirplaneBL();
 
-            //Se hace una pausa para ver el modal
-            //Thread.sleep(1000);
-            
-            //**********************************************************************
-            //se toman los datos de la session
-            //**********************************************************************
-            //HttpSession session = request.getSession();
-            
-            //**********************************************************************
-            //se consulta cual accion se desea realizar
-            //**********************************************************************
             String action = request.getParameter("action");
             switch (action) {
-                case "getAllFlights":
-                    json = new Gson().toJson(flightsBL.getAllFlights());
+                case "findAirplane":
+                    String airplane = request.getParameter("id_airplane");
+                    json = new Gson().toJson(typeAirBL.findAirplaneByID(airplane));
                     out.print(json);
                     break;
-                case "searchFlights":
-                    String cityFrom = request.getParameter("cityFrom");
-                    String cityTo = request.getParameter("cityTo");
-                    String departDate = request.getParameter("departDate");
-                    String returnDate = request.getParameter("returnDate");
-                    
-                    json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate) );
-                    out.print(json);
-                    
-                    break;
-                case "getAllDiscounts":
-                    json = new Gson().toJson(flightsBL.findDiscounts());
+                case "getAllAirplane":
+                    json = new Gson().toJson(typeAirBL.getAllAirplane());
                     out.print(json);
                     break;
-                default:
-                    out.print("E~No se indico la acción que se desea realizare");
-                    break;
+//                case "addAirplane":
+//                    ta.setIdAirplane(request.getParameter("identifier"));
+//                    ta.setTypeAirplane(request.getParameter("type_airplane"));
+//                    out.print(ta.getIdAirplane());
+//                    typeAirBL.addTypeAirplane(ta);
+//                    out.print("C~El tipo de avion fue ingresado correctamente");
+//                    break;
+//                default:
+//                    out.print("E~No se indico la acción que se desea realizare");
+//                    break;
             }
 
         } catch (NumberFormatException e) {

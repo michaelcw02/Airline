@@ -22,20 +22,7 @@
             <jsp:include page="header.jsp"/>
         </div>
 
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
-                    </div>
-                    <div class="modal-body" id="myModalMessage">
-                        <p>This is a small modal.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="myModalFormulario" role="dialog">
+        <div class="modal fade" id="myModalTypeAirplane" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -46,37 +33,32 @@
                         <form role="form" onsubmit="return false;" id="formTypeAirplane">
                             <div class="form-group" id="groupIdentifier">
                                 <label for="identifier">Identifier:</label>
-                                <input type="text" class="form-control" id="identifier" autofocus="true" placeholder="Identifier">
+                                <input type="text" class="form-control" id="identifier" autofocus="true" placeholder="Identifier" required="true">
                             </div>
 
                             <div class="form-group" id="groupYear">
                                 <label for="year">Year:</label>
-                                <input type="text" class="form-control" id="year" placeholder="Year" >
+                                <input type="text" class="form-control" id="year" placeholder="Year" required="true" >
                             </div>
 
                             <div class="form-group" id="groupBrand">
                                 <label for="brand">Brand:</label>
-                                <input type="text" class="form-control" id="brand" placeholder="Brand">
-                            </div>
-
-                            <div class="form-group" id="groupPassengerQuantity">
-                                <label for="passengerQuantity">Passenger quantity:</label>
-                                <input type="text" class="form-control" id="passengerQuantity" placeholder="Passenger quantity">
+                                <input type="text" class="form-control" id="brand" placeholder="Brand" required="true">
                             </div>
 
                             <div class="form-group" id="groupRows">
                                 <label for="rows">Rows quantity:</label>
                                 <select class="form-control" id="rows">
-                                    <option value="1" selected="selected">6</option>
-                                    <option value="2">7</option>
-                                    <option value="3">8</option>
-                                    <option value="4">9</option>
+                                    <option value="6" selected="selected">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
                                 </select>
                             </div>
 
                             <div class="form-group" id="groupSeatsRow">
                                 <label for="seatsRow">Seats per row:</label>
-                                <input type="text" class="form-control" id="seatsRow" placeholder="SeatsPerRow">
+                                <input type="number" class="form-control" id="seatsRow" placeholder="SeatsPerRow" required="true">
                             </div>
 
                             <div class="form-group">
@@ -100,7 +82,7 @@
                 <div class="panel-heading"><h3>Type Airplane Management</h3></div>
                 <div class="panel-body">
                     <center>
-                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalFormulario" id="btShowForm">Insert Type Airplane</button>
+                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
                     </center><br>
                     <div class="col-sm-12">
                         <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">
@@ -119,9 +101,8 @@
                             </div>
                         </form>
                     </div>
-                    <div class="container-fluid" id="typeAirlineReturn">
-                        <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>
-                    </div>
+                    <div class="container-fluid table-responsive" id="typeAirlineReturn">
+                        <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>                    </div>
                 </div>
             </div>
         </div>

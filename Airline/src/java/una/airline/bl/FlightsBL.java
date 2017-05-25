@@ -51,7 +51,6 @@ public class FlightsBL {
         return roundTripFlights;
     }
 
-    //!!!THIS METHOD HAS TO CHECK THE DATE, IT IS STILL NOT IMPLEMENTED FOR TESTING PURPOSES...
     public List<Flight> searchOneWayFlights(String cityFrom, String cityTo, String departDate) {
         List<Flight> results = null;
 

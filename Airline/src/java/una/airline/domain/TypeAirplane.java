@@ -77,4 +77,8 @@ public class TypeAirplane {
     public void setSeatsPerRow(int seatsPerRow) {
         this.seatsPerRow = seatsPerRow;
     }
+    public void calculateQtyOfSeats(){
+    int qtySeats=this.seatsPerRow*qtyOfRows;
+    setQtyOfSeats(qtySeats);
+    }
 }

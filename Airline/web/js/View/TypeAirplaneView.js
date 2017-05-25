@@ -10,8 +10,9 @@ function addElementsProperties() {
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(() => controller.searchTypeAirplane());
 }
-function searchTypeAirplane() {
-    controller.searchTypeAirplane();
+function deleteTypeAirplane(type_airline) {
+    controller.deleteTypeAirplane(type_airline);
 }
-    $(loadPage);
+
+$(loadPage);
 

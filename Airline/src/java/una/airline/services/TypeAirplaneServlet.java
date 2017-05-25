@@ -55,12 +55,25 @@ public class TypeAirplaneServlet extends HttpServlet {
                     ta.setTypeAirline(request.getParameter("type_airline"));
                     ta.setYear(request.getParameter("year"));
                     ta.setBrand(request.getParameter("brand"));
+                    ta.setQtyOfRows(Integer.parseInt(request.getParameter("qty_of_rows")));
+                    ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
+                    ta.calculateQtyOfSeats();
+                    typeAirBL.addTypeAirplane(ta);
+                    out.print("{\"data\":\"C~El tipo de avion fue ingresado correctamente\"}");
+                    break;
+                case "updateTypeAirplane":
+                    ta.setTypeAirline(request.getParameter("type_airline"));
+                    ta.setYear(request.getParameter("year"));
+                    ta.setBrand(request.getParameter("brand"));
                     ta.setQtyOfSeats(Integer.parseInt(request.getParameter("qty_of_seats")));
                     ta.setQtyOfRows(Integer.parseInt(request.getParameter("qty_of_rows")));
                     ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
-                    out.print(ta.getTypeAirline());
-                    typeAirBL.addTypeAirplane(ta);
-                    out.print("C~El tipo de avion fue ingresado correctamente");
+                    typeAirBL.updateTypeAirplane(ta);
+                    break;
+                case "deleteTypeAirplane":
+                    ta.setTypeAirline(request.getParameter("type_airline"));
+                    typeAirBL.deleteTypeAirplane(ta);
+                    out.print("{\"data\": \"C~La persona fue eliminada correctamente\"}");
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

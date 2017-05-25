@@ -25,7 +25,7 @@ IndexController.prototype = {
                 let trip = flight.trip;
                 element += '<h1>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '</h1>';
                 element += '<h3>' + flight.discountDescription + '</h3>';
-                element += '<h3><a href="">' + 'Limited offer for ' + flight.discount + '% </a></h3>';  
+                element += '<h3><a href="">' + 'Limited offer for ' + flight.discount + '% </a></h3>';
                 element += '</div>   </div>';
                 $(element).appendTo(this.view.$('.carousel-inner'));
             }
@@ -65,7 +65,10 @@ IndexController.prototype = {
         let validateRegex = /\d{4}-\d{2}-\d{2}/;
         if (validateRegex.test(departDate)) {
             this.view.$('#returning').datepicker('destroy');
-            this.view.$('#returning').datepicker({ minDate: new Date(departDate.replace(/-/g, '\/')), dateFormat: "yy-mm-dd" });
+            this.view.$('#returning').datepicker({
+                minDate: new Date(departDate.replace(/-/g, '\/')),
+                dateFormat: "yy-mm-dd"
+            });
         }
     },
 
@@ -84,7 +87,9 @@ IndexController.prototype = {
     setUpCitiesTo: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         if (cityFrom != 0) {
-            this.airlineController.searchTrips(cityFrom, (cities) => { fillWithCities(this.view.$('#cityTo'), cities); });
+            this.airlineController.searchTrips(cityFrom, (cities) => {
+                fillWithCities(this.view.$('#cityTo'), cities);
+            });
         }
     },
     moveToFlights: function () {
@@ -106,7 +111,7 @@ IndexController.prototype = {
         cityTo = (cityTo != '0') ? cityTo : 'All';
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
-            
+
             this.showFlightsResults(jsonResults);
 
         });
@@ -114,13 +119,18 @@ IndexController.prototype = {
     showFlightsResults: (jsonResults) => {
         let outboundFlights = jsonResults.outboundFlights;
         let returnFlights = jsonResults.returnFlights;
-        if(outboundFlights != undefined) {
+        $('.outbound-flights-div').hide();
+        $('.return-flights-div').hide();
+
+        if (outboundFlights != undefined) {
             showResult($('#outbound-flights'), outboundFlights);
             $('.outbound-flights-div').show();
+            toDataTable($('.outbound-flights-table'));
         }
-        if(returnFlights != undefined) {
+        if (returnFlights != undefined) {
             showResult($('#return-flights'), returnFlights);
             $('.return-flights-div').show();
+            toDataTable($('.return-flights-table'));
         }
     },
     showSearchFlights: function (numPage = 1, flights) {
@@ -146,30 +156,33 @@ IndexController.prototype = {
     },
 }
 
+
 function showResult($table, jsonFlights) {
     $table.empty();
     $table.show();
-    for(let i in jsonFlights) {
+    for (let i in jsonFlights) {
         toList($table, jsonFlights[i]);
     }
-
-    console.log(jsonFlights);
 }
 
 function toList($table, flight) {
     var trip = flight.trip;
-    var tr = $("<tr></tr>", {id: flight.flight_num, "data-toggle": "modal",  "data-target": "#", class:"tr-flights"});
+    console.log(flight);
+    var tr = $('<tr></tr>', {
+        "id": flight.flightNum,
+        "data-toggle": "modal",
+        "data-target": "flight-detail",
+        class: "tr-flights"
+    });
     $(tr).appendTo($table);
-    var td = "";
-    td += '<div><h2><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '<strong></h2></div>';
-    td += '<div>' + trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br> </div>';
-    td += '<div><h4> Date of departure: ' + flight.departureDate + '<h4></div>';
-    td += '<div><h4> Time of departure: ' + trip.departure_time +'</h4></div>';
-    $(td).appendTo($(tr));
-    
+    var td = '<td class="td-flights-info col-md-8">';
+    td += '<div><h2><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '　　　　Flight: ' + flight.flightNum + '<strong></h2>';
+    td += trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br>';
+    td += '<h4> Date of departure: ' + flight.departureDate + '    Time of departure: ' + trip.departureTime + 'h </h4></div></td>';
+    $(tr).append(td);
     var precio = flight.cost + " USD";
-    td = '<h3>' + precio + '</h3>';
-    $(td).appendTo($(tr));
+    td = '<td class="td-flights-price col-md-4"><h2>' + precio + '</h2></td>';
+    $(tr).append(td);
 }
 
 function getFlightCitiesTo(flights) {

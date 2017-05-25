@@ -10,41 +10,45 @@ AirlineController.prototype = {
 
     },
     getAllCities: function (callback) {
-        Proxy.getCities( (data) => {
+        Proxy.getCities((data) => {
             Storage.store('allCities', data);
             callback(data);
-        } );
+        });
     },
     retrieveAllCities: function () {
         return Storage.retrieve('allCities');
     },
     getAllDiscounts: function (callback) {
-        Proxy.getDiscounts( (data) => {
+        Proxy.getDiscounts((data) => {
             callback(data);
         })
     },
     getAllFlights: function (callback) {
-        Proxy.getFlights( (data) => {
+        Proxy.getFlights((data) => {
             callback(data);
         })
     },
     getAllTrips: function (callback) {
-        Proxy.getTrips( (data) => {
+        Proxy.getTrips((data) => {
             callback(data);
         })
     },
     searchTrips: function (codeCityFrom, callback) {
         let citiesTo = [];
-        this.getAllTrips( (data) => {
+        this.getAllTrips((data) => {
             if (codeCityFrom != 0) {
-                let results = data.filter((trip) => { return (trip.cityByDepartureCity.code === codeCityFrom); });
-                results.forEach((result) => { citiesTo.push(result.cityByArrivalCity); });
+                let results = data.filter((trip) => {
+                    return (trip.cityByDepartureCity.code === codeCityFrom);
+                });
+                results.forEach((result) => {
+                    citiesTo.push(result.cityByArrivalCity);
+                });
             } else {
                 citiesTo = this.retrieveAllCities();
             }
             callback(citiesTo);
             //Storage.store('searchTrips', { codeCityFrom, citiesTo });
-        } )
+        })
     },
     searchFlights: function (codeCityFrom, codeCityTo, departDate, returnDate, callback) {
         Proxy.searchForFlights(codeCityFrom, codeCityTo, departDate, returnDate, (data) => {
@@ -54,43 +58,55 @@ AirlineController.prototype = {
     },
     getSearch: function (codeCityFrom, codeCityTo) {
         let results = Storage.retrieve('searchFlights');
-        if(codeCityTo == 0)
+        if (codeCityTo == 0)
             codeCityTo = 'All';
         if (results.codeCityFromTo == (codeCityFrom + ' - ' + codeCityTo))
             return results.results;
     },
-    retrieveSearchFlights: function() {
+    retrieveSearchFlights: function () {
         let results = Storage.retrieve('searchFlights');
         return results.results;
     },
     findTrip: function (codeCityFrom, codeCityTo) {
-        let trip = this.trips().filter((trip) => { return (trip.cityFrom.code === codeCityFrom) && (trip.cityTo.code === codeCityTo) });
+        let trip = this.trips().filter((trip) => {
+            return (trip.cityFrom.code === codeCityFrom) && (trip.cityTo.code === codeCityTo)
+        });
         return trip[0];
     },
-    searchTypeAirplane: function (type_airline,callback) {
+    searchTypeAirplane: function (type_airline, callback) {
         Proxy.searchForTypeAirplane(type_airline, (data) => {
             Storage.store('searchTypeAirplane', data);
             callback(data);
         });
     },
-      getAllTypeAirline: function (callback) {
-        Proxy.getAllTypeAirline( (data) => {
+    getAllTypeAirline: function (callback) {
+        Proxy.getAllTypeAirline((data) => {
             callback(data);
         });
     },
-      addTypeAirplane: function (type_airline, year, brand, qtySeats, rows, seatsRow) {
-        Proxy.addTypeAirplane(type_airline, year, brand, qtySeats, rows, seatsRow);
+    addTypeAirplane: function (type_airline, year, brand, rows, seatsRow) {
+        Proxy.addTypeAirplane(type_airline, year, brand, rows, seatsRow);
         //, (data) => {
         //callback(data);
         //});
     },
+<<<<<<< HEAD
     
+=======
+    deleteTypeAirplane: function (type_airline) {
+        Proxy.deleteTypeAirplane(type_airline);
+    },
+    updateTypeAirplane: function (type_airline, year, brand, rows, seatsRow) {
+        Proxy.updateTypeAirplane(type_airline, year, brand, rows, seatsRow);
+    },
+>>>>>>> bc8a00dbdd93b95d412cf1e74c59d15ef66a97ea
     getTripByCode: function (idTrip, callback) {
         Proxy.searchTripByCode(idTrip, (data) => {
             Storage.store('searchTripByCode', data);
             callback(data);
         });
     },
+<<<<<<< HEAD
     searchAirplane: function (airplane,callback) {
         Proxy.searchForAirplane(airplane, (data) => {
             Storage.store('searchAirplane', data);
@@ -106,4 +122,6 @@ AirlineController.prototype = {
     },
     
 
+=======
+>>>>>>> bc8a00dbdd93b95d412cf1e74c59d15ef66a97ea
 }

@@ -20,20 +20,7 @@
             <jsp:include page="header.jsp"/>
         </div>
 
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
-                    </div>
-                    <div class="modal-body" id="myModalMessage">
-                        <p>This is a small modal.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="myModalFormulario" role="dialog">
+        <div class="modal fade" id="myModalRoute" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -111,9 +98,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-
-                    <table class="table table-hover table-condensed" id="tableRoute"></table>
+                  <div class="container-fluid table-responsive" id="typeAirlineReturn">
+                        <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>                    </div>
                 </div>
             </div>
         </div>
