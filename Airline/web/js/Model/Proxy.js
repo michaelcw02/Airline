@@ -114,7 +114,7 @@ Proxy.getAllTypeAirline = (callback) => {
             action: "getAllTypeAirplane"
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar los descuentos de la base de datos");
+            alert("Se presento un error a la hora de cargar los tipos de avión de la base de datos");
         },
         success: (data) => {
             console.log(data);

@@ -96,9 +96,9 @@
         <div class="container footer-container">
             <jsp:include page="footer.jsp"/>
         </div>
-
-        <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+       
 
 </body>
 

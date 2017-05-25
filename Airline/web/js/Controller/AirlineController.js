@@ -81,6 +81,7 @@ AirlineController.prototype = {
     },
     getAllTypeAirline: function (callback) {
         Proxy.getAllTypeAirline((data) => {
+            Storage.store('getAllTypeAirline', data);
             callback(data);
         });
     },

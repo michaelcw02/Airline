@@ -8,6 +8,11 @@ AirplaneController.prototype = {
         this.view = view;
         this.airlineController = new AirlineController();
     },
+    loadTypeAirplanes: function () {
+        this.airlineController.getAllTypeAirline((results) => {
+            fillWithTypeAirplanes(this.view.$('#typeAirplane'), results);
+        });
+    },
     getAllAirplane: function (callback) {
         this.airlineController.getAllAirline((result) => {
             callback(result);
@@ -26,8 +31,8 @@ AirplaneController.prototype = {
             row.append($("<th><b>ACTION</th>"));
             var row = $("<tr />");
             $("#tableAirplane").append(row);
-            row.append($("<td>" + jsonResults.id_airplane + "</td>"));
-            row.append($("<td>" + jsonResults.type_airplane + "</td>"));
+            row.append($("<td>" + jsonResults.idAirplane + "</td>"));
+            row.append($("<td>" + jsonResults.typeairplane.typeAirline + "</td>"));
             row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'modify\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
@@ -58,4 +63,18 @@ function showResult($container, jsonAirplane) {
 
     $container.find('div.results').text(jsonAirplane);
     console.log(jsonAirplane);
+}
+
+function fillWithTypeAirplanes($select, typeAirplane) {
+    $select.find('option').remove().end();
+    // $select.append('<option value="0">Type of Airplane</option>');
+    for (let i in typeAirplane) {
+        let tAirplane = typeAirplane[i];
+        let element = '';
+        element += '<option value="' + tAirplane.typeAirline + '">';
+        element += '<span class=".h4">' + tAirplane.typeAirline + '</span></option>';
+        $(element).appendTo($select);
+    }
+    if (!$select.has('option').length > 1)
+        $select.append('<option value="undefined">No Type of Airplane</option>');
 }

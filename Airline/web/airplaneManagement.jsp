@@ -35,11 +35,13 @@
                                 <input type="text" class="form-control" id="identifier" autofocus="true" placeholder="Identifier">
                             </div>
 
-                            <div class="form-group" id="groupHour">
+                            <div class="form-group" id="groupTypeAirplane">
                                 <label for="typeAirplane">Type of Airplane</label>
-                                <input type="text" class="form-control" id="type_airplane" placeholder="Airplane" >
+                                <select class='form-control' id='typeAirplane'>
+                                    <option value="0">Type of Airplane</option>
+                                </select>
                             </div>
- 
+                            
                             <div class="form-group">
                                 <input type="hidden" value="addAirplane" id="airplaneAction"/>
                                 <button type="submit" class="btn btn-primary" id="send">Save</button>
@@ -103,6 +105,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
          <!-- MODEL -->
+        <script type="text/javascript" src="js/Model/TypeAirplane/TypeAirplane.js"></script>
         <script type="text/javascript" src="js/Model/Airplane/Airplane.js"></script>
         <script src="js/Model/Proxy.js" type="text/javascript"></script>
         <script src="js/Model/utils.js" type="text/javascript"></script>

@@ -39,7 +39,7 @@ public class TypeAirplaneDAO extends BaseDAO {
     public LinkedList<TypeAirplane> getAllTypeAirplane() {
         LinkedList<TypeAirplane> listaResultado = new LinkedList<>();
         try {
-            String query = "SELECT * FROM typeairline;";
+            String query = "SELECT * FROM typeairplane;";
             query = String.format(query);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
