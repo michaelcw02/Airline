@@ -7,9 +7,13 @@ function loadPage(event) {
 
 function addElementsProperties() {
     $("#send").click(() => controller.addAirplane());
-    $("#cancel").click(() => controller.cleanForm());
+    $("#cancel").click(function () {
+        controller.cleanForm();
+        $("#modalAirplane").modal("hide");
+    });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(() => controller.searchAirplane());
+    $("#btSearchAll").click(() => controller.getAllAirplane());
 }
 function searchAirplane() {
     controller.searchAirplane();

@@ -21,7 +21,6 @@
         <div class="container top-container">
             <jsp:include page="header.jsp"/>
         </div>
-<<<<<<< HEAD
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -34,11 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="myModalTypeAirplane" role="dialog">
-=======
-
         <div class="modal fade" id="modalTypeAirplane" role="dialog">
->>>>>>> e7f5208b89cf444a8b204e34de3e44dbfb24910d
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">

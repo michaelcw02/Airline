@@ -14,8 +14,30 @@ AirplaneController.prototype = {
         });
     },
     getAllAirplane: function (callback) {
-        this.airlineController.getAllAirline((result) => {
-            callback(result);
+        this.airlineController.getAllAirplane((results) => {
+            $("#tableAirplane").html("");
+            var head = $("<thead />");
+            var row = $("<tr/>");
+            head.append(row);
+            $("#tableAirplane").append(head);
+            row.append($("<th><b>IDENTIFIER</b></th>"));
+            row.append($("<th><b>TYPE OF AIRPLANE</b></th>"));
+            row.append($("<th><b>ACTION</th>"));
+            var row = $("<tr />");
+            for (let i in results) {
+                let airplane = results[i];
+                var row = $("<tr/>");
+                $("#tableTypeAirplane").append(row);
+                row.append($("<td>" + airplane.typeAirline + "</td>"));
+                row.append($("<td>" + airplane.year + "</td>"));
+                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="">' +
+                        '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                        '</button>' +
+                        '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + results.typeAirline + '\');">' +
+                        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+                        '</button></td>'));
+            }
+
         });
     },
     searchAirplane: function () {
@@ -67,7 +89,7 @@ function showResult($container, jsonAirplane) {
 
 function fillWithTypeAirplanes($select, typeAirplane) {
     $select.find('option').remove().end();
-    // $select.append('<option value="0">Type of Airplane</option>');
+    $select.append('<option value="0">-</option>');
     for (let i in typeAirplane) {
         let tAirplane = typeAirplane[i];
         let element = '';

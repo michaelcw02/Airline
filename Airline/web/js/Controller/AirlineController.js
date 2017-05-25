@@ -116,7 +116,12 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-    
+    getAllAirplane: function (callback) {
+        Proxy.getAllAirplanes(data) => {
+            Storage.store('getAllAirplane', data);
+            callback(data);
+        });
+    },
     addAirplane: function (identifier ,type_airline) {
         Proxy.addAirplane(identifier, type_airline);
         //, (data) => {

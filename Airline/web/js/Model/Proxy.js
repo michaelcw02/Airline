@@ -232,6 +232,25 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         dataType: "json"
     }); 
 }
+
+Proxy.getAllAirplanes = (callback) => {
+    $.ajax({
+        url: 'AirplaneServlet',
+        data: {
+            action: "getAllAirplane"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred in the loading of airplane");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+
+}
 Proxy.searchTripByCode = (idTrip, callback) => {
     $.ajax({
         url: 'TripsServlet',
