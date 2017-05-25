@@ -119,17 +119,17 @@ IndexController.prototype = {
     showFlightsResults: (jsonResults) => {
         let outboundFlights = jsonResults.outboundFlights;
         let returnFlights = jsonResults.returnFlights;
-        $('.outbound-flights-div').hide();
-        $('.return-flights-div').hide();
+        $('.outbound-flights-div').fadeOut();
+        $('.return-flights-div').fadeOut();
 
         if (outboundFlights != undefined) {
             showResult($('#outbound-flights'), outboundFlights);
-            $('.outbound-flights-div').show();
+            $('.outbound-flights-div').fadeIn();
             toDataTable($('.outbound-flights-table'));
         }
         if (returnFlights != undefined) {
             showResult($('#return-flights'), returnFlights);
-            $('.return-flights-div').show();
+            $('.return-flights-div').fadeIn();
             toDataTable($('.return-flights-table'));
         }
     },
@@ -154,6 +154,22 @@ IndexController.prototype = {
                 this.view.addListenersButtons(idButton, (i + 1));
             }
     },
+    showFlightDetail: function(flightNum, mode) {
+        this.airlineController.retrieveSearchFlights((results) => {
+            let flight;
+            if (mode === 'out') 
+                flight = filterFlightByNum(results.outboundFlights, flightNum);
+            if (mode === 'in')
+                flight = filterFlightByNum(results.returnFlights, flightNum);
+            if(flight !== undefined) {
+                let element = '';
+                
+                
+                //modal settings
+                showModal('flightDetail', 'Flight Information', element);
+            }
+        })
+    }
 }
 
 
@@ -167,7 +183,6 @@ function showResult($table, jsonFlights) {
 
 function toList($table, flight) {
     var trip = flight.trip;
-    console.log(flight);
     var tr = $('<tr></tr>', {
         "id": flight.flightNum,
         "data-toggle": "modal",
@@ -218,6 +233,10 @@ function isBlank(element) {
     if (!element.val())
         return true;
     return false;
+}
+
+function filterFlightByNum(flights, flightNum) {
+    return flights.filter( (f) => { return (f.flightNum === flightNum); } );
 }
 
 //NOT IN USE

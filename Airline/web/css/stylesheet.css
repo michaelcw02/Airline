@@ -338,3 +338,9 @@ article hr {
 .return-flights-div {
     display: none;
 }
+#flight-detail, 
+#modalRoute,
+#modalTypeAirplane,
+#modalAirplane{
+    z-index: 6000 !important;
+}

@@ -19,7 +19,7 @@ public class AirplaneDAO extends BaseDAO {
     public void addTypeAirplane(Airplane airplane) throws Exception {
         String query = "INSERT INTO airplane VALUES ('%s', '%s');";
         query = String.format(query, airplane.getIdAirplane(),
-                airplane.getTypeairplane().getTypeAirline()
+                airplane.getTypeAirplane().getTypeAirline()
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);

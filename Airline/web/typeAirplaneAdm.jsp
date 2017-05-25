@@ -13,9 +13,7 @@
         <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="css/stylesheetAdm.css">
+        <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="stylesheet" href="css/hover.css">
 
     </head>
@@ -23,6 +21,7 @@
         <div class="container top-container">
             <jsp:include page="header.jsp"/>
         </div>
+<<<<<<< HEAD
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -36,6 +35,10 @@
             </div>
         </div>
         <div class="modal fade" id="myModalTypeAirplane" role="dialog">
+=======
+
+        <div class="modal fade" id="modalTypeAirplane" role="dialog">
+>>>>>>> e7f5208b89cf444a8b204e34de3e44dbfb24910d
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -95,7 +98,7 @@
                 <div class="panel-heading"><h3>Type Airplane Management</h3></div>
                 <div class="panel-body">
                     <center>
-                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
+                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#modalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
                     </center><br>
                     <div class="col-sm-12">
                         <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">
@@ -128,6 +131,8 @@
 
 
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <!-- MODEL -->
         <script type="text/javascript" src="js/Model/TypeAirplane/TypeAirplane.js"></script>
         <!-- NEW -->

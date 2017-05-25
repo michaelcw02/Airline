@@ -63,9 +63,9 @@ AirlineController.prototype = {
         if (results.codeCityFromTo == (codeCityFrom + ' - ' + codeCityTo))
             return results.results;
     },
-    retrieveSearchFlights: function () {
+    retrieveSearchFlights: function (callback) {
         let results = Storage.retrieve('searchFlights');
-        return results.results;
+        callback(results);
     },
     findTrip: function (codeCityFrom, codeCityTo) {
         let trip = this.trips().filter((trip) => {
@@ -81,6 +81,7 @@ AirlineController.prototype = {
     },
     getAllTypeAirline: function (callback) {
         Proxy.getAllTypeAirline((data) => {
+            Storage.store('getAllTypeAirline', data);
             callback(data);
         });
     },
@@ -102,5 +103,24 @@ AirlineController.prototype = {
             Storage.store('searchTripByCode', data);
             callback(data);
         });
+    },
+    searchFlightByNum: function (flightNum, callback) {
+        Proxy.searchFlightByNum(flightNum, (data) => {
+            
+            callback(data);
+        });
+    },
+    searchAirplane: function (airplane,callback) {
+        Proxy.searchForAirplane(airplane, (data) => {
+            Storage.store('searchAirplane', data);
+            callback(data);
+        });
+    },
+    
+    addAirplane: function (identifier ,type_airline) {
+        Proxy.addAirplane(identifier, type_airline);
+        //, (data) => {
+        //callback(data);
+        //});
     },
 }

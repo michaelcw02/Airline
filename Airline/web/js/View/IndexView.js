@@ -5,6 +5,7 @@ function loadPage() {
     controller.loadCities();
     addElementsProperties();
     controller.showCarousel();
+    $('#flight-detail').modal();
 }
 
 function addElementsProperties() {
@@ -27,8 +28,8 @@ function addElementsProperties() {
 
     $("#departing").change(() => controller.setMinReturnDate());
 
-    $('#btnRoundTrip').click(() => $("#returning").show());
-    $('#btnOneWay').click(() => $("#returning").hide());
+    $('#btnRoundTrip').click(() => $("#returning").fadeIn());
+    $('#btnOneWay').click(() => $("#returning").fadeOut());
 
     $('#btnDecrease').click(() => controller.decreaseAdults());
     $('#btnIncrease').click(() => controller.increaseAdults());
@@ -42,6 +43,14 @@ function addElementsProperties() {
 
 function addListenersButtons(idButton, num) {
     $(idButton).click(() => controller.pageButtonsHandler(num));
+}
+function addListenerTable() {
+    $('#outbound-flights').on('click', 'tr', () => {
+        controller.showFlightDetail(this.id, 'out');
+    });
+    $('#return-flights').on('click', 'tr', () => {
+        controller.showFlightDetail(this.id, 'in');
+    });
 }
 
 function searchFlights() {
