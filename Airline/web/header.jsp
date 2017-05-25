@@ -51,7 +51,7 @@
                                     </li>
                                     <ul>
                                         <li class="text-white"> <h5> <a href="typeAirplaneAdm.jsp">Type Airplanes</a> </h5> </li>
-                                        <li class="text-white"> <h5> <a href="airplaneManagement.jsp">Airplanes</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="airplaneAdm.jsp">Airplanes</a></h5> </li>
                                         <li class="text-white"> <h5> <a href="scheduleManagement.jsp">Schedules</a></h5> </li>
                                         <li class="text-white"> <h5> <a href="routeAdm.jsp">Routes</a></h5> </li>
                                     </ul>

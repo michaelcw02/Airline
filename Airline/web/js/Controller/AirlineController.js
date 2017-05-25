@@ -85,6 +85,7 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+     
     addTypeAirplane: function (type_airline, year, brand, rows, seatsRow) {
         Proxy.addTypeAirplane(type_airline, year, brand, rows, seatsRow);
         //, (data) => {

@@ -10,8 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>typeAirplaneAdm</title>
+        <link rel="icon" href="images/airplane-4-48.png" type="image/png">
+
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/stylesheetAdm.css">
+        <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="stylesheet" href="css/hover.css">
 
     </head>
@@ -19,8 +21,24 @@
         <div class="container top-container">
             <jsp:include page="header.jsp"/>
         </div>
-
+<<<<<<< HEAD
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
+                    </div>
+                    <div class="modal-body" id="myModalMessage">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="myModalTypeAirplane" role="dialog">
+=======
+
+        <div class="modal fade" id="modalTypeAirplane" role="dialog">
+>>>>>>> e7f5208b89cf444a8b204e34de3e44dbfb24910d
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -45,18 +63,18 @@
                             </div>
 
                             <div class="form-group" id="groupRows">
-                                <label for="rows">Rows quantity:</label>
-                                <select class="form-control" id="rows">
+                                <label for="row">Rows quantity:</label>
+                                <input type="number" class="form-control" id="rows" placeholder="Row" required="true">
+                            </div>
+
+                            <div class="form-group" id="groupSeatsRow">
+                                <label for="seatsRow">Seats per row:</label>
+                                <select class="form-control" id="seatsRow">
                                     <option value="6" selected="selected">6</option>
                                     <option value="7">7</option>
                                     <option value="8">8</option>
                                     <option value="9">9</option>
                                 </select>
-                            </div>
-
-                            <div class="form-group" id="groupSeatsRow">
-                                <label for="seatsRow">Seats per row:</label>
-                                <input type="number" class="form-control" id="seatsRow" placeholder="SeatsPerRow" required="true">
                             </div>
 
                             <div class="form-group">
@@ -80,7 +98,7 @@
                 <div class="panel-heading"><h3>Type Airplane Management</h3></div>
                 <div class="panel-body">
                     <center>
-                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
+                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#modalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
                     </center><br>
                     <div class="col-sm-12">
                         <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">
@@ -91,16 +109,22 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="search" placeholder="Enter the identifier">
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <button type="button" class="btn btn-info centered"  id="btSearch">            
                                         Search <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-info centered"  id="btSearchAll">            
+                                        Show All <span class="glyphicon glyphicon-list-alt"></span>
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="container-fluid table-responsive" id="typeAirlineReturn">
-                        <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>                    </div>
+                        <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>                   
+                    </div>
                 </div>
             </div>
         </div>

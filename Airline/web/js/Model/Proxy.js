@@ -97,7 +97,7 @@ Proxy.searchForTypeAirplane = (type_airline, callback) => {
             type_airline: type_airline
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("This type of airplane doesn´t exist");
+            showModal("myModal", "ERROR", "This type of airplane doesn´t exist");
         },
         success: (data) => {
             console.log(data);
@@ -114,7 +114,7 @@ Proxy.getAllTypeAirline = (callback) => {
             action: "getAllTypeAirplane"
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar los tipos de avión de la base de datos");
+            showModal("myModal", "ERROR", "An error occurred in the loading of type of airplane");
         },
         success: (data) => {
             console.log(data);
@@ -138,13 +138,11 @@ Proxy.addTypeAirplane = (type_airline, year, brand, rows, seatsRow) => {
             seats_per_row: seatsRow
         },
         error: function () {
-            alert("Se presento un error a la hora de insertar el tipo de avion a la base de datos");
-
+            showModal("myModal", "ERROR", "An error occurred when a type of airplane was inserted");
         },
         success: (data) => {
             console.log(data);
-            alert("Se inserto el tipo de avion a la base de datos");
-            //callback(data);
+            showModal("myModal", "Status", "The type of airplane was inserted into the database");
         },
         type: 'POST',
         dataType: "json"
@@ -159,13 +157,11 @@ Proxy.deleteTypeAirplane = (type_airline) => {
             type_airline: type_airline
         },
         error: function () {
-            alert("Se presento un error a la hora de borrar el tipo de avion a la base de datos");
-
+            showModal("myModal", "ERROR", "An error occurred when a type of airplane was deleted");
         },
         success: (data) => {
             console.log(data);
-            alert("Se borro el tipo de avion a la base de datos");
-            //callback(data);
+            showModal("myModal", "Status", "The type of airplane was deleted of the database");
         },
         type: 'POST',
         dataType: "json"
@@ -184,13 +180,11 @@ Proxy.updateTypeAirplane = (type_airline, year, brand, rows, seatsRow) => {
             seats_per_row: seatsRow
         },
         error: function () {
-            alert("Se presento un error a la hora de modificar el tipo de avion a la base de datos");
-
+            showModal("myModal", "ERROR", "An error occurred when a type of airplane was modified");
         },
         success: (data) => {
             console.log(data);
-            alert("Se modifico el tipo de avion a la base de datos");
-            //callback(data);
+            showModal("myModal", "Status", "The type of airplane was updated in the database");
         },
         type: 'POST',
         dataType: "json"
@@ -246,7 +240,7 @@ Proxy.searchTripByCode = (idTrip, callback) => {
             idTrip: idTrip
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("This route doesn´t exist");
+            showModal("myModal", "ERROR", "This route doesn´t exist");
         },
         success: (data) => {
             console.log(data);
