@@ -154,8 +154,19 @@ IndexController.prototype = {
                 this.view.addListenersButtons(idButton, (i + 1));
             }
     },
-    showFlightDetail: function(flightNum) {
-        
+    showFlightDetail: function(flightNum, mode) {
+        this.airlineController.retrieveSearchFlights((results) => {
+            let flight;
+            if (mode === 'out') 
+                flight = filterFlightByNum(results.outboundFlights, flightNum);
+            if (mode === 'in')
+                flight = filterFlightByNum(results.returnFlights, flightNum);
+            if(flight !== undefined) {
+                let element = '';
+                //modal settings
+                showModal('flightDetail', 'Flight Information', element);
+            }
+        })
     }
 }
 
@@ -220,6 +231,10 @@ function isBlank(element) {
     if (!element.val())
         return true;
     return false;
+}
+
+function filterFlightByNum(flights, flightNum) {
+    return flights.filter( (f) => { return (f.flightNum === flightNum); } );
 }
 
 //NOT IN USE

@@ -63,9 +63,9 @@ AirlineController.prototype = {
         if (results.codeCityFromTo == (codeCityFrom + ' - ' + codeCityTo))
             return results.results;
     },
-    retrieveSearchFlights: function () {
+    retrieveSearchFlights: function (callback) {
         let results = Storage.retrieve('searchFlights');
-        return results.results;
+        callback(results);
     },
     findTrip: function (codeCityFrom, codeCityTo) {
         let trip = this.trips().filter((trip) => {
@@ -99,6 +99,12 @@ AirlineController.prototype = {
     getTripByCode: function (idTrip, callback) {
         Proxy.searchTripByCode(idTrip, (data) => {
             Storage.store('searchTripByCode', data);
+            callback(data);
+        });
+    },
+    searchFlightByNum: function (flightNum, callback) {
+        Proxy.searchFlightByNum(flightNum, (data) => {
+            
             callback(data);
         });
     },

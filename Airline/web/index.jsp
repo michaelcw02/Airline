@@ -161,10 +161,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="flight-detail-title">Modal Header</h4>
+                    <h3 class="modal-title" id="flightDetailTitle">Flight Detail</h3>
                 </div>
-                <div class="modal-body" id="flight-detail-message">
-                    <p>This is a small modal.</p>
+                <div class="modal-body" id="flightDetailMessage">
+                    <div class="container-fluid">
+                        <h5>LALALALALLALALALALALLALALALAAL</h5>
+                    </div>
                 </div>
             </div>
         </div>

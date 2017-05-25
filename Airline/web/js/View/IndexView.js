@@ -45,7 +45,10 @@ function addListenersButtons(idButton, num) {
 }
 function addListenerTable() {
     $('#outbound-flights').on('click', 'tr', () => {
-        
+        controller.showFlightDetail(this.id, 'out');
+    });
+    $('#return-flights').on('click', 'tr', () => {
+        controller.showFlightDetail(this.id, 'in');
     });
 }
 

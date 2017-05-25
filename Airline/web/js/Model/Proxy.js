@@ -214,4 +214,22 @@ Proxy.searchTripByCode = (idTrip, callback) => {
         dataType: "json"
     });
 }
+Proxy.searchFlightByNum = (flightNum, callback) => {
+    $.ajax({
+        url: 'FlightsServlet',
+        data: {
+            action: "searchFlightByNum",
+            flightNum: flightNum
+        },
+        error: () => { //si existe un error en la respuesta del ajax
+            alert("This flight doesn´t exist");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 
+}
