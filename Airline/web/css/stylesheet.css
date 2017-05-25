@@ -338,3 +338,6 @@ article hr {
 .return-flights-div {
     display: none;
 }
+#flight-detail {
+    z-index: 6000 !important;
+}

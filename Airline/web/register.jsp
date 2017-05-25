@@ -158,8 +158,8 @@
     </div>
 
     <!-- LIBRARIES -->
-    <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts"></script>
     <!-- MODEL -->

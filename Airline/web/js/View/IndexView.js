@@ -5,6 +5,7 @@ function loadPage() {
     controller.loadCities();
     addElementsProperties();
     controller.showCarousel();
+    $('#flight-detail').modal();
 }
 
 function addElementsProperties() {

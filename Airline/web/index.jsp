@@ -165,7 +165,7 @@
                 </div>
                 <div class="modal-body" id="flightDetailMessage">
                     <div class="container-fluid">
-                        <h5>LALALALALLALALALALALLALALALAAL</h5>
+                        <h4>LALALALALA</h4>
                     </div>
                 </div>
             </div>

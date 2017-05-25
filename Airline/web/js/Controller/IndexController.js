@@ -163,6 +163,8 @@ IndexController.prototype = {
                 flight = filterFlightByNum(results.returnFlights, flightNum);
             if(flight !== undefined) {
                 let element = '';
+                
+                
                 //modal settings
                 showModal('flightDetail', 'Flight Information', element);
             }
