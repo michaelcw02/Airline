@@ -90,23 +90,18 @@ AirlineController.prototype = {
         //callback(data);
         //});
     },
-<<<<<<< HEAD
-    
-=======
     deleteTypeAirplane: function (type_airline) {
         Proxy.deleteTypeAirplane(type_airline);
     },
     updateTypeAirplane: function (type_airline, year, brand, rows, seatsRow) {
         Proxy.updateTypeAirplane(type_airline, year, brand, rows, seatsRow);
     },
->>>>>>> bc8a00dbdd93b95d412cf1e74c59d15ef66a97ea
     getTripByCode: function (idTrip, callback) {
         Proxy.searchTripByCode(idTrip, (data) => {
             Storage.store('searchTripByCode', data);
             callback(data);
         });
     },
-<<<<<<< HEAD
     searchAirplane: function (airplane,callback) {
         Proxy.searchForAirplane(airplane, (data) => {
             Storage.store('searchAirplane', data);
@@ -120,8 +115,4 @@ AirlineController.prototype = {
         //callback(data);
         //});
     },
-    
-
-=======
->>>>>>> bc8a00dbdd93b95d412cf1e74c59d15ef66a97ea
 }
