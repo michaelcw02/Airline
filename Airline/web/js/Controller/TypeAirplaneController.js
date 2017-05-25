@@ -115,6 +115,7 @@ function showResult($container, jsonTypeAirplane) {
 }
 function showTypeAirplaneForModify(typeAirplane) {
     showModal("myModalTypeAirplane");
+    console.log(typeAirplane);
     $("#identifier").attr('readonly', 'readonly');
     $("#identifier").val(typeAirplane.typeAirline);
     $("#year").val(typeAirplane.year);
