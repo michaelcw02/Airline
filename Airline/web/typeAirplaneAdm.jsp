@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>typeAirplaneAdm</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/stylesheetAdm.css">
+        <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="stylesheet" href="css/hover.css">
 
     </head>
@@ -20,7 +20,7 @@
             <jsp:include page="header.jsp"/>
         </div>
 
-        <div class="modal fade" id="myModalTypeAirplane" role="dialog">
+        <div class="modal fade" id="modalTypeAirplane" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -80,7 +80,7 @@
                 <div class="panel-heading"><h3>Type Airplane Management</h3></div>
                 <div class="panel-body">
                     <center>
-                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
+                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#modalTypeAirplane" id="btShowForm">Insert Type Airplane</button>
                     </center><br>
                     <div class="col-sm-12">
                         <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">

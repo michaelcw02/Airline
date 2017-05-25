@@ -13,14 +13,14 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="css/stylesheetAdm.css">
+        <link rel="stylesheet" href="css/stylesheet.css">
     </head>
     <body>
         <div class="container top-container">
             <jsp:include page="header.jsp"/>
         </div>
 
-        <div class="modal fade" id="myModalRoute" role="dialog">
+        <div class="modal fade" id="modalRoute" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -80,7 +80,7 @@
                 <div class="panel-heading"><h3>Route Management</h3></div>
                 <div class="panel-body">
                     <center>
-                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalFormulario" id="btMostarForm">Insert Route</button>
+                        <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#modalRoute" id="btMostarForm">Insert Route</button>
                     </center><br>
                     <div class="col-sm-12">
                         <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">

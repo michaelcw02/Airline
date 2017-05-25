@@ -14,7 +14,7 @@
     <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/stylesheetAdm.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/hover.css">
 </head>
 
@@ -23,7 +23,7 @@
         <jsp:include page="header.jsp" />
     </div>
 
-    <div class="modal fade" id="myModalFormulario" role="dialog">
+    <div class="modal fade" id="modalAirplane" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -76,7 +76,7 @@
             </div>
             <div class="panel-body">
                 <center>
-                    <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#myModalFormulario" id="btShowForm">Insert information</button>
+                    <button type="button" class="btn btn-primary centered" data-toggle="modal" data-target="#modalAirplane" id="btShowForm">Insert information</button>
                 </center><br>
                 <div class="col-sm-12">
                     <form role="form" onsubmit="return false;" id="formAiplanes" class="form-horizontal centered">
@@ -116,7 +116,7 @@
     <script type="text/javascript" src="js/Model/Airplane/Airplane.js"></script>
     <script type="text/javascript" src="js/Controller/Storage.js"></script>
     <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
-    <script type="text/javascript" src="js/Controller/AdministrationController.js"></script>
+    <script type="text/javascript" src="js/Controller/AirplaneController.js"></script>
     <!-- VIEW -->
     <script type="text/javascript" src="js/View/AirplaneView.js"></script>
 </body>
