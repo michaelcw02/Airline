@@ -18,6 +18,7 @@ IndexController.prototype = {
         this.airlineController.getAllDiscounts((results) => {
             for (let i in results) {
                 let flight = results[i];
+                console.log(flight);
                 let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
                 $(element).appendTo(this.view.$('.carousel-indicators'));
                 element = '<div class="item"><img class="img-rounded" src="' + flight.discountImagePath + '">';

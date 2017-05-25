@@ -41,6 +41,7 @@ public class BaseDAO {
             String cityFromCode = rs.getString("departure_city");
             String cityToCode = rs.getString("arrival_city");
             int departureTime = rs.getInt("departure_time");
+            String departureDay = rs.getString("departure_day");
             City cityFrom;
             City cityTo;
             try {
@@ -50,7 +51,7 @@ public class BaseDAO {
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in cities of trip", ex);
             }
-            return new Trip(idTrip, cityFrom, cityTo, duration, distance, departureTime);
+            return new Trip(idTrip, cityFrom, cityTo, duration, distance, departureTime, departureDay);
         } catch (SQLException ex) {
             return null;
         }
