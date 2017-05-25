@@ -340,7 +340,8 @@ article hr {
 }
 #flight-detail, 
 #modalRoute,
-#modalTypeAirplane,
+#myModalTypeAirplane,
+#myModal,
 #modalAirplane{
     z-index: 6000 !important;
 }

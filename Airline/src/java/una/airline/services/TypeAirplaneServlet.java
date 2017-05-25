@@ -49,8 +49,8 @@ public class TypeAirplaneServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "getAllTypeAirplane":
-                     List<TypeAirplane> list;
-            list = typeAirBL.getAllTypeAirplane();
+                    List<TypeAirplane> list;
+                    list = typeAirBL.getAllTypeAirplane();
                     json = new Gson().toJson(list);
                     out.print(json);
                     break;
@@ -68,9 +68,9 @@ public class TypeAirplaneServlet extends HttpServlet {
                     ta.setTypeAirline(request.getParameter("type_airline"));
                     ta.setYear(request.getParameter("year"));
                     ta.setBrand(request.getParameter("brand"));
-                    ta.setQtyOfSeats(Integer.parseInt(request.getParameter("qty_of_seats")));
                     ta.setQtyOfRows(Integer.parseInt(request.getParameter("qty_of_rows")));
                     ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
+                    ta.calculateQtyOfSeats();
                     typeAirBL.updateTypeAirplane(ta);
                     out.print("{\"data\": \"C~La persona fue modificada correctamente\"}");
                     break;
