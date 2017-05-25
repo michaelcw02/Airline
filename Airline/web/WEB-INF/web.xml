@@ -25,6 +25,10 @@
         <servlet-name>TypeAirplaneServlet</servlet-name>
         <servlet-class>una.airline.services.TypeAirplaneServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AirplaneServlet</servlet-name>
+        <servlet-class>una.airline.services.AirplaneServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CitiesServlet</servlet-name>
         <url-pattern>/CitiesServlet</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>TypeAirplaneServlet</servlet-name>
         <url-pattern>/TypeAirplaneServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AirplaneServlet</servlet-name>
+        <url-pattern>/AirplaneServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

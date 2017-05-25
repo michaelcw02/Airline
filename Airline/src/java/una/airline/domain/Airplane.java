@@ -30,11 +30,11 @@ public class Airplane implements java.io.Serializable {
         this.idAirplane = idAirplane;
     }
 
-    public TypeAirplane getTypeairplane() {
+    public TypeAirplane getTypeAirplane() {
         return this.typeairplane;
     }
 
-    public void setTypeairplane(TypeAirplane typeairplane) {
+    public void setTypeAirplane(TypeAirplane typeairplane) {
         this.typeairplane = typeairplane;
     }
 

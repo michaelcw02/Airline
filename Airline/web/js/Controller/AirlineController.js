@@ -81,6 +81,7 @@ AirlineController.prototype = {
     },
     getAllTypeAirline: function (callback) {
         Proxy.getAllTypeAirline((data) => {
+            Storage.store('getAllTypeAirline', data);
             callback(data);
         });
     },
@@ -107,5 +108,18 @@ AirlineController.prototype = {
             
             callback(data);
         });
+    },
+    searchAirplane: function (airplane,callback) {
+        Proxy.searchForAirplane(airplane, (data) => {
+            Storage.store('searchAirplane', data);
+            callback(data);
+        });
+    },
+    
+    addAirplane: function (identifier ,type_airline) {
+        Proxy.addAirplane(identifier, type_airline);
+        //, (data) => {
+        //callback(data);
+        //});
     },
 }
