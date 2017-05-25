@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`trip` (
   `departure_city` VARCHAR(3) NOT NULL,
   `arrival_city` VARCHAR(3) NOT NULL,
   `departure_time` INT NOT NULL,
+  `departure_day` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id_trip`),
   INDEX `departure_city_idx` (`departure_city` ASC),
   INDEX `arrival_city_idx` (`arrival_city` ASC),
@@ -256,24 +257,24 @@ INSERT INTO city (`code`, `name`, `country`) VALUES ('LHR', 'London', 'United Ki
 INSERT INTO city (`code`, `name`, `country`) VALUES ('NRT', 'Narita', 'Japan');
 INSERT INTO city (`code`, `name`, `country`) VALUES ('CCS', 'Caracas', 'Venezuela');
 
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('344', '383', 'SJO', 'ATL', '4');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('344', '383', 'ATL', 'SJO', '10');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('222', '379', 'SJO', 'BOS', '5');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('222', '379', 'BOS', 'SJO', '9');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('429', '865', 'SJO', 'CCS', '6');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('429', '865', 'CCS', 'SJO', '14');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('318', '743', 'SJO', 'JFK', '7');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('318', '743', 'JFK', 'SJO', '13');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('301', '739', 'SJO', 'LAX', '8');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('301', '739', 'LAX', 'SJO', '14');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('444', '653', 'SJO', 'LHR', '9');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('444', '653', 'LHR', 'SJO', '17');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('303', '798', 'SJO', 'MIA', '10');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('303', '798', 'MIA', 'SJO', '16');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('351', '1078', 'SJO', 'NRT', '11');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('351', '1078', 'NRT', 'SJO', '17');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('293', '894', 'SJO', 'TPE', '13');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`) VALUES ('293', '894', 'TPE', 'SJO', '18');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('344', '383', 'SJO', 'ATL', '4', 'MONDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('344', '383', 'ATL', 'SJO', '10', 'TUESDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('222', '379', 'SJO', 'BOS', '5', 'WEDNESDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('222', '379', 'BOS', 'SJO', '9', 'THURSDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('429', '865', 'SJO', 'CCS', '6', 'FRIDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('429', '865', 'CCS', 'SJO', '14', 'SATURDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('318', '743', 'SJO', 'JFK', '7', 'SUNDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('318', '743', 'JFK', 'SJO', '13', 'MONDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('301', '739', 'SJO', 'LAX', '8', 'TUESDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('301', '739', 'LAX', 'SJO', '14', 'WEDNESDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('444', '653', 'SJO', 'LHR', '9', 'THURSDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('444', '653', 'LHR', 'SJO', '17', 'FRIDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('303', '798', 'SJO', 'MIA', '10', 'SATURDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('303', '798', 'MIA', 'SJO', '16', 'SUNDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('351', '1078', 'SJO', 'NRT', '11', 'MONDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('351', '1078', 'NRT', 'SJO', '17', 'TUESDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('293', '894', 'SJO', 'TPE', '13', 'WEDNESDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('293', '894', 'TPE', 'SJO', '18', 'THURSDAY');
 
 
 INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST001', 'ASA-001', 1, 500, '2017-07-01', 800, 0, 'None', 'None');
