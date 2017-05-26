@@ -82,7 +82,7 @@
                     <form role="form" onsubmit="return false;" id="formAiplanes" class="form-horizontal centered">
                         <div class="form-group" id="groupIdentificador">
                             <div class="col-sm-4" style="text-align: center; vertical-align: middle;">
-                                <p><b>Search airplane per indentifier:</b></p>
+                                <h4 class="bold">Search airplane per indentifier: </h4>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="search" placeholder="Enter the identifier">
