@@ -13,11 +13,22 @@
         <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="stylesheet" href="css/hover.css">
     </head>
     <body>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
+                    </div>
+                    <div class="modal-body" id="myModalMessage">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container top-container">
             <jsp:include page="header.jsp"/>
         </div>
@@ -46,19 +57,36 @@
                                 <input type="text" class="form-control" id="duration" placeholder="Duration">
                             </div>
 
-                            <div class="form-group" id="departureCity">
+                            <div class="form-group" id="groupDepartureCity">
                                 <label for="departureCity">Departure City:</label>
-                                <input type="text" class="form-control" id="departureCity" placeholder="Id departure city">
+                                <select class='form-control' id='departureCity'>
+                                    <option value="0">Departure city</option>
+                                </select>
                             </div>
 
-                            <div class="form-group" id="arrivalCity">
+                            <div class="form-group" id="groupArrivalCity">
                                 <label for="arrivalCity">Arrival City:</label>
-                                <input type="text" class="form-control" id="arrivalCity" placeholder="Id arrival city ">
+                                <select class='form-control' id='arrivalCity'>
+                                    <option value="0">Arrival city</option>
+                                </select>
                             </div>
 
                             <div class="form-group" id="departureTime">
                                 <label for="departureCity">Departure Time:</label>
                                 <input type="text" class="form-control" id="departureTime" placeholder="Departure time">
+                            </div>
+
+                            <div class="form-group" id="groupDepartureDay">
+                                <label for="departureDay">Departure day</label>
+                                <select class='form-control' id='departureDay'>
+                                    <option value="MONDAY" selected="selected">MONDAY</option>
+                                    <option value="TUESDAY">TUESDAY</option>
+                                    <option value="WEDNESDAY">WEDNESDAY</option>
+                                    <option value="THRUSDAY">THRUSDAY</option>
+                                    <option value="FRIDAY">FRIDAY</option>
+                                    <option value="SATURDAY">SATURDAY</option>
+                                    <option value="SUNDAY">SUNDAY</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -93,19 +121,28 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="search" placeholder="Enter the identifier">
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2">
                                     <button type="button" class="btn btn-info centered"  id="btSearch">            
                                         Search <span class="glyphicon glyphicon-search"></span>
                                     </button>
                                 </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-info centered"  id="btSearchAll">            
+                                        Show All <span class="glyphicon glyphicon-list-alt"></span>
+                                    </button>
+                                </div>
                             </div>
                         </form>
-                        <div class="container-fluid table-responsive" id="typeAirlineReturn">
-                            <table class="table table-hover table-condensed" id="tableTypeAirplane"></table>                    </div>
+                        <div class="container-fluid table-responsive" id="routeReturn">
+                            <table class="table table-hover table-condensed" id="tableRoute"></table>                    </div>
                     </div>
                 </div>
             </div>
 
+            <!-- LIBRARIES -->
+            <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+            <script type="text/javascript" src="js/bootstrap.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
             <!-- MODEL -->
             <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>
             <!-- NEW -->

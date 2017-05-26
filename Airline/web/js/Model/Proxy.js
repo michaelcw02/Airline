@@ -250,6 +250,25 @@ Proxy.searchTripByCode = (idTrip, callback) => {
         dataType: "json"
     });
 }
+Proxy.deleteTrip = (id_trip) => {
+
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "deleteTrip",
+            id_trip: id_trip
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a route was deleted");
+        },
+        success: (data) => {
+            console.log(data);
+            showModal("myModal", "Status", "The route was deleted of the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
 Proxy.searchFlightByNum = (flightNum, callback) => {
     $.ajax({
         url: 'FlightsServlet',

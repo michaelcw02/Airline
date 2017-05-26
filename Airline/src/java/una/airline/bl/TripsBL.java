@@ -14,19 +14,22 @@ import una.airline.domain.Trip;
  * @author michaelcw02
  */
 public class TripsBL {
-    
+
     TripDAO tripDAO;
 
     public TripsBL() {
         tripDAO = new TripDAO();
     }
-    
+
     public List<Trip> getAllTrips() {
         return tripDAO.getAllTrips();
     }
-    
+
     public Trip getTripByCode(int code) throws Exception {
         return tripDAO.getTripByCode(code);
     }
-    
+
+    public void deleteTrip(Trip trip) throws Exception {
+        tripDAO.deleteTrip(trip);
+    }
 }

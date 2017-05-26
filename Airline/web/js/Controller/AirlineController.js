@@ -85,7 +85,7 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-     
+
     addTypeAirplane: function (type_airline, year, brand, rows, seatsRow) {
         Proxy.addTypeAirplane(type_airline, year, brand, rows, seatsRow);
         //, (data) => {
@@ -104,20 +104,23 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+    deleteTrip: function (id_trip) {
+        Proxy.deleteTrip(id_trip);
+    },
     searchFlightByNum: function (flightNum, callback) {
         Proxy.searchFlightByNum(flightNum, (data) => {
-            
+
             callback(data);
         });
     },
-    searchAirplane: function (airplane,callback) {
+    searchAirplane: function (airplane, callback) {
         Proxy.searchForAirplane(airplane, (data) => {
             Storage.store('searchAirplane', data);
             callback(data);
         });
     },
-    
-    addAirplane: function (identifier ,type_airline) {
+
+    addAirplane: function (identifier, type_airline) {
         Proxy.addAirplane(identifier, type_airline);
         //, (data) => {
         //callback(data);

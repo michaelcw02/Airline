@@ -8,8 +8,8 @@ TypeAirplaneController.prototype = {
         this.view = view;
         this.airlineController = new AirlineController();
     },
-    getAllTypeAirline: function (callback) {
-        this.airlineController.getAllTypeAirline((results) => {
+    getAllTypeAirline: function () {
+        this.airlineController.getAllTypeAirline((jsonResults) => {
             $("#tableTypeAirplane").html("");
             var head = $("<thead />");
             var row = $("<tr/>");
@@ -20,11 +20,11 @@ TypeAirplaneController.prototype = {
             row.append($("<th><b>BRAND</b></th>"));
             row.append($("<th><b>QUANTITY OF SEATS</b></th>"));
             row.append($("<th><b>ROWS</b></th>"));
-            row.append($("<th><b>ROWS PER SEAT</th>"));
+            row.append($("<th><b>SEATS PER ROW</th>"));
             row.append($("<th><b>ACTION</th>"));
             var row = $("<tr/>");
-            for (let i in results) {
-                let typeAirplane = results[i];
+            for (let i in jsonResults) {
+                let typeAirplane = jsonResults[i];
                 var row = $("<tr/>");
                 $("#tableTypeAirplane").append(row);
                 row.append($("<td>" + typeAirplane.typeAirline + "</td>"));
@@ -33,10 +33,10 @@ TypeAirplaneController.prototype = {
                 row.append($("<td>" + typeAirplane.qtyOfSeats + "</td>"));
                 row.append($("<td>" + typeAirplane.qtyOfRows + "</td>"));
                 row.append($("<td>" + typeAirplane.seatsPerRow + "</td>"));
-                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="">' +
+                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showTypeAirplaneForModify(\'' + typeAirplane.typeAirline + '\',\'' + typeAirplane.year + '\',\'' + typeAirplane.brand + '\',\'' + typeAirplane.qtyOfRows + '\',\'' + typeAirplane.seatsPerRow + '\');">' +
                         '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                         '</button>' +
-                        '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + results.typeAirline + '\');">' +
+                        '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + typeAirplane.typeAirline + '\');">' +
                         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
                         '</button></td>'));
             }
@@ -56,7 +56,7 @@ TypeAirplaneController.prototype = {
             row.append($("<th><b>BRAND</b></th>"));
             row.append($("<th><b>QUANTITY OF SEATS</b></th>"));
             row.append($("<th><b>ROWS</b></th>"));
-            row.append($("<th><b>ROWS PER SEAT</th>"));
+            row.append($("<th><b>SEATS PER ROW</th>"));
             row.append($("<th><b>ACTION</th>"));
             var row = $("<tr/>");
             $("#tableTypeAirplane").append(row);
@@ -66,7 +66,38 @@ TypeAirplaneController.prototype = {
             row.append($("<td>" + jsonResults.qtyOfSeats + "</td>"));
             row.append($("<td>" + jsonResults.qtyOfRows + "</td>"));
             row.append($("<td>" + jsonResults.seatsPerRow + "</td>"));
-            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showTypeAirplaneForModify(\'' + jsonResults + '\');">' +
+            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showTypeAirplaneForModify(\'' + jsonResults.typeAirline + '\',\'' + jsonResults.year + '\',\'' + jsonResults.brand + '\',\'' + jsonResults.qtyOfRows + '\',\'' + jsonResults.seatsPerRow + '\');">' +
+                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + jsonResults.typeAirline + '\');">' +
+                    '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+                    '</button></td>'));
+        });
+    },
+    showTable: function(){
+        let type_airline = this.view.$('#identifier').val();
+        this.airlineController.searchTypeAirplane(type_airline, (jsonResults) => {
+            $("#tableTypeAirplane").html("");
+            var head = $("<thead />");
+            var row = $("<tr/>");
+            head.append(row);
+            $("#tableTypeAirplane").append(head);
+            row.append($("<th><b>IDENTIFIER</b></th>"));
+            row.append($("<th><b>YEAR</b></th>"));
+            row.append($("<th><b>BRAND</b></th>"));
+            row.append($("<th><b>QUANTITY OF SEATS</b></th>"));
+            row.append($("<th><b>ROWS</b></th>"));
+            row.append($("<th><b>SEATS PER ROW</th>"));
+            row.append($("<th><b>ACTION</th>"));
+            var row = $("<tr/>");
+            $("#tableTypeAirplane").append(row);
+            row.append($("<td>" + jsonResults.typeAirline + "</td>"));
+            row.append($("<td>" + jsonResults.year + "</td>"));
+            row.append($("<td>" + jsonResults.brand + "</td>"));
+            row.append($("<td>" + jsonResults.qtyOfSeats + "</td>"));
+            row.append($("<td>" + jsonResults.qtyOfRows + "</td>"));
+            row.append($("<td>" + jsonResults.seatsPerRow + "</td>"));
+            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showTypeAirplaneForModify(\'' + jsonResults.typeAirline + '\',\'' + jsonResults.year + '\',\'' + jsonResults.brand + '\',\'' + jsonResults.qtyOfRows + '\',\'' + jsonResults.seatsPerRow + '\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
                     '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + jsonResults.typeAirline + '\');">' +
@@ -83,6 +114,7 @@ TypeAirplaneController.prototype = {
             let seatsPerRow = this.view.$('#seatsRow').val();
             this.airlineController.addTypeAirplane(type_airplane, year, brand, rows, seatsPerRow);
             hideModal("myModalTypeAirplane");
+            $("#tableTypeAirplane").empty();
         }
     },
     cleanForm: () => {
@@ -91,9 +123,11 @@ TypeAirplaneController.prototype = {
         $("#typeAirplaneAction").val("addTypeAirplane");
         $('#formTypeAirplane').trigger("reset");
     },
+
     deleteTypeAirplane: function (typeAirline) {
         //verificar que no exista ningun avion ligado a el para poder eliminar
         this.airlineController.deleteTypeAirplane(typeAirline);
+        $("#tableTypeAirplane").empty();
     },
     updateTypeAirplane: function () {
         let type_airplane = this.view.$('#identifier').val();
@@ -103,9 +137,19 @@ TypeAirplaneController.prototype = {
         let seatsPerRow = this.view.$('#seatsRow').val();
         this.airlineController.updateTypeAirplane(type_airplane, year, brand, rows, seatsPerRow);
         hideModal("myModalTypeAirplane");
+        $('#typeAirplaneAction').val("addTypeAirplane");
+        $("#tableTypeAirplane").empty();
+    },
+    sendAction: function () {
+        let verify = $('#typeAirplaneAction').val();
+        console.log(verify);
+        if (verify == "updateTypeAirplane") {
+            this.updateTypeAirplane();
+        } else {
+            this.addTypeAirplane();
+        }
     },
 }
-
 function showResult($container, jsonTypeAirplane) {
     $container.empty();
     $container.show();
@@ -113,15 +157,15 @@ function showResult($container, jsonTypeAirplane) {
     $container.find('div.results').text(jsonTypeAirplane);
     console.log(jsonTypeAirplane);
 }
-function showTypeAirplaneForModify(typeAirplane) {
+function showTypeAirplaneForModify(typeAirline, year, brand, qtyOfRows, seatsPerRow) {
     showModal("myModalTypeAirplane");
-    console.log(typeAirplane);
     $("#identifier").attr('readonly', 'readonly');
-    $("#identifier").val(typeAirplane.typeAirline);
-    $("#year").val(typeAirplane.year);
-    $("#brand").val(typeAirplane.brand);
-    $("#seatsRow").val(typeAirplane.seatsPerRow);
-    $("#rows").val(typeAirplane.qtyOfRows);
+    $("#identifier").val(typeAirline);
+    $("#year").val(year);
+    $("#brand").val(brand);
+    $("#rows").val(qtyOfRows);
+    $("#seatsRow").val(seatsPerRow);
+    $('#typeAirplaneAction').val("updateTypeAirplane");
 }
 function isBlank(element) {
     removeInvalid(element);
@@ -151,11 +195,12 @@ function isSomethingBlank() {
     return blanks;
 }
 function validateYear() {
-    let text = $('#year');
-    let error = false;
-    let regex = /^(194[0-9]|19[5-9]\d|200\d|201[0-7])$/
-    if (!regex.test(text)) {
-        error = true;
+    let text = $('#year').val();
+    console.log(text);
+    let error = true;
+    let regex = /^(194[0-9]|19[5-9]\d|200\d|201[0-7])$/;
+    if (regex.test(text)) {
+        error = false;
     }
     return error;
 }
