@@ -170,8 +170,6 @@ function toList($table, flight) {
     var trip = flight.trip;
     var tr = $('<tr></tr>', {
         "id": flight.flightNum,
-        "data-toggle": "modal",
-        "data-target": "flight-detail",
         class: "tr-flights"
     });
     $(tr).appendTo($table);
@@ -183,15 +181,18 @@ function toList($table, flight) {
     var precio = flight.cost + " USD";
     td = '<td class="td-flights-price col-md-4"><h2>' + precio + '</h2></td>';
     $(tr).append(td);
-    $('#' + flight.flightNum).on('click', showFlightDetail(flight.flightNum, flight))
+    $('#' + flight.flightNum).on('click', () => {
+        showFlightDetail(flight.flightNum, flight);
+    })
 }
 
 function showFlightDetail (flightNum, flight) {
-    new airlineController().retrieveSearchFlights((results) => {
+    new AirlineController().retrieveSearchFlights((results) => {
         if(flight !== undefined) {
+            let trip = flight.trip;
             let element = '';
             element += '<div class="row">';
-                element += '<h3 class="center">'+flight.flightNum+' - '+trip.cityByDepartureCity.code+' to '+trip.cityByArrivalCity.code + '</h3>'
+                element += '<h3 class="text-center">'+flight.flightNum+' - '+trip.cityByDepartureCity.code+' to '+trip.cityByArrivalCity.code + '</h3>'
             element += '</div>';
             element += '<div class="row">';
                 element += '<div class="col-md-6 col-sm-12">';
@@ -206,7 +207,7 @@ function showFlightDetail (flightNum, flight) {
                     element += '<h4>To: <i>' + trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Date: <i>' + calculateArrivalDate(flight.departureDate) + '</i> At: <i>' + calculateArrivalTime(trip.departureTime) + '</i></h4>';
+                    element += '<h4>Date: <i>' + 'calculateArrivalDate(flight.departureDate)' + '</i> At: <i>' + 'calculateArrivalTime(trip.departureTime)' + '</i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';
@@ -214,7 +215,7 @@ function showFlightDetail (flightNum, flight) {
                     element += '<h4>Duration: <i>' + flight.duration + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Price: <i>' + calculatePrice(flight.price) + '</i></h4>';
+                    element += '<h4>Price: <i>' + 'calculatePrice(flight.price)' + '</i></h4>';
                 element += '</div>';
             element += '</div>';
             

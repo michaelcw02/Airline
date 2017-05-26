@@ -156,7 +156,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="flight-detail" role="dialog">
+    <div class="modal fade" id="flightDetail" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
