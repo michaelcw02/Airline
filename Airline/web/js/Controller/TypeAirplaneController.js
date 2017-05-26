@@ -74,7 +74,7 @@ TypeAirplaneController.prototype = {
                     '</button></td>'));
         });
     },
-    showTable: function(){
+    showTable: function () {
         let type_airline = this.view.$('#identifier').val();
         this.airlineController.searchTypeAirplane(type_airline, (jsonResults) => {
             $("#tableTypeAirplane").html("");
@@ -130,15 +130,17 @@ TypeAirplaneController.prototype = {
         $("#tableTypeAirplane").empty();
     },
     updateTypeAirplane: function () {
-        let type_airplane = this.view.$('#identifier').val();
-        let year = this.view.$('#year').val();
-        let brand = this.view.$('#brand').val();
-        let rows = this.view.$('#rows').val();
-        let seatsPerRow = this.view.$('#seatsRow').val();
-        this.airlineController.updateTypeAirplane(type_airplane, year, brand, rows, seatsPerRow);
-        hideModal("myModalTypeAirplane");
-        $('#typeAirplaneAction').val("addTypeAirplane");
-        $("#tableTypeAirplane").empty();
+        if (!doValidate()) {
+            let type_airplane = this.view.$('#identifier').val();
+            let year = this.view.$('#year').val();
+            let brand = this.view.$('#brand').val();
+            let rows = this.view.$('#rows').val();
+            let seatsPerRow = this.view.$('#seatsRow').val();
+            this.airlineController.updateTypeAirplane(type_airplane, year, brand, rows, seatsPerRow);
+            hideModal("myModalTypeAirplane");
+            $('#typeAirplaneAction').val("addTypeAirplane");
+            $("#tableTypeAirplane").empty();
+        }
     },
     sendAction: function () {
         let verify = $('#typeAirplaneAction').val();
@@ -189,14 +191,13 @@ function isSomethingBlank() {
     } else if (isBlank($('#brand'))) {
         blanks = true;
     } else
-    if (isBlank($('#seatsRow'))) {
+    if (isBlank($('#rows'))) {
         blanks = true;
     }
     return blanks;
 }
 function validateYear() {
     let text = $('#year').val();
-    console.log(text);
     let error = true;
     let regex = /^(194[0-9]|19[5-9]\d|200\d|201[0-7])$/;
     if (regex.test(text)) {
@@ -204,6 +205,30 @@ function validateYear() {
     }
     return error;
 }
+function validateLength() {
+    let error = false;
+    var Max_Length1 = 20;
+    var Max_Length2 = 11;
+    var lengthId = $("#identifier").val().length;
+    var lengthBrand = $("#brand").val().length;
+    var lengthRow = $("#rows").val().length;
+
+    if (lengthId > Max_Length1) {
+        alert("The max length of " + Max_Length1 + " characters is reached in Identifier, you typed in  " + lengthId + "characters");
+        error = true;
+    }
+    if (lengthBrand > Max_Length1) {
+        alert("The max length of " + Max_Length1 + " characters is reached in Brand, you typed in  " + lengthBrand + "characters");
+        error = true;
+    }
+    if (lengthRow > Max_Length2) {
+        alert("The max length of " + Max_Length2 + " characters in Rows is reached, you typed in  " + lengthRow + "characters");
+        error = true;
+    }
+
+    return error;
+}
+
 function doValidate() {
     let error = false;
     if (this.isSomethingBlank()) {
@@ -211,6 +236,8 @@ function doValidate() {
         error = true;
     } else if (validateYear()) {
         alert("The value year isn´t a number or is an invalid number");
+        error = true;
+    } else if (validateLength()) {
         error = true;
     }
     return error;

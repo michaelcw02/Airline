@@ -7,7 +7,8 @@ function loadPage(event) {
 function addElementsProperties() {
     $("#send").click(function () {
         controller.sendAction();
-        controller.showTable();
+      //  controller.showTable(); //tiene que hacer la modificacion o insercion primero y despues muestra la tabla
+      //esta mostrando tabla antes de que se inserte o modifique
     });
     $("#cancel").click(function () {
         controller.cleanForm();
