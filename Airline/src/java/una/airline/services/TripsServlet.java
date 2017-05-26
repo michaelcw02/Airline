@@ -36,7 +36,7 @@ public class TripsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-
+            Trip trip = new Trip();
             TripsBL tripsBL = new TripsBL();
 
             //Se hace una pausa para ver el modal
@@ -59,6 +59,11 @@ public class TripsServlet extends HttpServlet {
                     json = new Gson().toJson(tripsBL.getTripByCode(idTrip));
                     out.print(json);
 
+                    break;
+                case "deleteTrip":
+                    trip.setIdTrip(Integer.parseInt(request.getParameter("id_trip")));
+                    tripsBL.deleteTrip(trip);
+                    out.print("{\"data\": \"C~La ruta fue eliminada correctamente\"}");
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");

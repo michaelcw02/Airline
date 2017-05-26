@@ -72,12 +72,12 @@ public class TypeAirplaneServlet extends HttpServlet {
                     ta.setSeatsPerRow(Integer.parseInt(request.getParameter("seats_per_row")));
                     ta.calculateQtyOfSeats();
                     typeAirBL.updateTypeAirplane(ta);
-                    out.print("{\"data\": \"C~La persona fue modificada correctamente\"}");
+                    out.print("{\"data\": \"C~el tipo de avion fue modificado correctamente\"}");
                     break;
                 case "deleteTypeAirplane":
                     ta.setTypeAirline(request.getParameter("type_airline"));
                     typeAirBL.deleteTypeAirplane(ta);
-                    out.print("{\"data\": \"C~La persona fue eliminada correctamente\"}");
+                    out.print("{\"data\": \"C~El tipo de avion fue eliminado \"}");
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
