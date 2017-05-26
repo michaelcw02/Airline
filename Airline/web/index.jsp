@@ -156,7 +156,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="flight-detail" role="dialog">
+    <div class="modal fade" id="flightDetail" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -164,36 +164,9 @@
                     <h3 class="modal-title" id="flightDetailTitle">Flight Information</h3>
                 </div>
                 <div class="modal-body" id="flightDetailMessage">
-                    <form class="form" action="return false" role="form" id="flightDetailForm">
-                        <div class="container">
-                            <div class="row">
-                                <h3 class="center">'+flight.flightNum+' - '+trip.cityByDepartureCity.code+' to '+trip.cityByArrivalCity.code' + '</h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <h4>From: <i>trip.cityByDepartureCity.name + ', ' + trip.cityByDepartureCity.country</i></h4>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <h4>Date: <i>' + flight.departureDate + '</i> At: <i>' + trip.departureTime + '</i></h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <h4>To: <i>trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country</i></h4>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <h4>Date: <i>' + calculateArrivalDate(flight.departureDate) + '</i> At: <i>' + calculateArrivalTime(trip.departureTime) + '</i></h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <h4>Duration: <i>flight.duration</i></h4>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <h4>Price: <i>calculatePrice(flight.price)</i></h4>
-                                </div>
-                            </div>
-
+                    <form class="form" onsubmit="return false" role="form" id="flightDetailForm">
+                        <div class="container" id="flightDetail">
+                            <!--THIS PLACE WILL BE THE FLIGHT DETAILS-->
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary" id="reserve">Reserve</button>
                                 <button type="button" class="btn btn-danger" id="cancel">Cancel</button>

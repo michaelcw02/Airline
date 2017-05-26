@@ -108,7 +108,7 @@ public class FlightDAO extends BaseDAO {
         List<Flight> listFlights = new LinkedList<>();
         try {
             String query = "SELECT * "
-                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = '%s')alias1 "
+                    + "FROM airlinedb.FLIGHT, (SELECT ID_TRIP AS TRIP FROM airlinedb.TRIP WHERE DEPARTURE_CITY = '%s')alias1 "
                     + "WHERE FLIGHT.ID_TRIP = TRIP";
             query = String.format(query, cityFrom);
             ResultSet rs = connection.executeQuery(query);
