@@ -21,24 +21,7 @@
         <div class="container top-container">
             <jsp:include page="header.jsp"/>
         </div>
-<<<<<<< HEAD
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
-                    </div>
-                    <div class="modal-body" id="myModalMessage">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="myModalTypeAirplane" role="dialog">
-=======
-
         <div class="modal fade" id="modalTypeAirplane" role="dialog">
->>>>>>> e7f5208b89cf444a8b204e34de3e44dbfb24910d
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
