@@ -67,7 +67,7 @@ Proxy.getTrips = (callback) => {
         type: 'GET',
         dataType: "json"
     });
-}
+};
 Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) => {
     $.ajax({
         url: 'FlightsServlet',
@@ -88,7 +88,7 @@ Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) =>
         type: 'POST',
         dataType: "json"
     });
-}
+};
 Proxy.searchForTypeAirplane = (type_airline, callback) => {
     $.ajax({
         url: 'TypeAirplaneServlet',
@@ -323,6 +323,26 @@ Proxy.searchFlightByNum = (flightNum, callback) => {
         dataType: "json"
     });
 }
+Proxy.reserveFlight = (flightNum, mode, callback) => {
+    $.ajax({
+        url: 'FlightsServlet',
+        data: {
+            action: "reserveFlight",
+            flightNum: flightNum,
+            mode: mode
+        },
+        error: () => { //si existe un error en la respuesta del ajax
+            alert("This flight doesn´t exist");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+
 Proxy.searchCityByCode = (code, callback) => {
     $.ajax({
         url: 'CitiesServlet',
@@ -341,16 +361,17 @@ Proxy.searchCityByCode = (code, callback) => {
         dataType: "json"
     });
 }
-Proxy.addCity = (code,name,country) => {
+
+Proxy.addCity = (code, name, country) => {
     $.ajax({
         url: 'CitiesServlet',
         data: {
             action: "addCity",
             code: code,
             name: name,
-            country:country
+            country: country
         },
-         error: function () {
+        error: function () {
             showModal("myModal", "ERROR", "An error occurred when a city was inserted");
         },
         success: (data) => {
@@ -378,7 +399,7 @@ Proxy.deleteCity = (code) => {
         dataType: "json"
     });
 }
-Proxy.updateCity = (code,name,country) => {
+Proxy.updateCity = (code, name, country) => {
     $.ajax({
         url: 'CitiesServlet',
         data: {
@@ -398,6 +419,7 @@ Proxy.updateCity = (code,name,country) => {
         dataType: "json"
     });
 }
+<<<<<<< HEAD
 Proxy.searchUserByUsername = (username, callback) => {
     $.ajax({
         url: 'UserServlet',
@@ -423,6 +445,16 @@ Proxy.getAllUsers = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred in the loading of users");
+=======
+Proxy.getPreviousId = (callback) => {
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "getPreviousId"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred");
+>>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663
         },
         success: (data) => {
             callback(data);
@@ -430,6 +462,7 @@ Proxy.getAllUsers = (callback) => {
         type: 'GET',
         dataType: "json"
     });
+<<<<<<< HEAD
 }
 Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
     $.ajax({
@@ -469,11 +502,38 @@ Proxy.deleteUser = (username) => {
         },
         success: (data) => {
             showModal("myModal", "Status", "The user was deleted of the database");
+=======
+};
+Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image,callback) => {
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "addTrip",
+            distance: distance,
+            duration: duration,
+            departureCity: departureCity,
+            arrivalCity: arrivalCity,
+            departureTime: departureTime,
+            departureDay: departureDay,
+            cost: cost,
+            discount: discount,
+            discountDes: discountDes,
+            discountPath: discountPath
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a trip was inserted");
+        },
+        success: (data) => {
+            console.log(data);
+           Proxy.productAddImagen(code, image, callBack);
+            showModal("myModal", "Status", "The trip was inserted in the database");
+>>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663
         },
         type: 'POST',
         dataType: "json"
     });
 }
+<<<<<<< HEAD
 Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
     $.ajax({
         url: 'UserServlet',
@@ -500,3 +560,20 @@ Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birth
         dataType: "json"
     });
 }
+=======
+Proxy.tripAddImage = function (code, image, callback) {
+    var AJAX_req = new XMLHttpRequest();
+    url = "/Airline/ImageUpload";
+    AJAX_req.open("POST", url, true);
+    AJAX_req.onreadystatechange = function () {
+        if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
+            callBack(0);
+        }
+    };
+    var formdata = new FormData();
+    formdata.append("code", code);
+    formdata.append("image", image);
+    AJAX_req.send(formdata);
+}
+
+>>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663

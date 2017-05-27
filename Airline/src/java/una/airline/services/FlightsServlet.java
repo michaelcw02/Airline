@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
 import una.airline.domain.Flight;
 
@@ -36,20 +37,11 @@ public class FlightsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-            
+
             FlightsBL flightsBL = new FlightsBL();
 
-            //Se hace una pausa para ver el modal
-            //Thread.sleep(1000);
+            HttpSession session = request.getSession();
             
-            //**********************************************************************
-            //se toman los datos de la session
-            //**********************************************************************
-            //HttpSession session = request.getSession();
-            
-            //**********************************************************************
-            //se consulta cual accion se desea realizar
-            //**********************************************************************
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllFlights":
@@ -57,21 +49,38 @@ public class FlightsServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "searchFlights":
-                    String cityFrom = request.getParameter("cityFrom");
-                    String cityTo = request.getParameter("cityTo");
-                    String departDate = request.getParameter("departDate");
-                    String returnDate = request.getParameter("returnDate");
-                    
-                    json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate) );
+                    cityFrom = request.getParameter("cityFrom");
+                    cityTo = request.getParameter("cityTo");
+                    departDate = request.getParameter("departDate");
+                    returnDate = request.getParameter("returnDate");
+
+                    json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate));
                     out.print(json);
                     
                     break;
                 case "searchFlightByNum":
-                    String flightNum = request.getParameter("flightNum");
-                    
+                    flightNum = request.getParameter("flightNum");
+                    json = new Gson().toJson(flightsBL.searchFlightByNum(flightNum));
+                    out.print(json);
+                    resetVariables();
+                    break;
+                case "reserveFlight":
+                    flightNum = request.getParameter("flightNum");
+                    mode = request.getParameter("mode");
+                    if(session.getAttribute("type").equals("LoggedUser")) {
+                        //THIS IS THE PLACE WHERE THE FLIGHT HAVE TO BE CREATED ACCORDING TO THE USER
+                        session.setAttribute(mode + "Reservation", flightNum);
+                        json = "{'response':'S~Succeded " + mode + " Reservation!'}";
+                        out.print(json);                                               
+                    }
+                    else {
+                        json = "{'response':'E~You are not logged!'}";
+                        out.print(json);
+                    }
+                    resetVariables();
                     break;
                 default:
-                    out.print("E~No se indico la acción que se desea realizare");
+                    out.print("{'response':'E~Did not receive any action'");
                     break;
             }
 
@@ -80,7 +89,23 @@ public class FlightsServlet extends HttpServlet {
         } catch (Exception e) {
             out.print("E~" + e.getMessage());
         }
+
     }
+    
+    private void resetVariables() {
+        cityFrom = null;
+        cityTo = null;
+        departDate = null;
+        returnDate = null;
+        flightNum = null;
+        mode = null;
+    }
+    String cityFrom;
+    String cityTo;
+    String departDate;
+    String returnDate;
+    String flightNum;
+    String mode;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

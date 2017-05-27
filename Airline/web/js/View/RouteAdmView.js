@@ -6,7 +6,7 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $("#send").click(() => controller.enviar());
+    $("#send").click(() => controller.addTrip());
     $("#cancel").click(function () {
         controller.cleanForm();
         $("#myModalTypeAirplane").modal("hide");

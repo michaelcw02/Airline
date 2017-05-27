@@ -6,6 +6,7 @@
 package una.airline.services;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -67,6 +68,24 @@ public class TripsServlet extends HttpServlet {
                     trip.setIdTrip(Integer.parseInt(request.getParameter("id_trip")));
                     tripsBL.deleteTrip(trip);
                     out.print("{\"data\": \"C~La ruta fue eliminada correctamente\"}");
+                    break;
+                case "getPreviousId":
+                    json = new Gson().toJson(tripsBL.getPreviousId());
+                    out.print(json);
+                    break;
+                case "addTrip":
+                    trip.setDistance(Integer.parseInt(request.getParameter("distance")));
+                    trip.setDuration(Integer.parseInt(request.getParameter("duration")));
+                    /*trip.setCityByDepartureCity(request.getParameter("departureCity"));
+                    trip.setCityByArrivalCity(request.getParameter("arrivalCity"));*/
+                    trip.setDepartureTime(Integer.parseInt(request.getParameter("departureTime")));
+                    trip.setDepartureDay(request.getParameter("departureDay"));
+                    trip.setCost(Integer.parseInt(request.getParameter("cost")));
+                    trip.setDiscount(Integer.parseInt(request.getParameter("discount")));
+                    trip.setDiscountDescription(request.getParameter("discountDes"));
+                    trip.setDiscountImagePath(request.getParameter("discountPath"));
+                    tripsBL.addTrip(trip);
+                    out.print("{\"data\":\"C~La ruta fue ingresada correctamente\"}");
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");

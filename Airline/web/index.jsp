@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="css/hover.css">
 </head>
@@ -157,22 +157,15 @@
     </div>
 
     <div class="modal fade" id="flightDetail" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title" id="flightDetailTitle">Flight Information</h3>
                 </div>
                 <div class="modal-body" id="flightDetailMessage">
-                    <form class="form" onsubmit="return false" role="form" id="flightDetailForm">
-                        <div class="container" id="flightDetail">
                             <!--THIS PLACE WILL BE THE FLIGHT DETAILS-->
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary" id="reserve">Reserve</button>
-                                <button type="button" class="btn btn-danger" id="cancel">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
+
                 </div>
             </div>
         </div>

@@ -173,19 +173,19 @@ function toList($table, flight) {
     });
     $(tr).appendTo($table);
     var td = '<td class="td-flights-info col-md-8">';
-    td += '<div><h2><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '　　　　Flight: ' + flight.flightNum + '<strong></h2>';
+    td += '<div><h2><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '　　　Flight: ' + flight.flightNum + '<strong></h2>';
     td += trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br>';
     td += '<h4> Date of departure: ' + flight.departureDate + '    Time of departure: ' + trip.departureTime + 'h </h4></div></td>';
     $(tr).append(td);
-    var precio = flight.cost + " USD";
+    var precio = calculatePrice(trip.cost, trip.discount) + " USD";
     td = '<td class="td-flights-price col-md-4"><h2>' + precio + '</h2></td>';
     $(tr).append(td);
     $('#' + flight.flightNum).on('click', () => {
-        showFlightDetail(flight.flightNum, flight);
+        showFlightDetail(flight.flightNum, flight, ($table.attr('id')[0] == 'o') ? 'Outbound' : 'Return');
     })
 }
 
-function showFlightDetail (flightNum, flight) {
+function showFlightDetail (flightNum, flight, mode) {
     new AirlineController().retrieveSearchFlights((results) => {
         if(flight !== undefined) {
             let trip = flight.trip;
@@ -195,31 +195,70 @@ function showFlightDetail (flightNum, flight) {
             element += '</div>';
             element += '<div class="row">';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>From: <i>' + trip.cityByDepartureCity.name + ', ' + trip.cityByDepartureCity.country + '</i></h4>';
+                    element += '<h4 class="text-center">From: <i>' + trip.cityByDepartureCity.name + ', ' + trip.cityByDepartureCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Date: <i>' + flight.departureDate + '</i> At: <i>' + trip.departureTime + '</i></h4>';
+                    element += '<h4 class="text-center">Date: <i>' + flight.departureDate + '</i> At: <i>' + trip.departureTime + 'h </i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>To: <i>' + trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country + '</i></h4>';
+                    element += '<h4 class="text-center">To: <i>' + trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Date: <i>' + 'calculateArrivalDate(flight.departureDate)' + '</i> At: <i>' + 'calculateArrivalTime(trip.departureTime)' + '</i></h4>';
+                    element += '<h4 class="text-center">Date: <i>' + calculateArrivalDate(flight.departureDate, flight.departureTime) + '</i> At: <i>' + calculateArrivalTime(trip.departureTime) + 'h </i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Duration: <i>' + flight.duration + '</i></h4>';
+                    element += '<h4 class="text-center">Duration: <i>' + calculateDuration(trip.duration) + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Price: <i>' + 'calculatePrice(flight.price)' + '</i></h4>';
+                    element += '<h4 class="text-center">Price: <i>' + calculatePrice(trip.cost, trip.discount) + ' USD</i></h4>';
                 element += '</div>';
             element += '</div>';
+
+            element += '<form class="form" role="form" id="flightDetailForm">';
+                element += '<div class="form-group text-center">';
+                    element += '<button type="button" class="btn btn-primary" id="reserve">Reserve</button> ';
+                    element += ' <button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
+                element += '</div>';
+
+                element += '<div class="form-group height25" >';
+                    element += '<div class="alert alert-success hiddenDiv" id="messajeResult">';
+                        element += '<strong id="messajeResultNeg">Info!</strong>';
+                        element += '<span id="messajeResultText">This alert box could indicate a neutral informative change or action.</span>';
+                    element += '</div>';
+                element += '</div>';
+            element += '</form>';
             
             //modal settings
-            showModal('flightDetail', 'Flight Information', element);
+            showModal('flightDetail', mode + ' Flight Information', element);
+            $('#reserve').on('click', (event) => {
+                new AirlineController().reserveFlight(flight.flightNum, mode, (data) => {
+                    if(data.response[0] == 'S') {
+                        let response = data.split('~')[1];
+                        alert('Success On Reserving Flight');
+                        $('#messageResultText').html('');
+                        $('#messageResult').removeClass('alert-danger');
+                        $('#messageResult').addClass('alert-sucess');
+                        $('#messageResultText').text(response);
+                        $('#flightDetail').modal("hide");
+                    }
+                    else {
+                        let response = data.split('~')[1];
+                        $('#messageResultText').html('');
+                        $('#messageResult').removeClass('alert-sucess');
+                        $('#messageResult').addClass('alert-danger');
+                        $('#messageResultText').text(response);
+                        $('#messageResult').fadeIn();
+                    }
+                });
+            });
+            $('#cancel').on('click', (event) => {
+                $('#flightDetail').modal('hide');
+                $('#flightDetailMessage').html('');
+            })
         }
     })
 }
