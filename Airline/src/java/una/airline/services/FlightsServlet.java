@@ -40,16 +40,8 @@ public class FlightsServlet extends HttpServlet {
 
             FlightsBL flightsBL = new FlightsBL();
 
-            //Se hace una pausa para ver el modal
-            //Thread.sleep(1000);
-            //**********************************************************************
-            //se toman los datos de la session
-            //**********************************************************************
             HttpSession session = request.getSession();
             
-            //**********************************************************************
-            //se consulta cual accion se desea realizar
-            //**********************************************************************
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllFlights":
@@ -77,12 +69,18 @@ public class FlightsServlet extends HttpServlet {
                     mode = request.getParameter("mode");
                     if(session.getAttribute("type").equals("LoggedUser")) {
                         //THIS IS THE PLACE WHERE THE FLIGHT HAVE TO BE CREATED ACCORDING TO THE USER
-                        
+                        session.setAttribute(mode + "Reservation", flightNum);
+                        json = "{'response':'S~Succeded " + mode + " Reservation!'}";
+                        out.print(json);                                               
+                    }
+                    else {
+                        json = "{'response':'E~You are not logged!'}";
+                        out.print(json);
                     }
                     resetVariables();
                     break;
                 default:
-                    out.print("E~No se indico la acción que se desea realizare");
+                    out.print("{'response':'E~Did not receive any action'");
                     break;
             }
 

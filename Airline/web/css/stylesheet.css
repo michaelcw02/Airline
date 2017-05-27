@@ -346,3 +346,10 @@ article hr {
 #modalAirplane{
     z-index: 6000 !important;
 }
+
+.height25{
+    height: 25px;
+}
+.hiddenDiv{
+    display: none;
+}
