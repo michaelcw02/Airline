@@ -72,6 +72,10 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`trip` (
   `arrival_city` VARCHAR(3) NOT NULL,
   `departure_time` INT NOT NULL,
   `departure_day` VARCHAR(10) NOT NULL,
+  `cost` INT NOT NULL,
+  `discount` INT NOT NULL,
+  `discount_description` VARCHAR(45) NOT NULL,
+  `discount_image_path` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_trip`),
   INDEX `departure_city_idx` (`departure_city` ASC),
   INDEX `arrival_city_idx` (`arrival_city` ASC),
@@ -94,14 +98,10 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `airlinedb`.`flight` (
   `flight_num` VARCHAR(10) NOT NULL,
-  `cost` INT(11) NOT NULL,
   `departure_date` DATE NOT NULL,
   `available_seats` INT(11) NOT NULL,
   `id_trip` INT(11) NOT NULL,
   `id_airplane` VARCHAR(20) NOT NULL,
-  `discount` INT(11) NULL DEFAULT NULL,
-  `discount_description` VARCHAR(45) NULL DEFAULT NULL,
-  `discount_image_path` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`flight_num`),
   INDEX `id_airplane_idx` (`id_airplane` ASC),
   INDEX `id_trip_idx` (`id_trip` ASC),
@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`flight` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 
 -- -----------------------------------------------------
@@ -257,94 +258,94 @@ INSERT INTO city (`code`, `name`, `country`) VALUES ('LHR', 'London', 'United Ki
 INSERT INTO city (`code`, `name`, `country`) VALUES ('NRT', 'Narita', 'Japan');
 INSERT INTO city (`code`, `name`, `country`) VALUES ('CCS', 'Caracas', 'Venezuela');
 
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('344', '383', 'SJO', 'ATL', '4', 'MONDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('344', '383', 'ATL', 'SJO', '10', 'TUESDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('222', '379', 'SJO', 'BOS', '5', 'WEDNESDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('222', '379', 'BOS', 'SJO', '9', 'THURSDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('429', '865', 'SJO', 'CCS', '6', 'FRIDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('429', '865', 'CCS', 'SJO', '14', 'SATURDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('318', '743', 'SJO', 'JFK', '7', 'SUNDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('318', '743', 'JFK', 'SJO', '13', 'MONDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('301', '739', 'SJO', 'LAX', '8', 'TUESDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('301', '739', 'LAX', 'SJO', '14', 'WEDNESDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('444', '653', 'SJO', 'LHR', '9', 'THURSDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('444', '653', 'LHR', 'SJO', '17', 'FRIDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('303', '798', 'SJO', 'MIA', '10', 'SATURDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('303', '798', 'MIA', 'SJO', '16', 'SUNDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('351', '1078', 'SJO', 'NRT', '11', 'MONDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('351', '1078', 'NRT', 'SJO', '17', 'TUESDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('293', '894', 'SJO', 'TPE', '13', 'WEDNESDAY');
-INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('293', '894', 'TPE', 'SJO', '18', 'THURSDAY');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('344', '383', 'SJO', 'ATL', '4', 'MONDAY', 750, 10, 'Have you thought about Atlanta?', 'images/background-5.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('344', '383', 'ATL', 'SJO', '10', 'TUESDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('222', '379', 'SJO', 'BOS', '5', 'WEDNESDAY', 750, 0, 'Let us take you to Boston!', 'images/background-6.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('222', '379', 'BOS', 'SJO', '9', 'THURSDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('429', '865', 'SJO', 'CCS', '6', 'FRIDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('429', '865', 'CCS', 'SJO', '14', 'SATURDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('318', '743', 'SJO', 'JFK', '7', 'SUNDAY', 750, 5, 'The City That Never Sleeps?', 'images/background-17.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('318', '743', 'JFK', 'SJO', '13', 'MONDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('301', '739', 'SJO', 'LAX', '8', 'TUESDAY', 750, 15, 'Let\'s go to Los Angeles!', 'images/background-3.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('301', '739', 'LAX', 'SJO', '14', 'WEDNESDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('444', '653', 'SJO', 'LHR', '9', 'THURSDAY', 750, 25, 'How about London?', 'images/background-1.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('444', '653', 'LHR', 'SJO', '17', 'FRIDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('303', '798', 'SJO', 'MIA', '10', 'SATURDAY', 750, 2, 'Wanna go to Miami?', 'images/background-2.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('303', '798', 'MIA', 'SJO', '16', 'SUNDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('351', '1078', 'SJO', 'NRT', '11', 'MONDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('351', '1078', 'NRT', 'SJO', '17', 'TUESDAY', 750, 0, 'None', 'None');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('293', '894', 'SJO', 'TPE', '13', 'WEDNESDAY', 750, 10, 'Taipei is just Amazing!', 'images/background-17.jpg');
+INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('293', '894', 'TPE', 'SJO', '18', 'THURSDAY', 750, 0, 'None', 'None');
 
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST001', 'ASA-001', 1, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST002', 'ASA-002', 1, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST003', 'ASA-003', 1, 500, '2017-07-03', 800, 5, 'Have you thought about Atlanta?', 'images/background-5.jpg');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST001', 'ASA-001', 1, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST002', 'ASA-002', 1, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST003', 'ASA-003', 1, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST004', 'ASA-004', 2, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST005', 'ASA-005', 2, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST006', 'ASA-006', 2, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST004', 'ASA-004', 2, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST005', 'ASA-005', 2, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST006', 'ASA-006', 2, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST007', 'ASA-007', 3, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST008', 'ASA-008', 3, 500, '2017-07-02', 800, 20, 'Let us take you to Boston!', 'images/background-6.jpg');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST009', 'ASA-009', 3, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST007', 'ASA-007', 3, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST008', 'ASA-008', 3, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST009', 'ASA-009', 3, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST010', 'ASA-010', 4, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST011', 'ASA-011', 4, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST012', 'ASA-012', 4, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST010', 'ASA-010', 4, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST011', 'ASA-011', 4, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST012', 'ASA-012', 4, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST013', 'ASA-013', 5, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST014', 'ASA-014', 5, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST015', 'ASA-015', 5, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST013', 'ASA-013', 5, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST014', 'ASA-014', 5, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST015', 'ASA-015', 5, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST016', 'ASA-016', 6, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST017', 'ASA-017', 6, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST018', 'ASA-018', 6, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST016', 'ASA-016', 6, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST017', 'ASA-017', 6, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST018', 'ASA-018', 6, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST019', 'ASA-019', 7, 500, '2017-07-01', 800, 10, 'The City That Never Sleeps?', 'images/background-17.jpg');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST020', 'ASA-020', 7, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST021', 'ASA-021', 7, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST019', 'ASA-019', 7, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST020', 'ASA-020', 7, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST021', 'ASA-021', 7, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST022', 'ASA-022', 8, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST023', 'ASA-023', 8, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST024', 'ASA-024', 8, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST022', 'ASA-022', 8, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST023', 'ASA-023', 8, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST024', 'ASA-024', 8, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST025', 'ASA-025', 9, 500, '2017-07-01', 800, 30, 'Let\'s go to Los Angeles!', 'images/background-3.jpg');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST026', 'ASA-026', 9, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST027', 'ASA-027', 9, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST025', 'ASA-025', 9, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST026', 'ASA-026', 9, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST027', 'ASA-027', 9, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST028', 'ASA-028', 10, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST029', 'ASA-029', 10, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST030', 'ASA-030', 10, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST028', 'ASA-028', 10, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST029', 'ASA-029', 10, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST030', 'ASA-030', 10, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST031', 'ASA-031', 11, 500, '2017-07-01', 800, 20, 'How about London?', 'images/background-1.jpg');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST032', 'ASA-032', 11, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST033', 'ASA-033', 11, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST031', 'ASA-031', 11, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST032', 'ASA-032', 11, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST033', 'ASA-033', 11, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST034', 'ASA-034', 12, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST035', 'ASA-035', 12, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST036', 'ASA-036', 12, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST034', 'ASA-034', 12, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST035', 'ASA-035', 12, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST036', 'ASA-036', 12, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST037', 'ASA-037', 13, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST038', 'ASA-038', 13, 500, '2017-07-02', 800, 30, 'Wanna go to Miami?', 'images/background-2.jpg');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST039', 'ASA-039', 13, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST037', 'ASA-037', 13, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST038', 'ASA-038', 13, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST039', 'ASA-039', 13, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST040', 'ASA-040', 14, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST041', 'ASA-041', 14, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST042', 'ASA-042', 14, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST040', 'ASA-040', 14, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST041', 'ASA-041', 14, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST042', 'ASA-042', 14, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST043', 'ASA-043', 15, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST044', 'ASA-044', 15, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST045', 'ASA-045', 15, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST043', 'ASA-043', 15, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST044', 'ASA-044', 15, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST045', 'ASA-045', 15, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST046', 'ASA-046', 16, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST047', 'ASA-047', 16, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST048', 'ASA-048', 16, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST046', 'ASA-046', 16, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST047', 'ASA-047', 16, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST048', 'ASA-048', 16, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST049', 'ASA-049', 17, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST050', 'ASA-050', 17, 500, '2017-07-02', 800, 12, 'Taipei is just Amazing!', 'images/background-17.jpg');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST051', 'ASA-051', 17, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST049', 'ASA-049', 17, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST050', 'ASA-050', 17, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST051', 'ASA-051', 17, '2017-07-03', 800);
 
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST052', 'ASA-052', 18, 500, '2017-07-01', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST053', 'ASA-053', 18, 500, '2017-07-02', 800, 0, 'None', 'None');
-INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) VALUES ('ST054', 'ASA-054', 18, 500, '2017-07-03', 800, 0, 'None', 'None');
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST052', 'ASA-052', 18, '2017-07-01', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST053', 'ASA-053', 18, '2017-07-02', 800);
+INSERT INTO flight(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) VALUES ('ST054', 'ASA-054', 18, '2017-07-03', 800);

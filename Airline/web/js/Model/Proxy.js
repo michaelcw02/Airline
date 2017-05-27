@@ -19,7 +19,7 @@ Proxy.getCities = (callback) => {
 }
 Proxy.getDiscounts = (callback) => {
     $.ajax({
-        url: 'FlightsServlet',
+        url: 'TripsServlet',
         data: {
             action: "getAllDiscounts"
         },

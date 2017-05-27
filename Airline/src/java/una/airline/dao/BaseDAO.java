@@ -42,6 +42,10 @@ public class BaseDAO {
             String cityToCode = rs.getString("arrival_city");
             int departureTime = rs.getInt("departure_time");
             String departureDay = rs.getString("departure_day");
+            int cost = rs.getInt("cost");
+            int discount = rs.getInt("discount");
+            String discountDescription = rs.getString("discount_description");
+            String discountImagePath = rs.getString("discount_image_path");
             City cityFrom;
             City cityTo;
             try {
@@ -51,7 +55,7 @@ public class BaseDAO {
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in cities of trip", ex);
             }
-            return new Trip(idTrip, cityFrom, cityTo, duration, distance, departureTime, departureDay);
+            return new Trip(idTrip, cityFrom, cityTo, duration, distance, departureTime, departureDay, cost, discount, discountDescription, discountImagePath);
         } catch (SQLException ex) {
             return null;
         }
@@ -62,12 +66,8 @@ public class BaseDAO {
             String flightNum = rs.getString("flight_num");
             String airplaneId = rs.getString("id_airplane");
             int tripId = rs.getInt("id_trip");
-            int cost = rs.getInt("cost");
             Date departureDate = rs.getDate("departure_date");
             int availableSeats = rs.getInt("available_seats");
-            int discount = rs.getInt("discount");
-            String discountDescription = rs.getString("discount_description");
-            String discountImagePath = rs.getString("discount_image_path");
             Airplane airplane = null;
             Trip trip = null;
             try {
@@ -78,7 +78,7 @@ public class BaseDAO {
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in airplane or trips of flight", ex);
             }
-            return new Flight(flightNum, airplane, trip, cost, departureDate, availableSeats, discount, discountDescription, discountImagePath);
+            return new Flight(flightNum, airplane, trip, departureDate, availableSeats);
         } catch (SQLException ex) {
             return null;
         }
