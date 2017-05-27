@@ -24,7 +24,7 @@ public class TripsBL {
     public List<Trip> getAllTrips() {
         return tripDAO.getAllTrips();
     }
-    
+
     public List<Trip> findDiscounts() {
         return tripDAO.findDiscounts();
     }
@@ -35,5 +35,13 @@ public class TripsBL {
 
     public void deleteTrip(Trip trip) throws Exception {
         tripDAO.deleteTrip(trip);
+    }
+
+    public void addTrip(Trip trip) throws Exception {
+        tripDAO.addTrip(trip);
+    }
+
+    public int getPreviousId() throws Exception {
+        return tripDAO.getAutoIncremental();
     }
 }

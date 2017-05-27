@@ -1,28 +1,29 @@
 var controller;
 function loadPage(event) {
-    controller = new RouteAdmController(window);
-    controller.loadCities();
+    controller = new CityController(window);
     addElementsProperties();
 }
 
 function addElementsProperties() {
-    $("#send").click(() => controller.addTrip());
+    $("#send").click(function () {
+        controller.sendAction();
+    });
     $("#cancel").click(function () {
         controller.cleanForm();
         $("#myModalTypeAirplane").modal("hide");
     });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(function () {
-        controller.searchTripsByCode();
+        controller.searchCityByCode();
         $("#search").val("");
     });
-    $("#btSearchAll").click(() => controller.getAllTrips());
+    $("#btSearchAll").click(() => controller.getAllCities());
 }
-function  searchTripsByCode() {
-    controller.searchTripsByCode();
+function deleteCity(code) {
+    controller.deleteCity(code);
 }
-function deleteTrip(id_trip) {
-    controller.deleteTrip(id_trip);
-}
+
 $(loadPage);
+
+
 

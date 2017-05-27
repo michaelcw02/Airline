@@ -343,6 +343,7 @@ article hr {
 #modalRoute,
 #myModalTypeAirplane,
 #myModal,
+#myModalCity,
 #modalAirplane{
     z-index: 6000 !important;
 }

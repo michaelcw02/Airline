@@ -42,19 +42,16 @@
                     </div>
                     <div class="modal-body" id="myModalMessage">
                         <form role="form" onsubmit="return false;" id="formRoute">
-                            <div class="form-group" id="groupIdentifier">
-                                <label for="identifier">Identifier:</label>
-                                <input type="text" class="form-control" id="identifier" autofocus="true" placeholder="Identifier">
-                            </div>
-
+                         
                             <div class="form-group" id="groupDistance">
                                 <label for="distance">Distance:</label>
-                                <input type="text" class="form-control" id="distance" placeholder="Distance" >
+                                <input type="number" class="form-control" id="distance" placeholder="Distance" >
                             </div>
 
-                            <div class="form-group" id="duration">
+                            <div class="form-group" id="groupDuration">
                                 <label for="duration">Duration:</label>
-                                <input type="text" class="form-control" id="duration" placeholder="Duration">
+                                <input type="number" class="form-control" id="hours" placeholder="hours">
+                                <input type="number" class="form-control" id="minutes" placeholder="minutes">
                             </div>
 
                             <div class="form-group" id="groupDepartureCity">
@@ -87,6 +84,25 @@
                                     <option value="SATURDAY">SATURDAY</option>
                                     <option value="SUNDAY">SUNDAY</option>
                                 </select>
+                            </div>
+
+                            <div class="form-group" id="groupPrice">
+                                <label for="price">Price:</label>
+                                <input type="number" class="form-control" id="price" placeholder="Price">
+                            </div>
+
+                            <div class="form-group" id="groupDiscount">
+                                <label for="discount">Discount:</label>
+                                <input type="number" class="form-control" id="discount" placeholder="Discount">
+                            </div>
+
+                            <div class="form-group" id="groupDiscountDescription">
+                                <label for="discountDescription">Discount description:</label>
+                                <input type="text" class="form-control" id="discountDescription" placeholder="Discount description">
+                            </div>
+
+                            <div class="form-group" id="groupImage">
+                                <label>Image <input type="file" id="image"> </label>
                             </div>
 
                             <div class="form-group">

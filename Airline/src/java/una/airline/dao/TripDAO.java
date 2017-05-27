@@ -106,4 +106,13 @@ public class TripDAO extends BaseDAO {
         }
         return listResult;
     }
+      public int getAutoIncremental() throws Exception {
+        String query = "SELECT MAX(id_trip) FROM Trip;";
+        query = String.format(query);
+        ResultSet rs = connection.executeQuery(query);
+        if (rs.next()) {
+            return rs.getInt("MAX(id_trip)");
+        }
+        throw new Exception("E~Trip does not exists");
+    }
 }

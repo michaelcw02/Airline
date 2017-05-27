@@ -16,9 +16,10 @@ import una.airline.domain.*;
 public class TestDAO {
     
     
-    public static void main(String[] arg) {
+    public static void main(String[] arg) throws Exception {
         
-        
+        TripDAO trip=new TripDAO();
+     System.out.println( trip.getAutoIncremental());
         //TEST COMPLETE
         
     }
