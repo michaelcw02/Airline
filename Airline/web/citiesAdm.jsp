@@ -41,10 +41,10 @@
                         <h4 class="modal-title" id="myModalTitle">Insert/Modify City</h4>
                     </div>
                     <div class="modal-body" id="myModalMessage">
-                        <form role="form" onsubmit="return false;" id="formTypeAirplane">
-                            <div class="form-group" id="groupIdentifier">
-                                <label for="identifier">Identifier:</label>
-                                <input type="text" class="form-control" id="identifier" autofocus="true" placeholder="Identifier" required="true">
+                        <form role="form" onsubmit="return false;" id="formCity">
+                            <div class="form-group" id="groupCode">
+                                <label for="code">Code:</label>
+                                <input type="text" class="form-control" id="code" autofocus="true" placeholder="Code" required="true">
                             </div>
 
                             <div class="form-group" id="groupName">

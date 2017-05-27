@@ -42,18 +42,31 @@ public class CityDAO extends BaseDAO {
         }
         return listaResultado;
     }
+
     public City getCityByCode(String code) throws Exception {
         String query = "SELECT * FROM City WHERE code = '%s';";
         query = String.format(query, code);
         ResultSet rs = connection.executeQuery(query);
-        if(rs.next()) {
+        if (rs.next()) {
             return city(rs);
-        }
-        else {
+        } else {
             throw new Exception("E~City not found.");
         }
     }
-    
+
+    public int updateCity(City city) {
+        String query = "UPDATE City SET name='%s',country='%s' WHERE code='%s'";
+        query = String.format(query, city.getName(), city.getCountry(),city.getCode());
+        int result = connection.executeUpdate(query);
+        return result;
+    }
+
+    public void deleteCity(City city) throws Exception {
+        String query = "DELETE FROM City WHERE code = '%s'";
+        query = String.format(query, city.getCode());
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("E~City doesnt exists");
+        }
+    }
 }
-
-
