@@ -286,5 +286,24 @@ Proxy.searchFlightByNum = (flightNum, callback) => {
         type: 'POST',
         dataType: "json"
     });
+}
+Proxy.reserveFlight = (flightNum, mode, callback) => {
+    $.ajax({
+        url: 'FlightsServlet',
+        data: {
+            action: "reserveFlight",
+            flightNum: flightNum,
+            mode: mode
+        },
+        error: () => { //si existe un error en la respuesta del ajax
+            alert("This flight doesn´t exist");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 
 }

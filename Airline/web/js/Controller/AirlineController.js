@@ -126,4 +126,10 @@ AirlineController.prototype = {
         //callback(data);
         //});
     },
+    reserveFlight: function (flightNum, mode, callback) {
+        Proxy.reserveFlight(flightNum, mode, (data) => {
+            Storage.store('reserveFlight' + mode, data);
+            callback(data);
+        })
+    }
 }

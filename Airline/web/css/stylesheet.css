@@ -338,7 +338,8 @@ article hr {
 .return-flights-div {
     display: none;
 }
-#flight-detail, 
+
+#flightDetail,
 #modalRoute,
 #myModalTypeAirplane,
 #myModal,

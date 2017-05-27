@@ -73,6 +73,8 @@ public class FlightsBL {
         }
         return flightDAO.getAllFlights();
     }
-    
+    public List<Flight> searchFlightByNum (String flightNum) {
+        return flightDAO.findByID(flightNum);
+    }
     
 }
