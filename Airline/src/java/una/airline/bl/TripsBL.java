@@ -24,6 +24,10 @@ public class TripsBL {
     public List<Trip> getAllTrips() {
         return tripDAO.getAllTrips();
     }
+    
+    public List<Trip> findDiscounts() {
+        return tripDAO.findDiscounts();
+    }
 
     public Trip getTripByCode(int code) throws Exception {
         return tripDAO.getTripByCode(code);

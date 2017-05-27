@@ -66,10 +66,6 @@ public class FlightsServlet extends HttpServlet {
                     out.print(json);
                     
                     break;
-                case "getAllDiscounts":
-                    json = new Gson().toJson(flightsBL.findDiscounts());
-                    out.print(json);
-                    break;
                 case "searchFlightByNum":
                     String flightNum = request.getParameter("flightNum");
                     

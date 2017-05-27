@@ -58,7 +58,10 @@ public class TripsServlet extends HttpServlet {
                     int idTrip = Integer.parseInt(request.getParameter("idTrip"));
                     json = new Gson().toJson(tripsBL.getTripByCode(idTrip));
                     out.print(json);
-
+                    break;
+                case "getAllDiscounts":
+                    json = new Gson().toJson(tripsBL.findDiscounts());
+                    out.print(json);
                     break;
                 case "deleteTrip":
                     trip.setIdTrip(Integer.parseInt(request.getParameter("id_trip")));

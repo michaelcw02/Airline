@@ -12,26 +12,18 @@ public class Flight {
     private String flightNum;
     private Airplane airplane;
     private Trip trip;
-    private int cost;
     private Date departureDate;
     private int availableSeats;
-    private int discount;
-    private String discountDescription;
-    private String discountImagePath;
 
     public Flight() {
     }
 
-    public Flight(String flightNum, Airplane airplane, Trip trip, int cost, Date departureDate, int availableSeats, int discount, String discountDescription, String discountImagePath) {
+    public Flight(String flightNum, Airplane airplane, Trip trip, Date departureDate, int availableSeats) {
         this.flightNum = flightNum;
         this.airplane = airplane;
         this.trip = trip;
-        this.cost = cost;
         this.departureDate = departureDate;
         this.availableSeats = availableSeats;
-        this.discount = discount;
-        this.discountDescription = discountDescription;
-        this.discountImagePath = discountImagePath;
     }
 
     public String getFlightNum() {
@@ -58,14 +50,6 @@ public class Flight {
         this.trip = trip;
     }
 
-    public int getCost() {
-        return this.cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
     public Date getDepartureDate() {
         return this.departureDate;
     }
@@ -80,29 +64,5 @@ public class Flight {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
-    }
-
-    public int getDiscount() {
-        return this.discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
-
-    public String getDiscountDescription() {
-        return this.discountDescription;
-    }
-
-    public void setDiscountDescription(String discountDescription) {
-        this.discountDescription = discountDescription;
-    }
-
-    public String getDiscountImagePath() {
-        return this.discountImagePath;
-    }
-
-    public void setDiscountImagePath(String discountImagePath) {
-        this.discountImagePath = discountImagePath;
     }
 }
