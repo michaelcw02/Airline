@@ -206,7 +206,7 @@ function showFlightDetail (flightNum, flight) {
                     element += '<h4>To: <i>' + trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Date: <i>' + 'calculateArrivalDate(flight.departureDate)' + '</i> At: <i>' + 'calculateArrivalTime(trip.departureTime)' + '</i></h4>';
+                    element += '<h4>Date: <i>' + calculateArrivalDate(flight.departureDate) + '</i> At: <i>' + calculateArrivalTime(trip.departureTime) + '</i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';
@@ -214,7 +214,7 @@ function showFlightDetail (flightNum, flight) {
                     element += '<h4>Duration: <i>' + flight.duration + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4>Price: <i>' + 'calculatePrice(flight.price)' + '</i></h4>';
+                    element += '<h4>Price: <i>' + calculatePrice(flight.price, trip.discount) + '</i></h4>';
                 element += '</div>';
             element += '</div>';
             
