@@ -117,10 +117,13 @@ AirlineController.prototype = {
         });
     },
     getAllAirplane: function (callback) {
-        Proxy.getAllAirplanes(data) => {
+        Proxy.getAllAirplanes((data) => {
             Storage.store('getAllAirplane', data);
             callback(data);
         });
+    },
+    updateAirplane: function (id_airplane, type_airplane) {
+        Proxy.updateAirplane(id_airplane,type_airplane);
     },
     addAirplane: function (identifier ,type_airline) {
         Proxy.addAirplane(identifier, type_airline);

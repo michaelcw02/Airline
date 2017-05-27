@@ -14,6 +14,7 @@ function addElementsProperties() {
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(() => controller.searchAirplane());
     $("#btSearchAll").click(() => controller.getAllAirplane());
+    $("#update").click(() => controller.updateAirplane());
 }
 function searchAirplane() {
     controller.searchAirplane();

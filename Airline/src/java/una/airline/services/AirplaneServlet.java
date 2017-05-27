@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import una.airline.bl.AirplaneBL;
+import una.airline.bl.TypeAirplaneBL;
 import una.airline.domain.Airplane;
 
 /**
@@ -38,18 +39,26 @@ public class AirplaneServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             Airplane ta = new Airplane();
-            AirplaneBL typeAirBL = new AirplaneBL();
+            AirplaneBL AirBL = new AirplaneBL();
+            TypeAirplaneBL typeAirBL = new TypeAirplaneBL();
 
             String action = request.getParameter("action");
             switch (action) {
                 case "findAirplane":
                     String airplane = request.getParameter("id_airplane");
-                    json = new Gson().toJson(typeAirBL.findAirplaneByID(airplane));
+                    json = new Gson().toJson(AirBL.findAirplaneByID(airplane));
                     out.print(json);
                     break;
                 case "getAllAirplane":
-                    json = new Gson().toJson(typeAirBL.getAllAirplane());
+                    json = new Gson().toJson(AirBL.getAllAirplane());
                     out.print(json);
+                    break;
+                case "updateAirplane":
+                    ta.setIdAirplane(request.getParameter("id_airplane"));
+                    String typeAirplane = request.getParameter("type_airplane");
+                  //  json = new Gson().toJson(typeAirBL.findTypeAirplaneByType(typeAirplane));
+                    ta.setTypeAirplane(typeAirBL.findTypeAirplaneByType(typeAirplane));
+                    AirBL.updateAirplane(ta);
                     break;
 //                case "addAirplane":
 //                    ta.setIdAirplane(request.getParameter("identifier"));
@@ -58,9 +67,9 @@ public class AirplaneServlet extends HttpServlet {
 //                    typeAirBL.addTypeAirplane(ta);
 //                    out.print("C~El tipo de avion fue ingresado correctamente");
 //                    break;
-//                default:
-//                    out.print("E~No se indico la acción que se desea realizare");
-//                    break;
+                default:
+                    out.print("E~No se indico la acción que se desea realizare");
+                    break;
             }
 
         } catch (NumberFormatException e) {
