@@ -6,17 +6,18 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $("#send").click(() => controller.addAirplane());
+    $("#send").click(function () {
+        controller.sendAction();
+    });
     $("#cancel").click(function () {
         controller.cleanForm();
         $("#modalAirplane").modal("hide");
     });
     $("#btShowForm").click(() => controller.cleanForm());
-    $("#btSearch").click(() => controller.searchAirplane());
+    $("#btSearch").click(function () {
+        controller.searchAirplane();
+        $("#search").val("");
+    });
     $("#btSearchAll").click(() => controller.getAllAirplane());
-    $("#update").click(() => controller.updateAirplane());
-}
-function searchAirplane() {
-    controller.searchAirplane();
 }
 $(loadPage);

@@ -54,7 +54,7 @@ AirplaneController.prototype = {
             $("#tableAirplane").append(row);
             row.append($("<td>" + jsonResults.idAirplane + "</td>"));
             row.append($("<td>" + jsonResults.typeairplane.typeAirline + "</td>"));
-            row.append($('<td><button type="button" id="update" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showAirplaneForModify(\'' + jsonResults + '\');">' +
+            row.append($('<td><button type="button" id="update" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showAirplaneForModify(\'' + jsonResults.idAirplane + '\',\'' + jsonResults.typeairplane.typeAirline + '\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
                     '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'eliminate\');">' +
@@ -72,6 +72,8 @@ AirplaneController.prototype = {
         let type_airplane = this.view.$('#typeAirplane').val();
         this.airlineController.updateAirplane(id_airplane,type_airplane);
         hideModal("modalAirplane");
+        $('#airplaneAction').val("addAirplane");
+        $("#tableAirplane").empty();
     },
     cleanForm: () => {
         $('#identifier').focus();
@@ -105,9 +107,10 @@ function fillWithTypeAirplanes($select, typeAirplane) {
         $select.append('<option value="undefined">No Type of Airplane</option>');
 }
 
-function showAirplaneForModify(airplane) {
+function showAirplaneForModify(idAirplane, typeAirplane) {
     showModal("modalAirplane");
     $("#identifier").attr('readonly', 'readonly');
-    $("#identifier").val(airplane.idAirplane);
-    $("#typeAirplane").val(airplane.typeairplane.typeAirline);
+    $("#identifier").val(idAirplane);
+    $("#typeAirplane").val(typeAirplane);
+    $('#airplaneAction').val("addAirplane");
 }
