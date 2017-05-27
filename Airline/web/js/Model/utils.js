@@ -21,3 +21,8 @@ function calculateArrivalTime(departureTime, duration) {
 function calculatePrice(basePrice, discount) {
     return (discount != 0) ? basePrice * ((100 - discount) / 100) : basePrice;
 }
+function calculateDuration(duration) {
+    let minutes = duration % 60;
+    let hours = Math.floor(duration / 60);
+    return (hours == 0) ? minutes + 'm' : hours + 'h ' + minutes + 'm';
+}

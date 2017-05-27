@@ -211,7 +211,7 @@ function showFlightDetail (flightNum, flight, mode) {
             element += '</div>';
             element += '<div class="row">';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4 class="text-center">Duration: <i>' + flight.duration + '</i></h4>';
+                    element += '<h4 class="text-center">Duration: <i>' + calculateDuration(trip.duration) + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
                     element += '<h4 class="text-center">Price: <i>' + calculatePrice(trip.cost, trip.discount) + ' USD</i></h4>';
@@ -219,9 +219,9 @@ function showFlightDetail (flightNum, flight, mode) {
             element += '</div>';
 
             element += '<form class="form" role="form" id="flightDetailForm">';
-                element += '<div class="form-group">';
-                    element += '<button type="button" class="btn btn-primary" id="reserve">Reserve</button>';
-                    element += '<button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
+                element += '<div class="form-group text-center">';
+                    element += '<button type="button" class="btn btn-primary" id="reserve">Reserve</button> ';
+                    element += ' <button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
                 element += '</div>';
 
                 element += '<div class="form-group height25" >';
@@ -235,7 +235,7 @@ function showFlightDetail (flightNum, flight, mode) {
             //modal settings
             showModal('flightDetail', mode + ' Flight Information', element);
             $('#reserve').on('click', (event) => {
-                this.airlineController.reserveFlight(flight.flightNum, mode, (data) => {
+                new AirlineController().reserveFlight(flight.flightNum, mode, (data) => {
                     if(data.response[0] == 'S') {
                         let response = data.split('~')[1];
                         alert('Success On Reserving Flight');
@@ -256,6 +256,8 @@ function showFlightDetail (flightNum, flight, mode) {
                 });
             });
             $('#cancel').on('click', (event) => {
+                $('#flightDetail').modal('hide');
+                $('#flightDetailMessage').html('');
             })
         }
     })
