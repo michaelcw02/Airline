@@ -72,6 +72,9 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`trip` (
   `arrival_city` VARCHAR(3) NOT NULL,
   `departure_time` INT NOT NULL,
   `departure_day` VARCHAR(10) NOT NULL,
+  `discount` INT NOT NULL,
+  `discount_description` VARCHAR(45) NOT NULL,
+  `discount_image_path` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_trip`),
   INDEX `departure_city_idx` (`departure_city` ASC),
   INDEX `arrival_city_idx` (`arrival_city` ASC),
@@ -99,9 +102,6 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`flight` (
   `available_seats` INT(11) NOT NULL,
   `id_trip` INT(11) NOT NULL,
   `id_airplane` VARCHAR(20) NOT NULL,
-  `discount` INT(11) NULL DEFAULT NULL,
-  `discount_description` VARCHAR(45) NULL DEFAULT NULL,
-  `discount_image_path` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`flight_num`),
   INDEX `id_airplane_idx` (`id_airplane` ASC),
   INDEX `id_trip_idx` (`id_trip` ASC),
@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`flight` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 
 -- -----------------------------------------------------
