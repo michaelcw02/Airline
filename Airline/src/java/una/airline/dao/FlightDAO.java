@@ -23,17 +23,13 @@ public class FlightDAO extends BaseDAO {
 
     public void addFlight(Flight flight) throws Exception {
         String query = "INSERT INTO `airlinedb`.`flight` "
-                + "(`flight_num`, `id_airplane`, `id_trip`, `cost`, `departure_date`, `available_seats`, `discount`, `discount_description`, `discount_image_path`) "
-                + "VALUES ('%s', '%d', '%d', '%d', '%d', '%s', '%d', '%s', '%s');";
+                + "(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) "
+                + "VALUES ('%s', '%d', '%d', '%d', '%s');";
         query = String.format(query, flight.getFlightNum(),
                 flight.getAirplane().getIdAirplane(),
-                flight.getTrip().getIdTrip(),   
-                flight.getCost(),
+                flight.getTrip().getIdTrip(),
                 dateToSQL(flight.getDepartureDate()),
-                flight.getAvailableSeats(),
-                flight.getDiscount(),
-                flight.getDiscountDescription(),
-                flight.getDiscountImagePath());
+                flight.getAvailableSeats());
         System.out.println(query);
         int result = connection.executeUpdate(query);
         if (result == 0) {
@@ -108,7 +104,7 @@ public class FlightDAO extends BaseDAO {
         List<Flight> listFlights = new LinkedList<>();
         try {
             String query = "SELECT * "
-                    + "FROM FLIGHT, (SELECT ID_TRIP AS TRIP FROM TRIP WHERE DEPARTURE_CITY = '%s')alias1 "
+                    + "FROM airlinedb.FLIGHT, (SELECT ID_TRIP AS TRIP FROM airlinedb.TRIP WHERE DEPARTURE_CITY = '%s')alias1 "
                     + "WHERE FLIGHT.ID_TRIP = TRIP";
             query = String.format(query, cityFrom);
             ResultSet rs = connection.executeQuery(query);
@@ -138,17 +134,4 @@ public class FlightDAO extends BaseDAO {
         return listFlights;
     }
 
-    public List<Flight> findDiscounts() {
-        List<Flight> listResult = new LinkedList<>();
-        try {
-            String query = "SELECT * FROM FLIGHT WHERE DISCOUNT <> '0';";
-            ResultSet rs = connection.executeQuery(query);
-            while(rs.next()) {
-                listResult.add((flight(rs)));
-            }
-        } catch(Exception e) {
-            return null;
-        }
-        return listResult;
-    }
 }

@@ -26,10 +26,6 @@ public class FlightsBL {
         return flightDAO.getAllFlights();
     }
 
-    public List<Flight> findDiscounts() {
-        return flightDAO.findDiscounts();
-    }
-
     public RoundTripFlights searchFlights(String cityFrom, String cityTo, String departDate, String returnDate) {
         RoundTripFlights roundTripFlights = new RoundTripFlights();
         List<Flight> outbound;

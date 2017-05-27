@@ -17,16 +17,14 @@ IndexController.prototype = {
 
         this.airlineController.getAllDiscounts((results) => {
             for (let i in results) {
-                let flight = results[i];
-                console.log(flight);
+                let trip = results[i];
                 let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
                 $(element).appendTo(this.view.$('.carousel-indicators'));
-                element = '<div class="item"><img class="img-rounded" src="' + flight.discountImagePath + '">';
+                element = '<div class="item"><img class="img-rounded" src="' + trip.discountImagePath + '">';
                 element += '<div class="carousel-caption">';
-                let trip = flight.trip;
                 element += '<h1>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '</h1>';
-                element += '<h3>' + flight.discountDescription + '</h3>';
-                element += '<h3><a href="">' + 'Limited offer for ' + flight.discount + '% </a></h3>';
+                element += '<h3>' + trip.discountDescription + '</h3>';
+                element += '<h3><a href="">' + 'Limited offer for ' + trip.discount + '% </a></h3>';
                 element += '</div>   </div>';
                 $(element).appendTo(this.view.$('.carousel-inner'));
             }
@@ -155,22 +153,7 @@ IndexController.prototype = {
                 this.view.addListenersButtons(idButton, (i + 1));
             }
     },
-    showFlightDetail: function(flightNum, mode) {
-        this.airlineController.retrieveSearchFlights((results) => {
-            let flight;
-            if (mode === 'out') 
-                flight = filterFlightByNum(results.outboundFlights, flightNum);
-            if (mode === 'in')
-                flight = filterFlightByNum(results.returnFlights, flightNum);
-            if(flight !== undefined) {
-                let element = '';
-                
-                
-                //modal settings
-                showModal('flightDetail', 'Flight Information', element);
-            }
-        })
-    }
+    
 }
 
 
@@ -186,8 +169,6 @@ function toList($table, flight) {
     var trip = flight.trip;
     var tr = $('<tr></tr>', {
         "id": flight.flightNum,
-        "data-toggle": "modal",
-        "data-target": "flight-detail",
         class: "tr-flights"
     });
     $(tr).appendTo($table);
@@ -199,6 +180,48 @@ function toList($table, flight) {
     var precio = flight.cost + " USD";
     td = '<td class="td-flights-price col-md-4"><h2>' + precio + '</h2></td>';
     $(tr).append(td);
+    $('#' + flight.flightNum).on('click', () => {
+        showFlightDetail(flight.flightNum, flight);
+    })
+}
+
+function showFlightDetail (flightNum, flight) {
+    new AirlineController().retrieveSearchFlights((results) => {
+        if(flight !== undefined) {
+            let trip = flight.trip;
+            let element = '';
+            element += '<div class="row">';
+                element += '<h3 class="text-center">'+flight.flightNum+' - '+trip.cityByDepartureCity.code+' to '+trip.cityByArrivalCity.code + '</h3>'
+            element += '</div>';
+            element += '<div class="row">';
+                element += '<div class="col-md-6 col-sm-12">';
+                    element += '<h4>From: <i>' + trip.cityByDepartureCity.name + ', ' + trip.cityByDepartureCity.country + '</i></h4>';
+                element += '</div>';
+                element += '<div class="col-md-6 col-sm-12">';
+                    element += '<h4>Date: <i>' + flight.departureDate + '</i> At: <i>' + trip.departureTime + '</i></h4>';
+                element += '</div>';
+            element += '</div>';
+            element += '<div class="row">';
+                element += '<div class="col-md-6 col-sm-12">';
+                    element += '<h4>To: <i>' + trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country + '</i></h4>';
+                element += '</div>';
+                element += '<div class="col-md-6 col-sm-12">';
+                    element += '<h4>Date: <i>' + 'calculateArrivalDate(flight.departureDate)' + '</i> At: <i>' + 'calculateArrivalTime(trip.departureTime)' + '</i></h4>';
+                element += '</div>';
+            element += '</div>';
+            element += '<div class="row">';
+                element += '<div class="col-md-6 col-sm-12">';
+                    element += '<h4>Duration: <i>' + flight.duration + '</i></h4>';
+                element += '</div>';
+                element += '<div class="col-md-6 col-sm-12">';
+                    element += '<h4>Price: <i>' + 'calculatePrice(flight.price)' + '</i></h4>';
+                element += '</div>';
+            element += '</div>';
+            
+            //modal settings
+            showModal('flightDetail', 'Flight Information', element);
+        }
+    })
 }
 
 function getFlightCitiesTo(flights) {

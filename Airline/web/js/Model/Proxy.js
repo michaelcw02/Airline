@@ -19,7 +19,7 @@ Proxy.getCities = (callback) => {
 }
 Proxy.getDiscounts = (callback) => {
     $.ajax({
-        url: 'FlightsServlet',
+        url: 'TripsServlet',
         data: {
             action: "getAllDiscounts"
         },
@@ -189,8 +189,8 @@ Proxy.updateTypeAirplane = (type_airline, year, brand, rows, seatsRow) => {
         type: 'POST',
         dataType: "json"
     });
- }
-    
+}
+
 Proxy.searchForAirplane = (id_airplane, callback) => {
     $.ajax({
         url: 'AirplaneServlet',
@@ -230,7 +230,7 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         },
         type: 'POST',
         dataType: "json"
-    }); 
+    });
 }
 
 Proxy.getAllAirplanes = (callback) => {
@@ -283,6 +283,25 @@ Proxy.searchTripByCode = (idTrip, callback) => {
         success: (data) => {
             console.log(data);
             callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.deleteTrip = (id_trip) => {
+
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "deleteTrip",
+            id_trip: id_trip
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a route was deleted");
+        },
+        success: (data) => {
+            console.log(data);
+            showModal("myModal", "Status", "The route was deleted of the database");
         },
         type: 'POST',
         dataType: "json"

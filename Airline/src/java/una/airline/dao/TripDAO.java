@@ -8,6 +8,7 @@ package una.airline.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.List;
 import una.airline.domain.Trip;
 
 /**
@@ -15,19 +16,21 @@ import una.airline.domain.Trip;
  * @author michaelcw02
  */
 public class TripDAO extends BaseDAO {
+
     public TripDAO() {
         super();
     }
- 
+
     public void addTrip(Trip trip) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`) VALUES ('%d', '%d', '%s', '%s', '%d', '%s');";
-        query = String.format(query, trip.getDistance(), trip.getDuration(), trip.getCityByArrivalCity().getCode(), trip.getCityByDepartureCity().getCode(), trip.getDepartureTime(), trip.getDepartureDay());
+        String query = "INSERT INTO `airlinedb`.`trip` (`distance`, `duration`, `departure_city`, `arrival_city`, `departure_time`, `departure_day`, `cost`, `discount`, `discount_description`, `discount_image_path`) VALUES ('%d', '%d', '%s', '%s', '%d', '%s', '%d', '%d', '%s', '%s');";
+        query = String.format(query, trip.getDistance(), trip.getDuration(), trip.getCityByArrivalCity().getCode(), trip.getCityByDepartureCity().getCode(), trip.getDepartureTime(), trip.getDepartureDay(), trip.getCost(), trip.getDiscount(), trip.getDiscountDescription(), trip.getDiscountImagePath());
         System.out.println(query);
         int result = connection.executeUpdate(query);
         if (result == 0) {
             throw new Exception("City already exists.");
         }
     }
+
     public LinkedList<Trip> getAllTrips() {
         LinkedList<Trip> listaResultado = new LinkedList<>();
         try {
@@ -41,15 +44,18 @@ public class TripDAO extends BaseDAO {
         }
         return listaResultado;
     }
+
     public Trip getTripByCode(int code) throws Exception {
         String query = "SELECT * FROM TRIP WHERE ID_TRIP = '%d';";
         query = String.format(query, code);
         ResultSet rs = connection.executeQuery(query);
-        if(rs.next())
+        if (rs.next()) {
             return trip(rs);
+        }
         throw new Exception("E~Trip does not exists");
     }
-    public LinkedList<Trip> getTripByCityFrom(String code) throws Exception{
+
+    public LinkedList<Trip> getTripByCityFrom(String code) throws Exception {
         LinkedList<Trip> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * FROM Trip WHERE departure_city = '%s'";
@@ -62,7 +68,8 @@ public class TripDAO extends BaseDAO {
         }
         return listaResultado;
     }
-    public LinkedList<Trip> getTripByCityFromTo(String codeCityFrom, String codeCityTo) throws Exception{
+
+    public LinkedList<Trip> getTripByCityFromTo(String codeCityFrom, String codeCityTo) throws Exception {
         LinkedList<Trip> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * FROM Trip WHERE departure_city = '%s' AND arrival_city = '%s'";
@@ -77,4 +84,26 @@ public class TripDAO extends BaseDAO {
         return listaResultado;
     }
 
+    public void deleteTrip(Trip dTrip) throws Exception {
+        String query = "DELETE FROM Trip WHERE id_trip = '%d';";
+        query = String.format(query, dTrip.getIdTrip());
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("E~Trip doesnt exists");
+        }
+    }
+
+    public List<Trip> findDiscounts() {
+        List<Trip> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT * FROM TRIP WHERE DISCOUNT <> '0';";
+            ResultSet rs = connection.executeQuery(query);
+            while(rs.next()) {
+                listResult.add((trip(rs)));
+            }
+        } catch(Exception e) {
+            return null;
+        }
+        return listResult;
+    }
 }

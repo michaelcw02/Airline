@@ -340,8 +340,14 @@ article hr {
 }
 #flight-detail, 
 #modalRoute,
+<<<<<<< HEAD
 #modalTypeAirplane,
 #modalAirplane,
 #myModal{
+=======
+#myModalTypeAirplane,
+#myModal,
+#modalAirplane{
+>>>>>>> 265da5b692f3f7af8a1591185641b4e220cbb8a1
     z-index: 6000 !important;
 }

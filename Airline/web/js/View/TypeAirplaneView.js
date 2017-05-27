@@ -5,13 +5,20 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $("#send").click(() => controller.addTypeAirplane());
+    $("#send").click(function () {
+        controller.sendAction();
+      //  controller.showTable(); //tiene que hacer la modificacion o insercion primero y despues muestra la tabla
+      //esta mostrando tabla antes de que se inserte o modifique
+    });
     $("#cancel").click(function () {
         controller.cleanForm();
         $("#myModalTypeAirplane").modal("hide");
     });
     $("#btShowForm").click(() => controller.cleanForm());
-    $("#btSearch").click(() => controller.searchTypeAirplane());
+    $("#btSearch").click(function () {
+        controller.searchTypeAirplane();
+        $("#search").val("");
+    });
     $("#btSearchAll").click(() => controller.getAllTypeAirline());
 }
 function deleteTypeAirplane(type_airline) {

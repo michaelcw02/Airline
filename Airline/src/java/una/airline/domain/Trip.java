@@ -18,11 +18,15 @@ public class Trip {
     private int duration;
     private int departureTime;
     private String departureDay;
+    private int cost;
+    private int discount;
+    private String discountDescription;
+    private String discountImagePath;
 
     public Trip() {
     }
     // THIS CONSTRUCTOR IS FOR DAO ONLY
-    public Trip(int idTrip, City cityByDepartureCity, City cityByArrivalCity, int distance, int duration, int departureTime, String departureDay) {
+    public Trip(int idTrip, City cityByDepartureCity, City cityByArrivalCity, int distance, int duration, int departureTime, String departureDay, int cost, int discount, String discountDescription, String discountImagePath) {
         this.idTrip = idTrip;
         this.cityByArrivalCity = cityByArrivalCity;
         this.cityByDepartureCity = cityByDepartureCity;
@@ -30,15 +34,23 @@ public class Trip {
         this.duration = duration;
         this.departureTime = departureTime;
         this.departureDay = departureDay;
+        this.cost = cost;
+        this.discount = discount;
+        this.discountDescription = discountDescription;
+        this.discountImagePath = discountImagePath;
     }
     // THIS CONSTRUCTOR IS FOR NORMAL USE ONLY
-    public Trip(City cityByDepartureCity, City cityByArrivalCity, int distance, int duration, int departureTime, String departureDay) {
+    public Trip(City cityByDepartureCity, City cityByArrivalCity, int distance, int duration, int departureTime, String departureDay, int cost, int discount, String discountDescription, String discountImagePath) {
         this.cityByArrivalCity = cityByArrivalCity;
         this.cityByDepartureCity = cityByDepartureCity;
         this.distance = distance;
         this.duration = duration;
         this.departureTime = departureTime;
         this.departureDay = departureDay;
+        this.cost = cost;
+        this.discount = discount;
+        this.discountDescription = discountDescription;
+        this.discountImagePath = discountImagePath;        
     }
 
     public Integer getIdTrip() {
@@ -96,6 +108,36 @@ public class Trip {
     public void setDepartureDay(String departureDay) {
         this.departureDay = departureDay;
     }
-    
-    
+
+    public int getCost() {
+        return this.cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getDiscount() {
+        return this.discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
+
+    public String getDiscountDescription() {
+        return this.discountDescription;
+    }
+
+    public void setDiscountDescription(String discountDescription) {
+        this.discountDescription = discountDescription;
+    }
+
+    public String getDiscountImagePath() {
+        return this.discountImagePath;
+    }
+
+    public void setDiscountImagePath(String discountImagePath) {
+        this.discountImagePath = discountImagePath;
+    }
 }
