@@ -119,7 +119,6 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-<<<<<<< HEAD
     getAllAirplane: function (callback) {
         Proxy.getAllAirplanes((data) => {
             Storage.store('getAllAirplane', data);
@@ -129,11 +128,7 @@ AirlineController.prototype = {
     updateAirplane: function (id_airplane, type_airplane) {
         Proxy.updateAirplane(id_airplane,type_airplane);
     },
-    addAirplane: function (identifier ,type_airline) {
-=======
-
     addAirplane: function (identifier, type_airline) {
->>>>>>> 265da5b692f3f7af8a1591185641b4e220cbb8a1
         Proxy.addAirplane(identifier, type_airline);
         //, (data) => {
         //callback(data);

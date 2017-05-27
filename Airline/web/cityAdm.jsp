@@ -1,5 +1,5 @@
 <%-- 
-    Document   : AirplaneManagement
+    Document   : cityAdm
     Created on : May 20, 2017, 12:04:43 AM
     Author     : cfuen
 --%>
@@ -10,7 +10,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Airplane Management</title>
+    <title>City Management</title>
     <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">

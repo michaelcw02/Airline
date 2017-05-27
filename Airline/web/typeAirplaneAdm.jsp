@@ -33,11 +33,7 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="modal fade" id="modalTypeAirplane" role="dialog">
-=======
         <div class="modal fade" id="myModalTypeAirplane" role="dialog">
->>>>>>> 265da5b692f3f7af8a1591185641b4e220cbb8a1
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
