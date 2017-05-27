@@ -398,3 +398,105 @@ Proxy.updateCity = (code,name,country) => {
         dataType: "json"
     });
 }
+Proxy.searchUserByUsername = (username, callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "getUserByUsername",
+            username: username
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "This user doesn´t exist");
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.getAllUsers = (callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "getAllUsers"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred in the loading of users");
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+}
+Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "addUser",
+            username: username, 
+            password: password,
+            name: name, 
+            lastname1: lastname1,
+            lastname2: lastname2, 
+            email:email, 
+            birthdate: birthdate, 
+            address: address, 
+            phone: phone, 
+            celular: celular
+        },
+         error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a user was inserted");
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The user was inserted into the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.deleteUser = (username) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "deleteUser",
+            username: username
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a user was deleted");
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The user was deleted of the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "updateUser",
+            username: username, 
+            password: password,
+            name: name, 
+            lastname1: lastname1,
+            lastname2: lastname2, 
+            email:email, 
+            birthdate: birthdate, 
+            address: address, 
+            phone: phone, 
+            celular: celular
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a user was modified");
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The user was updated in the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}

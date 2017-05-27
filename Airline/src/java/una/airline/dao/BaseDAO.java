@@ -142,7 +142,7 @@ public class BaseDAO {
             User user = null;
             Flight flight = null;
             try {
-                user = (User) new UserDAO().findByUsername(username);
+                user = (User) new UserDAO().getUserByUsername(username);
                 flight = (Flight) new FlightDAO().findByID(flightNum);
             } catch (Exception e) {
                 throw new Exception("E~There was an issue with User or Flight of Ticket", e);

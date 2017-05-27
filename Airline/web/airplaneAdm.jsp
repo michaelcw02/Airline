@@ -39,7 +39,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="myModalTitle">Insert Airplane
+                    <h4 class="modal-title" id="myModalTitle">Insert/Modify Airplane
                 </div>
                 <div class="modal-body" id="myModalMessage">
                     <form role="form" onsubmit="return false;" id="formAirplanes">

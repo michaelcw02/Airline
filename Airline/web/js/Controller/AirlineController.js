@@ -142,4 +142,25 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+    addUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
+        Proxy.addUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
+    },
+    updateUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
+        Proxy.updateUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
+    },
+    deleteUser: function (username) {
+        Proxy.deleteUser(username);
+    },
+    searchUserByUsername: function (username, callback) {
+        Proxy.searchUserByUsername(username, (data) => {
+            Storage.store('searchUserByUsername', data);
+            callback(data);
+        });
+    },
+    getAllUsers: function (callback) {
+        Proxy.getAllUsers((data) => {
+            Storage.store('getAllUsers', data);
+            callback(data);
+        });
+    }
 }

@@ -63,23 +63,37 @@ AirplaneController.prototype = {
         });
     },
     addAirplane: function () {
-        let identifier = this.view.$('#identifier').val();
-        let type_airplane = this.view.$('#type_airplane').val();
-        this.airlineController.addAirplane(identifier, type_airplane);
+        if (!doValidate()) {
+            let identifier = this.view.$('#identifier').val();
+            let type_airplane = this.view.$('#typeAirplane').val();
+            this.airlineController.addAirplane(identifier, type_airplane);
+            hideModal("modalAirplane");
+            $("#tableAirplane").empty();
+        }
     },
     updateAirplane: function () {
-        let id_airplane = this.view.$('#identifier').val();
-        let type_airplane = this.view.$('#typeAirplane').val();
-        this.airlineController.updateAirplane(id_airplane,type_airplane);
-        hideModal("modalAirplane");
-        $('#airplaneAction').val("addAirplane");
-        $("#tableAirplane").empty();
+        if (!doValidate()) {
+            let id_airplane = this.view.$('#identifier').val();
+            let type_airplane = this.view.$('#typeAirplane').val();
+            this.airlineController.updateAirplane(id_airplane,type_airplane);
+            hideModal("modalAirplane");
+            $('#airplaneAction').val("addAirplane");
+            $("#tableAirplane").empty();
+        }
     },
     cleanForm: () => {
         $('#identifier').focus();
         $("#identifier").removeAttr("readonly");
         $("#airplaneAction").val("addAirplane");
         $('#formAirplanes').trigger("reset");
+    },
+    sendAction: function () {
+        let verify = $('#airplaneAction').val();
+        if (verify == "updateAirplane") {
+            this.updateAirplane();
+        } else {
+            this.addAirplane();
+        }
     },
 
 }
@@ -113,4 +127,55 @@ function showAirplaneForModify(idAirplane, typeAirplane) {
     $("#identifier").val(idAirplane);
     $("#typeAirplane").val(typeAirplane);
     $('#airplaneAction').val("addAirplane");
+}
+
+function isBlank(element) {
+    removeInvalid(element);
+    if (!element.val()) {
+        setInvalid(element);
+        return true;
+    }
+}
+function removeInvalid(element) {
+    element.removeClass('invalid');
+}
+function setInvalid(element) {
+    element.addClass('invalid');
+}
+function isSomethingBlank() {
+    let blanks = false;
+    if (isBlank($('#identifier'))) {
+        blanks = true;
+    } else if (isBlankTypeAirplane($('#typeAirplane'))) {
+        blanks = true;
+    } 
+    return blanks;
+}
+function isBlankTypeAirplane(element){
+    removeInvalid(element);
+    if(element.val() == 0){
+        setInvalid(element);
+        return true;
+    }
+}
+function validateLength() {
+    let error = false;
+    var Max_Length = 20;
+    var lengthIdentifier = $("#identifier").val().length;
+    if (lengthIdentifier > Max_Length) {
+        alert("The max length of " + Max_Length + " characters is reached in Identifier, you typed in  " + lengthIdentifier + "characters");
+        error = true;
+    }
+    return error;
+}
+
+function doValidate() {
+    let error = false;
+    if (this.isSomethingBlank()) {
+        alert("There is something you missed, please fill it up!");
+        error = true;
+    } else if (validateLength()) {
+        error = true;
+    }
+    return error;
 }
