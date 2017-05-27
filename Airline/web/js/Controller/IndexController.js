@@ -17,15 +17,14 @@ IndexController.prototype = {
 
         this.airlineController.getAllDiscounts((results) => {
             for (let i in results) {
-                let flight = results[i];
+                let trip = results[i];
                 let element = '<li data-target="#advertisement-carousel" data-slide-to="' + i + '"></li>';
                 $(element).appendTo(this.view.$('.carousel-indicators'));
-                element = '<div class="item"><img class="img-rounded" src="' + flight.discountImagePath + '">';
+                element = '<div class="item"><img class="img-rounded" src="' + trip.discountImagePath + '">';
                 element += '<div class="carousel-caption">';
-                let trip = flight.trip;
                 element += '<h1>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '</h1>';
-                element += '<h3>' + flight.discountDescription + '</h3>';
-                element += '<h3><a href="">' + 'Limited offer for ' + flight.discount + '% </a></h3>';
+                element += '<h3>' + trip.discountDescription + '</h3>';
+                element += '<h3><a href="">' + 'Limited offer for ' + trip.discount + '% </a></h3>';
                 element += '</div>   </div>';
                 $(element).appendTo(this.view.$('.carousel-inner'));
             }
