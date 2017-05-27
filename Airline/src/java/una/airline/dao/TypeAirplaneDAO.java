@@ -67,8 +67,8 @@ public class TypeAirplaneDAO extends BaseDAO {
     }
 
     public int updateTypeAirplane(TypeAirplane nTypeAirplane) {
-       String query = "UPDATE typeairplane SET year='%s', qty_of_seats='%d', qty_of_rows='%d', seats_per_row='%d' WHERE type_airline='%s'";
-       query = String.format(query, nTypeAirplane.getYear(), nTypeAirplane.getQtyOfSeats(), nTypeAirplane.getQtyOfRows(), nTypeAirplane.getSeatsPerRow(), nTypeAirplane.getTypeAirline());
+       String query = "UPDATE typeairplane SET year='%s',brand='%s', qty_of_seats='%d', qty_of_rows='%d', seats_per_row='%d' WHERE type_airline='%s'";
+       query = String.format(query, nTypeAirplane.getYear(),nTypeAirplane.getBrand() ,nTypeAirplane.getQtyOfSeats(), nTypeAirplane.getQtyOfRows(), nTypeAirplane.getSeatsPerRow(), nTypeAirplane.getTypeAirline());
        int result = connection.executeUpdate(query);
        return result;
     }

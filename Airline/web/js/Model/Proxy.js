@@ -189,8 +189,8 @@ Proxy.updateTypeAirplane = (type_airline, year, brand, rows, seatsRow) => {
         type: 'POST',
         dataType: "json"
     });
- }
-    
+}
+
 Proxy.searchForAirplane = (id_airplane, callback) => {
     $.ajax({
         url: 'AirplaneServlet',
@@ -230,7 +230,7 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         },
         type: 'POST',
         dataType: "json"
-    }); 
+    });
 }
 Proxy.searchTripByCode = (idTrip, callback) => {
     $.ajax({
