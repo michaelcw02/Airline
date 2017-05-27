@@ -88,9 +88,6 @@ AirlineController.prototype = {
 
     addTypeAirplane: function (type_airline, year, brand, rows, seatsRow) {
         Proxy.addTypeAirplane(type_airline, year, brand, rows, seatsRow);
-        //, (data) => {
-        //callback(data);
-        //});
     },
     deleteTypeAirplane: function (type_airline) {
         Proxy.deleteTypeAirplane(type_airline);
@@ -109,7 +106,6 @@ AirlineController.prototype = {
     },
     searchFlightByNum: function (flightNum, callback) {
         Proxy.searchFlightByNum(flightNum, (data) => {
-
             callback(data);
         });
     },
@@ -130,8 +126,20 @@ AirlineController.prototype = {
     },
     addAirplane: function (identifier, type_airline) {
         Proxy.addAirplane(identifier, type_airline);
-        //, (data) => {
-        //callback(data);
-        //});
+    },
+    addCity: function (code, name, country) {
+        Proxy.addCity(code, name, country);
+    },
+    updateCity: function (code, name, country) {
+        Proxy.updateCity(code, name, country);
+    },
+    deleteCity: function (code) {
+        Proxy.deleteCity(code);
+    },
+    searchCityByCode: function (code, callback) {
+        Proxy.searchCityByCode(code, (data) => {
+            Storage.store('searchCityByCode', data);
+            callback(data);
+        });
     },
 }

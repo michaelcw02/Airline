@@ -211,7 +211,6 @@ Proxy.searchForAirplane = (id_airplane, callback) => {
 }
 
 Proxy.addAirplane = (id_airplane, type_airplane) => {
-    console.log(id_airplane, type_airplane);
     $.ajax({
         url: 'AirplaneServlet',
         data: {
@@ -289,7 +288,6 @@ Proxy.searchTripByCode = (idTrip, callback) => {
     });
 }
 Proxy.deleteTrip = (id_trip) => {
-
     $.ajax({
         url: 'TripsServlet',
         data: {
@@ -324,5 +322,79 @@ Proxy.searchFlightByNum = (flightNum, callback) => {
         type: 'POST',
         dataType: "json"
     });
-
+}
+Proxy.searchCityByCode = (code, callback) => {
+    $.ajax({
+        url: 'CitiesServlet',
+        data: {
+            action: "getCityByCode",
+            code: code
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "This city doesn´t exist");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.addCity = (code,name,country) => {
+    $.ajax({
+        url: 'CitiesServlet',
+        data: {
+            action: "addCity",
+            code: code,
+            name: name,
+            country:country
+        },
+         error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a city was inserted");
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The city was inserted into the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.deleteCity = (code) => {
+    $.ajax({
+        url: 'CitiesServlet',
+        data: {
+            action: "deleteCity",
+            code: code
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a city was deleted");
+        },
+        success: (data) => {
+            console.log(data);
+            showModal("myModal", "Status", "The city was deleted of the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.updateCity = (code,name,country) => {
+    $.ajax({
+        url: 'CitiesServlet',
+        data: {
+            action: "updateCity",
+            code: code,
+            name: name,
+            country: country
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a city was modified");
+        },
+        success: (data) => {
+            console.log(data);
+            showModal("myModal", "Status", "The city was updated in the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }

@@ -38,17 +38,16 @@ public class CitiesServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-            
+
             CityBL cityBL = new CityBL();
-            
+            City city = new City();
+
             //Se hace una pausa para ver el modal
             //Thread.sleep(1000);
-            
             //**********************************************************************
             //se toman los datos de la session
             //**********************************************************************
             //HttpSession session = request.getSession();
-            
             //**********************************************************************
             //se consulta cual accion se desea realizar
             //**********************************************************************
@@ -59,7 +58,30 @@ public class CitiesServlet extends HttpServlet {
                     json = new Gson().toJson(list);
                     out.print(json);
                     break;
-                
+                case "getCityByCode":
+                    String code = request.getParameter("code");
+                    json = new Gson().toJson(cityBL.getCityByCode(code));
+                    out.print(json);
+                    break;
+                case "addCity":
+                    city.setCode(request.getParameter("code"));
+                    city.setName(request.getParameter("name"));
+                    city.setCountry(request.getParameter("country"));
+                    cityBL.addCity(city);
+                    out.print("{\"data\":\"C~la ciudad fue ingresada correctamente\"}");
+                    break;
+                case "updateCity":
+                    city.setCode(request.getParameter("code"));
+                    city.setName(request.getParameter("name"));
+                    city.setCountry(request.getParameter("country"));
+                    cityBL.updateCity(city);
+                    out.print("{\"data\":\"C~la ciudad fue modificada correctamente\"}");
+                    break;
+                case "deleteCity":
+                    city.setCode(request.getParameter("code"));
+                    cityBL.deleteCity(city);
+                    out.print("{\"data\": \"C~La ciudad fue eliminada \"}");
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
