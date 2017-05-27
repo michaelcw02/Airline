@@ -419,7 +419,6 @@ Proxy.updateCity = (code, name, country) => {
         dataType: "json"
     });
 }
-<<<<<<< HEAD
 Proxy.searchUserByUsername = (username, callback) => {
     $.ajax({
         url: 'UserServlet',
@@ -445,7 +444,14 @@ Proxy.getAllUsers = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred in the loading of users");
-=======
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+}
 Proxy.getPreviousId = (callback) => {
     $.ajax({
         url: 'TripsServlet',
@@ -454,7 +460,6 @@ Proxy.getPreviousId = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred");
->>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663
         },
         success: (data) => {
             callback(data);
@@ -462,7 +467,6 @@ Proxy.getPreviousId = (callback) => {
         type: 'GET',
         dataType: "json"
     });
-<<<<<<< HEAD
 }
 Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
     $.ajax({
@@ -502,7 +506,10 @@ Proxy.deleteUser = (username) => {
         },
         success: (data) => {
             showModal("myModal", "Status", "The user was deleted of the database");
-=======
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 };
 Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image,callback) => {
     $.ajax({
@@ -527,13 +534,11 @@ Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departure
             console.log(data);
            Proxy.productAddImagen(code, image, callBack);
             showModal("myModal", "Status", "The trip was inserted in the database");
->>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663
         },
         type: 'POST',
         dataType: "json"
     });
 }
-<<<<<<< HEAD
 Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
     $.ajax({
         url: 'UserServlet',
@@ -560,7 +565,6 @@ Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birth
         dataType: "json"
     });
 }
-=======
 Proxy.tripAddImage = function (code, image, callback) {
     var AJAX_req = new XMLHttpRequest();
     url = "/Airline/ImageUpload";
@@ -575,5 +579,3 @@ Proxy.tripAddImage = function (code, image, callback) {
     formdata.append("image", image);
     AJAX_req.send(formdata);
 }
-
->>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663

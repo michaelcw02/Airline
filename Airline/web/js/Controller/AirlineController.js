@@ -142,7 +142,6 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-<<<<<<< HEAD
     addUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
         Proxy.addUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
     },
@@ -163,7 +162,7 @@ AirlineController.prototype = {
             Storage.store('getAllUsers', data);
             callback(data);
         });
-=======
+    },    
     addTrip: function(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback){
         Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback);  
     },
@@ -175,6 +174,5 @@ AirlineController.prototype = {
             Storage.store('reserveFlight' + mode, data);
             callback(data);
         })
->>>>>>> cf0a900e7bcc8b7dfec9c9515e0cfe8ef0e13663
     }
 }
