@@ -67,7 +67,7 @@ Proxy.getTrips = (callback) => {
         type: 'GET',
         dataType: "json"
     });
-}
+};
 Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) => {
     $.ajax({
         url: 'FlightsServlet',
@@ -88,7 +88,7 @@ Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) =>
         type: 'POST',
         dataType: "json"
     });
-}
+};
 Proxy.searchForTypeAirplane = (type_airline, callback) => {
     $.ajax({
         url: 'TypeAirplaneServlet',
@@ -303,16 +303,16 @@ Proxy.searchCityByCode = (code, callback) => {
         dataType: "json"
     });
 }
-Proxy.addCity = (code,name,country) => {
+Proxy.addCity = (code, name, country) => {
     $.ajax({
         url: 'CitiesServlet',
         data: {
             action: "addCity",
             code: code,
             name: name,
-            country:country
+            country: country
         },
-         error: function () {
+        error: function () {
             showModal("myModal", "ERROR", "An error occurred when a city was inserted");
         },
         success: (data) => {
@@ -340,7 +340,7 @@ Proxy.deleteCity = (code) => {
         dataType: "json"
     });
 }
-Proxy.updateCity = (code,name,country) => {
+Proxy.updateCity = (code, name, country) => {
     $.ajax({
         url: 'CitiesServlet',
         data: {
@@ -360,3 +360,62 @@ Proxy.updateCity = (code,name,country) => {
         dataType: "json"
     });
 }
+Proxy.getPreviousId = (callback) => {
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "getPreviousId"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred");
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+};
+Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image,callback) => {
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "addTrip",
+            distance: distance,
+            duration: duration,
+            departureCity: departureCity,
+            arrivalCity: arrivalCity,
+            departureTime: departureTime,
+            departureDay: departureDay,
+            cost: cost,
+            discount: discount,
+            discountDes: discountDes,
+            discountPath: discountPath
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a trip was inserted");
+        },
+        success: (data) => {
+            console.log(data);
+           Proxy.productAddImagen(code, image, callBack);
+            showModal("myModal", "Status", "The trip was inserted in the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.tripAddImage = function (code, image, callback) {
+    var AJAX_req = new XMLHttpRequest();
+    url = "/Airline/ImageUpload";
+    AJAX_req.open("POST", url, true);
+    AJAX_req.onreadystatechange = function () {
+        if (AJAX_req.readyState === 4 && AJAX_req.status === 200) {
+            callBack(0);
+        }
+    };
+    var formdata = new FormData();
+    formdata.append("code", code);
+    formdata.append("image", image);
+    AJAX_req.send(formdata);
+}
+

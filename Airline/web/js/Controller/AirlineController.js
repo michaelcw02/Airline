@@ -134,4 +134,10 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+    addTrip: function(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback){
+        Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback);  
+    },
+    getPreviousId: function(callback){
+        Proxy.getPreviousId(callback);
+    },
 }
