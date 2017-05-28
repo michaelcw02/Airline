@@ -174,8 +174,14 @@ AirlineController.prototype = {
     },
     reserveFlight: function (flightNum, mode, callback) {
         Proxy.reserveFlight(flightNum, mode, (data) => {
-            Storage.store('reserveFlight' + mode, data);
+            Storage.store(mode + "Reservation", data);
             callback(data);
         })
+    },
+    confirmReservation: function(callback) {
+
+    },
+    cancelReservation: function(callback) {
+        
     }
 }

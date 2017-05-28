@@ -32,6 +32,9 @@ function addElementsProperties() {
     $('#btnSearchFlights').click(() => controller.moveToFlights());
     $('#cityTo').change(() => controller.cityFromHandlerHide());
     $('#cityFrom').change(() => controller.cityFromHandlerHide());
+
+    $('#confirmReservation').click( () => controller.confirmReservation() );
+    $('#cancelReservation').click( () => controller.cancelReservation() );
 }
 
 function addListenersButtons(idButton, num) {

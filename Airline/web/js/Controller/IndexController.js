@@ -120,6 +120,7 @@ IndexController.prototype = {
         let returnFlights = jsonResults.returnFlights;
         $('.outbound-flights-div').fadeOut();
         $('.return-flights-div').fadeOut();
+        $('.confirmation-div').fadeOut();
 
         if (outboundFlights != undefined) {
             showResult($('#outbound-flights'), outboundFlights);
@@ -131,6 +132,8 @@ IndexController.prototype = {
             $('.return-flights-div').fadeIn();
             toDataTable($('.return-flights-table'));
         }
+
+        $('.confirmation-div').fadeIn();
     },
     showSearchFlights: function (numPage = 1, flights) {
         this.view.$("#flights").empty();
@@ -153,7 +156,13 @@ IndexController.prototype = {
                 this.view.addListenersButtons(idButton, (i + 1));
             }
     },
-    
+    confirmReservation: function() {
+        
+    },
+    cancelReservation: function() {
+
+    }
+     
 }
 
 
@@ -226,7 +235,7 @@ function showFlightDetail (flightNum, flight, mode) {
 
                 element += '<div class="form-group height25" >';
                     element += '<div class="alert alert-success hiddenDiv" id="messageResult">';
-                        element += '<strong id="messageResult">Info!... </strong>';
+                        element += '<strong id="messageResultTitle">Info!... </strong>';
                         element += '<span id="messageResultMessage">This alert box could indicate a neutral informative change or action.</span>';
                     element += '</div>';
                 element += '</div>';
@@ -235,24 +244,17 @@ function showFlightDetail (flightNum, flight, mode) {
             //modal settings
             showModal('flightDetail', mode + ' Flight Information', element);
             $('#reserve').on('click', (event) => {
-                showMessage('messageResult', 'Info!', 'Reserving Flight!');
+                showMessage('messageResult', 'Info!...', 'Reserving Flight!');
                 new AirlineController().reserveFlight(flight.flightNum, mode, (data) => {
                     if(data.response[0] == 'S') {
-                        let response = data.split('~')[1];
-                        alert('Success On Reserving Flight');
-                        $('#messageResultText').html('');
-                        $('#messageResult').removeClass('alert-danger');
-                        $('#messageResult').addClass('alert-sucess');
-                        $('#messageResultText').text(response);
-                        $('#flightDetail').modal("hide");
+                        let response = data.response.split('~')[1];
+                        showMessage('messageResult', 'Info!...', response, 'success');
+                        setTimeout( () => { $('#flightDetail').modal("hide"); }, 1500 );
                     }
                     else {
-                        let response = data.split('~')[1];
-                        $('#messageResultText').html('');
-                        $('#messageResult').removeClass('alert-sucess');
-                        $('#messageResult').addClass('alert-danger');
-                        $('#messageResultText').text(response);
-                        $('#messageResult').fadeIn();
+                        let response = data.response.split('~')[1];
+                        showMessage('messageResult', 'Warning!...', response, 'warning');
+                        setTimeout( () => { $('#flightDetail').modal("hide"); }, 1500 );
                     }
                 });
             });

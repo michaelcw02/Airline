@@ -335,7 +335,8 @@ article hr {
 }
 
 .outbound-flights-div,
-.return-flights-div {
+.return-flights-div,
+.confirmation-div {
     display: none;
 }
 
@@ -355,4 +356,9 @@ article hr {
 }
 .hiddenDiv{
     display: none;
+}
+
+.confirmation-div {
+    height: 60px;
+    margin-bottom: 22px;
 }

@@ -346,7 +346,7 @@ Proxy.reserveFlight = (flightNum, mode, callback) => {
             mode: mode
         },
         error: () => { //si existe un error en la respuesta del ajax
-            showModal("myModal", "ERROR", "Sorry, we could not reserve your flight.");
+            showModal("myModal", "ERROR", "Sorry, we could not select your flight.");
         },
         success: (data) => {
             console.log(data);
@@ -482,33 +482,31 @@ Proxy.getAllUsers = (callback) => {
         dataType: "json"
     });
 }
-Proxy.getPreviousId = (callback) => {
-    Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
-        $.ajax({
-            url: 'UserServlet',
-            data: {
-                action: "addUser",
-                username: username,
-                password: password,
-                name: name,
-                lastname1: lastname1,
-                lastname2: lastname2,
-                email: email,
-                birthdate: birthdate,
-                address: address,
-                phone: phone,
-                celular: celular
-            },
-            error: function () {
-                showModal("myModal", "ERROR", "An error occurred when a user was inserted");
-            },
-            success: (data) => {
-                showModal("myModal", "Status", "The user was inserted into the database");
-            },
-            type: 'POST',
-            dataType: "json"
-        });
-    }
+Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "addUser",
+            username: username,
+            password: password,
+            name: name,
+            lastname1: lastname1,
+            lastname2: lastname2,
+            email: email,
+            birthdate: birthdate,
+            address: address,
+            phone: phone,
+            celular: celular
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a user was inserted");
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The user was inserted into the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }
 Proxy.deleteUser = (username) => {
     $.ajax({
@@ -613,6 +611,23 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred while retrieving cities");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+}
+Proxy.confirmReservation = (cityFrom, callback) => {
+    $.ajax({
+        url: 'TicketsServlet',
+        data: {
+            action: "confirmReservation"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred while reserving the tickets");
         },
         success: (data) => {
             console.log(data);
