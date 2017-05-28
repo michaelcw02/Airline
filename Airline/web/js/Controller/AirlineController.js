@@ -33,23 +33,6 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    searchTrips: function (codeCityFrom, callback) {
-        let citiesTo = [];
-        this.getAllTrips((data) => {
-            if (codeCityFrom != 0) {
-                let results = data.filter((trip) => {
-                    return (trip.cityByDepartureCity.code === codeCityFrom);
-                });
-                results.forEach((result) => {
-                    citiesTo.push(result.cityByArrivalCity);
-                });
-            } else {
-                citiesTo = this.retrieveAllCities();
-            }
-            callback(citiesTo);
-            //Storage.store('searchTrips', { codeCityFrom, citiesTo });
-        })
-    },
     searchFlights: function (codeCityFrom, codeCityTo, departDate, returnDate, callback) {
         Proxy.searchForFlights(codeCityFrom, codeCityTo, departDate, returnDate, (data) => {
             Storage.store('searchFlights', data);
@@ -137,8 +120,8 @@ AirlineController.prototype = {
     addTrip: function(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback){
         Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback);  
     },
-    getPreviousId: function(callback){
-        Proxy.getPreviousId(callback);
+    getLastID: function(callback){
+        Proxy.getLastID(callback);
     },
     reserveFlight: function (flightNum, mode, callback) {
         Proxy.reserveFlight(flightNum, mode, (data) => {

@@ -38,7 +38,7 @@ RouteAdmController.prototype = {
             row.append($("<td>" + jsonResults.cityByDepartureCity.code + "</td>"));
             row.append($("<td>" + jsonResults.cityByArrivalCity.code + "</td>"));
             row.append($("<td>" + jsonResults.distance + "</td>"));
-            row.append($("<td>" + jsonResults.duration + "</td>"));
+            row.append($("<td>" + calculateDuration(jsonResults.duration) + "</td>"));
             row.append($("<td>" + jsonResults.departureTime + "h" + "</td>"));
             row.append($("<td>" + jsonResults.departureDay + "</td>"));
             row.append($("<td>" + jsonResults.cost + "</td>"));
@@ -77,10 +77,10 @@ RouteAdmController.prototype = {
                 $("#tableRoute").append(row);
                 row.append($("<td>" + trip.idTrip + "</td>"));
                 row.append($("<td>" + trip.distance + "</td>"));
-                row.append($("<td>" + trip.duration + "</td>"));
+                row.append($("<td>" + calculateDuration(trip.duration) + "</td>"));
                 row.append($("<td>" + trip.cityByDepartureCity.code + "</td>"));
                 row.append($("<td>" + trip.cityByArrivalCity.code + "</td>"));
-                row.append($("<td>" + trip.departureTime + "h" + "</td>"));
+                row.append($("<td>" + trip.departureTime + "</td>"));
                 row.append($("<td>" + trip.departureDay + "</td>"));
                 row.append($("<td>" + trip.cost + "</td>"));
                 row.append($("<td>" + trip.discount + "</td>"));
@@ -100,8 +100,9 @@ RouteAdmController.prototype = {
         $("#tableRoute").empty();
     },
     addTrip: function () {
-            let code = this.getPreviousId();
-            console.log(code);
+        this.airlineController.getLastID( (number) => {
+            let idTrip = number++;
+            console.log(idTrip);
             let distance = this.view.$('#distance').val();
             let duration1 = this.view.$('#hours').val();
             let duration2 = this.view.$('#minutes').val();
@@ -114,17 +115,10 @@ RouteAdmController.prototype = {
             let cost = this.view.$('#price').val();
             let discount = this.view.$('#discount').val();
             let discountDes = this.view.$('#discountDescription').val();
-            let discountPath = ("/") + "images/" + code + ".png";
+            let discountPath = 'images/' + idTrip + '.jpg';
             let image = this.view.$('#image').files;
-            this.airlineController.addTrip(code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath,image, (jsonResults) => {
-            });
-       
-    },
-    getPreviousId: function () {
-        this.airlineController.getPreviousId((jsonResults) => {
-            let number = jsonResults;
-            return number+1;
-        });
+            this.airlineController.addTrip(idTrip, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => { });
+        } )       
     },
     cleanForm: () => {
         $('#identifier').focus();

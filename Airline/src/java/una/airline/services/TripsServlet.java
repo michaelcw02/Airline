@@ -69,8 +69,8 @@ public class TripsServlet extends HttpServlet {
                     tripsBL.deleteTrip(trip);
                     out.print("{\"data\": \"C~La ruta fue eliminada correctamente\"}");
                     break;
-                case "getPreviousId":
-                    json = new Gson().toJson(tripsBL.getPreviousId());
+                case "getLastID":
+                    json = new Gson().toJson(tripsBL.getLastID());
                     out.print(json);
                     break;
                 case "addTrip":
