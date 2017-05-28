@@ -79,7 +79,7 @@
                                     <option value="MONDAY" selected="selected">MONDAY</option>
                                     <option value="TUESDAY">TUESDAY</option>
                                     <option value="WEDNESDAY">WEDNESDAY</option>
-                                    <option value="THRUSDAY">THRUSDAY</option>
+                                    <option value="THURSDAY">THURSDAY</option>
                                     <option value="FRIDAY">FRIDAY</option>
                                     <option value="SATURDAY">SATURDAY</option>
                                     <option value="SUNDAY">SUNDAY</option>

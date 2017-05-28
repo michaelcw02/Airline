@@ -41,7 +41,7 @@ public class TripsBL {
         tripDAO.addTrip(trip);
     }
 
-    public int getPreviousId() throws Exception {
+    public int getLastID() throws Exception {
         return tripDAO.getAutoIncremental();
     }
 }

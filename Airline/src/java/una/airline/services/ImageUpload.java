@@ -14,8 +14,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +21,8 @@ import javax.servlet.http.Part;
 
 /**
  *
- * @author Escinf
+ * @author michaelcw02
  */
-@WebServlet(name = "ImageUpload", urlPatterns = {"/ImageUpload"})
-@MultipartConfig
 public class ImageUpload extends HttpServlet {
 
     /**
@@ -38,9 +34,9 @@ public class ImageUpload extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       try {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {            
             final String code = new BufferedReader(new InputStreamReader(request.getPart("code").getInputStream())).readLine();
             final Part filePart = request.getPart("image");
             OutputStream out = null;
