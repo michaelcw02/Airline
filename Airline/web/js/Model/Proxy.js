@@ -231,6 +231,44 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         dataType: "json"
     });
 }
+
+Proxy.getAllAirplanes = (callback) => {
+    $.ajax({
+        url: 'AirplaneServlet',
+        data: {
+            action: "getAllAirplane"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred in the loading of airplane");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+}
+Proxy.updateAirplane = (id_airplane, type_airplane) => {
+
+    $.ajax({
+        url: 'AirplaneServlet',
+        data: {
+            action: "updateAirplane",
+            id_airplane: id_airplane,
+            type_airplane: type_airplane
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when an airplane was modified");
+        },
+        success: (data) => {
+            console.log(data);
+            showModal("myModal", "Status", "The airplane was updated in the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
 Proxy.searchTripByCode = (idTrip, callback) => {
     $.ajax({
         url: 'TripsServlet',
@@ -396,54 +434,157 @@ Proxy.getLastID = (callback) => {
         type: 'POST',
         dataType: "json"
     });
-};
-//THIS METHOD ADDS THE IMAGE FIRST, AND THEN ADDS THE TRIP
-Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image,callback) => {
-    Proxy.addTripImage(code, image, () => {
-        $.ajax({
-            url: 'TripsServlet',
-            data: {
-                action: "addTrip",
-                distance: distance,
-                duration: duration,
-                departureCity: departureCity,
-                arrivalCity: arrivalCity,
-                departureTime: departureTime,
-                departureDay: departureDay,
-                cost: cost,
-                discount: discount,
-                discountDes: discountDes,
-                discountPath: discountPath
-            },
-            error: function () {
-                showModal("myModal", "ERROR", "An error occurred when a trip was inserted");
-            },
-            success: (data) => {
-                console.log(data);
-                showModal("myModal", "Status", "The trip was inserted in the database");
-            },
-            type: 'POST',
-            dataType: "json"
-        });
-    });
 }
-Proxy.addTripImage = (idTrip, image, callback) => {
-    var formData = new FormData();
-    formData.append('code', idTrip);
-    formData.append('image', image);
+Proxy.searchUserByUsername = (username, callback) => {
     $.ajax({
-        url: 'ImageUpload',
-        data: formData,
-        processData: false,
-        contentType: false,
-        error: function () {
-            showModal("myModal", "ERROR", "An error occurred while uploading the image");
+        url: 'UserServlet',
+        data: {
+            action: "getUserByUsername",
+            username: username
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "This user doesn´t exist");
         },
         success: (data) => {
-            callback();
+            callback(data);
         },
         type: 'POST',
         dataType: "json"
     });
-
+}
+Proxy.getAllUsers = (callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "getAllUsers"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred in the loading of users");
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'GET',
+        dataType: "json"
+    });
+}
+Proxy.getPreviousId = (callback) => {
+    Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+        $.ajax({
+            url: 'UserServlet',
+            data: {
+                action: "addUser",
+                username: username,
+                password: password,
+                name: name,
+                lastname1: lastname1,
+                lastname2: lastname2,
+                email: email,
+                birthdate: birthdate,
+                address: address,
+                phone: phone,
+                celular: celular
+            },
+            error: function () {
+                showModal("myModal", "ERROR", "An error occurred when a user was inserted");
+            },
+            success: (data) => {
+                showModal("myModal", "Status", "The user was inserted into the database");
+            },
+            type: 'POST',
+            dataType: "json"
+        });
+    }
+    Proxy.deleteUser = (username) => {
+        $.ajax({
+            url: 'UserServlet',
+            data: {
+                action: "deleteUser",
+                username: username
+            },
+            error: function () {
+                showModal("myModal", "ERROR", "An error occurred when a user was deleted");
+            },
+            success: (data) => {
+                showModal("myModal", "Status", "The user was deleted of the database");
+            },
+            type: 'POST',
+            dataType: "json"
+        });
+    };
+    //THIS METHOD ADDS THE IMAGE FIRST, AND THEN ADDS THE TRIP
+    Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, callback) => {
+        Proxy.addTripImage(code, image, () => {
+            $.ajax({
+                url: 'TripsServlet',
+                data: {
+                    action: "addTrip",
+                    distance: distance,
+                    duration: duration,
+                    departureCity: departureCity,
+                    arrivalCity: arrivalCity,
+                    departureTime: departureTime,
+                    departureDay: departureDay,
+                    cost: cost,
+                    discount: discount,
+                    discountDes: discountDes,
+                    discountPath: discountPath
+                },
+                error: function () {
+                    showModal("myModal", "ERROR", "An error occurred when a trip was inserted");
+                },
+                success: (data) => {
+                    console.log(data);
+                    showModal("myModal", "Status", "The trip was inserted in the database");
+                },
+                type: 'POST',
+                dataType: "json"
+            });
+        });
+    }
+    Proxy.addTripImage = (idTrip, image, callback) => {
+        var formData = new FormData();
+        formData.append('code', idTrip);
+        formData.append('image', image);
+        $.ajax({
+            url: 'ImageUpload',
+            data: formData,
+            processData: false,
+            contentType: false,
+            error: function () {
+                showModal("myModal", "ERROR", "An error occurred while uploading the image");
+            },
+            success: (data) => {
+                callback();
+            },
+            type: 'POST',
+            dataType: "json"
+        });
+    }
+    Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+        $.ajax({
+            url: 'UserServlet',
+            data: {
+                action: "updateUser",
+                username: username,
+                password: password,
+                name: name,
+                lastname1: lastname1,
+                lastname2: lastname2,
+                email: email,
+                birthdate: birthdate,
+                address: address,
+                phone: phone,
+                celular: celular
+            },
+            error: function () {
+                showModal("myModal", "ERROR", "An error occurred when a user was modified");
+            },
+            success: (data) => {
+                showModal("myModal", "Status", "The user was updated in the database");
+            },
+            type: 'POST',
+            dataType: "json"
+        });
+    }
 }

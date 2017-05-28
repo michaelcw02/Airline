@@ -344,7 +344,8 @@ article hr {
 #myModalTypeAirplane,
 #myModal,
 #myModalCity,
-#modalAirplane{
+#modalAirplane,
+#myModalUser{
     z-index: 6000 !important;
 }
 

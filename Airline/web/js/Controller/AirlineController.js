@@ -98,7 +98,15 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-
+    getAllAirplane: function (callback) {
+        Proxy.getAllAirplanes((data) => {
+            Storage.store('getAllAirplane', data);
+            callback(data);
+        });
+    },
+    updateAirplane: function (id_airplane, type_airplane) {
+        Proxy.updateAirplane(id_airplane,type_airplane);
+    },
     addAirplane: function (identifier, type_airline) {
         Proxy.addAirplane(identifier, type_airline);
     },
@@ -117,6 +125,27 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+    addUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
+        Proxy.addUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
+    },
+    updateUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
+        Proxy.updateUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
+    },
+    deleteUser: function (username) {
+        Proxy.deleteUser(username);
+    },
+    searchUserByUsername: function (username, callback) {
+        Proxy.searchUserByUsername(username, (data) => {
+            Storage.store('searchUserByUsername', data);
+            callback(data);
+        });
+    },
+    getAllUsers: function (callback) {
+        Proxy.getAllUsers((data) => {
+            Storage.store('getAllUsers', data);
+            callback(data);
+        });
+    },    
     addTrip: function(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback){
         Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback);  
     },

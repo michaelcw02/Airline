@@ -30,4 +30,8 @@ public class AirplaneBL {
     public void addTypeAirplane(Airplane airplane) throws Exception{
          airplaneDAO.addTypeAirplane(airplane);
     }
+    public void updateAirplane(Airplane nAirplane) {
+        airplaneDAO.updateAirplane(nAirplane);
+    }
+    
 }

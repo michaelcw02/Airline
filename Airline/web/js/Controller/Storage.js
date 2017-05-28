@@ -29,6 +29,9 @@ Storage = {
         if (value instanceof Object && value._class == 'Airplane') {
             return new Airplane(value.id_airplane, value.type_airplane);
         }
+        if (value instanceof Object && value._class == 'User') {
+            return new User(value.username, value.password, value.name, value.lastname1, value.lastname2, value.email, value.birthdate, value.address, value.phone, value.celular);
+        }
         return value;
     },
 
@@ -47,6 +50,9 @@ Storage = {
         }
         if (value instanceof Airplane) {
             value._class = 'Airplane';
+        }
+        if (value instanceof User) {
+            value._class = 'User';
         }
         return value;
     }

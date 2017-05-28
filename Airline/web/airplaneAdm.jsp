@@ -1,5 +1,5 @@
 <%-- 
-    Document   : AirplaneManagement
+    Document   : AirplaneAdm
     Created on : May 20, 2017, 12:04:43 AM
     Author     : cfuen
 --%>
@@ -22,13 +22,24 @@
     <div class="container top-container">
         <jsp:include page="header.jsp" />
     </div>
-
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
+                </div>
+                    <div class="modal-body" id="myModalMessage">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="modalAirplane" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="myModalTitle">Insert Airplane
+                    <h4 class="modal-title" id="myModalTitle">Insert/Modify Airplane
                 </div>
                 <div class="modal-body" id="myModalMessage">
                     <form role="form" onsubmit="return false;" id="formAirplanes">
@@ -40,21 +51,14 @@
                         <div class="form-group" id="groupTypeAirplane">
                             <label for="typeAirplane">Type of Airplane</label>
                             <select class='form-control' id='typeAirplane'>
-                                    <option value="0">Type of Airplane</option>
-                                </select>
+                                <option value="0">Type of Airplane</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <input type="hidden" value="addAirplane" id="airplaneAction" />
                             <button type="submit" class="btn btn-primary" id="send">Save</button>
                             <button type="reset" class="btn btn-danger" id="cancel">Cancel</button>
-                        </div>
-
-                        <div class="form-group height25">
-                            <div class="alert alert-success hiddenDiv" id="mesajeResult">
-                                <strong id="mesajeResultNeg">Info!</strong>
-                                <span id="mesajeResultText">This alert box could indicate a neutral informative change or action.</span>
-                            </div>
                         </div>
 
                     </form>
@@ -82,21 +86,26 @@
                     <form role="form" onsubmit="return false;" id="formAiplanes" class="form-horizontal centered">
                         <div class="form-group" id="groupIdentificador">
                             <div class="col-sm-4" style="text-align: center; vertical-align: middle;">
-                                <h4 class="bold">Search airplane per indentifier: </h4>
+                                <p><b>Search airplane per indentifier:</b></p>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="search" placeholder="Enter the identifier">
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <button type="button" class="btn btn-info centered" id="btSearch">
-                                            Search <span class="glyphicon glyphicon-search"></span>
-                                        </button>
+                                    Search <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-info centered"  id="btSearchAll">            
+                                    Show All <span class="glyphicon glyphicon-list-alt"></span>
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <div class="container-fluid" id="airplaneReturn">
+                <div class="container-fluid table-responsive" id="airplaneReturn">
                     <table class="table table-hover table-condensed" id="tableAirplane"></table>
                 </div>
 

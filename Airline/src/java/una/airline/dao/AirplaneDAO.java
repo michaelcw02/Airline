@@ -52,5 +52,11 @@ public class AirplaneDAO extends BaseDAO {
             throw new Exception("E~Trip does not exists");
         }
     }
+    public int updateAirplane(Airplane nAirplane) {
+       String query = "UPDATE airplane SET id_airplane='%s', type_airplane='%s' WHERE id_airplane='%s'";
+       query = String.format(query, nAirplane.getIdAirplane(), nAirplane.getTypeAirplane().getTypeAirline(), nAirplane.getIdAirplane());
+       int result = connection.executeUpdate(query);
+       return result;
+    }
 
 }
