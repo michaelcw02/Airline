@@ -30,10 +30,10 @@ AirplaneController.prototype = {
                 $("#tableAirplane").append(row);
                 row.append($("<td>" + airplane.idAirplane + "</td>"));
                 row.append($("<td>" + airplane.typeairplane.typeAirline + "</td>"));
-                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showAirplaneForModify(\'' + results + '\');">' +
+                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showAirplaneForModify(\'' + airplane.idAirplane + '\',\'' + airplane.typeairplane.typeAirline + '\');">' +
                         '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                         '</button>' +
-                        '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTypeAirplane(\'' + results.airplane + '\');">' +
+                        '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteAirplane(\'' + airplane.idAirplane + '\');">' +
                         '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
                         '</button></td>'));
             }
@@ -57,7 +57,7 @@ AirplaneController.prototype = {
             row.append($('<td><button type="button" id="update" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showAirplaneForModify(\'' + jsonResults.idAirplane + '\',\'' + jsonResults.typeairplane.typeAirline + '\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'eliminate\');">' +
+                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteAirplane(\'' + jsonResults.idAirplane + '\');">' +
                     '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
                     '</button></td>'));
         });
@@ -71,11 +71,15 @@ AirplaneController.prototype = {
             $("#tableAirplane").empty();
         }
     },
+    deleteAirplane: function (id_airplane) {
+        this.airlineController.deleteAirplane(id_airplane);
+        $("#tableAirplane").empty();
+    },
     updateAirplane: function () {
         if (!doValidate()) {
             let id_airplane = this.view.$('#identifier').val();
             let type_airplane = this.view.$('#typeAirplane').val();
-            this.airlineController.updateAirplane(id_airplane,type_airplane);
+            this.airlineController.updateAirplane(id_airplane, type_airplane);
             hideModal("modalAirplane");
             $('#airplaneAction').val("addAirplane");
             $("#tableAirplane").empty();
@@ -127,6 +131,7 @@ function showAirplaneForModify(idAirplane, typeAirplane) {
     $("#identifier").val(idAirplane);
     $("#typeAirplane").val(typeAirplane);
     $('#airplaneAction').val("addAirplane");
+    $('#airplaneAction').val("updateAirplane");
 }
 
 function isBlank(element) {

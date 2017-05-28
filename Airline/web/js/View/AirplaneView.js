@@ -20,4 +20,7 @@ function addElementsProperties() {
     });
     $("#btSearchAll").click(() => controller.getAllAirplane());
 }
+function deleteAirplane(id_airplane) {
+    controller.deleteAirplane(id_airplane);
+}
 $(loadPage);
