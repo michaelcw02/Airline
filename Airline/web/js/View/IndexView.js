@@ -18,12 +18,7 @@ function addElementsProperties() {
         dateFormat: "yy-mm-dd"
     });
 
-    //NEW ELEMENTS!!
-    //$('#outbound-flights').hide();
-    //$('#return-flights').hide();
-
-    //EVENT HANDLERS
-    //$('#cityFrom').autocomplete( () => controller.setUpCitiesFrom() );
+    $('#cityFrom').change(() => controller.setUpCitiesTo());
 
     $("#departing").change(() => controller.setMinReturnDate());
 
@@ -33,7 +28,6 @@ function addElementsProperties() {
     $('#btnDecrease').click(() => controller.decreaseAdults());
     $('#btnIncrease').click(() => controller.increaseAdults());
 
-    $('#cityFrom').change(() => controller.setUpCitiesTo());
 
     $('#btnSearchFlights').click(() => controller.moveToFlights());
     $('#cityTo').change(() => controller.cityFromHandlerHide());

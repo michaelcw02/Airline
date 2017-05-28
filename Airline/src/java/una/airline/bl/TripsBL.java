@@ -44,4 +44,8 @@ public class TripsBL {
     public int getLastID() throws Exception {
         return tripDAO.getAutoIncremental();
     }
+    
+    public List<Trip> getTripsByCityFrom(String cityFrom) throws Exception {
+        return tripDAO.getTripByCityFrom(cityFrom);
+    }
 }

@@ -215,10 +215,10 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         url: 'AirplaneServlet',
         data: {
             action: "addAirplane",
-            id_airplane: id_airplane, 
+            id_airplane: id_airplane,
             type_airplane: type_airplane
         },
-         error: function () {
+        error: function () {
             showModal("myModal", "ERROR", "An error occurred when a airplane was inserted");
         },
         success: (data) => {
@@ -265,8 +265,8 @@ Proxy.updateAirplane = (id_airplane, type_airplane) => {
         type: 'POST',
         dataType: "json"
     });
- }
- Proxy.deleteAirplane = (id_airplane) => {
+}
+Proxy.deleteAirplane = (id_airplane) => {
     $.ajax({
         url: 'AirplaneServlet',
         data: {
@@ -601,6 +601,24 @@ Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birth
             showModal("myModal", "Status", "The user was updated in the database");
         },
         type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.getTripsFromCity = (cityFrom, callback) => {
+    $.ajax({
+        url: 'TripsServlet',
+        data: {
+            action: "getTripsFromCity",
+            cityFrom: cityFrom
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred while retrieving cities");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data);
+        },
+        type: 'GET',
         dataType: "json"
     });
 }

@@ -9,6 +9,7 @@ AirlineController.prototype = {
     AirlineController: function () {
 
     },
+    //CITIES
     getAllCities: function (callback) {
         Proxy.getCities((data) => {
             Storage.store('allCities', data);
@@ -18,6 +19,7 @@ AirlineController.prototype = {
     retrieveAllCities: function () {
         return Storage.retrieve('allCities');
     },
+
     getAllDiscounts: function (callback) {
         Proxy.getDiscounts((data) => {
             callback(data);
@@ -32,6 +34,19 @@ AirlineController.prototype = {
         Proxy.getTrips((data) => {
             callback(data);
         })
+    },
+    searchCitiesTo: function (codeCityFrom, callback) {
+        if(codeCityFrom != 0) {
+            Proxy.getTripsFromCity( codeCityFrom, (data) => {
+                let citiesTo = [];
+                data = data.filter( (trip) => { return(trip.cityByDepartureCity.code === codeCityFrom) } );
+                data.forEach( (trip) => { citiesTo.push(trip.cityByArrivalCity) } );
+                callback(citiesTo);
+            })
+        }
+        if(codeCityFrom == 0) {
+            callback(this.retrieveAllCities());
+        }
     },
     searchFlights: function (codeCityFrom, codeCityTo, departDate, returnDate, callback) {
         Proxy.searchForFlights(codeCityFrom, codeCityTo, departDate, returnDate, (data) => {
@@ -148,13 +163,13 @@ AirlineController.prototype = {
             Storage.store('getAllUsers', data);
             callback(data);
         });
-    },    
-    addTrip: function(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback){
-        Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image, (data) => {
-            callback(data);
-        });  
     },
-    getLastID: function(callback){
+    addTrip: function (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, callback) {
+        Proxy.addTrip(code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (data) => {
+            callback(data);
+        });
+    },
+    getLastID: function (callback) {
         Proxy.getLastID(callback);
     },
     reserveFlight: function (flightNum, mode, callback) {

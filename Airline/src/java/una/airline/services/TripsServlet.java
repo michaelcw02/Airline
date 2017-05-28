@@ -99,6 +99,12 @@ public class TripsServlet extends HttpServlet {
                     tripsBL.addTrip(trip);
                     out.print("{\"data\":\"C~La ruta fue ingresada correctamente\"}");
                     break;
+                case "getTripsFromCity":
+                    cityFrom = "";
+                    cityFrom = request.getParameter("cityFrom");
+                    json = new Gson().toJson(tripsBL.getTripsByCityFrom(cityFrom));
+                    out.print(json);
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");
                     break;
