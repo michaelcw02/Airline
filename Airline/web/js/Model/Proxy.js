@@ -265,7 +265,6 @@ Proxy.updateAirplane = (id_airplane, type_airplane) => {
         type: 'POST',
         dataType: "json"
     });
-<<<<<<< HEAD
  }
  Proxy.deleteAirplane = (id_airplane) => {
     $.ajax({
@@ -283,10 +282,7 @@ Proxy.updateAirplane = (id_airplane, type_airplane) => {
         type: 'POST',
         dataType: "json"
     });
-};
-=======
 }
->>>>>>> fc7605c1550a9f3a2818f9249513f3a1c85c05a2
 Proxy.searchTripByCode = (idTrip, callback) => {
     $.ajax({
         url: 'TripsServlet',
