@@ -26,3 +26,8 @@ function calculateDuration(duration) {
     let hours = Math.floor(duration / 60);
     return (hours == 0) ? minutes + 'm' : hours + 'h ' + minutes + 'm';
 }
+function showMessage(idDiv, title, message) {
+    $("#" + idDiv + "Title").html(title);
+    $("#" + idDiv + "Message").html(message);
+    $("#" + idDiv).show();
+}

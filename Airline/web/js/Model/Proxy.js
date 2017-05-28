@@ -346,7 +346,7 @@ Proxy.reserveFlight = (flightNum, mode, callback) => {
             mode: mode
         },
         error: () => { //si existe un error en la respuesta del ajax
-            alert("This flight doesn´t exist");
+            showModal("myModal", "ERROR", "Sorry, we could not reserve your flight.");
         },
         success: (data) => {
             console.log(data);

@@ -40,8 +40,8 @@ public class FlightsServlet extends HttpServlet {
 
             FlightsBL flightsBL = new FlightsBL();
 
-            HttpSession session = request.getSession();
-            
+            HttpSession session = request.getSession(true);
+
             String action = request.getParameter("action");
             switch (action) {
                 case "getAllFlights":
@@ -56,7 +56,7 @@ public class FlightsServlet extends HttpServlet {
 
                     json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate));
                     out.print(json);
-                    
+
                     break;
                 case "searchFlightByNum":
                     flightNum = request.getParameter("flightNum");
@@ -67,16 +67,11 @@ public class FlightsServlet extends HttpServlet {
                 case "reserveFlight":
                     flightNum = request.getParameter("flightNum");
                     mode = request.getParameter("mode");
-                    if(session.getAttribute("type").equals("LoggedUser")) {
-                        //THIS IS THE PLACE WHERE THE FLIGHT HAVE TO BE CREATED ACCORDING TO THE USER
-                        session.setAttribute(mode + "Reservation", flightNum);
-                        json = "{'response':'S~Succeded " + mode + " Reservation!'}";
-                        out.print(json);                                               
-                    }
-                    else {
-                        json = "{'response':'E~You are not logged!'}";
-                        out.print(json);
-                    }
+                    
+                    session.setAttribute(mode + "Reservation", flightNum);
+                    json = "{\"response\":\"S~Succeded " + mode + " Reservation!\"}";
+                    out.print(json);
+
                     resetVariables();
                     break;
                 default:
@@ -91,7 +86,7 @@ public class FlightsServlet extends HttpServlet {
         }
 
     }
-    
+
     private void resetVariables() {
         cityFrom = null;
         cityTo = null;

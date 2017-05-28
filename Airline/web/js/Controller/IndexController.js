@@ -220,14 +220,14 @@ function showFlightDetail (flightNum, flight, mode) {
 
             element += '<form class="form" role="form" id="flightDetailForm">';
                 element += '<div class="form-group text-center">';
-                    element += '<button type="button" class="btn btn-primary" id="reserve">Reserve</button> ';
+                    element += '<button type="button" class="btn btn-success" id="reserve">Reserve</button> ';
                     element += ' <button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
                 element += '</div>';
 
                 element += '<div class="form-group height25" >';
-                    element += '<div class="alert alert-success hiddenDiv" id="messajeResult">';
-                        element += '<strong id="messajeResultNeg">Info!</strong>';
-                        element += '<span id="messajeResultText">This alert box could indicate a neutral informative change or action.</span>';
+                    element += '<div class="alert alert-success hiddenDiv" id="messageResult">';
+                        element += '<strong id="messageResult">Info!... </strong>';
+                        element += '<span id="messageResultMessage">This alert box could indicate a neutral informative change or action.</span>';
                     element += '</div>';
                 element += '</div>';
             element += '</form>';
@@ -235,6 +235,7 @@ function showFlightDetail (flightNum, flight, mode) {
             //modal settings
             showModal('flightDetail', mode + ' Flight Information', element);
             $('#reserve').on('click', (event) => {
+                showMessage('messageResult', 'Info!', 'Reserving Flight!');
                 new AirlineController().reserveFlight(flight.flightNum, mode, (data) => {
                     if(data.response[0] == 'S') {
                         let response = data.split('~')[1];
