@@ -215,17 +215,14 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         url: 'AirplaneServlet',
         data: {
             action: "addAirplane",
-            id_airplane: id_airplane,
+            id_airplane: id_airplane, 
             type_airplane: type_airplane
         },
-        error: function () {
-            alert("Se presento un error a la hora de insertar el avion a la base de datos");
-
+         error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a airplane was inserted");
         },
         success: (data) => {
-            console.log(data);
-            alert("Se inserto el avion a la base de datos");
-            //callback(data);
+            showModal("myModal", "Status", "The airplane was inserted into the database");
         },
         type: 'POST',
         dataType: "json"
@@ -264,6 +261,23 @@ Proxy.updateAirplane = (id_airplane, type_airplane) => {
         success: (data) => {
             console.log(data);
             showModal("myModal", "Status", "The airplane was updated in the database");
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+ }
+ Proxy.deleteAirplane = (id_airplane) => {
+    $.ajax({
+        url: 'AirplaneServlet',
+        data: {
+            action: "deleteAirplane",
+            id_airplane: id_airplane
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a airplane was deleted");
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The airplane was deleted of the database");
         },
         type: 'POST',
         dataType: "json"

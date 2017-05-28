@@ -98,7 +98,7 @@ public class UserServlet extends HttpServlet {
                     out.print("{\"data\": \"C~El usuario fue eliminado \"}");
                     break;
                 default:
-                    out.print("E~No se indico la acción que se desea realizare");
+                    out.print("E~No se indico la acción que se desea realizar");
                     break;
             }
 

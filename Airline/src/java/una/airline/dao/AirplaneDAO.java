@@ -16,7 +16,7 @@ import una.airline.domain.Airplane;
  */
 public class AirplaneDAO extends BaseDAO {
 
-    public void addTypeAirplane(Airplane airplane) throws Exception {
+    public void addAirplane(Airplane airplane) throws Exception {
         String query = "INSERT INTO airplane VALUES ('%s', '%s');";
         query = String.format(query, airplane.getIdAirplane(),
                 airplane.getTypeAirplane().getTypeAirline()
@@ -49,14 +49,22 @@ public class AirplaneDAO extends BaseDAO {
         if (rs.next()) {
             return airplane(rs);
         } else {
-            throw new Exception("E~Trip does not exists");
+            throw new Exception("E~Airplane does not exists");
         }
     }
     public int updateAirplane(Airplane nAirplane) {
-       String query = "UPDATE airplane SET id_airplane='%s', type_airplane='%s' WHERE id_airplane='%s'";
-       query = String.format(query, nAirplane.getIdAirplane(), nAirplane.getTypeAirplane().getTypeAirline(), nAirplane.getIdAirplane());
+       String query = "UPDATE airplane SET type_airplane='%s' WHERE id_airplane='%s'";
+       query = String.format(query, nAirplane.getTypeAirplane().getTypeAirline(), nAirplane.getIdAirplane());
        int result = connection.executeUpdate(query);
        return result;
+    }
+    public void deleteAirplane(Airplane airplane) throws Exception {
+        String query = "DELETE FROM airplane WHERE id_airplane = '%s'";
+        query = String.format(query, airplane.getIdAirplane());
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("E~Airplane doesnt exists");
+        }
     }
 
 }

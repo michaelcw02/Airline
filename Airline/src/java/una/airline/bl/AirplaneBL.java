@@ -27,11 +27,13 @@ public class AirplaneBL {
     public Airplane findAirplaneByID(String airplane) throws Exception {
         return airplaneDAO.findAirplaneByID(airplane);
     }
-    public void addTypeAirplane(Airplane airplane) throws Exception{
-         airplaneDAO.addTypeAirplane(airplane);
-    }
     public void updateAirplane(Airplane nAirplane) {
         airplaneDAO.updateAirplane(nAirplane);
     }
-    
+    public void addAirplane(Airplane airplane) throws Exception{
+        airplaneDAO.addAirplane(airplane);
+    }
+    public void deleteAirplane(Airplane airplane) throws Exception {
+        airplaneDAO.deleteAirplane(airplane);
+    }
 }

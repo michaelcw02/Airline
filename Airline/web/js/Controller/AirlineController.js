@@ -105,10 +105,13 @@ AirlineController.prototype = {
         });
     },
     updateAirplane: function (id_airplane, type_airplane) {
-        Proxy.updateAirplane(id_airplane,type_airplane);
+        Proxy.updateAirplane(id_airplane, type_airplane);
     },
     addAirplane: function (identifier, type_airline) {
         Proxy.addAirplane(identifier, type_airline);
+    },
+    deleteAirplane: function (id_airplane) {
+        Proxy.deleteAirplane(id_airplane);
     },
     addCity: function (code, name, country) {
         Proxy.addCity(code, name, country);

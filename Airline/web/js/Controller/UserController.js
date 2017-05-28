@@ -129,7 +129,6 @@ UserController.prototype = {
     },
     sendAction: function () {
         let verify = $('#userAction').val();
-        console.log(verify);
         if (verify == "updateUser") {
             this.updateUser();
         } else {
@@ -141,7 +140,7 @@ UserController.prototype = {
         $("#user").removeAttr("readonly");
         $("#userAction").val("addUser");
         $('#formUser').trigger("reset");
-    },
+    }
 }
 function showUserForModify(name, firstlastname, secondlastname, birthdate, email, username, password, telephone, cellphone, direction) {
     showModal("myModalUser");

@@ -56,19 +56,24 @@ public class AirplaneServlet extends HttpServlet {
                 case "updateAirplane":
                     ta.setIdAirplane(request.getParameter("id_airplane"));
                     String typeAirplane = request.getParameter("type_airplane");
-                  //  json = new Gson().toJson(typeAirBL.findTypeAirplaneByType(typeAirplane));
                     ta.setTypeAirplane(typeAirBL.findTypeAirplaneByType(typeAirplane));
                     AirBL.updateAirplane(ta);
+                    out.print("{\"data\":\"C~El avion fue modificado correctamente\"}");
                     break;
-//                case "addAirplane":
-//                    ta.setIdAirplane(request.getParameter("identifier"));
-//                    ta.setTypeAirplane(request.getParameter("type_airplane"));
-//                    out.print(ta.getIdAirplane());
-//                    typeAirBL.addTypeAirplane(ta);
-//                    out.print("C~El tipo de avion fue ingresado correctamente");
-//                    break;
+                case "addAirplane":
+                    ta.setIdAirplane(request.getParameter("id_airplane"));
+                    String tAirplane = request.getParameter("type_airplane");
+                    ta.setTypeAirplane(typeAirBL.findTypeAirplaneByType(tAirplane));
+                    AirBL.addAirplane(ta);
+                    out.print("{\"data\":\"C~El avion fue ingresado correctamente\"}");
+                    break;
+                case "deleteAirplane":
+                    ta.setIdAirplane(request.getParameter("id_airplane"));
+                    AirBL.deleteAirplane(ta);
+                    out.print("{\"data\": \"C~El avion fue eliminado \"}");
+                    break;
                 default:
-                    out.print("E~No se indico la acción que se desea realizare");
+                    out.print("E~No se indico la acción que se desea realizar");
                     break;
             }
 
