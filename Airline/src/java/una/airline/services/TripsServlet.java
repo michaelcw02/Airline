@@ -13,7 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import una.airline.bl.CityBL;
 import una.airline.bl.TripsBL;
+import una.airline.domain.City;
 import una.airline.domain.Trip;
 
 /**
@@ -74,16 +76,26 @@ public class TripsServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "addTrip":
-                    trip.setDistance(Integer.parseInt(request.getParameter("distance")));
-                    trip.setDuration(Integer.parseInt(request.getParameter("duration")));
-                    /*trip.setCityByDepartureCity(request.getParameter("departureCity"));
-                    trip.setCityByArrivalCity(request.getParameter("arrivalCity"));*/
-                    trip.setDepartureTime(Integer.parseInt(request.getParameter("departureTime")));
-                    trip.setDepartureDay(request.getParameter("departureDay"));
-                    trip.setCost(Integer.parseInt(request.getParameter("cost")));
-                    trip.setDiscount(Integer.parseInt(request.getParameter("discount")));
-                    trip.setDiscountDescription(request.getParameter("discountDes"));
-                    trip.setDiscountImagePath(request.getParameter("discountPath"));
+                    int distance = Integer.parseInt(request.getParameter("distance"));
+                    int duration = Integer.parseInt(request.getParameter("duration"));
+                    String cityFrom = request.getParameter("departureCity");
+                    String cityTo = request.getParameter("arrivalCity");
+                    int departureTime = Integer.parseInt(request.getParameter("departureTime"));
+                    String departureDay = request.getParameter("departureDay");
+                    int cost = Integer.parseInt(request.getParameter("cost"));
+                    int discount = Integer.parseInt(request.getParameter("discount"));
+                    String discountDes = request.getParameter("discountDes");
+                    String discountPath = request.getParameter("discountPath");
+                    City origin = null;
+                    City destination = null;
+                    try {
+                        CityBL cityBL = new CityBL();
+                        origin = cityBL.getCityByCode(cityFrom);
+                        destination = cityBL.getCityByCode(cityTo);
+                    } catch (Exception e) {
+                       out.print("{\"data\":\"E~The cities are not valid!\"}");                    
+                    }
+                    trip = new Trip(origin, destination, distance, duration, departureTime, departureDay, cost, discount, discountDes, discountPath);
                     tripsBL.addTrip(trip);
                     out.print("{\"data\":\"C~La ruta fue ingresada correctamente\"}");
                     break;

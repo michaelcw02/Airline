@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import javax.servlet.http.Part;
  *
  * @author michaelcw02
  */
+@MultipartConfig
 public class ImageUpload extends HttpServlet {
 
     /**
@@ -42,7 +44,7 @@ public class ImageUpload extends HttpServlet {
             OutputStream out = null;
             InputStream filecontent = null;
             final PrintWriter writer = response.getWriter();
-            out = new FileOutputStream(new File(getServletContext().getRealPath("/")+"images/"+code+".png"));
+            out = new FileOutputStream(new File(getServletContext().getRealPath("/")+"images/"+code+".jpg"));
             filecontent = filePart.getInputStream();
 
             int read = 0;
@@ -51,7 +53,10 @@ public class ImageUpload extends HttpServlet {
             while ((read = filecontent.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            out.close();                    
+            PrintWriter res = response.getWriter();
+            res.print("{\"data\":\"C~La imagen fue ingresada correctamente\"}");
+            
+            out.close();
         } catch (Exception e) {
             System.out.println(e);
         }

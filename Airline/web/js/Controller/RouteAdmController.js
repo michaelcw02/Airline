@@ -101,7 +101,7 @@ RouteAdmController.prototype = {
     },
     addTrip: function () {
         this.airlineController.getLastID( (number) => {
-            let idTrip = number++;
+            let idTrip = number + 1;
             console.log(idTrip);
             let distance = this.view.$('#distance').val();
             let duration1 = this.view.$('#hours').val();
@@ -116,7 +116,7 @@ RouteAdmController.prototype = {
             let discount = this.view.$('#discount').val();
             let discountDes = this.view.$('#discountDescription').val();
             let discountPath = 'images/' + idTrip + '.jpg';
-            let image = this.view.$('#image').files;
+            let image = this.view.$('#image')[0].files[0];
             this.airlineController.addTrip(idTrip, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => { });
         } )       
     },

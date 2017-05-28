@@ -147,7 +147,9 @@ AirlineController.prototype = {
         });
     },    
     addTrip: function(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback){
-        Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image,callback);  
+        Proxy.addTrip(code,distance,duration,departureCity,arrivalCity,departureTime,departureDay,cost,discount,discountDes,discountPath,image, (data) => {
+            callback(data);
+        });  
     },
     getLastID: function(callback){
         Proxy.getLastID(callback);

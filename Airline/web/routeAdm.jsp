@@ -68,8 +68,8 @@
                                 </select>
                             </div>
 
-                            <div class="form-group" id="departureTime">
-                                <label for="departureCity">Departure Time:</label>
+                            <div class="form-group" id="groupDepartureTime">
+                                <label for="departureTime">Departure Time:</label>
                                 <input type="text" class="form-control" id="departureTime" placeholder="Departure time">
                             </div>
 
@@ -150,7 +150,7 @@
                             </div>
                         </form>
                         <div class="container-fluid table-responsive" id="routeReturn">
-                            <table class="table table-hover table-condensed" id="tableRoute"></table>                    </div>
+                            <table class="table table-responsive table-hover table-condensed" id="tableRoute"></table>                    </div>
                     </div>
                 </div>
             </div>
