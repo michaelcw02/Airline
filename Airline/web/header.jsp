@@ -139,7 +139,7 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
                                             <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
-                                            <%=user.getName()%>
+                                            <%=user%>
                                         </a>
                                         <ul class="dropdown-menu dropdown-profile">
                                             <ul>

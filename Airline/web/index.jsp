@@ -56,6 +56,7 @@
                     <div class="btn-group-md col-md-12"><br>
                         <button type="button" class="btn btn-primary" id="btnRoundTrip">Round-trip</button>
                         <button type="button" class="btn btn-primary" id="btnOneWay">One-way</button>
+                        <input type="hidden" value="RoundTrip" id="FlightMode"/>
                     </div>
                 </div>
                 <hr>
@@ -130,6 +131,7 @@
 
                             </tbody>
                         </table>
+                        <input type="hidden" value="none" id="OutboundSelection"/>
                     </div>
                 </div>
             </div>
@@ -150,6 +152,7 @@
 
                             </tbody>
                         </table>
+                        <input type="hidden" value="none" id="ReturnSelection"/>
                     </div>
                 </div>
             </div>

@@ -157,12 +157,17 @@ IndexController.prototype = {
             }
     },
     confirmReservation: function() {
-    
+        let mode = $('#FlightMode').val();
+        let outboundSelection = $('#OutboundSelection').val();
+        let returnSelection;
+        if(mode == 'RoundTrip') {
+            returnSelection = $('#ReturnSelection').val();
+        }
+        this.airlineController.confirmReservation( outboundSelection, returnSelection, (data) => {
+            
+        } )
     },
     cancelReservation: function() {
-        this.airlineController.confirmReservation( (data) => {
-
-        } )
     }
      
 }
