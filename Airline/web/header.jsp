@@ -4,8 +4,16 @@
     Author     : michaelcw02
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+
+    session = request.getSession(true);
+
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -64,6 +72,7 @@
                             <!------------- SUPER IMPORTANT --------------->
                             <!-- This place is supposed to have 2 different kinds,one for log in and 1 for user logged -->
                             <li class="dropdown">
+                                <% String user = (String) request.getSession().getAttribute("user"); %>
                                 <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
                                     <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
                                     Sign In
@@ -71,7 +80,7 @@
                                 <ul class="dropdown-menu sign-in">
                                     <li>
                                         <div class="container-fluid text-center">
-                                            <form action="javascript:signIn();" class="form-horizontal">
+                                            <form action="javascript:new AirlineController().loginUser();" class="form-horizontal">
 
                                                 <div class="row text-center">
                                                     <h2 class="text-white">Sign in at Star Airlines</h2>

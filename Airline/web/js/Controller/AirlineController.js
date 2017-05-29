@@ -179,9 +179,23 @@ AirlineController.prototype = {
         })
     },
     confirmReservation: function(callback) {
-
+        
     },
     cancelReservation: function(callback) {
         
+    },
+    loginUser: function() {
+        $('#username').removeClass("has-error");
+        $('#password').removeClass("has-error");
+        let username = $('#username').val();
+        let password = $('#password').val();
+        Proxy.loginUser(username, password, (response) => {
+            if(response[0] === 'C') {
+                location.reload();
+            } else {
+                $('#username').addClass("has-error");
+                $('#password').addClass("has-error");
+            }
+        });
     }
 }

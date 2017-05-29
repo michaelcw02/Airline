@@ -18,9 +18,9 @@ public class TestDAO {
     
     public static void main(String[] arg) throws Exception {
         
-        TripDAO trip=new TripDAO();
-     System.out.println( trip.getAutoIncremental());
-        //TEST COMPLETE
+        UserDAO userDAO = new UserDAO();
+        User u = userDAO.validateUser("1", "1");
+        System.out.println(u.getUsername());
         
     }
     

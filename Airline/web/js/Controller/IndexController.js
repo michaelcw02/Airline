@@ -157,10 +157,12 @@ IndexController.prototype = {
             }
     },
     confirmReservation: function() {
-        
+    
     },
     cancelReservation: function() {
+        this.airlineController.confirmReservation( (data) => {
 
+        } )
     }
      
 }

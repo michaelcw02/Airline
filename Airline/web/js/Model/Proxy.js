@@ -637,3 +637,22 @@ Proxy.confirmReservation = (cityFrom, callback) => {
         dataType: "json"
     });
 }
+Proxy.loginUser = (username, password, callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "userLogin",
+            username: username,
+            password: password
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred while signing in");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data.response);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
