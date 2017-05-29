@@ -10,14 +10,18 @@ function addElementsProperties() {
     });
     $("#cancel").click(function () {
         controller.cleanForm();
-        $("#myModalTypeAirplane").modal("hide");
+        $("#myModalCity").modal("hide");
     });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(function () {
+        $("#tableCity").empty();
         controller.searchCityByCode();
         $("#search").val("");
     });
-    $("#btSearchAll").click(() => controller.getAllCities());
+    $("#btSearchAll").click(function () {
+        $("#tableCity").empty();
+        controller.getAllCities();
+    });
 }
 function deleteCity(code) {
     controller.deleteCity(code);

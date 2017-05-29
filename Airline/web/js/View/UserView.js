@@ -5,10 +5,7 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $("#birthdate").datepicker({
-        minDate: new Date(),
-        dateFormat: "yy-mm-dd"
-    });
+    $('#birthdate').datepicker();
     $("#send").click(function () {
         controller.sendAction();
     });
@@ -18,10 +15,14 @@ function addElementsProperties() {
     });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(function () {
+        $("#tableUser").empty();
         controller.searchUserByUsername();
         $("#search").val("");
     });
-    $("#btSearchAll").click(() => controller.getAllUsers());
+    $("#btSearchAll").click(function () {
+        $("#tableUser").empty();
+        controller.getAllUsers();
+    });
 }
 function deleteUser(username) {
     controller.deleteUser(username);

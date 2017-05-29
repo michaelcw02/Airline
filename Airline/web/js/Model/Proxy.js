@@ -199,7 +199,7 @@ Proxy.searchForAirplane = (id_airplane, callback) => {
             id_airplane: id_airplane
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar los aviones de la base de datos");
+            showModal("myModal", "ERROR", "This airplane doesn´t exist");
         },
         success: (data) => {
             console.log(data);
@@ -634,6 +634,24 @@ Proxy.confirmReservation = (cityFrom, callback) => {
             callback(data);
         },
         type: 'GET',
+        dataType: "json"
+    });
+}
+Proxy.userLogin = (username, password, callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "userLogin",
+            username: username,
+            password: password
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "xxxxx");
+        },
+        success: (data) => {
+            callback(data.data);
+        },
+        type: 'POST',
         dataType: "json"
     });
 }
