@@ -11,8 +11,6 @@
 <%
 
     session = request.getSession(true);
-    String user = (String) request.getSession().getAttribute("user");
-    String type = (String) request.getSession().getAttribute("type");
 %>
 
 <html>
@@ -70,8 +68,8 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-
-                            <% if (user.equals("Not A User")){%> 
+                            <% String user = (String) request.getSession().getAttribute("user"); %>
+                            <% if (user == null){%> 
                                     <!------------- SUPER IMPORTANT --------------->
                                     <!-- This place is supposed to have 2 different kinds,one for log in and 1 for user logged -->
                                     <li class="dropdown">
@@ -134,7 +132,7 @@
                                     </li>
                                 <%}%> 
 
-                                <%   if (!user.equals("Not A User")){%>
+                                <%   if (user != null){%>
                                     
                                     <li class="dropdown">
                                         <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
