@@ -82,7 +82,7 @@
                                         <ul class="dropdown-menu sign-in">
                                             <li>
                                                 <div class="container-fluid text-center">
-                                                    <form action="" class="form-horizontal">
+                                                    <form action="javascript: new AirlineController().loginUser();" class="form-horizontal">
                                                         <div class="row text-center">
                                                             <h2 class="text-white">Sign in at Star Airlines</h2>
                                                         </div>
@@ -141,10 +141,14 @@
                                             <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
                                             <%=user%>
                                         </a>
+                                        
                                         <ul class="dropdown-menu dropdown-profile">
-                                            <ul>
-                                                <li class="text-white"> <h5> <a href="#">Log Out</a> </h5> </li>
-                                            </ul>
+                                            <div class="col-md-4" style="text-align: right;">
+                                                <a class="btn btn-warning" href="Logout" role="button">
+                                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                                    Log Out
+                                                </a>
+                                            </div>
                                         </ul>
                                     </li>
                                 <%}%> 
