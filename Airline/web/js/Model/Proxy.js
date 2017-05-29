@@ -620,7 +620,7 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         dataType: "json"
     });
 }
-Proxy.confirmReservation = (cityFrom, callback) => {
+Proxy.confirmReservation = (outboundFlight, returnFlight, callback) => {
     $.ajax({
         url: 'TicketsServlet',
         data: {

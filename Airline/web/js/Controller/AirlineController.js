@@ -178,8 +178,10 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    confirmReservation: function(callback) {
-        Proxy.confirmReservation();
+    confirmReservation: function(outboundFlight, returnFlight, callback) {
+        Proxy.confirmReservation(outboundFlight, returnFlight, (data) => {
+
+        });
     },
     cancelReservation: function(callback) {
         
