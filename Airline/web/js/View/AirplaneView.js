@@ -15,10 +15,14 @@ function addElementsProperties() {
     });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(function () {
+        $("#tableAirplane").empty();
         controller.searchAirplane();
         $("#search").val("");
     });
-    $("#btSearchAll").click(() => controller.getAllAirplane());
+    $("#btSearchAll").click(function () {
+        $("#tableAirplane").empty();
+        controller.getAllAirplane();
+    });
 }
 function deleteAirplane(id_airplane) {
     controller.deleteAirplane(id_airplane);

@@ -199,7 +199,7 @@ Proxy.searchForAirplane = (id_airplane, callback) => {
             id_airplane: id_airplane
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar los aviones de la base de datos");
+            showModal("myModal", "ERROR", "This airplane doesn´t exist");
         },
         success: (data) => {
             console.log(data);

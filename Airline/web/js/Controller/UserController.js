@@ -22,6 +22,8 @@ UserController.prototype = {
             row.append($("<th><b>TELEPHONE</b></th>"));
             row.append($("<th><b>CELLPHONE</b></th>"));
             row.append($("<th><b>DIRECTION</b></th>"));
+            row.append($("<th><b>ADMINISTRATOR</b></th>"));
+            row.append($("<th><b>CLIENT</b></th>"));
             row.append($("<th><b>ACTION</th>"));
             var row = $("<tr/>");
             for (let i in jsonResults) {
@@ -37,6 +39,8 @@ UserController.prototype = {
                 row.append($("<td>" + user.phone + "</td>"));
                 row.append($("<td>" + user.celular + "</td>"));
                 row.append($("<td>" + user.address + "</td>"));
+                row.append($("<td>" + user.administrator + "</td>"));
+                row.append($("<td>" + user.cliente + "</td>"));
                 row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + user.name + '\',\'' + user.lastname1 + 
                     '\',\'' + user.lastname2 + '\',\'' + user.birthday + '\',\'' + user.email + '\',\'' + user.username + '\',\'' + user.password + '\',\'' + user.phone + 
                     '\',\'' + user.celular + '\',\'' + user.address + '\');">' +
@@ -66,6 +70,8 @@ UserController.prototype = {
             row.append($("<th><b>TELEPHONE</b></th>"));
             row.append($("<th><b>CELLPHONE</b></th>"));
             row.append($("<th><b>DIRECTION</b></th>"));
+            row.append($("<th><b>ADMINISTRATOR</b></th>"));
+            row.append($("<th><b>CLIENT</b></th>"));
             row.append($("<th><b>ACTION</th>"));
             var row = $("<tr/>");
             $("#tableUser").append(row);
@@ -78,6 +84,8 @@ UserController.prototype = {
             row.append($("<td>" + jsonResults.phone + "</td>"));
             row.append($("<td>" + jsonResults.celular + "</td>"));
             row.append($("<td>" + jsonResults.address + "</td>"));
+            row.append($("<td>" + jsonResults.administrator + "</td>"));
+            row.append($("<td>" + jsonResults.cliente + "</td>"));
             row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + jsonResults.name + '\',\'' + jsonResults.lastname1 + 
                     '\',\'' + jsonResults.lastname2 + '\',\'' + jsonResults.birthday + '\',\'' + jsonResults.email + '\',\'' + jsonResults.username + '\',\'' + jsonResults.password + '\',\'' + jsonResults.phone + 
                     '\',\'' + jsonResults.celular + '\',\'' + jsonResults.address + '\');">' +
@@ -269,6 +277,17 @@ function validatePass(){
     return error;
 }
 
+function phoneCheck(element, errorMsg) {
+    var regex = /^\d{4}[-\s]?\d{4}$/;
+    removeInvalid( element );
+    if (!regex.test(element.val())) {
+        setInvalid(element);
+        alert(errorMsg);
+        return false;
+    }
+    return true;
+}
+
 function doValidate() {
     let error = false;
     if (this.isSomethingBlank()) {
@@ -278,7 +297,14 @@ function doValidate() {
         error = true;
     } else if (validatePass()) {
         error = true;
-    }
+        }
+//    } else if($('#telephone').val()) {
+//        phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' );
+//        error = true;
+//    } else if($('#cellphone').val()) {
+//        phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' );
+//        error = true;
+//    }
     return error;
 }
 
