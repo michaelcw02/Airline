@@ -658,3 +658,20 @@ Proxy.loginUser = (username, password, callback) => {
         dataType: "json"
     });
 }
+Proxy.logoutUser = (callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "userLogout",
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            //showModal("myModal", "ERROR", "An error occurred closing session");
+            callback();
+        },
+        success: (data) => {
+            callback();
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
