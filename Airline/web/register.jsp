@@ -183,6 +183,7 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTA1btQZJ0v_4ry2yFCX7u70GcpePQcts"></script>
+    <script src="js/Model/utils.js" type="text/javascript"></script>
     <!-- MODEL -->
     <script src="js/Model/GoogleMap/GoogleMap.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/Model/Proxy.js"></script>
