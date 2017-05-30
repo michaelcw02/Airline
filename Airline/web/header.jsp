@@ -4,8 +4,15 @@
     Author     : michaelcw02
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+
+    session = request.getSession(true);
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,8 +31,8 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
+                    
                     <div class="navbar-collapse collapse">
-
                         <ul class="nav navbar-nav">
                             <li><a href="#">Check In</a></li>
                             <li class="dropdown">
@@ -43,7 +50,7 @@
                                 </ul>
                             </li>
                             <!--only for test-->
-                            <li class="dropdown">
+                            <li class="dropdown" style="display:none;" id="administration">
                                 <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">Administration</a>
                                 <ul class="dropdown-menu dropdown-profile">
                                     <li>
@@ -61,73 +68,93 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <!------------- SUPER IMPORTANT --------------->
-                            <!-- This place is supposed to have 2 different kinds,one for log in and 1 for user logged -->
-                            <li class="dropdown">
-                                <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
-                                    <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
-                                    Sign In
-                                </a>
-                                <ul class="dropdown-menu sign-in">
-                                    <li>
-                                        <div class="container-fluid text-center">
-                                            <form action="javascript:signIn();" class="form-horizontal">
+                            <% String user = (String) request.getSession().getAttribute("user"); %>
+                            <% if (user == null){%> 
+                                <!------------- SUPER IMPORTANT --------------->
+                                <!-- This place is supposed to have 2 different kinds,one for log in and 1 for user logged -->
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
+                                        <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
+                                        Sign In
+                                    </a>
+                                    <ul class="dropdown-menu sign-in">
+                                        <li>
+                                            <div class="container-fluid text-center">
+                                                <form action="javascript: new AirlineController().loginUser();" class="form-horizontal">
+                                                    <div class="row text-center">
+                                                        <h2 class="text-white">Sign in at Star Airlines</h2>
+                                                    </div>
 
-                                                <div class="row text-center">
-                                                    <h2 class="text-white">Sign in at Star Airlines</h2>
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-1 text-center">
+                                                            <img class="icon" src="images/user-48.png" alt="User">
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="text" id="username" class="form-control" placeholder="email/username" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-1 text-center">
+                                                            <img class="icon" src="images/lock-4-48.png" alt="password">
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="password" id="password" class="form-control" placeholder="Password" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-3 col-md-1">
+                                                            <button type="submit" onclick="" id="btnSubmit" class="btn btn-success">Sign In</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <a href="#">Forgot your password?</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="register">
+                                                <div class="row">
+                                                    <div class="col-md-offset-3 col-md-6 text-center text-white">
+                                                        Not registered yet?
+                                                    </div>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-md-offset-2 col-md-1 text-center">
-                                                        <img class="icon" src="images/user-48.png" alt="User">
+                                                <div class="row">
+                                                    <div class="col-md-offset-3  col-md-6 text-center register">
+                                                        <a class="hvr-grow" href="./register.jsp" target="_blank">
+                                                            <img class="icon-register" src="images/edit-8-48.png" alt="Register">Register
+                                                        </a>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="username" class="form-control" placeholder="email/username" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-md-offset-2 col-md-1 text-center">
-                                                        <img class="icon" src="images/lock-4-48.png" alt="password">
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <input type="password" id="password" class="form-control" placeholder="Password" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-md-offset-3 col-md-1">
-                                                        <button type="submit" id="btnSubmit" class="btn btn-success">Sign In</button>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <a href="#">Forgot your password?</a>
-                                                    </div>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                        <div class="register">
-                                            <div class="row">
-                                                <div class="col-md-offset-3 col-md-6 text-center text-white">
-                                                    Not registered yet?
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-offset-3  col-md-6 text-center register">
-                                                    <a class="hvr-grow" href="./register.jsp" target="_blank">
-                                                        <img class="icon-register" src="images/edit-8-48.png" alt="Register">Register
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <%}%> 
+
+                            <%  if (user != null){%>
+                                <% if (request.getSession().getAttribute("type").equals("Administrator")){%> 
+                                    <script>
+                                        document.getElementById("administration").style.display = 'block';
+                                   </script>
+                                <%}%> 
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
+                                        <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
+                                        <%=user%>
+                                    </a>
+                                    <ul class="dropdown-menu logout">
+                                        <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();return false;">
+                                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                            Log Out
+                                        </a>
+                                    </ul>
+                                </li>
+                            <%}%> 
                         </ul>
-
                     </div>
                 </div>
             </nav>
-        </header>
+        </header>  
     </body>
 </html>

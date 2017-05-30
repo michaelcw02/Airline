@@ -22,8 +22,14 @@ function addElementsProperties() {
 
     $("#departing").change(() => controller.setMinReturnDate());
 
-    $('#btnRoundTrip').click(() => $("#returning").fadeIn());
-    $('#btnOneWay').click(() => $("#returning").fadeOut());
+    $('#btnRoundTrip').click(() => {
+        $('#FlightMode').val('RoundTrip');
+        $('#returning').fadeIn();
+    });
+    $('#btnOneWay').click(() => {
+        $('#FlightMode').val('OneWay');
+        $("#returning").fadeOut()
+    });
 
     $('#btnDecrease').click(() => controller.decreaseAdults());
     $('#btnIncrease').click(() => controller.increaseAdults());

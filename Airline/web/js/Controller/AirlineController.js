@@ -174,14 +174,37 @@ AirlineController.prototype = {
     },
     reserveFlight: function (flightNum, mode, callback) {
         Proxy.reserveFlight(flightNum, mode, (data) => {
-            Storage.store(mode + "Reservation", data);
+            $('#' + mode + 'Selection').val(flightNum);
             callback(data);
         })
     },
-    confirmReservation: function(callback) {
-
+    confirmReservation: function(mode, numPassengers, callback) {
+        Proxy.confirmReservation(mode, numPassengers, (data) => {          
+            let response = data.response;
+            callback(response);
+        });
     },
     cancelReservation: function(callback) {
         
-    }
+    },
+    loginUser: function() {
+        $('#username').removeClass("has-error");
+        $('#password').removeClass("has-error");
+        let username = $('#username').val();
+        let password = $('#password').val();
+        Proxy.loginUser(username, password, (response) => {
+            if(response[0] === 'C') {
+                location.reload();
+            } else {
+                $('#username').addClass("has-error");
+                $('#password').addClass("has-error");
+            }
+        });
+    },
+    logout: function() {
+       Proxy.logoutUser((data) => {
+            window.location.replace("/Airline");
+            callback(data);
+        });
+    },
 }

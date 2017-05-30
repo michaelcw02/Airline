@@ -40,4 +40,19 @@ public class UserBL {
     public void deleteUser(User user) throws Exception {
         userDAO.deleteUser(user);
     }
+    
+    public String validateUser(String username, String password) {
+        User user = null;
+        try {
+            user = userDAO.validateUser(username, password);
+            if(user != null) {
+                if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    return (user.isAdministrator() == true) ? "Administrator~" + user.getName() : "Client~"  + user.getName();
+                }
+            }
+        } catch (Exception e) {
+            return "Not A User~No Name";
+        }
+        return "Not A User~No Name";
+    }
 }

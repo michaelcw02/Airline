@@ -79,6 +79,17 @@ public class UserDAO extends BaseDAO {
             throw new Exception("E~User doesnt exists");
         }
     }
+    
+    public User validateUser(String username, String password) throws Exception {
+        String query = "SELECT * FROM user WHERE username = '%s' AND password = '%s';";
+        query = String.format(query, username, password);
+        ResultSet rs = connection.executeQuery(query);
+        if(rs.next()) {
+            return user(rs);
+        } else {
+            throw new Exception("E~User does not exists");
+        }
+    }
 
     private int booleanToInt(boolean b) {
         return (b) ? 1 : 0;

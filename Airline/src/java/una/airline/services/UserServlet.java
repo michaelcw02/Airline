@@ -47,7 +47,7 @@ public class UserServlet extends HttpServlet {
             //**********************************************************************
             //se toman los datos de la session
             //**********************************************************************
-            //HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             //**********************************************************************
             //se consulta cual accion se desea realizar
             //**********************************************************************
@@ -96,6 +96,28 @@ public class UserServlet extends HttpServlet {
                     user.setUsername(request.getParameter("username"));
                     userBL.deleteUser(user);
                     out.print("{\"data\": \"C~El usuario fue eliminado \"}");
+                    break;
+                case "userLogin":
+                    username = request.getParameter("username");
+                    String password = request.getParameter("password");
+                    
+                    String type = userBL.validateUser(username, password);
+                    String[] separated = type.split("~");
+                    type = separated[0];
+                    String name = separated[1];
+                    json = "{}";
+                    if(!type.equals("Not A User")) {
+                        session.setAttribute("user", name);
+                        session.setAttribute("type", type);
+                        session.setAttribute("username", username);
+                        session.setAttribute("loginStatus", "logged.");
+                        json = "{\"response\":\"C~The user has been validated successfully\"}";
+                    }
+                    out.print(json);
+                    break;
+                case "userLogout":
+                    session.removeAttribute("user");
+                    session.invalidate();
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");

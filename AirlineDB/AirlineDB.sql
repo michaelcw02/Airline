@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`ticket` (
   `number` INT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(20) NOT NULL,
   `flight_num` VARCHAR(10) NOT NULL,
+  `number_passengers` INT NOT NULL,
   PRIMARY KEY (`number`),
   INDEX `id_user_idx` (`username` ASC),
   INDEX `flight_num_idx` (`flight_num` ASC),
@@ -171,9 +172,10 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `airlinedb`.`passenger` (
   `passport` VARCHAR(20) NOT NULL,
   `ticket_num` INT(11) NOT NULL,
-  `name` VARCHAR(20) NULL DEFAULT NULL,
-  `lastname` VARCHAR(20) NULL DEFAULT NULL,
-  `seat` VARCHAR(5) NULL DEFAULT NULL,
+  `name` VARCHAR(20) NOT NULL,
+  `lastname` VARCHAR(20) NOT NULL,
+  `seat` VARCHAR(5) NOT NULL,
+  `checked` TINYINT NOT NULL,
   PRIMARY KEY (`passport`, `ticket_num`),
   INDEX `ticket_num_idx` (`ticket_num` ASC),
   CONSTRAINT `fk_passenger1`

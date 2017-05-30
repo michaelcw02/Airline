@@ -199,7 +199,7 @@ Proxy.searchForAirplane = (id_airplane, callback) => {
             id_airplane: id_airplane
         },
         error: function () { //si existe un error en la respuesta del ajax
-            alert("Se presento un error a la hora de cargar los aviones de la base de datos");
+            showModal("myModal", "ERROR", "This airplane doesn´t exist");
         },
         success: (data) => {
             console.log(data);
@@ -620,11 +620,13 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         dataType: "json"
     });
 }
-Proxy.confirmReservation = (cityFrom, callback) => {
+Proxy.confirmReservation = (mode, numPassengers, callback) => {
     $.ajax({
         url: 'TicketsServlet',
         data: {
-            action: "confirmReservation"
+            action: "confirmReservation",
+            mode: mode,
+            numPassengers: numPassengers
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred while reserving the tickets");
@@ -633,7 +635,43 @@ Proxy.confirmReservation = (cityFrom, callback) => {
             console.log(data);
             callback(data);
         },
-        type: 'GET',
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.loginUser = (username, password, callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "userLogin",
+            username: username,
+            password: password
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "An error occurred while signing in");
+        },
+        success: (data) => {
+            console.log(data);
+            callback(data.response);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.logoutUser = (callback) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "userLogout",
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            //showModal("myModal", "ERROR", "An error occurred closing session");
+            callback();
+        },
+        success: (data) => {
+            callback();
+        },
+        type: 'POST',
         dataType: "json"
     });
 }

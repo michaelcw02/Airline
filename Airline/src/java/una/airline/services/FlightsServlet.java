@@ -72,7 +72,8 @@ public class FlightsServlet extends HttpServlet {
                 case "reserveFlight":
                     flightNum = request.getParameter("flightNum");
                     mode = request.getParameter("mode");
-                    
+                    //Outbound
+                    //Return
                     session.setAttribute(mode + "Reservation", flightNum);
                     
                     json = "{\"response\":\"S~" + mode + " Selected!\"}";

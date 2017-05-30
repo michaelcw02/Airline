@@ -18,12 +18,13 @@ import una.airline.domain.PassengerID;
 public class PassengerDAO extends BaseDAO {
 
     public void addPassenger(Passenger passenger) throws Exception {
-        String query = "INSERT INTO passenger VALUES ('%s', '%s', '%s', '%s', '%s');";
+        String query = "INSERT INTO passenger VALUES ('%s', '%s', '%s', '%s', '%s', '%d');";
         query = String.format(query, passenger.getID().getPassport(),
                 passenger.getTicket().getNumber(),
                 passenger.getName(),
                 passenger.getLastname(),
-                passenger.getSeat()
+                passenger.getSeat(),
+                passenger.isChecked()
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);

@@ -157,10 +157,36 @@ IndexController.prototype = {
             }
     },
     confirmReservation: function() {
-        
+        let mode = $('#FlightMode').val();
+        let outboundSelection = $('#OutboundSelection').val();
+        let returnSelection;
+        let numPassengers = $('#flightsFormAdults').val();
+        if(mode == 'RoundTrip') {
+            returnSelection = $('#ReturnSelection').val();
+        }
+        this.airlineController.confirmReservation(mode, numPassengers, (response) => {
+            response = response.split('~');
+            if(response[0] == 'S') {
+                //REDIRECTS TO TICKETS PAGE FOR FURTHER SETTINGS ON TICKETS AND PASSENGERS
+                showModal('myModal', 'Info!...', 'Redirecting...');
+                setTimeout( () => { /*window.location.replace("/");*/ }, 1500 );
+                
+            }
+            if(response[0] == 'E') {
+                if(response[1] == '1') {
+                    //SELECTION ERROR
+                    showModal('myModal', 'Info!...', response[2]);
+                    setTimeout( () => { $('#myModal').modal("hide"); }, 1500 );
+                }
+                if(response[1] == '2') {
+                    //USER ERROR
+                    showModal('myModal', 'Info!...', response[2]);
+                    setTimeout( () => { location.reload(true); }, 1500 );
+                }
+            }
+        } )
     },
     cancelReservation: function() {
-
     }
      
 }

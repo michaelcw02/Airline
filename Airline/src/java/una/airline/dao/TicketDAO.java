@@ -7,7 +7,6 @@ package una.airline.dao;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
-import java.util.List;
 import una.airline.domain.Ticket;
 
 /**
@@ -17,9 +16,10 @@ import una.airline.domain.Ticket;
 public class TicketDAO extends BaseDAO {
 
     public void addTicket(Ticket ticket) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`) VALUES ('%s', '%s');";
+        String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`, `number_passengers`) VALUES ('%s', '%s', '%d');";
         query = String.format(query, ticket.getUser().getUsername(),
-                ticket.getFlight().getFlightNum()
+                ticket.getFlight().getFlightNum(),
+                ticket.getNumPassengers()
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);
@@ -27,8 +27,15 @@ public class TicketDAO extends BaseDAO {
             throw new Exception("Ticket already exists.");
         }
     }
+    
+    public int addTicket(String username, String flightNum, int numPassengers) {
+        String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`, `number_passengers`) VALUES ('%s', '%s', '%d');";
+        query = String.format(query, username, flightNum, numPassengers);
+        System.out.println(query);
+        return connection.executeUpdate(query);
+    }
 
-    public LinkedList<Ticket> getAllAirplanes() {
+    public LinkedList<Ticket> getAllTickets() {
         LinkedList<Ticket> listResult = new LinkedList<>();
         try {
             String query = "SELECT * FROM ticket;";
@@ -49,7 +56,29 @@ public class TicketDAO extends BaseDAO {
         if (rs.next()) {
             return ticket(rs);
         }
-        throw new Exception("E~Ticket doesnt exists");
+        throw new Exception("E~Ticket does not exists");
+    }
+    
+    public Ticket searchTicketByFlightNUser(String username, String flightNum) throws Exception {
+        String query = "SELECT * FROM ticket WHERE username = '%s' AND flight_num = '%s';";
+        query = String.format(query, username, flightNum);
+        ResultSet rs = connection.executeQuery(query);
+        if(rs.next()) {
+            return ticket(rs);
+        }
+        throw new Exception("E~Ticket does not exists");
+    }
+
+    public Ticket createTicket(String username, String flightNum, int numPassengers) {
+        int result = this.addTicket(username, flightNum, numPassengers);
+        if(result == 1) {
+            try {
+                return this.searchTicketByFlightNUser(username, flightNum);                
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+        return null;        
     }
     
 }
