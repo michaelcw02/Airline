@@ -107,10 +107,11 @@ public class UserServlet extends HttpServlet {
                     String name = separated[1];
                     json = "{}";
                     if(!type.equals("Not A User")) {
-                        session.setAttribute("loginStatus", "logged.");
-                        session.setAttribute("type", type);
-                        json = "{\"response\":\"C~The user has been validated successfully\"}";
                         session.setAttribute("user", name);
+                        session.setAttribute("type", type);
+                        session.setAttribute("username", username);
+                        session.setAttribute("loginStatus", "logged.");
+                        json = "{\"response\":\"C~The user has been validated successfully\"}";
                     }
                     out.print(json);
                     break;

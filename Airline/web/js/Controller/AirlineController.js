@@ -174,12 +174,12 @@ AirlineController.prototype = {
     },
     reserveFlight: function (flightNum, mode, callback) {
         Proxy.reserveFlight(flightNum, mode, (data) => {
-            $('#' + mode + 'Selection').val(flightNUm);
+            $('#' + mode + 'Selection').val(flightNum);
             callback(data);
         })
     },
-    confirmReservation: function(mode, callback) {
-        Proxy.confirmReservation(mode, (data) => {
+    confirmReservation: function(mode, numPassengers, callback) {
+        Proxy.confirmReservation(mode, numPassengers, (data) => {
             
         });
     },

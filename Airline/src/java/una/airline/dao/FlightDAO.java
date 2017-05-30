@@ -52,19 +52,17 @@ public class FlightDAO extends BaseDAO {
         return listaResultado;
     }
     
-    public List<Flight> findByID(String flightNum) {
-        List<Flight> listResult = new LinkedList<>();
+    public Flight findByID(String flightNum) {
         try {
-            String query = "SELECT FROM flight WHERE flight_num = %s;";
+            String query = "SELECT * FROM flight WHERE flight_num = '%s';";
             query = String.format(query, flightNum);
             ResultSet rs = connection.executeQuery(query);
-            while (rs.next()) {
-                listResult.add(flight(rs));
+            if (rs.next()) {
+                return flight(rs);
             }
         } catch (Exception e) {
-            return null;
         }
-        return listResult;
+        return null;
     }
 
     public List<Flight> findFlightByCityFromCityTo(String cityFrom, String cityTo) {

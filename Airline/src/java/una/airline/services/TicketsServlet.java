@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
+import una.airline.bl.TicketsBL;
 import una.airline.dao.TicketDAO;
 import una.airline.domain.Flight;
 
@@ -38,12 +39,14 @@ public class TicketsServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
             
+            TicketsBL ticketsBL = new TicketsBL();
+            
             HttpSession session = request.getSession();
 
             String action = request.getParameter("action");
             switch (action) {
                 case "confirmReservation":
-                    String user = (String) session.getAttribute("user");
+                    String username = (String) session.getAttribute("username");
                     String status = (String) session.getAttribute("loginStatus");
                     
                     String mode = (String) session.getAttribute("mode");
@@ -51,19 +54,19 @@ public class TicketsServlet extends HttpServlet {
                     String outboundReservation = (String) session.getAttribute("OurboundReservation");
                     String returnReservation = null;
                     
+                    int numPassengers = (int) session.getAttribute("numPassengers");
+                    
                     json = "";
                     
                     FlightsBL flightsBL = new FlightsBL();
                     
-                    if(user != null && status.equalsIgnoreCase("logged.")) {
+                    if(username != null && status.equalsIgnoreCase("logged.")) {
                         if(outboundReservation == null) {
                             json = "{\"response\":\"E~You did not select a flight!\"}";
                             out.print(json);
                             break;
                         }
                         //SUCCESS FOR ONE WAY
-                        Flight outboundFlight = (Flight) flightsBL.searchFlightByNum(outboundReservation);
-                        
                         if(mode.equalsIgnoreCase("RoundTrip")) {
                             returnReservation = (String) session.getAttribute("ReturnReservation");
                             if(returnReservation == null) {
@@ -72,7 +75,8 @@ public class TicketsServlet extends HttpServlet {
                                 break;
                             }
                             //SUCCESS FOR ROUND TRIPS
-                            Flight returnFlight = (Flight) flightsBL.searchFlightByNum(returnReservation);
+                            ticketsBL.reserveTickets(username, outboundReservation, returnReservation, numPassengers);
+                            
                             
                         }
                         

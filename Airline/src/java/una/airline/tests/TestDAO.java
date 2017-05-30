@@ -6,6 +6,7 @@
 package una.airline.tests;
 
 import java.util.Date;
+import una.airline.bl.*;
 import una.airline.dao.*;
 import una.airline.domain.*;
 
@@ -17,6 +18,14 @@ public class TestDAO {
     
     
     public static void main(String[] arg) throws Exception {
+        
+        
+        
+        //TEST PASSED
+        TicketsBL ticketsBL = new TicketsBL();
+        RoundTripInfo<Ticket> result = ticketsBL.reserveTickets("michaelcw02", "ST003", "ST007", 1);
+        System.out.println("doNE");
+        
         
         UserDAO userDAO = new UserDAO();
         User u = userDAO.validateUser("1", "1");
