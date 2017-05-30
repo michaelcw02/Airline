@@ -133,7 +133,6 @@
                             <%}%> 
 
                             <%  if (user != null){%>
-                                <% String type = (String) request.getSession().getAttribute("type"); %>
                                 <% if (request.getSession().getAttribute("type").equals("Administrator")){%> 
                                     <script>
                                         document.getElementById("administration").style.display = 'block';
@@ -144,13 +143,11 @@
                                         <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
                                         <%=user%>
                                     </a>
-                                    <ul class="dropdown-menu dropdown-profile">
-                                        <div class="col-md-4" style="text-align: right;">
-                                            <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();">
-                                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                                                Log Out
-                                            </a>
-                                        </div>
+                                    <ul class="dropdown-menu logout ">
+                                        <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();">
+                                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                            Log Out
+                                        </a>
                                     </ul>
                                 </li>
                             <%}%> 
