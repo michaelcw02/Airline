@@ -201,6 +201,9 @@ AirlineController.prototype = {
         });
     },
     logout: function() {
-       Proxy.logoutUser();
-    }
+       Proxy.logoutUser((data) => {
+            location.reload();
+            callback(data);
+        });
+    },
 }

@@ -34,7 +34,7 @@
             <div class="row text-center">
                 <label for="alerts" class="alert" id="alert"></label>
             </div>
-            <form action='javascript:submitRegistration();' method='POST' id='registrationForm'>
+            <form action='' method='POST' id='registrationForm'>
                 <div class='row'>
                     <div class='form-group text-center'>
                         <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>Name:</div>
@@ -44,8 +44,15 @@
                 <br>
                 <div class='row'>
                     <div class='form-group text-center'>
-                        <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>Lastname:</div>
-                        <div class='col-sm-4'><input type='text' id='lastname' class='form-control bg-black text-white' placeholder="Doe" ></div>
+                        <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>First Lastname:</div>
+                        <div class='col-sm-4'><input type='text' id='firstlastname' class='form-control bg-black text-white' placeholder="Doe" ></div>
+                    </div>
+                </div>
+                <br>
+                <div class='row'>
+                    <div class='form-group text-center'>
+                        <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>Second Lastname:</div>
+                        <div class='col-sm-4'><input type='text' id='secondlastname' class='form-control bg-black text-white' placeholder="Doe" ></div>
                     </div>
                 </div>
                 <br>
@@ -79,7 +86,7 @@
                 <div class='row'>
                     <div class='form-group text-center'>
                         <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>Username:</div>
-                        <div class='col-sm-4'><input type='text' id='username' class='form-control bg-black text-white' placeholder="johndoe123"></div>
+                        <div class='col-sm-4'><input type='text' id='user' class='form-control bg-black text-white' placeholder="johndoe123"></div>
                     </div>
                 </div>
                 <br>
@@ -93,7 +100,7 @@
                 <div class='row'>
                     <div class='form-group text-center'>
                         <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>Password:</div>
-                        <div class='col-sm-4'><input type='password' id='password' class='form-control bg-black text-white'></div>
+                        <div class='col-sm-4'><input type='password' id='pass' class='form-control bg-black text-white'></div>
                     </div>
                 </div>
                 <br>
@@ -145,7 +152,7 @@
                 <br>
                 <div class='row'>
                     <div class='col-md-12 text-center'>
-                        <input type='submit' class='btn btn-success' id='submit'>
+                        <input type='submit' class='btn btn-success' id='send'>
                     </div>
                 </div>
             </form>

@@ -143,8 +143,8 @@
                                         <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
                                         <%=user%>
                                     </a>
-                                    <ul class="dropdown-menu logout ">
-                                        <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();">
+                                    <ul class="dropdown-menu logout">
+                                        <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();return false;">
                                             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                             Log Out
                                         </a>

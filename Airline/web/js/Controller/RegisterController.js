@@ -8,7 +8,7 @@ RegisterController.prototype = {
         this.view = view;
         var divElemMap = document.getElementById('map');
         this.gMap = new GoogleMap(GoogleMapKey, divElemMap);
-        //this.airlineController = new AirlineController();
+        this.airlineController = new AirlineController();
         //this.registerModel = new RegisterModel();
     },
     getLocation: function () {
@@ -31,11 +31,12 @@ RegisterController.prototype = {
         let blanks = false;
         
         blanks = isBlank($('#name'));
-        blanks = isBlank($('#lastname'));
+        blanks = isBlank($('#firstlastname'));
+        blanks = isBlank($('#secondlastname'));
         blanks = isBlank($('#birthdate'));
-        blanks = isBlank($('#username'));
+        blanks = isBlank($('#user'));
         blanks = isBlank($('#email'));
-        blanks = isBlank($('#password'));
+        blanks = isBlank($('#pass'));
         blanks = isBlank($('#passwordRepeat'));
 
         let $sex = $('input[name="sex"]:checked');
@@ -76,29 +77,45 @@ RegisterController.prototype = {
         }
         if(error)
             event.preventDefault();
+        return error;
     },
 
     isPasswordOK: function () {
-        var pass_1 = $('#password').val();
+        var pass_1 = $('#pass').val();
         var pass_2 = $('#passwordRepeat').val();
-        if (pass_1 === pass_2)
-            return true;
-        return false;
+        if (pass_1 !== pass_2)
+            return false;
+        return true;
     },
     checkUsername: function(event) {
         console.log('password check')
     },
     submitRegistration: function() {
         let name = $('#name').val();
+        let firstLast = $("#firstlastname").val();
+        let secondLast = $("#secondlastname").val();
         let lastname = $('#lastname').val();
         let birthdate = $('#birthdate').val();
         let username = $('#username').val();
         let email = $('#email').val();
-        let password = $('#password').val();
+        let password = $('#pass').val();
 
         let msg = 'thank you for registering (THIS IS JUST A PLACEHOLDER!)';
         console.log(msg)
         window.alert(msg);
+    },
+    addUser: function () {
+        let username = this.view.$("#user").val();
+        let name = this.view.$("#name").val();
+        let firstLast = this.view.$("#firstlastname").val();
+        let secondLast = this.view.$("#secondlastname").val();
+        let email = this.view.$("#email").val();
+        let birth = this.view.$("#birthdate").val();
+        let pass = this.view.$("#pass").val();
+        let tel = this.view.$("#telephone").val();
+        let cel = this.view.$("#cellphone").val();
+        let direction = this.view.$("#direction").val();
+        this.airlineController.addUser(username, pass, name, firstLast, secondLast, email, birth, direction, tel, cel);
     }
 }
 

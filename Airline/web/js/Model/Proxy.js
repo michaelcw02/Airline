@@ -660,14 +660,14 @@ Proxy.logoutUser = (callback) => {
     $.ajax({
         url: 'UserServlet',
         data: {
-            action: "userLogout"
+            action: "userLogout",
         },
         error: function () { //si existe un error en la respuesta del ajax
-            showModal("myModal", "ERROR", "An error occurred closing session");
+            //showModal("myModal", "ERROR", "An error occurred closing session");
+            callback();
         },
         success: (data) => {
-            console.log(data);
-            callback(data.response);
+            callback();
         },
         type: 'POST',
         dataType: "json"
