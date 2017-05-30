@@ -119,6 +119,10 @@ public class UserServlet extends HttpServlet {
                     session.setAttribute("user", name);
                     out.print(json);
                     break;
+                case "userLogout":
+                    session.removeAttribute("user");
+                    session.invalidate();
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");
                     break;

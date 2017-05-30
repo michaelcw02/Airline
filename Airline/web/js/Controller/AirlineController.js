@@ -199,5 +199,8 @@ AirlineController.prototype = {
                 $('#password').addClass("has-error");
             }
         });
+    },
+    logout: function() {
+       Proxy.logoutUser();
     }
 }
