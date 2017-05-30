@@ -93,7 +93,7 @@ public class TripsServlet extends HttpServlet {
                         origin = cityBL.getCityByCode(cityFrom);
                         destination = cityBL.getCityByCode(cityTo);
                     } catch (Exception e) {
-                       out.print("{\"data\":\"E~The cities are not valid!\"}");                    
+                        out.print("{\"data\":\"E~The cities are not valid!\"}");
                     }
                     trip = new Trip(origin, destination, distance, duration, departureTime, departureDay, cost, discount, discountDes, discountPath);
                     tripsBL.addTrip(trip);
@@ -104,6 +104,30 @@ public class TripsServlet extends HttpServlet {
                     cityFrom = request.getParameter("cityFrom");
                     json = new Gson().toJson(tripsBL.getTripsByCityFrom(cityFrom));
                     out.print(json);
+                    break;
+                case "updateTrip":
+                    int id_trip=Integer.parseInt(request.getParameter("id_trip"));
+                    int distance1 = Integer.parseInt(request.getParameter("distance"));
+                    int duration1 = Integer.parseInt(request.getParameter("duration"));
+                    String cityFrom1 = request.getParameter("departureCity");
+                    String cityTo1 = request.getParameter("arrivalCity");
+                    int departureTime1 = Integer.parseInt(request.getParameter("departureTime"));
+                    String departureDay1 = request.getParameter("departureDay");
+                    int cost1 = Integer.parseInt(request.getParameter("cost"));
+                    int discount1 = Integer.parseInt(request.getParameter("discount"));
+                    String discountDes1 = request.getParameter("discountDes");
+                    String discountPath1 = request.getParameter("discountPath");
+                    City origin1 = null;
+                    City destination1 = null;
+                    try {
+                        CityBL cityBL = new CityBL();
+                        origin = cityBL.getCityByCode(cityFrom1);
+                        destination = cityBL.getCityByCode(cityTo1);
+                    } catch (Exception e) {
+                        out.print("{\"data\":\"E~The cities are not valid!\"}");
+                    }
+                    trip = new Trip(id_trip,origin1, destination1, distance1, duration1, departureTime1, departureDay1, cost1, discount1, discountDes1, discountPath1);
+                    tripsBL.updateTrip(trip);
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");

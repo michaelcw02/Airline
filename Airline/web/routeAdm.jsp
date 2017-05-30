@@ -38,22 +38,11 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Insert Route</h4>
+                        <h4 class="modal-title" id="myModalTitle">Insert/Modify Route</h4>
                     </div>
                     <div class="modal-body" id="myModalMessage">
-                        <form role="form" onsubmit="return false;" id="formRoute">
-                         
-                            <div class="form-group" id="groupDistance">
-                                <label for="distance">Distance:</label>
-                                <input type="number" class="form-control" id="distance" placeholder="Distance" >
-                            </div>
-
-                            <div class="form-group" id="groupDuration">
-                                <label for="duration">Duration:</label>
-                                <input type="number" class="form-control" id="hours" placeholder="hours">
-                                <input type="number" class="form-control" id="minutes" placeholder="minutes">
-                            </div>
-
+                        <form role="form"  onsubmit="return false;" id="formRoute">
+                            
                             <div class="form-group" id="groupDepartureCity">
                                 <label for="departureCity">Departure City:</label>
                                 <select class='form-control' id='departureCity'>
@@ -66,6 +55,23 @@
                                 <select class='form-control' id='arrivalCity'>
                                     <option value="0">Arrival city</option>
                                 </select>
+                            </div>
+
+                            <div class="form-group" id="groupDistance">
+                                <label for="distance">Distance:</label>
+                                <input type="number" class="form-control" id="distance" placeholder="Distance" >
+                            </div>
+
+                            <div class="form-group" id="groupDuration">
+                                <label for="duration">Duration:</label>
+                                <div class="form-group row">
+                                    <div class="col-xs-6">
+                                        <input type="number" class="form-control" id="hours" placeholder="hours">
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="number" class="form-control" id="minutes" placeholder="minutes">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group" id="groupDepartureTime">

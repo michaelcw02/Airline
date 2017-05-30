@@ -55,7 +55,7 @@ public class BaseDAO {
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in cities of trip", ex);
             }
-            return new Trip(idTrip, cityFrom, cityTo, duration, distance, departureTime, departureDay, cost, discount, discountDescription, discountImagePath);
+            return new Trip(idTrip, cityFrom, cityTo,distance,duration, departureTime, departureDay, cost, discount, discountDescription, discountImagePath);
         } catch (SQLException ex) {
             return null;
         }

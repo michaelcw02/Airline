@@ -9,7 +9,7 @@ function addElementsProperties() {
     $("#send").click(() => controller.addTrip());
     $("#cancel").click(function () {
         controller.cleanForm();
-        $("#myModalTypeAirplane").modal("hide");
+        $("#modalRoute").modal("hide");
     });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(function () {

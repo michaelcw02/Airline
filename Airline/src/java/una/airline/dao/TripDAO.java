@@ -98,15 +98,16 @@ public class TripDAO extends BaseDAO {
         try {
             String query = "SELECT * FROM TRIP WHERE DISCOUNT <> '0';";
             ResultSet rs = connection.executeQuery(query);
-            while(rs.next()) {
+            while (rs.next()) {
                 listResult.add((trip(rs)));
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             return null;
         }
         return listResult;
     }
-      public int getAutoIncremental() throws Exception {
+
+    public int getAutoIncremental() throws Exception {
         String query = "SELECT MAX(id_trip) FROM Trip;";
         query = String.format(query);
         ResultSet rs = connection.executeQuery(query);
@@ -114,5 +115,12 @@ public class TripDAO extends BaseDAO {
             return rs.getInt("MAX(id_trip)");
         }
         throw new Exception("E~Trip does not exists");
+    }
+
+    public int updateTrip(Trip trip) {
+        String query = "UPDATE Trip SET distance='%d',duration='%d',arrival_city='%s', departure_city='%s',departure_time='%d',departure_day='%s', cost='%d', discount='%d', discount_description='%s', discount_image_path='%s' WHERE id_trip='%s'";
+        query = String.format(query, trip.getDistance(), trip.getDuration(), trip.getCityByArrivalCity().getCode(), trip.getCityByDepartureCity().getCode(), trip.getDepartureTime(), trip.getDepartureDay(), trip.getCost(), trip.getDiscount(), trip.getDiscountDescription(), trip.getDiscountImagePath(), trip.getIdTrip());
+        int result = connection.executeUpdate(query);
+        return result;
     }
 }
