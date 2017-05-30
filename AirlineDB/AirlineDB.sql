@@ -119,7 +119,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
-
 -- -----------------------------------------------------
 -- Table `airlinedb`.`user`
 -- -----------------------------------------------------
@@ -132,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`user` (
   `email` VARCHAR(40) NOT NULL,
   `phone` VARCHAR(20) NOT NULL,
   `celular` VARCHAR(20) NOT NULL,
-  `address` VARCHAR(50) NOT NULL,
+  `address` VARCHAR(200) NOT NULL,
   `birthday` DATE NOT NULL,
   `administrator` TINYINT(1) NOT NULL,
   `cliente` TINYINT(1) NOT NULL,
@@ -191,6 +190,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+INSERT INTO `airlinedb`.`user` (`username`, `password`, `name`, `lastname1`, `lastname2`, `email`, `phone`, `celular`, `address`, `birthday`, `administrator`, `cliente`) VALUES ('admin', 'admin', 'ADMINISTRATOR', 'ADMINISTRATOR', 'ADMINISTRATOR', 'ADMINISTRATOR', '887654321', '12345678', 'ADMINISTRATOR', '1996-02-01', '1', '1');
 
 INSERT INTO TYPEAIRPLANE VALUES ('A380-800', '2009', 'Airbus', '800', '88', '9');
 

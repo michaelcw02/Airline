@@ -482,7 +482,7 @@ Proxy.getAllUsers = (callback) => {
         dataType: "json"
     });
 }
-Proxy.addUser = (user, admin, client) => {
+Proxy.addUser = (user, admin, client, callback) => {
     $.ajax({
         url: 'UserServlet',
         data: {
@@ -504,7 +504,7 @@ Proxy.addUser = (user, admin, client) => {
             showModal("myModal", "ERROR", "An error occurred when a user was inserted");
         },
         success: (data) => {
-            showModal("myModal", "Status", "The user was inserted into the database");
+            callback(data);
         },
         type: 'POST',
         dataType: "json"

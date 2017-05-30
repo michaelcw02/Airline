@@ -110,7 +110,10 @@ UserController.prototype = {
                 cellphone: this.view.$("#cellphone").val(),
                 direction: this.view.$("#direction").val()
             }
-            this.airlineController.addUser(user, 1, 0);
+            this.airlineController.addUser(user, 1, 0, (data) => {
+                showModal('myModal', 'Status', 'The user was successfully registered into the database, please login');
+                setTimeout( () => { hideModal('myModal') }, 1500);
+            });
             hideModal("myModalUser");
             $("#tableUser").empty();
         }
