@@ -10,10 +10,13 @@ function addElementsProperties() {
     $('#birthdate').datepicker();
     
     //EVENT HANDLERS
-    $('#getDirection').click( () => controller.getLocation() );
     $('#registrationForm').submit( () => controller.doValidate() );
+    $('#getDirection').click( () => controller.getLocation() );
     $('#user').on( 'keypress change', () => controller.checkUsername() );
-    $("#send").click( () => controller.addUser() );
+}
+
+function addUser() {
+    controller.addUser();
 }
 
 function submitRegistration() {

@@ -41,8 +41,8 @@ UserController.prototype = {
                 row.append($("<td>" + user.address + "</td>"));
                 row.append($("<td>" + user.administrator + "</td>"));
                 row.append($("<td>" + user.cliente + "</td>"));
-                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + user.name + '\',\'' + user.lastname1 + 
-                    '\',\'' + user.lastname2 + '\',\'' + user.birthday + '\',\'' + user.email + '\',\'' + user.username + '\',\'' + user.password + '\',\'' + user.phone + 
+                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + user.name + '\',\'' + user.lastname1 +
+                    '\',\'' + user.lastname2 + '\',\'' + user.birthday + '\',\'' + user.email + '\',\'' + user.username + '\',\'' + user.password + '\',\'' + user.phone +
                     '\',\'' + user.celular + '\',\'' + user.address + '\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
@@ -86,29 +86,31 @@ UserController.prototype = {
             row.append($("<td>" + jsonResults.address + "</td>"));
             row.append($("<td>" + jsonResults.administrator + "</td>"));
             row.append($("<td>" + jsonResults.cliente + "</td>"));
-            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + jsonResults.name + '\',\'' + jsonResults.lastname1 + 
-                    '\',\'' + jsonResults.lastname2 + '\',\'' + jsonResults.birthday + '\',\'' + jsonResults.email + '\',\'' + jsonResults.username + '\',\'' + jsonResults.password + '\',\'' + jsonResults.phone + 
-                    '\',\'' + jsonResults.celular + '\',\'' + jsonResults.address + '\');">' +
-                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
-                    '</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteUser(\'' + jsonResults.username + '\');">' +
-                    '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
-                    '</button></td>'));
+            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + jsonResults.name + '\',\'' + jsonResults.lastname1 +
+                '\',\'' + jsonResults.lastname2 + '\',\'' + jsonResults.birthday + '\',\'' + jsonResults.email + '\',\'' + jsonResults.username + '\',\'' + jsonResults.password + '\',\'' + jsonResults.phone +
+                '\',\'' + jsonResults.celular + '\',\'' + jsonResults.address + '\');">' +
+                '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
+                '</button>' +
+                '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteUser(\'' + jsonResults.username + '\');">' +
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' +
+                '</button></td>'));
         });
     },
     addUser: function () {
         if (!doValidate()) {
-            let username = this.view.$("#user").val();
-            let name = this.view.$("#name").val();
-            let firstLast = this.view.$("#firstlastname").val();
-            let secondLast = this.view.$("#secondlastname").val();
-            let email = this.view.$("#email").val();
-            let birth = this.view.$("#birthdate").val();
-            let pass = this.view.$("#pass").val();
-            let tel = this.view.$("#telephone").val();
-            let cel = this.view.$("#cellphone").val();
-            let direction = this.view.$("#direction").val();
-            this.airlineController.addUser(username, pass, name, firstLast, secondLast, email, birth, direction, tel, cel);
+            let user = {
+                username: this.view.$("#user").val(),
+                name: this.view.$("#name").val(),
+                lastname1: this.view.$("#firstlastname").val(),
+                lastname2: this.view.$("#secondlastname").val(),
+                email: this.view.$("#email").val(),
+                birthdate: this.view.$("#birthdate").val(),
+                password: this.view.$("#pass").val(),
+                telephone: this.view.$("#telephone").val(),
+                cellphone: this.view.$("#cellphone").val(),
+                direction: this.view.$("#direction").val()
+            }
+            this.airlineController.addUser(user, 1, 0);
             hideModal("myModalUser");
             $("#tableUser").empty();
         }
@@ -150,6 +152,7 @@ UserController.prototype = {
         $('#formUser').trigger("reset");
     }
 }
+
 function showUserForModify(name, firstlastname, secondlastname, birthdate, email, username, password, telephone, cellphone, direction) {
     showModal("myModalUser");
     $("#name").val(name);
@@ -166,6 +169,7 @@ function showUserForModify(name, firstlastname, secondlastname, birthdate, email
     $("#direction").val(direction);
     $('#userAction').val("updateUser");
 }
+
 function isBlank(element) {
     removeInvalid(element);
     if (!element.val()) {
@@ -173,12 +177,15 @@ function isBlank(element) {
         return true;
     }
 }
+
 function removeInvalid(element) {
     element.removeClass('invalid');
 }
+
 function setInvalid(element) {
     element.addClass('invalid');
 }
+
 function isSomethingBlank() {
     let blanks = false;
     if (isBlank($('#user'))) {
@@ -206,6 +213,7 @@ function isSomethingBlank() {
     }
     return blanks;
 }
+
 function validateLength() {
     let error = false;
     var Max_Length1 = 20;
@@ -266,11 +274,11 @@ function validateLength() {
     return error;
 }
 
-function validatePass(){
+function validatePass() {
     let error = false;
     let pass = $("#pass").val();
     let pass2 = $("#passwordRepeat").val();
-    if (pass != pass2){
+    if (pass != pass2) {
         alert("Passwords do not match");
         error = true;
     }
@@ -279,7 +287,7 @@ function validatePass(){
 
 function phoneCheck(element, errorMsg) {
     var regex = /^\d{4}[-\s]?\d{4}$/;
-    removeInvalid( element );
+    removeInvalid(element);
     if (!regex.test(element.val())) {
         setInvalid(element);
         alert(errorMsg);
@@ -297,15 +305,13 @@ function doValidate() {
         error = true;
     } else if (validatePass()) {
         error = true;
-        }
-//    } else if($('#telephone').val()) {
-//        phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' );
-//        error = true;
-//    } else if($('#cellphone').val()) {
-//        phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' );
-//        error = true;
-//    }
+    }
+    //    } else if($('#telephone').val()) {
+    //        phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' );
+    //        error = true;
+    //    } else if($('#cellphone').val()) {
+    //        phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' );
+    //        error = true;
+    //    }
     return error;
 }
-
-
