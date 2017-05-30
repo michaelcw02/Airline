@@ -202,7 +202,7 @@ AirlineController.prototype = {
     },
     logout: function() {
        Proxy.logoutUser((data) => {
-            location.reload();
+            location="/Airline/index.jsp";
             callback(data);
         });
     },
