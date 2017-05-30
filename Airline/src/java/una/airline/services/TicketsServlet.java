@@ -5,7 +5,6 @@
  */
 package una.airline.services;
 
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,13 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
+import una.airline.dao.TicketDAO;
 import una.airline.domain.Flight;
 
 /**
  *
  * @author michaelcw02
  */
-public class FlightsServlet extends HttpServlet {
+public class TicketsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,52 +37,54 @@ public class FlightsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-
-            FlightsBL flightsBL = new FlightsBL();
-
+            
             HttpSession session = request.getSession();
 
             String action = request.getParameter("action");
             switch (action) {
-                case "getAllFlights":
-                    json = new Gson().toJson(flightsBL.getAllFlights());
-                    out.print(json);
-                    break;
-                case "searchFlights":
-                    cityFrom = request.getParameter("cityFrom");
-                    cityTo = request.getParameter("cityTo");
-                    departDate = request.getParameter("departDate");
-                    returnDate = request.getParameter("returnDate");
-                    String mode = "OneWayReservation";
-                    if(returnDate != null) {
-                        mode = "RoundTripReservation";
+                case "confirmReservation":
+                    String user = (String) session.getAttribute("user");
+                    String status = (String) session.getAttribute("loginStatus");
+                    
+                    String mode = (String) session.getAttribute("mode");
+                    
+                    String outboundReservation = (String) session.getAttribute("OurboundReservation");
+                    String returnReservation = null;
+                    
+                    json = "";
+                    
+                    FlightsBL flightsBL = new FlightsBL();
+                    
+                    if(user != null && status.equalsIgnoreCase("logged.")) {
+                        if(outboundReservation == null) {
+                            json = "{\"response\":\"E~You did not select a flight!\"}";
+                            out.print(json);
+                            break;
+                        }
+                        //SUCCESS FOR ONE WAY
+                        Flight outboundFlight = (Flight) flightsBL.searchFlightByNum(outboundReservation);
+                        
+                        if(mode.equalsIgnoreCase("RoundTrip")) {
+                            returnReservation = (String) session.getAttribute("ReturnReservation");
+                            if(returnReservation == null) {
+                                json = "{\"response\":\"E~You did not select a flight!\"}";
+                                out.print(json);
+                                break;
+                            }
+                            //SUCCESS FOR ROUND TRIPS
+                            Flight returnFlight = (Flight) flightsBL.searchFlightByNum(returnReservation);
+                            
+                        }
+                        
+                        
+                    } else {
+                        json = "{\"response\":\"E~You are not logged!\"}";
+                        out.print(json);
+                        break;
                     }
-                    session.setAttribute("ReservationMode", mode);
                     
-                    json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate));
-                    out.print(json);
-
-                    break;
-                case "searchFlightByNum":
-                    flightNum = request.getParameter("flightNum");
-                    json = new Gson().toJson(flightsBL.searchFlightByNum(flightNum));
-                    out.print(json);
-                    resetVariables();
-                    break;
-                case "reserveFlight":
-                    flightNum = request.getParameter("flightNum");
-                    mode = request.getParameter("mode");
-                    //Outbound
-                    //Return
-                    session.setAttribute(mode + "Reservation", flightNum);
-                    
-                    json = "{\"response\":\"S~" + mode + " Selected!\"}";
-                    out.print(json);
-
-                    resetVariables();
-                    break;
                 default:
-                    out.print("{'response':'E~Did not receive any action'");
+                    out.print("E~No se indico la acción que se desea realizare");
                     break;
             }
 
@@ -91,23 +93,7 @@ public class FlightsServlet extends HttpServlet {
         } catch (Exception e) {
             out.print("E~" + e.getMessage());
         }
-
     }
-
-    private void resetVariables() {
-        cityFrom = null;
-        cityTo = null;
-        departDate = null;
-        returnDate = null;
-        flightNum = null;
-        mode = null;
-    }
-    String cityFrom;
-    String cityTo;
-    String departDate;
-    String returnDate;
-    String flightNum;
-    String mode;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

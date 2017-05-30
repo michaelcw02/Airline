@@ -178,9 +178,9 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    confirmReservation: function(outboundFlight, returnFlight, callback) {
-        Proxy.confirmReservation(outboundFlight, returnFlight, (data) => {
-
+    confirmReservation: function(mode, callback) {
+        Proxy.confirmReservation(mode, (data) => {
+            
         });
     },
     cancelReservation: function(callback) {

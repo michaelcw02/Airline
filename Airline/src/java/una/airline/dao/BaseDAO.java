@@ -139,6 +139,7 @@ public class BaseDAO {
             int number = rs.getInt("number");
             String username = rs.getString("username");
             String flightNum = rs.getString("flight_num");
+            int numPassengers = rs.getInt("number_passengers");
             User user = null;
             Flight flight = null;
             try {
@@ -147,7 +148,7 @@ public class BaseDAO {
             } catch (Exception e) {
                 throw new Exception("E~There was an issue with User or Flight of Ticket", e);
             }
-            return new Ticket(number, flight, user);
+            return new Ticket(number, flight, user, numPassengers);
         } catch (SQLException e) {
             return null;
         }
@@ -161,6 +162,7 @@ public class BaseDAO {
             String name = rs.getString("name");
             String lastname = rs.getString("lastname");
             String seat = rs.getString("seat");
+            boolean checked = (rs.getInt("checked") == 1);
 
             Ticket ticket = null;
             try {

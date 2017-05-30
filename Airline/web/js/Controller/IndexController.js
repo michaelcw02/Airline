@@ -163,7 +163,7 @@ IndexController.prototype = {
         if(mode == 'RoundTrip') {
             returnSelection = $('#ReturnSelection').val();
         }
-        this.airlineController.confirmReservation( outboundSelection, returnSelection, (data) => {
+        this.airlineController.confirmReservation(mode, (data) => {
             
         } )
     },

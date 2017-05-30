@@ -14,18 +14,23 @@ public class Ticket {
     private int number;
     private Flight flight;
     private User user;
+    private int numPassengers;
 
     public Ticket() {
     }
     
-    public Ticket(int number, Flight flight, User user) {
+    //FOR DAO'S USE
+    public Ticket(int number, Flight flight, User user, int numPassengers) {
         this.flight = flight;
         this.user = user;
+        this.numPassengers = numPassengers;
     }
 
-    public Ticket(Flight flight, User user) {
+    //FOR NORMAL INSERTION USE!
+    public Ticket(Flight flight, User user, int numPassengers) {
         this.flight = flight;
         this.user = user;
+        this.numPassengers = numPassengers;
     }
 
     public int getNumber() {
@@ -51,4 +56,13 @@ public class Ticket {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public int getNumPassengers() {
+        return numPassengers;
+    }
+
+    public void setNumPassengers(int numPassengers) {
+        this.numPassengers = numPassengers;
+    }
+    
 }

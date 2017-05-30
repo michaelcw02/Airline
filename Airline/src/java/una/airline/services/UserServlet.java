@@ -110,13 +110,8 @@ public class UserServlet extends HttpServlet {
                         session.setAttribute("loginStatus", "logged.");
                         session.setAttribute("type", type);
                         json = "{\"response\":\"C~The user has been validated successfully\"}";
-                    } else if (session.getAttribute("user").equals(username)) {
-                        int tries = (session.getAttribute("tries") != null) ? (int) session.getAttribute("tries"): -1;
-                        session.setAttribute("tries", (tries == -1) ? "0" : Integer.toString(tries + 1));
-                        //this should set the user as blocked, but this won't be implemented for the project
-                        json = "{\"response\":\"E~The user has NOT been validated.\"}";
+                        session.setAttribute("user", name);
                     }
-                    session.setAttribute("user", name);
                     out.print(json);
                     break;
                 default:

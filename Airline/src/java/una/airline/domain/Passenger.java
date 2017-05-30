@@ -16,6 +16,7 @@ public class Passenger implements java.io.Serializable {
     private String name;
     private String lastname;
     private String seat;
+    private boolean checked;
 
     public Passenger() {
     }
@@ -31,6 +32,7 @@ public class Passenger implements java.io.Serializable {
         this.name = name;
         this.lastname = lastname;
         this.seat = seat;
+        this.checked = false;
     }
 
     public PassengerID getID() {
@@ -71,6 +73,14 @@ public class Passenger implements java.io.Serializable {
 
     public void setSeat(String seat) {
         this.seat = seat;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
 }

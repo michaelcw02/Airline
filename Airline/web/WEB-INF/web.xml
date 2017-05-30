@@ -39,7 +39,7 @@
     </servlet>
     <servlet>
         <servlet-name>TicketsServlet</servlet-name>
-        <servlet-class>una.airline.bl.TicketsServlet</servlet-class>
+        <servlet-class>una.airline.services.TicketsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CitiesServlet</servlet-name>

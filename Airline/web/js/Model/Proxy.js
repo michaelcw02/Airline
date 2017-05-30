@@ -620,11 +620,12 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         dataType: "json"
     });
 }
-Proxy.confirmReservation = (outboundFlight, returnFlight, callback) => {
+Proxy.confirmReservation = (mode, callback) => {
     $.ajax({
         url: 'TicketsServlet',
         data: {
-            action: "confirmReservation"
+            action: "confirmReservation",
+            mode: mode
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred while reserving the tickets");
@@ -633,7 +634,7 @@ Proxy.confirmReservation = (outboundFlight, returnFlight, callback) => {
             console.log(data);
             callback(data);
         },
-        type: 'GET',
+        type: 'POST',
         dataType: "json"
     });
 }
