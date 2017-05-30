@@ -7,14 +7,7 @@ package una.airline.dao;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import una.airline.bl.FlightsBL;
-import una.airline.bl.UserBL;
-import una.airline.domain.Flight;
 import una.airline.domain.Ticket;
-import una.airline.domain.User;
 
 /**
  *
