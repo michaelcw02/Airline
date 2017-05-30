@@ -17,6 +17,7 @@ RouteAdmController.prototype = {
         this.airlineController.getTripByCode(idTrip, (jsonResults) => {
             console.log(jsonResults);
             $("#tableRoute").html("");
+            console.log(jsonResults);
             var head = $("<thead />");
             var row = $("<tr/>");
             head.append(row);
@@ -100,25 +101,30 @@ RouteAdmController.prototype = {
         $("#tableRoute").empty();
     },
     addTrip: function () {
-        this.airlineController.getLastID( (number) => {
-            let idTrip = number + 1;
-            console.log(idTrip);
-            let distance = this.view.$('#distance').val();
-            let duration1 = this.view.$('#hours').val();
-            let duration2 = this.view.$('#minutes').val();
-            let duration3 = convertHours_Minutes(duration1) + parseInt(duration2);
-            let duration=duration3.toString();
-            let departureCity = this.view.$('#departureCity').val();
-            let arrivalCity = this.view.$('#arrivalCity').val();
-            let departureTime = this.view.$('#departureTime').val();
-            let departureDay = this.view.$('#departureDay').val();
-            let cost = this.view.$('#price').val();
-            let discount = this.view.$('#discount').val();
-            let discountDes = this.view.$('#discountDescription').val();
-            let discountPath = 'images/' + idTrip + '.jpg';
-            let image = this.view.$('#image')[0].files[0];
-            this.airlineController.addTrip(idTrip, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => { });
-        } )       
+        if (!doValidate()) {
+            this.airlineController.getLastID((number) => {
+                let idTrip = number + 1;
+                console.log(idTrip);
+                let distance = this.view.$('#distance').val();
+                let duration1 = this.view.$('#hours').val();
+                let duration2 = this.view.$('#minutes').val();
+                let duration3 = convertHours_Minutes(duration1) + parseInt(duration2);
+                let duration = duration3.toString();
+                let departureCity = this.view.$('#departureCity').val();
+                let arrivalCity = this.view.$('#arrivalCity').val();
+                let departureTime = this.view.$('#departureTime').val();
+                let departureDay = this.view.$('#departureDay').val();
+                let cost = this.view.$('#price').val();
+                let discount = this.view.$('#discount').val();
+                let discountDes = this.view.$('#discountDescription').val();
+                let discountPath = 'images/' + idTrip + '.jpg';
+                let image = this.view.$('#image')[0].files[0];
+                this.airlineController.addTrip(idTrip, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => {
+                });
+                $("#modalRoute").modal("hide");
+                this.cleanForm();
+            })
+        }
     },
     cleanForm: () => {
         $('#identifier').focus();
@@ -144,4 +150,118 @@ function fillWithCities($select, cities) {
 function convertHours_Minutes(hours) {
     let minutes = parseInt(hours) * 60;
     return minutes;
+}
+function isBlank(element) {
+    removeInvalid(element);
+    if (!element.val()) {
+        setInvalid(element);
+        return true;
+    }
+}
+function removeInvalid(element) {
+    element.removeClass('invalid');
+}
+function setInvalid(element) {
+    element.addClass('invalid');
+}
+function isSomethingBlank() {
+    let blanks = false;
+    if (isBlank($('#distance'))) {
+        blanks = true;
+    } else if (isBlank($('#hours')) && isBlank($('#minutes'))) {
+        blanks = true;
+    } else if (isBlank($('#hours')) && !isBlank($('#minutes'))) {
+        $('#hours').val("0");
+    } else if (!isBlank($('#hours')) && isBlank($('#minutes'))) {
+        $('#minutes').val("0");
+    } else if (isBlank($('#departureTime'))) {
+        blanks = true;
+    } else
+    if (isBlank($('#price'))) {
+        blanks = true;
+    }
+    if (isBlank($('#discount'))) {
+        $('#discount').val("0");
+    }
+    if (isBlank($('#discountDescription'))) {
+        $('#discountDescription').val("None");
+    }
+    return blanks;
+}
+function validateCities() {
+    let error = false;
+    if ($('#arrivalCity').val() == "0") {
+        alert("Please, select a city");
+        error = true;
+    } else if ($('#departureCity').val() == "0") {
+        alert("Please, select a city");
+        error = true;
+    }
+    return error;
+}
+function validateLength() {
+    let error = false;
+    var Max_Length2 = 45;
+    var Max_Length1 = 11;
+    var lengthDistance = $("#distance").val().length;
+    var lengthDiscountDescription = $("#discountDescription").val().length;
+
+    if (lengthDistance > Max_Length1) {
+        alert("The max length of " + Max_Length1 + " characters is reached in distance, you typed in  " + lengthDistance + "characters");
+        error = true;
+    }
+    if (lengthDiscountDescription > Max_Length2) {
+        alert("The max length of " + Max_Length2 + " characters is reached in discount description, you typed in  " + lengthDiscountDescription + "characters");
+        error = true;
+    }
+    return error;
+}
+function validateDiscount() {
+    let error = false;
+    if ($('#discount').val() != "0") {
+        if ($('#discountDescription').val() == "None" && $('#image').val() == "") {
+            error = true;
+            alert("You put a discount, so please register a description and an image");
+        } else if ($('#discountDescription').val() == "None") {
+            error = true;
+            alert("You put a discount, so please register a description");
+        } else if ($('#image').val() == "") {
+            error = true;
+            alert("You put a discount, so please register an image");
+        }
+    }
+    return error;
+}
+function validateNumbers() {
+    let text = $('#departureTime').val();
+    let text2 = $('#discount').val();
+    let error = false;
+    let regex = /^(?:[0-1]?[0-9]|2[0-3])(?::[0-5][0-9])?$/;
+    let regex2 = /^([0-9]|[1-9][0-9]|100)$/;
+    if (!regex.test(text)) {
+        error = true;
+        alert("The time of departure is in the format of 24 hours and you wrote  " + text);
+    }
+    if (!regex2.test(text2)) {
+        error = true;
+        alert("The discount is in the format of 0-100 and you wrote  " + text2);
+    }
+
+    return error;
+}
+function doValidate() {
+    let error = false;
+    if (this.isSomethingBlank()) {
+        alert("There is something you missed, please fill it up!");
+        error = true;
+    } else if (validateDiscount()) {
+        error = true;
+    } else if (validateLength()) {
+        error = true;
+    } else if (validateNumbers()) {
+        error = true;
+    } else if (validateCities()) {
+        error = true;
+    }
+    return error;
 }
