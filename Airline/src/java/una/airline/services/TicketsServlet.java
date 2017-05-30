@@ -8,6 +8,8 @@ package una.airline.services;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
 import una.airline.bl.TicketsBL;
+import una.airline.bl.UserBL;
 import una.airline.dao.TicketDAO;
 import una.airline.domain.Flight;
 import una.airline.domain.RoundTripInfo;
 import una.airline.domain.Ticket;
+import una.airline.domain.User;
 
 /**
  *
@@ -41,53 +45,68 @@ public class TicketsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-                        
+
             TicketsBL ticketsBL = new TicketsBL();
-            
+
             HttpSession session = request.getSession();
 
             String action = request.getParameter("action");
             switch (action) {
                 case "confirmReservation":
+                    FlightsBL flightsBL = new FlightsBL();
+
                     String username = (String) session.getAttribute("username");
                     String status = (String) session.getAttribute("loginStatus");
-                    
-                    String mode = (String) session.getAttribute("mode");
-                    
-                    String outboundReservation = (String) session.getAttribute("OurboundReservation");
+                    String outboundReservation = (String) session.getAttribute("OutboundReservation");
                     String returnReservation = null;
                     
-                    int numPassengers = (int) session.getAttribute("numPassengers");
-                    
+                    String mode = (String) request.getParameter("mode");
+                    int numPassengers = Integer.parseInt(request.getParameter("numPassengers"));
+
+                    User user = null;
+                    List<Ticket> outList = new LinkedList<>();
+                    List<Ticket> inList = new LinkedList<>();
+                    Ticket outboundTicket = null;
+                    Ticket returnTicket = null;
+
                     json = "";
-                    
-                    FlightsBL flightsBL = new FlightsBL();
-                    
-                    if(username != null && status.equalsIgnoreCase("logged.")) {
-                        if(outboundReservation == null) {
-                            json = "{\"response\":\"E~You did not select a flight!\"}";
+
+                    if (username != null && status.equalsIgnoreCase("logged.")) {
+                        user = new UserBL().getUserByUsername(username);
+                        if (outboundReservation == null) {
+                            json = "{\"response\":\"E~1~Perhaps you forgot to select an outbound flight!\"}";
                             out.print(json);
                             break;
                         }
                         //SUCCESS FOR ONE WAY
-                        if(mode.equalsIgnoreCase("RoundTrip")) {
+                        outboundTicket = new Ticket( new FlightsBL().searchFlightByNum(outboundReservation), user, numPassengers );
+                        outList.add(outboundTicket);
+                        
+                        if (mode.equalsIgnoreCase("RoundTrip")) {
                             returnReservation = (String) session.getAttribute("ReturnReservation");
-                            if(returnReservation == null) {
-                                json = "{\"response\":\"E~You did not select a flight!\"}";
+                            if (returnReservation == null) {
+                                json = "{\"response\":\"E~1~Perhaps you forgot to select a return flight!\"}";
                                 out.print(json);
                                 break;
                             }
                             //SUCCESS FOR ROUND TRIPS
+                            returnTicket = new Ticket( new FlightsBL().searchFlightByNum(returnReservation), user, numPassengers );
+                            inList.add(returnTicket);
                         }
-                        json = new Gson().toJson(ticketsBL.reserveTickets(username, outboundReservation, returnReservation, numPassengers));
+                        RoundTripInfo<Ticket> roundTickets = new RoundTripInfo<>(outList, inList);
+                        
+                        //ATTENTION! THIS ATTRIBUTE MUST BE DELETED AFTER LOGOUT!
+                        session.setAttribute("TicketsInfo", roundTickets);
+                        
+                        json = "{\"response\":\"S~Tickets created successfully!\"}";
                         out.print(json);
                         break;
                     } else {
-                        json = "{\"response\":\"E~You are not logged!\"}";
+                        json = "{\"response\":\"E~2~Hey! you are not logged in, do it first before buying!\"}";
                         out.print(json);
                         break;
                     }
-                    
+
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;

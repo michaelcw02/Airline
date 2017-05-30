@@ -179,8 +179,9 @@ AirlineController.prototype = {
         })
     },
     confirmReservation: function(mode, numPassengers, callback) {
-        Proxy.confirmReservation(mode, numPassengers, (data) => {
-            
+        Proxy.confirmReservation(mode, numPassengers, (data) => {          
+            let response = data.response;
+            callback(response);
         });
     },
     cancelReservation: function(callback) {
@@ -202,7 +203,7 @@ AirlineController.prototype = {
     },
     logout: function() {
        Proxy.logoutUser((data) => {
-            location.reload();
+            window.location.replace("/Airline");
             callback(data);
         });
     },

@@ -212,7 +212,7 @@
     <script type="text/javascript" src="js/Model/Flight/Flight.js"></script>
     <script type="text/javascript" src="js/Model/Discount/Discount.js"></script>
     <!-- NEW -->
-    <script src="js/Model/Proxy.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/Model/Proxy.js"></script>
 
     <!-- CONTROLLER -->
     <script type="text/javascript" src="js/Controller/Storage.js"></script>
