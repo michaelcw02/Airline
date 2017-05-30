@@ -319,6 +319,7 @@ Proxy.deleteTrip = (id_trip) => {
         dataType: "json"
     });
 }
+
 Proxy.searchFlightByNum = (flightNum, callback) => {
     $.ajax({
         url: 'FlightsServlet',
@@ -356,7 +357,6 @@ Proxy.reserveFlight = (flightNum, mode, callback) => {
         dataType: "json"
     });
 }
-
 Proxy.searchCityByCode = (code, callback) => {
     $.ajax({
         url: 'CitiesServlet',
@@ -677,3 +677,4 @@ Proxy.logoutUser = (callback) => {
         dataType: "json"
     });
 }
+
