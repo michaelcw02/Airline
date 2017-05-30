@@ -5,6 +5,7 @@
  */
 package una.airline.services;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,6 +17,8 @@ import una.airline.bl.FlightsBL;
 import una.airline.bl.TicketsBL;
 import una.airline.dao.TicketDAO;
 import una.airline.domain.Flight;
+import una.airline.domain.RoundTripInfo;
+import una.airline.domain.Ticket;
 
 /**
  *
@@ -38,7 +41,7 @@ public class TicketsServlet extends HttpServlet {
         try {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
-            
+                        
             TicketsBL ticketsBL = new TicketsBL();
             
             HttpSession session = request.getSession();
@@ -75,12 +78,10 @@ public class TicketsServlet extends HttpServlet {
                                 break;
                             }
                             //SUCCESS FOR ROUND TRIPS
-                            ticketsBL.reserveTickets(username, outboundReservation, returnReservation, numPassengers);
-                            
-                            
                         }
-                        
-                        
+                        json = new Gson().toJson(ticketsBL.reserveTickets(username, outboundReservation, returnReservation, numPassengers));
+                        out.print(json);
+                        break;
                     } else {
                         json = "{\"response\":\"E~You are not logged!\"}";
                         out.print(json);

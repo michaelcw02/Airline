@@ -5,6 +5,7 @@
  */
 package una.airline.tests;
 
+import com.google.gson.Gson;
 import java.util.Date;
 import una.airline.bl.*;
 import una.airline.dao.*;
@@ -23,7 +24,10 @@ public class TestDAO {
         
         //TEST PASSED
         TicketsBL ticketsBL = new TicketsBL();
-        RoundTripInfo<Ticket> result = ticketsBL.reserveTickets("michaelcw02", "ST003", "ST007", 1);
+        RoundTripInfo<Ticket> result = ticketsBL.reserveTickets("michaelcw02", "ST003", null, 1);
+        System.out.println("doNE");
+        ticketsBL = new TicketsBL();
+        String json = new Gson().toJson(ticketsBL.reserveTickets("michaelcw02", "ST003", "ST007", 1));
         System.out.println("doNE");
         
         
