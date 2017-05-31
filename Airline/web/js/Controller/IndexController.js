@@ -140,10 +140,10 @@ IndexController.prototype = {
     searchFlights: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         let cityTo = this.view.$('#cityTo').val();
-
-        if (!isBlank(this.view.$('#departing')))
-            var departDate = this.view.$('#departing').val();
-        if (!isBlank(this.view.$('#returning')))
+        
+        let departDate = this.view.$('#departing').val();
+        //'LET' IS MORE LIKE A LOCAL VARIABLE, WHILE 'VAR' IS A GLOBAL VARIABLE.
+        if ($('#FlightMode').val() === 'RoundTrip')
             var returnDate = this.view.$('#returning').val();
 
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
