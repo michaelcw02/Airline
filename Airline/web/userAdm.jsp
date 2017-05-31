@@ -13,6 +13,7 @@
         <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="stylesheet" href="css/hover.css">
 
@@ -44,7 +45,7 @@
                         <form role="form" onsubmit="return false;" id="formUser">
                             <div class="form-group" id="groupName">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control"  autofocus="true" id="name" placeholder="name" required="true">
+                                <input type="text" class="form-control"  autofocus="true" id="name" placeholder="Name" required="true">
                             </div>
                             
                             <div class="form-group" id="groupFirstLasname">

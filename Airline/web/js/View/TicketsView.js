@@ -18,14 +18,4 @@ function searchFlights() {
     controller.searchFlights();
 }
 
-function toDataTable($table) {
-    if (!$.fn.DataTable.isDataTable('#' + $table.attr('id'))) {
-        $table.DataTable({
-            "searching": false,
-            "lengthChange": false,
-            "order": [[1, "desc"]]
-        });
-    }
-}
-
 $(loadPage);
