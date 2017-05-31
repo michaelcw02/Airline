@@ -8,6 +8,7 @@ package una.airline.services;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import una.airline.bl.AirplaneBL;
 import una.airline.bl.TypeAirplaneBL;
 import una.airline.domain.Airplane;
+import una.airline.domain.User;
 
 /**
  *
@@ -50,7 +52,8 @@ public class AirplaneServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "getAllAirplane":
-                    json = new Gson().toJson(AirBL.getAllAirplane());
+                    List<Airplane> list = AirBL.getAllAirplane();
+                    json = new Gson().toJson(list);
                     out.print(json);
                     break;
                 case "updateAirplane":

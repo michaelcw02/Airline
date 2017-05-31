@@ -27,11 +27,13 @@
     </div>
 
     <div class="container body-container">
-        <div class="tab navbar-inverse text-center">
-            <a class="hvr-grow" href="#flightsContent"><img src="images/airplane-4-48.png" alt="Flights">Tickets</a>
+        <div class="container">
+            <div class="page-header">
+                <h1>Tickets ✵</h1>
+            </div>
         </div>
-        
-        <div class="container-fluid outbound-flights-div">
+
+        <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h1>Outbound Flights</h1>
@@ -52,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid return-flights-div">
+        <div class="container return-flights-div">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h1>Return Flights</h1>
@@ -73,15 +75,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="container-fluid confirmation-div">
-            <div class="row text-center" id="confirmation">
-                <button type="button" class="btn btn-success" id="confirmReservation">Confirm Reservation</button>
-                <button type="button" class="btn btn-danger" id="cancelReservation">Cancel</button>
-            </div>
-        </div>
     </div>
-
     <div class="container footer-container">
         <jsp:include page="footer.jsp" />
     </div>
