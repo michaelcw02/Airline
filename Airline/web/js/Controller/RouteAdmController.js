@@ -16,9 +16,7 @@ RouteAdmController.prototype = {
         $("#tableRoute").empty();
         let idTrip = this.view.$('#search').val();
         this.airlineController.getTripByCode(idTrip, (jsonResults) => {
-            console.log(jsonResults);
             $("#tableRoute").html("");
-            console.log(jsonResults);
             var head = $("<thead />");
             var row = $("<tr/>");
             head.append(row);
@@ -39,7 +37,7 @@ RouteAdmController.prototype = {
             row.append($("<td>" + jsonResults.idTrip + "</td>"));
             row.append($("<td>" + jsonResults.cityByDepartureCity.code + "</td>"));
             row.append($("<td>" + jsonResults.cityByArrivalCity.code + "</td>"));
-            row.append($("<td>" + jsonResults.distance + "</td>"));
+            row.append($("<td>" + jsonResults.distance + " miles</td>"));
             row.append($("<td>" + calculateDuration(jsonResults.duration) + "</td>"));
             row.append($("<td>" + jsonResults.departureTime + "h" + "</td>"));
             row.append($("<td>" + jsonResults.departureDay + "</td>"));
@@ -63,10 +61,10 @@ RouteAdmController.prototype = {
             head.append(row);
             $("#tableRoute").append(head);
             row.append($("<th><b>IDENTIFIER</b></th>"));
-            row.append($("<th><b>DISTANCE</b></th>"));
-            row.append($("<th><b>DURATION</b></th>"));
             row.append($("<th><b>DEPARTURE CITY</b></th>"));
             row.append($("<th><b>ARRIVAL CITY</b></th>"));
+            row.append($("<th><b>DISTANCE</b></th>"));
+            row.append($("<th><b>DURATION</b></th>"));
             row.append($("<th><b>DEPARTURE TIME</th>"));
             row.append($("<th><b>DEPARTURE DAY</th>"));
             row.append($("<th><b>COST</th>"));
@@ -79,10 +77,10 @@ RouteAdmController.prototype = {
                 var row = $("<tr/>");
                 $("#tableRoute").append(row);
                 row.append($("<td>" + trip.idTrip + "</td>"));
-                row.append($("<td>" + trip.distance + "</td>"));
-                row.append($("<td>" + calculateDuration(trip.duration) + "</td>"));
                 row.append($("<td>" + trip.cityByDepartureCity.code + "</td>"));
                 row.append($("<td>" + trip.cityByArrivalCity.code + "</td>"));
+                row.append($("<td>" + trip.distance + " miles</td>"));
+                row.append($("<td>" + calculateDuration(trip.duration) + "</td>"));
                 row.append($("<td>" + trip.departureTime + "</td>"));
                 row.append($("<td>" + trip.departureDay + "</td>"));
                 row.append($("<td>" + trip.cost + "</td>"));
