@@ -21,21 +21,17 @@ public class FlightDAO extends BaseDAO {
         super();
     }
 
-    public void addFlight(Flight flight) throws Exception {
+    public int addFlight(Flight flight) {
         String query = "INSERT INTO `airlinedb`.`flight` "
                 + "(`flight_num`, `id_airplane`, `id_trip`, `departure_date`, `available_seats`) "
-                + "VALUES ('%s', '%d', '%d', '%d', '%s');";
+                + "VALUES ('%s', '%s', '%d', '%s', %d);";
         query = String.format(query, flight.getFlightNum(),
                 flight.getAirplane().getIdAirplane(),
                 flight.getTrip().getIdTrip(),
                 dateToSQL(flight.getDepartureDate()),
                 flight.getAvailableSeats());
         System.out.println(query);
-        int result = connection.executeUpdate(query);
-        if (result == 0) {
-            throw new Exception("Flight already exists.");
-        }
-
+        return connection.executeUpdate(query);
     }
 
     public LinkedList<Flight> getAllFlights() {

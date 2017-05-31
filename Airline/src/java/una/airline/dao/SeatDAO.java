@@ -21,14 +21,26 @@ public class SeatDAO extends BaseDAO {
     }
 
     public void addSeat(Seat seat) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`seat` (`flight_num`, `seat_num`, `passenger`) VALUES ('%s', '%s', '%s');";
-        query = String.format(query, seat.getFlight().getFlightNum(), seat.getId().getSeatNumber(), seat.getPassenger().getID().getPassport());
+        String query = "INSERT INTO `airlinedb`.`seat` (`flight_num`, `seat_num`, `passenger`, `ticket_num`) VALUES ('%s', '%s', '%s', '%s');";
+        query = String.format(query, seat.getFlight().getFlightNum(), seat.getId().getSeatNumber(), seat.getPassenger().getID().getPassport(), seat.getPassenger().getTicket().getNumber());
+        System.out.println(query);
+        int result = connection.executeUpdate(query);
+        if (result == 0) {
+            throw new Exception("E~Seat already exists.");
+        }
+    }
+    
+    public void addSeatWithoutPassenger(Seat seat) throws Exception {
+        String query = "INSERT INTO `airlinedb`.`seat` (`flight_num`, `seat_num`) VALUES ('%s', '%s');";
+        query = String.format(query, seat.getFlight().getFlightNum(), seat.getId().getSeatNumber());
         System.out.println(query);
         int result = connection.executeUpdate(query);
         if (result == 0) {
             throw new Exception("E~City already exists.");
         }
     }
+    
+    
 
     public LinkedList<Seat> getAllSeats() {
         LinkedList<Seat> listaResultado = new LinkedList<>();
@@ -62,12 +74,12 @@ public class SeatDAO extends BaseDAO {
         return result;
     }
     
-    public void deleteCity(Seat seat) throws Exception {
+    public void deleteSeat(Seat seat) throws Exception {
         String query = "DELETE FROM Seat WHERE flight_num = '%s' AND seat_num = '%s'";
         query = String.format(query, seat.getId().getFlightNum(), seat.getId().getSeatNumber());
         int result = connection.executeUpdate(query);
         if (result == 0) {
-            throw new Exception("E~City doesnt exists");
+            throw new Exception("E~Seat does not exists");
     }
     }
 

@@ -35,9 +35,17 @@ public class GeneralTests {
     }
 
     public static void main(String[] arg) {
+
+        char[] alpha = new char[26];
+        int k = 0;
+        for (int i = 0; i < 26; i++) {
+            alpha[i] = (char) (65 + (i));
+        }
         
+        System.out.println("end");
+
         System.out.println(dateToSQL(new Date(2017, 06, 01)));
         System.out.println(stringToSQL("30/05/2017"));
-        
+
     }
 }

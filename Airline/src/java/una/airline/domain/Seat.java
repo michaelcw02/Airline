@@ -14,6 +14,7 @@ public class Seat {
     public Seat(SeatID id, Flight flight) {
         this.id = id;
         this.flight = flight;
+        this.passenger = null;
     }
     public Seat(SeatID id, Flight flight, Passenger passenger) {
         this.id = id;
