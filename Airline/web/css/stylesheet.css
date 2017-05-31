@@ -367,3 +367,6 @@ article hr {
     width: 180px;
     text-align: center;
 }
+.tr-flights {
+    cursor: pointer;
+}
