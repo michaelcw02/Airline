@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group" id="groupRows">
-                                <label for="row">Rows quantity:</label>
+                                <label for="row">Quantity of Rows:</label>
                                 <input type="number" class="form-control" id="rows" placeholder="Row" required="true">
                             </div>
 
