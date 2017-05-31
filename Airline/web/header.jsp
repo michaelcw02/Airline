@@ -45,7 +45,7 @@
                                         <li class="text-white"> <h5> <a href="companyInfo.jsp">History of us</a> </h5> </li>
                                         <li class="text-white"> <h5> <a href="contactUs.jsp">Contact us</a></h5> </li>
                                         <li class="text-white"> <h5> <a href="instBenchmarks.jsp">Institutional Benchmarks</a></h5> </li>
-                                        <li class="text-white"> <h5> <a href="tickets.jsp">About us</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="aboutUs.jsp">About us</a></h5> </li>
                                     </ul>
                                 </ul>
                             </li>

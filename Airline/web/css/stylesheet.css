@@ -370,3 +370,6 @@ article hr {
 .tr-flights {
     cursor: pointer;
 }
+.ui-datepicker {
+    z-index: 7000 !important;
+}
