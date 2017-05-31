@@ -675,4 +675,34 @@ Proxy.logoutUser = (callback) => {
         dataType: "json"
     });
 }
-
+Proxy.updateTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image,callback) => {
+    Proxy.addTripImage(code, image, (dat) => {
+        $.ajax({
+            url: 'TripsServlet',
+            data: {
+                action: "updateTrip",
+                id_trip: code,
+                distance: distance,
+                duration: duration,
+                departureCity: departureCity,
+                arrivalCity: arrivalCity,
+                departureTime: departureTime,
+                departureDay: departureDay,
+                cost: cost,
+                discount: discount,
+                discountDes: discountDes,
+                discountPath: discountPath
+            },
+            error: function () {
+                showModal("myModal", "ERROR", "An error occurred when a trip was updated");
+            },
+            success: (data) => {
+                console.log(data);
+                callback(data);
+                showModal("myModal", "Status", "The trip was updated in the database");
+            },
+            type: 'POST',
+            dataType: "json"
+        });
+    });
+}

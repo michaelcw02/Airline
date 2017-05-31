@@ -13,6 +13,7 @@ RouteAdmController.prototype = {
         });
     },
     searchTripsByCode: function () {
+        $("#tableRoute").empty();
         let idTrip = this.view.$('#search').val();
         this.airlineController.getTripByCode(idTrip, (jsonResults) => {
             console.log(jsonResults);
@@ -45,7 +46,7 @@ RouteAdmController.prototype = {
             row.append($("<td>" + jsonResults.cost + "</td>"));
             row.append($("<td>" + jsonResults.discount + "</td>"));
             row.append($("<td>" + jsonResults.discountDescription + "</td>"));
-            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'modify\');">' +
+            row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showTripForModify(\'' + jsonResults.idTrip + '\',\'' + jsonResults.distance + '\',\'' + jsonResults.duration + '\',\'' + jsonResults.cityByDepartureCity.code + '\',\'' + jsonResults.cityByArrivalCity.code + '\',\'' + jsonResults.departureTime + '\',\'' + jsonResults.departureDay + '\',\'' + jsonResults.cost + '\',\'' + jsonResults.discount + '\',\'' + jsonResults.discountDescription + '\');">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                     '</button>' +
                     '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'eliminate\');">' +
@@ -54,6 +55,7 @@ RouteAdmController.prototype = {
         });
     },
     getAllTrips: function () {
+        $("#tableRoute").empty();
         this.airlineController.getAllTrips((jsonResults) => {
             $("#tableRoute").html("");
             var head = $("<thead />");
@@ -86,7 +88,7 @@ RouteAdmController.prototype = {
                 row.append($("<td>" + trip.cost + "</td>"));
                 row.append($("<td>" + trip.discount + "</td>"));
                 row.append($("<td>" + trip.discountDescription + "</td>"));
-                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="alert(\'modify\');">' +
+                row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showTripForModify(\'' + trip.idTrip + '\',\'' + trip.distance + '\',\'' + trip.duration + '\',\'' + trip.cityByDepartureCity.code + '\',\'' + trip.cityByArrivalCity.code + '\',\'' + trip.departureTime + '\',\'' + trip.departureDay + '\',\'' + trip.cost + '\',\'' + trip.discount + '\',\'' + trip.discountDescription + '\');">' +
                         '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>' +
                         '</button>' +
                         '<button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="deleteTrip(\'' + trip.idTrip + '\');">' +
@@ -126,13 +128,48 @@ RouteAdmController.prototype = {
             })
         }
     },
+    updateTrip: function () {
+        if (!doValidate()) {
+            let id_trip = this.view.$('#idTrip').val();
+            let distance = this.view.$('#distance').val();
+            let duration1 = this.view.$('#hours').val();
+            let duration2 = this.view.$('#minutes').val();
+            let duration3 = convertHours_Minutes(duration1) + parseInt(duration2);
+            let duration = duration3.toString();
+            let departureCity = this.view.$('#departureCity').val();
+            let arrivalCity1 = this.view.$('#arrivalCity').val();
+            let departureTime = this.view.$('#departureTime').val();
+            let departureDay = this.view.$('#departureDay').val();
+            let cost = this.view.$('#price').val();
+            let arrivalCity = this.view.$('#arrivalCity').val();
+            let discount = this.view.$('#discount').val();
+            let discountDes = this.view.$('#discountDescription').val();
+            let discountPath = 'images/' + id_trip + '.jpg';
+            let image = this.view.$('#image')[0].files[0];
+            this.airlineController.updateTrip(id_trip, distance, duration, departureCity, arrivalCity1, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => {
+            });
+            hideModal("modalRoute");
+            $('#routeAction').val("addRoute");
+            console.log($('#routeAction').val());
+            $("#tableRoute").empty();
+            
+        }
+    },
+    sendAction: function () {
+        let verify = $('#ruteAction').val();
+        console.log(verify);
+        if ($('#ruteAction').val() == "updateTrip") {
+            this.updateTrip();
+        } else {
+            this.addTrip();
+        }
+    },
     cleanForm: () => {
         $('#identifier').focus();
         $("#identifier").removeAttr("readonly");
         $("#routeAction").val("addRoute");
         $('#formRoute').trigger("reset");
     },
-
 }
 function fillWithCities($select, cities) {
     $select.find('option').remove().end();
@@ -150,6 +187,14 @@ function fillWithCities($select, cities) {
 function convertHours_Minutes(hours) {
     let minutes = parseInt(hours) * 60;
     return minutes;
+}
+function convertMinutes_hours(minutes) {
+    let hours = Math.floor(minutes / 60);
+    return hours;
+}
+function convertMinutes(minutes) {
+    let minutes1 = parseInt(minutes) % 60;
+    return minutes1;
 }
 function isBlank(element) {
     removeInvalid(element);
@@ -225,9 +270,11 @@ function validateDiscount() {
         } else if ($('#discountDescription').val() == "None") {
             error = true;
             alert("You put a discount, so please register a description");
-        } else if ($('#image').val() == "") {
-            error = true;
-            alert("You put a discount, so please register an image");
+        } else if ($('#routeAction').val() == "addTrip") {
+            if ($('#image').val() == "") {
+                error = true;
+                alert("You put a discount, so please register an image");
+            }
         }
     }
     return error;
@@ -264,4 +311,23 @@ function doValidate() {
         error = true;
     }
     return error;
+}
+function showTripForModify(code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes) {
+    showModal("modalRoute");
+    $("#idTrip").val(code);
+    $("#distance").val(distance);
+    let hours = convertMinutes_hours(duration);
+    let minutes = convertMinutes(duration);
+    $("#hours").val(hours);
+    $("#minutes").val(minutes);
+    $("#distance").val(distance);
+    $("#departureCity").val(departureCity);
+    $("#arrivalCity").val(arrivalCity);
+    $("#departureTime").val(departureTime);
+    $("#departureDay").val(departureDay);
+    $("#price").val(cost);
+    $("#discount").val(discount);
+    $("#discountDescription").val(discountDes);
+    $('#ruteAction').val("updateTrip");
+    console.log($('#ruteAction').val());
 }

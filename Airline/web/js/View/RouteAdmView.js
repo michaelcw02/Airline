@@ -6,7 +6,9 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $("#send").click(() => controller.addTrip());
+    $("#send").click(function () {
+        controller.sendAction();
+    });
     $("#cancel").click(function () {
         controller.cleanForm();
         $("#modalRoute").modal("hide");
