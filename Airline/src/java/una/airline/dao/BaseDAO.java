@@ -20,6 +20,17 @@ public class BaseDAO {
     public BaseDAO() {
         connection = new Database(null, null, null);
     }
+    
+    public boolean setConnectionAutoCommit(boolean autoCommit) {
+        return connection.setConnectionAutoCommit(autoCommit);
+    }
+    
+    public boolean commit() {
+        return connection.connectionCommit();
+    }
+    public boolean rollback() {
+        return connection.connectionRollback();
+    }
 
     protected City city(ResultSet rs) {
         try {
