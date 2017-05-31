@@ -105,7 +105,11 @@ RegisterController.prototype = {
             cellphone: this.view.$("#cellphone").val(),
             direction: this.view.$("#direction").val()
         }
-        this.airlineController.addUser(client, 0, 1);
+        this.airlineController.addUser(client, 0, 1, (data) => {
+            showModal('myModal', 'Status', 'The user was successfully registered, please login');
+            setTimeout( () => { hideModal('myModal') }, 1500);
+            setTimeout( () => { location.reload(true); }, 500);
+        });
     }
 }
 

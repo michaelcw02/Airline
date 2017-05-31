@@ -77,7 +77,7 @@ public class UserServlet extends HttpServlet {
                     user.setAdministrator( (1 == Integer.parseInt( request.getParameter("administrator") )) );
                     user.setClient((1 == Integer.parseInt( request.getParameter("client") )) );
                     userBL.addUser(user);
-                    out.print("{\"data\":\"C~El usuario fue ingresado correctamente\"}");
+                    out.print("{\"response\":\"C~El usuario fue ingresado correctamente\"}");
                     break;
                 case "updateUser":
                     user.setUsername(request.getParameter("username"));

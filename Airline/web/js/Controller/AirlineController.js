@@ -147,8 +147,10 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-    addUser: function (user, admin, client) {
-        Proxy.addUser(user, admin, client);
+    addUser: function (user, admin, client, callback) {
+        Proxy.addUser(user, admin, client, (data) => {
+            callback(data);
+        });
     },
     updateUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
         Proxy.updateUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);

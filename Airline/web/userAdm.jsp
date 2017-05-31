@@ -155,9 +155,7 @@
         <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <!-- MODEL -->
-        <script type="text/javascript" src="js/Model/User/User.js"></script>
-        <!-- NEW -->
+        
         <script src="js/Model/Proxy.js" type="text/javascript"></script>
         <script src="js/Model/utils.js" type="text/javascript"></script>
         <!-- CONTROLLER -->

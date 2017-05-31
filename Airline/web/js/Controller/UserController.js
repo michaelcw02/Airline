@@ -40,7 +40,7 @@ UserController.prototype = {
                 row.append($("<td>" + user.celular + "</td>"));
                 row.append($("<td>" + user.address + "</td>"));
                 row.append($("<td>" + user.administrator + "</td>"));
-                row.append($("<td>" + user.cliente + "</td>"));
+                row.append($("<td>" + user.client + "</td>"));
                 row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + user.name + '\',\'' + user.lastname1 +
                     '\',\'' + user.lastname2 + '\',\'' + user.birthday + '\',\'' + user.email + '\',\'' + user.username + '\',\'' + user.password + '\',\'' + user.phone +
                     '\',\'' + user.celular + '\',\'' + user.address + '\');">' +
@@ -85,7 +85,7 @@ UserController.prototype = {
             row.append($("<td>" + jsonResults.celular + "</td>"));
             row.append($("<td>" + jsonResults.address + "</td>"));
             row.append($("<td>" + jsonResults.administrator + "</td>"));
-            row.append($("<td>" + jsonResults.cliente + "</td>"));
+            row.append($("<td>" + jsonResults.client + "</td>"));
             row.append($('<td><button type="button" class="btn btn-default btn-xs" aria-label="Left Align" onclick="showUserForModify(\'' + jsonResults.name + '\',\'' + jsonResults.lastname1 +
                 '\',\'' + jsonResults.lastname2 + '\',\'' + jsonResults.birthday + '\',\'' + jsonResults.email + '\',\'' + jsonResults.username + '\',\'' + jsonResults.password + '\',\'' + jsonResults.phone +
                 '\',\'' + jsonResults.celular + '\',\'' + jsonResults.address + '\');">' +
@@ -110,7 +110,10 @@ UserController.prototype = {
                 cellphone: this.view.$("#cellphone").val(),
                 direction: this.view.$("#direction").val()
             }
-            this.airlineController.addUser(user, 1, 0);
+            this.airlineController.addUser(user, 1, 0, (data) => {
+                showModal('myModal', 'Status', 'The user was successfully registered into the database, please login');
+                setTimeout( () => { hideModal('myModal') }, 1500);
+            });
             hideModal("myModalUser");
             $("#tableUser").empty();
         }

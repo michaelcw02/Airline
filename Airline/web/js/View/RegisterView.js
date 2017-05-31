@@ -7,7 +7,10 @@ function loadPage(event){
 
 function addElementsProperties() {
     //BASIC ELEMENTS
-    $('#birthdate').datepicker();
+    $('#birthdate').datepicker( {
+        changeMonth: true,
+        changeYear: true
+    });
     
     //EVENT HANDLERS
     $('#registrationForm').submit( () => controller.doValidate() );
