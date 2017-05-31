@@ -22,17 +22,17 @@ TicketsController.prototype = {
 function showDetail($div, ticket, mode) {
     let flight = ticket.flight;
     let element = '';
-    element += '<h3>' + mode + ' FLIGHT: <strong>'+ flight.flightNum +'</strong> </h3>';
+    element += '<div class="row"><h3 class="col-md-4">' + mode + ' FLIGHT: <strong>'+ flight.flightNum +'</strong> </h3></div>';
     element += '<div class="row">';
     let depCity = flight.trip.cityByDepartureCity;
     let arrCity = flight.trip.cityByArrivalCity;
-    element += '<h4 class="col-md-offset-3">From: <strong>'+ depCity.code + ', ' + depCity.name + ', ' + depCity.country +'</strong> - To: <strong>'+ arrCity.code + ', ' + arrCity.name + ', ' + arrCity.country +'</strong></h4>';
+    element += '<h4 class="col-md-offset-2 col-md-4">From: <strong>'+ depCity.code + ', ' + depCity.name + ', ' + depCity.country +'</strong> </h4><h4 class="col-md-4"> To: <strong>'+ arrCity.code + ', ' + arrCity.name + ', ' + arrCity.country +'</strong></h4>';
     element += '</div>';
     element += '<div class="row">';
-    element += '<h4 class="col-md-offset-3">Date of departure: <strong>' + flight.departureDate + '</strong> - Departure Time: <strong>' + calculateTime(flight.trip.departureTime) + '</strong></h4>';
+    element += '<h4 class="col-md-offset-2 col-md-4">Date of departure: <strong>' + flight.departureDate + '</strong> </h4><h4 class="col-md-4"> Departure Time: <strong>' + calculateTime(flight.trip.departureTime) + '</strong></h4>';
     element += '</div>';
     element += '<div class="row">';
-    element += '<h4 class="col-md-offset-3">Date of arrival: <strong>' + calculateArrivalDate(flight.departureDate, flight.trip.departureTime, flight.trip.duration) + '</strong> - Arrival Time: <strong>' + calculateArrivalTime(flight.trip.departureTime, flight.trip.duration) + '</strong></h4>';
+    element += '<h4 class="col-md-offset-2 col-md-4">Date of arrival: <strong>' + calculateArrivalDate(flight.departureDate, flight.trip.departureTime, flight.trip.duration) + '</strong> </h4><h4 class="col-md-4"> Arrival Time: <strong>' + calculateArrivalTime(flight.trip.departureTime, flight.trip.duration) + '</strong></h4>';
     element += '</div>'
     $div.append($(element));
 }

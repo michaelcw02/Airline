@@ -46,11 +46,11 @@
         <article>
             <h1 class="text-center">TICKET RESERVATION DETAILS</h1>
             <hr>
-            <div class="container-fluid" id="outbound-flight-detail">
+            <div class="container-fluid text-center" id="outbound-flight-detail">
 
             </div>
             <hr>
-            <div class="container-fluid" id="return-flight-detail">
+            <div class="container-fluid text-center" id="return-flight-detail">
 
             </div>
             <hr>
