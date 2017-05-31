@@ -123,7 +123,6 @@ TypeAirplaneController.prototype = {
         $("#typeAirplaneAction").val("addTypeAirplane");
         $('#formTypeAirplane').trigger("reset");
     },
-
     deleteTypeAirplane: function (typeAirline) {
         //verificar que no exista ningun avion ligado a el para poder eliminar
         this.airlineController.deleteTypeAirplane(typeAirline);

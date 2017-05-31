@@ -150,9 +150,7 @@ IndexController.prototype = {
         cityTo = (cityTo != '0') ? cityTo : 'All';
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
-
             this.showFlightsResults(jsonResults);
-
         });
     },
     showFlightsResults: (jsonResults) => {
