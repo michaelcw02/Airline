@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`flight` (
   PRIMARY KEY (`flight_num`),
   INDEX `id_airplane_idx` (`id_airplane` ASC),
   INDEX `id_trip_idx` (`id_trip` ASC),
+  UNIQUE INDEX `departure_date_UNIQUE` (`departure_date` ASC, `id_trip` ASC),
   CONSTRAINT `fk_flight1`
     FOREIGN KEY (`id_airplane`)
     REFERENCES `airlinedb`.`airplane` (`id_airplane`)
@@ -117,6 +118,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`flight` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 
 -- -----------------------------------------------------
@@ -184,6 +186,35 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`passenger` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `airlinedb`.`seat`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `airlinedb`.`seat` (
+  `flight_num` VARCHAR(10) NOT NULL,
+  `seat_num` VARCHAR(10) NOT NULL,
+  `passenger` VARCHAR(20) NULL,
+  `ticket_num` INT NULL,
+  PRIMARY KEY (`flight_num`, `seat_num`),
+  INDEX `fk_seat_02_idx` (`passenger` ASC),
+  INDEX `fk_seat_03_idx` (`ticket_num` ASC),
+  UNIQUE INDEX `passenger_UNIQUE` (`passenger` ASC, `ticket_num` ASC),
+  CONSTRAINT `fk_seat_01`
+    FOREIGN KEY (`flight_num`)
+    REFERENCES `airlinedb`.`flight` (`flight_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_seat_02`
+    FOREIGN KEY (`passenger`)
+    REFERENCES `airlinedb`.`passenger` (`passport`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_seat_03`
+    FOREIGN KEY (`ticket_num`)
+    REFERENCES `airlinedb`.`passenger` (`ticket_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

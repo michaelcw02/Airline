@@ -175,6 +175,32 @@ public class BaseDAO {
             return null;
         }
     }
+    
+    protected Seat seat(ResultSet rs) throws Exception {
+        try {
+            String seatNumber = rs.getString("seat_num");
+            String flightNum = rs.getString("flight_num");
+            SeatID seatID = new SeatID(seatNumber, flightNum);
+            
+            String passport = rs.getString("passenger");
+            int ticketNum = rs.getInt("ticket_num");
+            
+            PassengerID passengerID = new PassengerID(passport, ticketNum);
+            Passenger passenger = null;
+            Flight flight = null;
+            try {
+                if(passport != null & ticketNum != 0) {
+                    passenger = (Passenger) new PassengerDAO().findByID(passengerID);
+                }
+                flight = (Flight) new FlightDAO().findByID(flightNum);
+            } catch (Exception ex) {
+                throw new Exception ("E~Passenger does not exists");
+            }
+            return new Seat(seatID, flight, passenger);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     protected String dateToSQL(Date date) {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

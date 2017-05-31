@@ -7,6 +7,7 @@ package una.airline.tests;
 
 import com.google.gson.Gson;
 import java.util.Date;
+import java.util.LinkedList;
 import una.airline.bl.*;
 import una.airline.dao.*;
 import una.airline.domain.*;
@@ -20,7 +21,9 @@ public class TestDAO {
     
     public static void main(String[] arg) throws Exception {
         
-        
+        SeatDAO seatDAO = new SeatDAO();
+        LinkedList<Seat> resulta = seatDAO.getAllSeats();
+        System.out.println(resulta);
         
         //TEST PASSED
         TicketsBL ticketsBL = new TicketsBL();
