@@ -5,6 +5,22 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    session = request.getSession();
+    if(session!=null){
+        if (session.getAttribute("loginStatus")  != null) {
+            if("Not logged.".equalsIgnoreCase((String) session.getAttribute("loginStatus"))) {
+                response.sendRedirect("index.jsp");
+            }
+        }else{
+            response.sendRedirect("index.jsp");
+        }
+    }else{
+        response.sendRedirect("LoginJSP.jsp");
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 
@@ -21,82 +37,94 @@
     <link rel="stylesheet" href="css/hover.css">
 </head>
 
-<body>
+<body class="ticket-body">
     <div class="container top-container">
         <jsp:include page="header.jsp" />
     </div>
 
     <div class="container body-container">
-        <div class="container">
-            <div class="page-header">
-                <h1>Tickets ✵</h1>
+        <article>
+            <h1 class="text-center">TICKET RESERVATION DETAILS</h1>
+            <hr>
+            <div class="container-fluid text-center" id="outbound-flight-detail">
+
+            </div>
+            <hr>
+            <div class="container-fluid text-center" id="return-flight-detail">
+
+            </div>
+            <hr>
+            <h3>CONTACT FORM</h3>
+            <div>
+                <form>
+                    <div class="form-group row ">
+                        <div class="col-md-6">
+                            <input type="text" id="Name" class="form-control bg-black text-white" placeholder="Name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="LastName" class="form-control bg-black text-white" placeholder="LastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <input type="text" id="Country" class="form-control bg-black text-white" placeholder="Country" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="Email" class="form-control bg-black text-white" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="text" id="Subject" class="form-control bg-black text-white" placeholder="Subject" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <textarea id="Question" class="form-control bg-black text-white" placeholder="Your Question" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 align">
+                                <button type="submit" id="btnSubmit" class="btn btn-primary button ">Send your message</button>
+                            </div>
+                        </div>
+                </form>
+                </div>
+        </article>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
+                    </div>
+                    <div class="modal-body" id="myModalMessage">
+                        <p>This is a small modal.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="container">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1>Outbound Flights</h1>
-                </div>
-                <div class="panel-body">
-                    <table class="table-responsive table-hover outbound-flights-table col-md-offset-2 col-md-8">
-                        <thead>
-                            <tr>
-                                <th>Information</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody id="outbound-flights">
-
-                        </tbody>
-                    </table>
-                    <input type="hidden" value="none" id="OutboundSelection"/>
-                </div>
-            </div>
         </div>
-        <div class="container return-flights-div">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1>Return Flights</h1>
-                </div>
-                <div class="panel-body">
-                    <table class="table-responsive table-hover return-flights-table col-md-offset-2 col-md-8">
-                        <thead>
-                            <tr>
-                                <th>Information</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody id="return-flights">
-
-                        </tbody>
-                    </table>
-                    <input type="hidden" value="none" id="ReturnSelection"/>
-                </div>
-            </div>
+        <div class="container footer-container">
+            <jsp:include page="footer.jsp" />
         </div>
-    </div>
-    <div class="container footer-container">
-        <jsp:include page="footer.jsp" />
-    </div>
 
-    <!-- LIBRARIES -->
-    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="js/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="js/Model/utils.js" type="text/javascript"></script>
-    
-    <script src="js/Model/Proxy.js" type="text/javascript"></script>
+        <!-- LIBRARIES -->
+        <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="js/Model/utils.js" type="text/javascript"></script>
 
-    <!-- CONTROLLER -->
-    <script type="text/javascript" src="js/Controller/Storage.js"></script>
-    <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
-    <script type="text/javascript" src="js/Controller/IndexController.js"></script>
+        <script src="js/Model/Proxy.js" type="text/javascript"></script>
 
-    <!-- VIEW -->
-    <script type="text/javascript" src="js/View/IndexView.js"></script>
+        <!-- CONTROLLER -->
+        <script type="text/javascript" src="js/Controller/Storage.js"></script>
+        <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
+        <script type="text/javascript" src="js/Controller/TicketsController.js"></script>
+
+        <!-- VIEW -->
+        <script type="text/javascript" src="js/View/TicketsView.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,8 @@
 var controller;
 
 function loadPage() {
-    controller = new TicketsController(window);
+    this.controller = new TicketsController(window);
+    this.controller.loadFlightDetails();
     addElementsProperties();
 }
 
@@ -10,12 +11,12 @@ function addElementsProperties() {
 }
 
 function addListenersButtons(idButton, num) {
-    $(idButton).click(() => controller.pageButtonsHandler(num));
+    $(idButton).click(() => this.controller.pageButtonsHandler(num));
 }
 
 function searchFlights() {
     //THIS IS WHERE IT HAS TO GET THE FLIGHTS
-    controller.searchFlights();
+    this.controller.searchFlights();
 }
 
 $(loadPage);
