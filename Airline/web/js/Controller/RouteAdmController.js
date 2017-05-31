@@ -39,7 +39,7 @@ RouteAdmController.prototype = {
             row.append($("<td>" + jsonResults.cityByArrivalCity.code + "</td>"));
             row.append($("<td>" + jsonResults.distance + " miles</td>"));
             row.append($("<td>" + calculateDuration(jsonResults.duration) + "</td>"));
-            row.append($("<td>" + jsonResults.departureTime + "h" + "</td>"));
+            row.append($("<td>" + calculateDuration(jsonResults.departureTime) + "h" + "</td>"));
             row.append($("<td>" + jsonResults.departureDay + "</td>"));
             row.append($("<td>" + jsonResults.cost + "</td>"));
             row.append($("<td>" + jsonResults.discount + "</td>"));
@@ -81,7 +81,7 @@ RouteAdmController.prototype = {
                 row.append($("<td>" + trip.cityByArrivalCity.code + "</td>"));
                 row.append($("<td>" + trip.distance + " miles</td>"));
                 row.append($("<td>" + calculateDuration(trip.duration) + "</td>"));
-                row.append($("<td>" + trip.departureTime + "</td>"));
+                row.append($("<td>" + calculateDuration(trip.departureTime) + "</td>"));
                 row.append($("<td>" + trip.departureDay + "</td>"));
                 row.append($("<td>" + trip.cost + "</td>"));
                 row.append($("<td>" + trip.discount + "</td>"));
@@ -112,7 +112,10 @@ RouteAdmController.prototype = {
                 let duration = duration3.toString();
                 let departureCity = this.view.$('#departureCity').val();
                 let arrivalCity = this.view.$('#arrivalCity').val();
-                let departureTime = this.view.$('#departureTime').val();
+                let departureTime1 = this.view.$('#hoursDT').val();
+                let departureTime2 = this.view.$('#minutesDT').val();
+                let departureTime3 = convertHours_Minutes(departureTime1) + parseInt(departureTime2);
+                let departureTime = departureTime3.toString();
                 let departureDay = this.view.$('#departureDay').val();
                 let cost = this.view.$('#price').val();
                 let discount = this.view.$('#discount').val();
@@ -135,22 +138,24 @@ RouteAdmController.prototype = {
             let duration3 = convertHours_Minutes(duration1) + parseInt(duration2);
             let duration = duration3.toString();
             let departureCity = this.view.$('#departureCity').val();
-            let arrivalCity1 = this.view.$('#arrivalCity').val();
-            let departureTime = this.view.$('#departureTime').val();
+            let arrivalCity = this.view.$('#arrivalCity').val();
+            let departureTime1 = this.view.$('#hoursDT').val();
+            let departureTime2 = this.view.$('#minutesDT').val();
+            let departureTime3 = convertHours_Minutes(departureTime1) + parseInt(departureTime2);
+            let departureTime = departureTime3.toString();
             let departureDay = this.view.$('#departureDay').val();
             let cost = this.view.$('#price').val();
-            let arrivalCity = this.view.$('#arrivalCity').val();
             let discount = this.view.$('#discount').val();
             let discountDes = this.view.$('#discountDescription').val();
             let discountPath = 'images/' + id_trip + '.jpg';
             let image = this.view.$('#image')[0].files[0];
-            this.airlineController.updateTrip(id_trip, distance, duration, departureCity, arrivalCity1, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => {
+            this.airlineController.updateTrip(id_trip, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (jsonResults) => {
             });
             hideModal("modalRoute");
             $('#routeAction').val("addRoute");
             console.log($('#routeAction').val());
             $("#tableRoute").empty();
-            
+
         }
     },
     sendAction: function () {
@@ -217,8 +222,12 @@ function isSomethingBlank() {
         $('#hours').val("0");
     } else if (!isBlank($('#hours')) && isBlank($('#minutes'))) {
         $('#minutes').val("0");
-    } else if (isBlank($('#departureTime'))) {
+    } else if (isBlank($('#hoursDT')) && isBlank($('#minutesDT'))) {
         blanks = true;
+    } else if (isBlank($('#hoursDT')) && !isBlank($('#minutesDT'))) {
+        $('#hoursDT').val("0");
+    } else if (!isBlank($('#hoursDT')) && isBlank($('#minutesDT'))) {
+        $('#minutesDT').val("0");
     } else
     if (isBlank($('#price'))) {
         blanks = true;
@@ -278,18 +287,24 @@ function validateDiscount() {
     return error;
 }
 function validateNumbers() {
-    let text = $('#departureTime').val();
+    let text = $('#hoursDT').val();
     let text2 = $('#discount').val();
+    let text3 = $('#minutesDT').val();
     let error = false;
     let regex = /^(?:[0-1]?[0-9]|2[0-3])(?::[0-5][0-9])?$/;
     let regex2 = /^([0-9]|[1-9][0-9]|100)$/;
+    let regex3 = /^([0-5]?[0-9]|60)$/;
     if (!regex.test(text)) {
         error = true;
-        alert("The time of departure is in the format of 24 hours and you wrote  " + text);
+        alert("The hours in departure time are in the format of 24 hours and you wrote  " + text);
     }
     if (!regex2.test(text2)) {
         error = true;
         alert("The discount is in the format of 0-100 and you wrote  " + text2);
+    }
+    if (!regex3.test(text3)) {
+        error = true;
+        alert("The minutes in departure time are in the format of 0-60 and you wrote  " + text3);
     }
 
     return error;
@@ -321,7 +336,10 @@ function showTripForModify(code, distance, duration, departureCity, arrivalCity,
     $("#distance").val(distance);
     $("#departureCity").val(departureCity);
     $("#arrivalCity").val(arrivalCity);
-    $("#departureTime").val(departureTime);
+    let hoursDT = convertMinutes_hours(departureTime);
+    let minutesDT = convertMinutes(departureTime);
+    $("#hoursDT").val(hoursDT);
+    $("#minutesDT").val(minutesDT);
     $("#departureDay").val(departureDay);
     $("#price").val(cost);
     $("#discount").val(discount);

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>typeAirplaneAdm</title>
+        <title>Route Management</title>
         <link rel="icon" href="images/airplane-4-48.png" type="image/png">
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="modal-body" id="myModalMessage">
                         <form role="form"  onsubmit="return false;" id="formRoute">
-                           
+
                             <div class="form-group" id="groupIdentifier">
                                 <label for="id_trip">Id_trip:</label>
                                 <input type="text" class="form-control" id="idTrip" placeholder="id trip" readonly="readonly">
@@ -79,8 +79,15 @@
                             </div>
 
                             <div class="form-group" id="groupDepartureTime">
-                                <label for="departureTime">Departure Time (24h ex: 2330 is equivalent to 11:30 PM): </label>
-                                <input type="text" class="form-control" id="departureTime" placeholder="1315">
+                                <label for="departureTime">Departure Time (24h ex: 23:30 is equivalent to 11:30 PM): </label>
+                                <div class="form-group row">
+                                    <div class="col-xs-6">
+                                        <input type="number" class="form-control" id="hoursDT" placeholder="hours">
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="number" class="form-control" id="minutesDT" placeholder="minutes">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group" id="groupDepartureDay">
