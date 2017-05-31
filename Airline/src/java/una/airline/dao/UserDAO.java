@@ -30,7 +30,7 @@ public class UserDAO extends BaseDAO {
                              user.getAddress(),
                              dateToSQL(user.getBirthday()),
                              (user.isAdministrator())? 1 : 0,
-                             (user.isCliente())? 1 : 0
+                             (user.isClient())? 1 : 0
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);

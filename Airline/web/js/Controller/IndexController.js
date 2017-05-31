@@ -97,13 +97,53 @@ IndexController.prototype = {
         }, '2000');
         this.cityFromHandlerShow();
     },
+    validateSearch: function() {
+        let isOK = true;
+
+        $('#cityFrom').removeClass('invalid');
+        $('#cityTo').removeClass('invalid');
+        $('#departing').removeClass('invalid');
+        $('#returning').removeClass('invalid');
+
+        let cityFrom = $('#cityFrom').val();
+        let cityTo = $('#cityTo').val();
+
+        let msg = 'Hey!<br>'
+
+        if(cityFrom == 0 || cityTo == 0) {
+            isOK = false;
+            msg += 'You must first select a route<br>';
+            (cityFrom == 0) ? $('#cityFrom').addClass('invalid') : 0;
+            (cityTo == 0) ? $('#cityTo').addClass('invalid') : 0;
+        }
+        
+        let dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if( !dateRegex.test( $('#departing').val() ) ) {
+            isOK = false;
+            msg += 'You must first select a departure date<br>';
+            $('#departing').addClass('invalid');
+        }
+        if($('#FlightMode').val() === 'RoundTrip') {
+            if( !dateRegex.test( $('#returning').val() ) ) {
+                msg += 'You must first select a return date<br>';
+                isOK = false;
+                $('#returning').addClass('invalid');
+            }
+        }
+        if(!isOK) {
+            event.preventDefault();
+            showModal('myModal', '<h3>Info!...</h3>', '<h4>' + msg + '</h4>');
+            setTimeout(() => hideModal('myModal'), 2500);
+        }
+        return isOK;
+    },
     searchFlights: function () {
         let cityFrom = this.view.$('#cityFrom').val();
         let cityTo = this.view.$('#cityTo').val();
-
-        if (!isBlank(this.view.$('#departing')))
-            var departDate = this.view.$('#departing').val();
-        if (!isBlank(this.view.$('#returning')))
+        
+        let departDate = this.view.$('#departing').val();
+        //'LET' IS MORE LIKE A LOCAL VARIABLE, WHILE 'VAR' IS A GLOBAL VARIABLE.
+        if ($('#FlightMode').val() === 'RoundTrip')
             var returnDate = this.view.$('#returning').val();
 
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
@@ -111,9 +151,7 @@ IndexController.prototype = {
         
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
-
             this.showFlightsResults(jsonResults);
-
         });
     },
     showFlightsResults: (jsonResults) => {        

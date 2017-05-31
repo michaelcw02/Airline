@@ -12,7 +12,7 @@ function addElementsProperties() {
     });
     $("#cancel").click(function () {
         controller.cleanForm();
-        $("#myModalTypeAirplane").modal("hide");
+        hideModal('myModalTypeAirplane');
     });
     $("#btShowForm").click(() => controller.cleanForm());
     $("#btSearch").click(function () {

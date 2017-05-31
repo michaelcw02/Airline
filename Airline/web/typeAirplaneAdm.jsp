@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group" id="groupRows">
-                                <label for="row">Rows quantity:</label>
+                                <label for="row">Quantity of Rows:</label>
                                 <input type="number" class="form-control" id="rows" placeholder="Row" required="true">
                             </div>
 
@@ -130,8 +130,6 @@
         <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <!-- MODEL -->
-        <script type="text/javascript" src="js/Model/TypeAirplane/TypeAirplane.js"></script>
         <!-- NEW -->
         <script src="js/Model/Proxy.js" type="text/javascript"></script>
         <script src="js/Model/utils.js" type="text/javascript"></script>

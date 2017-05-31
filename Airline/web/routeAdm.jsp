@@ -37,12 +37,16 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" onclick="controller.cleanForm();" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" id="myModalTitle">Insert/Modify Route</h4>
                     </div>
                     <div class="modal-body" id="myModalMessage">
                         <form role="form"  onsubmit="return false;" id="formRoute">
-                            
+                           
+                            <div class="form-group" id="groupIdentifier">
+                                <label for="id_trip">Id_trip:</label>
+                                <input type="text" class="form-control" id="idTrip" placeholder="id trip" readonly="readonly">
+                            </div>
                             <div class="form-group" id="groupDepartureCity">
                                 <label for="departureCity">Departure City:</label>
                                 <select class='form-control' id='departureCity'>
@@ -58,7 +62,7 @@
                             </div>
 
                             <div class="form-group" id="groupDistance">
-                                <label for="distance">Distance:</label>
+                                <label for="distance">Distance (miles):</label>
                                 <input type="number" class="form-control" id="distance" placeholder="Distance" >
                             </div>
 
@@ -75,8 +79,8 @@
                             </div>
 
                             <div class="form-group" id="groupDepartureTime">
-                                <label for="departureTime">Departure Time:</label>
-                                <input type="text" class="form-control" id="departureTime" placeholder="Departure time">
+                                <label for="departureTime">Departure Time (24h ex: 2330 is equivalent to 11:30 PM): </label>
+                                <input type="text" class="form-control" id="departureTime" placeholder="1315">
                             </div>
 
                             <div class="form-group" id="groupDepartureDay">
@@ -93,18 +97,18 @@
                             </div>
 
                             <div class="form-group" id="groupPrice">
-                                <label for="price">Price:</label>
+                                <label for="price">Price (USD):</label>
                                 <input type="number" class="form-control" id="price" placeholder="Price">
                             </div>
 
                             <div class="form-group" id="groupDiscount">
-                                <label for="discount">Discount:</label>
-                                <input type="number" class="form-control" id="discount" placeholder="Discount">
+                                <label for="discount">Discount (%):</label>
+                                <input type="number" class="form-control" id="discount" placeholder="Discount" value="0">
                             </div>
 
                             <div class="form-group" id="groupDiscountDescription">
                                 <label for="discountDescription">Discount description:</label>
-                                <input type="text" class="form-control" id="discountDescription" placeholder="Discount description">
+                                <input type="text" class="form-control" id="discountDescription" placeholder="Discount description" value="None">
                             </div>
 
                             <div class="form-group" id="groupImage">
@@ -165,9 +169,7 @@
             <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
             <script type="text/javascript" src="js/bootstrap.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-            <!-- MODEL -->
-            <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>
-            <!-- NEW -->
+
             <script src="js/Model/Proxy.js" type="text/javascript"></script>
             <script src="js/Model/utils.js" type="text/javascript"></script>
             <!-- CONTROLLER -->

@@ -34,6 +34,7 @@ public class TestDAO {
         UserDAO userDAO = new UserDAO();
         User u = userDAO.validateUser("1", "1");
         System.out.println(u.getUsername());
+     
         
     }
     

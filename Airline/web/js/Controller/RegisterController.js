@@ -58,26 +58,28 @@ RegisterController.prototype = {
     },
     doValidate: function () {
         $('.alert').hide();
-        let error = false;
+        let isOK = true;
         if (this.isSomethingBlank()) {
             showAlert('There is something you missed, please fill it up!');
-            error = true;
+            isOK = false;
         }
         else if (!this.isPasswordOK()) {
             showAlert('The passwords doesn\'t match, please check them out!');
-            error = true;
+            isOK = false;
         }
         else if($('#telephone').val()) {
-            phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' );
-            error = true;
+            if(!phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' )) {
+                isOK = false;
+            }
         }
         else if($('#cellphone').val()) {
-            phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' );
-            error = true;
+            if(!phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' )) {
+                isOK = false;
+            }             
         }
-        if(error)
+        if(!isOK)
             event.preventDefault();
-        return error;
+        return isOK;
     },
 
     isPasswordOK: function () {
@@ -90,32 +92,24 @@ RegisterController.prototype = {
     checkUsername: function(event) {
         console.log('password check')
     },
-    submitRegistration: function() {
-        let name = $('#name').val();
-        let firstLast = $("#firstlastname").val();
-        let secondLast = $("#secondlastname").val();
-        let lastname = $('#lastname').val();
-        let birthdate = $('#birthdate').val();
-        let username = $('#username').val();
-        let email = $('#email').val();
-        let password = $('#pass').val();
-
-        let msg = 'thank you for registering (THIS IS JUST A PLACEHOLDER!)';
-        console.log(msg)
-        window.alert(msg);
-    },
     addUser: function () {
-        let username = this.view.$("#user").val();
-        let name = this.view.$("#name").val();
-        let firstLast = this.view.$("#firstlastname").val();
-        let secondLast = this.view.$("#secondlastname").val();
-        let email = this.view.$("#email").val();
-        let birth = this.view.$("#birthdate").val();
-        let pass = this.view.$("#pass").val();
-        let tel = this.view.$("#telephone").val();
-        let cel = this.view.$("#cellphone").val();
-        let direction = this.view.$("#direction").val();
-        this.airlineController.addUser(username, pass, name, firstLast, secondLast, email, birth, direction, tel, cel);
+        let client = {
+            username: this.view.$("#user").val(),
+            name: this.view.$("#name").val(),
+            lastname1: this.view.$("#firstlastname").val(),
+            lastname2: this.view.$("#secondlastname").val(),
+            email: this.view.$("#email").val(),
+            birthdate: this.view.$("#birthdate").val(),
+            password: this.view.$("#pass").val(),
+            telephone: this.view.$("#telephone").val(),
+            cellphone: this.view.$("#cellphone").val(),
+            direction: this.view.$("#direction").val()
+        }
+        this.airlineController.addUser(client, 0, 1, (data) => {
+            showModal('myModal', 'Status', 'The user was successfully registered, please login');
+            setTimeout( () => { hideModal('myModal') }, 1500);
+            setTimeout( () => { location.reload(true); }, 500);
+        });
     }
 }
 

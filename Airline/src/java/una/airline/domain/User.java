@@ -24,12 +24,12 @@ public class User {
     private String address;
     private Date birthday;
     private boolean administrator;
-    private boolean cliente;
+    private boolean client;
 
     public User() {
     }
 
-    public User(String username, String password, String name, String lastname1, String lastname2, String email, String phone, String celular, String address, Date birthday, boolean administrator, boolean cliente) {
+    public User(String username, String password, String name, String lastname1, String lastname2, String email, String phone, String celular, String address, Date birthday, boolean administrator, boolean client) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -41,7 +41,7 @@ public class User {
         this.address = address;
         this.birthday = birthday;
         this.administrator = administrator;
-        this.cliente = cliente;
+        this.client = client;
     }
 
     public String getUsername() {
@@ -132,12 +132,12 @@ public class User {
         this.administrator = administrator;
     }
 
-    public boolean isCliente() {
-        return this.cliente;
+    public boolean isClient() {
+        return this.client;
     }
 
-    public void setCliente(boolean cliente) {
-        this.cliente = cliente;
+    public void setClient(boolean client) {
+        this.client = client;
     }
 
 }

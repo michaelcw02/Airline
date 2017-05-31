@@ -64,7 +64,6 @@ public class UserServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "addUser":
-                    user.setAdministrator(true);
                     user.setUsername(request.getParameter("username"));
                     user.setPassword(request.getParameter("password"));
                     user.setName(request.getParameter("name"));
@@ -75,8 +74,10 @@ public class UserServlet extends HttpServlet {
                     user.setAddress(request.getParameter("address"));
                     user.setPhone(request.getParameter("phone"));
                     user.setCelular(request.getParameter("celular"));
+                    user.setAdministrator( (1 == Integer.parseInt( request.getParameter("administrator") )) );
+                    user.setClient((1 == Integer.parseInt( request.getParameter("client") )) );
                     userBL.addUser(user);
-                    out.print("{\"data\":\"C~El usuario fue ingresado correctamente\"}");
+                    out.print("{\"response\":\"C~El usuario fue ingresado correctamente\"}");
                     break;
                 case "updateUser":
                     user.setUsername(request.getParameter("username"));
