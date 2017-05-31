@@ -34,10 +34,10 @@ function addElementsProperties() {
     $('#btnDecrease').click(() => controller.decreaseAdults());
     $('#btnIncrease').click(() => controller.increaseAdults());
 
-
-    $('#btnSearchFlights').click(() => controller.moveToFlights());
     $('#cityTo').change(() => controller.cityFromHandlerHide());
     $('#cityFrom').change(() => controller.cityFromHandlerHide());
+
+    $('#searchFlights').submit( () => controller.validateSearch() );
 
     $('#confirmReservation').click( () => controller.confirmReservation() );
     $('#cancelReservation').click( () => controller.cancelReservation() );
@@ -57,6 +57,7 @@ function addListenerTable() {
 
 function searchFlights() {
     //THIS IS WHERE IT HAS TO GET THE FLIGHTS
+    controller.moveToFlights()
     controller.searchFlights();
 }
 

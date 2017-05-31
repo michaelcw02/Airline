@@ -51,7 +51,7 @@
             <a class="hvr-grow" href="#flightsContent"><img src="images/airplane-4-48.png" alt="Flights">Flights</a>
         </div>
         <div class="tabcontent text-center" id="flightsContent">
-            <form action="javascript:searchFlights();" class="form-horizontal">
+            <form action="javascript:searchFlights();" class="form-horizontal" id="searchFlights">
                 <div class="row">
                     <div class="btn-group-md col-md-12"><br>
                         <button type="button" class="btn btn-primary" id="btnRoundTrip">Round-trip</button>
@@ -65,7 +65,7 @@
                         <div class="input-group back">
                             <span class="input-group-addon"><b>From</b></span>
                             <select class='form-control' name="cityFrom" id='cityFrom'>
-                                <option value="0">All cities</option>
+                                <option value="0">Cities</option>
                             </select>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <div class="input-group back">
                             <span class="input-group-addon"><b>To</b></span>
                             <select class='form-control' name="cityTo" id='cityTo'>
-                                <option value="0">All cities</option>
+                                <option value="0">Cities</option>
                             </select>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
     </div>
 
     <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -206,14 +206,8 @@
     <script src="js/jquery.dataTables.js" type="text/javascript"></script>
     <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script src="js/Model/utils.js" type="text/javascript"></script>
-    <!-- MODEL -->
-    <script type="text/javascript" src="js/Model/City/City.js"></script>
-    <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>
-    <script type="text/javascript" src="js/Model/Flight/Flight.js"></script>
-    <script type="text/javascript" src="js/Model/Discount/Discount.js"></script>
-    <!-- NEW -->
-    <script type="text/javascript" src="js/Model/Proxy.js"></script>
 
+    <script type="text/javascript" src="js/Model/Proxy.js"></script>
     <!-- CONTROLLER -->
     <script type="text/javascript" src="js/Controller/Storage.js"></script>
     <script type="text/javascript" src="js/Controller/AirlineController.js"></script>
