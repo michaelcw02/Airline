@@ -482,21 +482,23 @@ Proxy.getAllUsers = (callback) => {
         dataType: "json"
     });
 }
-Proxy.addUser = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+Proxy.addUser = (user, admin, client) => {
     $.ajax({
         url: 'UserServlet',
         data: {
             action: "addUser",
-            username: username,
-            password: password,
-            name: name,
-            lastname1: lastname1,
-            lastname2: lastname2,
-            email: email,
-            birthdate: birthdate,
-            address: address,
-            phone: phone,
-            celular: celular
+            username: user.username,
+            password: user.password,
+            name: user.name,
+            lastname1: user.lastname1,
+            lastname2: user.lastname2,
+            email: user.email,
+            birthdate: user.birthdate,
+            address: user.direction,
+            phone: user.telephone,
+            celular: user.cellphone,
+            administrator: admin,
+            client: client
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a user was inserted");

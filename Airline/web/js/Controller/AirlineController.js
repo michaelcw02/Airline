@@ -147,8 +147,8 @@ AirlineController.prototype = {
             callback(data);
         });
     },
-    addUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
-        Proxy.addUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
+    addUser: function (user, admin, client) {
+        Proxy.addUser(user, admin, client);
     },
     updateUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
         Proxy.updateUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
