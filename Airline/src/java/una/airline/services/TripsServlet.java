@@ -106,7 +106,7 @@ public class TripsServlet extends HttpServlet {
                     out.print(json);
                     break;
                 case "updateTrip":
-                    int id_trip=Integer.parseInt(request.getParameter("id_trip"));
+                    int id_trip = Integer.parseInt(request.getParameter("id_trip"));
                     int distance1 = Integer.parseInt(request.getParameter("distance"));
                     int duration1 = Integer.parseInt(request.getParameter("duration"));
                     String cityFrom1 = request.getParameter("departureCity");
@@ -121,13 +121,14 @@ public class TripsServlet extends HttpServlet {
                     City destination1 = null;
                     try {
                         CityBL cityBL = new CityBL();
-                        origin = cityBL.getCityByCode(cityFrom1);
-                        destination = cityBL.getCityByCode(cityTo1);
+                        origin1 = cityBL.getCityByCode(cityFrom1);
+                        destination1 = cityBL.getCityByCode(cityTo1);
                     } catch (Exception e) {
                         out.print("{\"data\":\"E~The cities are not valid!\"}");
                     }
-                    trip = new Trip(id_trip,origin1, destination1, distance1, duration1, departureTime1, departureDay1, cost1, discount1, discountDes1, discountPath1);
+                    trip = new Trip(id_trip, origin1, destination1, distance1, duration1, departureTime1, departureDay1, cost1, discount1, discountDes1, discountPath1);
                     tripsBL.updateTrip(trip);
+                    out.print("{\"data\":\"C~La ruta fue modificada correctamente\"}");
                     break;
                 default:
                     out.print("E~No se indico la acción que se desea realizar");

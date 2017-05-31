@@ -36,15 +36,19 @@ AirlineController.prototype = {
         })
     },
     searchCitiesTo: function (codeCityFrom, callback) {
-        if(codeCityFrom != 0) {
-            Proxy.getTripsFromCity( codeCityFrom, (data) => {
+        if (codeCityFrom != 0) {
+            Proxy.getTripsFromCity(codeCityFrom, (data) => {
                 let citiesTo = [];
-                data = data.filter( (trip) => { return(trip.cityByDepartureCity.code === codeCityFrom) } );
-                data.forEach( (trip) => { citiesTo.push(trip.cityByArrivalCity) } );
+                data = data.filter((trip) => {
+                    return(trip.cityByDepartureCity.code === codeCityFrom)
+                });
+                data.forEach((trip) => {
+                    citiesTo.push(trip.cityByArrivalCity)
+                });
                 callback(citiesTo);
             })
         }
-        if(codeCityFrom == 0) {
+        if (codeCityFrom == 0) {
             callback(this.retrieveAllCities());
         }
     },
@@ -180,22 +184,22 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    confirmReservation: function(mode, numPassengers, callback) {
-        Proxy.confirmReservation(mode, numPassengers, (data) => {          
+    confirmReservation: function (mode, numPassengers, callback) {
+        Proxy.confirmReservation(mode, numPassengers, (data) => {
             let response = data.response;
             callback(response);
         });
     },
-    cancelReservation: function(callback) {
-        
+    cancelReservation: function (callback) {
+
     },
-    loginUser: function() {
+    loginUser: function () {
         $('#username').removeClass("has-error");
         $('#password').removeClass("has-error");
         let username = $('#username').val();
         let password = $('#password').val();
         Proxy.loginUser(username, password, (response) => {
-            if(response[0] === 'C') {
+            if (response[0] === 'C') {
                 location.reload();
             } else {
                 $('#username').addClass("has-error");
@@ -203,9 +207,14 @@ AirlineController.prototype = {
             }
         });
     },
-    logout: function() {
-       Proxy.logoutUser((data) => {
+    logout: function () {
+        Proxy.logoutUser((data) => {
             window.location.replace("/Airline");
+            callback(data);
+        });
+    },
+    updateTrip: function (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, callback) {
+        Proxy.updateTrip(code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, (data) => {
             callback(data);
         });
     },
