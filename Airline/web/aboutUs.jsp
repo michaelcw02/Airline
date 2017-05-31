@@ -1,7 +1,7 @@
 <%-- 
     Document   : aboutUs
     Created on : May 10, 2017, 9:14:09 AM
-    Author     : michael
+    Author     : Fabiana
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
