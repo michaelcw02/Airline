@@ -87,12 +87,7 @@
     <script src="js/jquery.dataTables.js" type="text/javascript"></script>
     <script src="js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script src="js/Model/utils.js" type="text/javascript"></script>
-    <!-- MODEL -->
-    <script type="text/javascript" src="js/Model/City/City.js"></script>
-    <script type="text/javascript" src="js/Model/Trip/Trip.js"></script>
-    <script type="text/javascript" src="js/Model/Flight/Flight.js"></script>
-    <script type="text/javascript" src="js/Model/Discount/Discount.js"></script>
-    <!-- NEW -->
+    
     <script src="js/Model/Proxy.js" type="text/javascript"></script>
 
     <!-- CONTROLLER -->
