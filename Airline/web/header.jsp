@@ -24,7 +24,7 @@
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.jsp">Star Airlines<strong>✵</strong></a>
+                        <a class="navbar-brand hvr-grow" href="index.jsp">Star Airlines<strong>✵</strong></a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -45,7 +45,7 @@
                                         <li class="text-white"> <h5> <a href="companyInfo.jsp">History of us</a> </h5> </li>
                                         <li class="text-white"> <h5> <a href="contactUs.jsp">Contact us</a></h5> </li>
                                         <li class="text-white"> <h5> <a href="instBenchmarks.jsp">Institutional Benchmarks</a></h5> </li>
-                                        <li class="text-white"> <h5> <a href="aboutUs.jsp">About us</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="tickets.jsp">About us</a></h5> </li>
                                     </ul>
                                 </ul>
                             </li>

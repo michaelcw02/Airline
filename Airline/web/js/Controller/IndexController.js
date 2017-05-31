@@ -148,12 +148,13 @@ IndexController.prototype = {
 
         cityFrom = (cityFrom != '0') ? cityFrom : 'All';
         cityTo = (cityTo != '0') ? cityTo : 'All';
+        
 
         this.airlineController.searchFlights(cityFrom, cityTo, departDate, returnDate, (jsonResults) => {
             this.showFlightsResults(jsonResults);
         });
     },
-    showFlightsResults: (jsonResults) => {
+    showFlightsResults: (jsonResults) => {        
         let outboundFlights = jsonResults.outboundFlights;
         let returnFlights = jsonResults.returnFlights;
         $('.outbound-flights-div').fadeOut();
@@ -208,7 +209,7 @@ IndexController.prototype = {
                 //REDIRECTS TO TICKETS PAGE FOR FURTHER SETTINGS ON TICKETS AND PASSENGERS
                 showModal('myModal', 'Info!...', 'Redirecting...');
                 setTimeout( () => { /*window.location.replace("/");*/ }, 1500 );
-                
+                window.location.href = "/Airline/tickets.jsp";
             }
             if(response[0] == 'E') {
                 if(response[1] == '1') {
