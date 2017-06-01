@@ -1,7 +1,8 @@
 var controller;
 
 function loadPage() {
-    controller = new TicketsController(window);
+    this.controller = new TicketsController(window);
+    this.controller.loadFlightDetails();
     addElementsProperties();
 }
 
@@ -10,22 +11,12 @@ function addElementsProperties() {
 }
 
 function addListenersButtons(idButton, num) {
-    $(idButton).click(() => controller.pageButtonsHandler(num));
+    $(idButton).click(() => this.controller.pageButtonsHandler(num));
 }
 
 function searchFlights() {
     //THIS IS WHERE IT HAS TO GET THE FLIGHTS
-    controller.searchFlights();
-}
-
-function toDataTable($table) {
-    if (!$.fn.DataTable.isDataTable('#' + $table.attr('id'))) {
-        $table.DataTable({
-            "searching": false,
-            "lengthChange": false,
-            "order": [[1, "desc"]]
-        });
-    }
+    this.controller.searchFlights();
 }
 
 $(loadPage);

@@ -29,6 +29,32 @@ public final class Database {
             cnx = this.getConnection(null, null, null);
         }
     }
+    
+    public boolean setConnectionAutoCommit(boolean autoCommit) {
+        try {
+            cnx.setAutoCommit(autoCommit);
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean connectionCommit() {
+        try {
+            cnx.commit();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
+    public boolean connectionRollback() {
+        try {
+            cnx.rollback();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
 
     public Connection getConnection(String servidorArg, String usuarioArg, String claveArg) {
         try {

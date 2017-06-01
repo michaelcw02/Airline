@@ -272,7 +272,7 @@ function showFlightDetail (flightNum, flight, mode) {
                     element += '<h4 class="text-center">From: <i>' + trip.cityByDepartureCity.name + ', ' + trip.cityByDepartureCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4 class="text-center">Date: <i>' + flight.departureDate + '</i> At: <i>' + trip.departureTime + 'h </i></h4>';
+                    element += '<h4 class="text-center">Date: <i>' + flight.departureDate + '</i> At: <i>' + calculateTime(trip.departureTime) + 'h </i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';

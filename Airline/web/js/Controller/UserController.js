@@ -289,14 +289,15 @@ function validatePass() {
 }
 
 function phoneCheck(element, errorMsg) {
-    var regex = /^\d{4}[-\s]?\d{4}$/;
     removeInvalid(element);
+    var regex = /^\d{4}[-\s]?\d{4}$/;
     if (!regex.test(element.val())) {
         setInvalid(element);
         alert(errorMsg);
-        return false;
+        return true;
     }
-    return true;
+    
+    return false;
 }
 
 function doValidate() {
@@ -308,13 +309,10 @@ function doValidate() {
         error = true;
     } else if (validatePass()) {
         error = true;
+    } else if(phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' )) {
+        error = true;
+    } else if(phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' )) {
+        error = true;
     }
-    //    } else if($('#telephone').val()) {
-    //        phoneCheck( $('#telephone'), 'This is not a valid telephone number, please check it out!' );
-    //        error = true;
-    //    } else if($('#cellphone').val()) {
-    //        phoneCheck( $('#cellphone'), 'This is not a valid cellphone number, please check it out!' );
-    //        error = true;
-    //    }
     return error;
 }

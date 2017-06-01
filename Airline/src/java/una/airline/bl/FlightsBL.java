@@ -6,9 +6,16 @@
 package una.airline.bl;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import una.airline.dao.FlightDAO;
+import una.airline.dao.SeatDAO;
+import una.airline.domain.Airplane;
 import una.airline.domain.Flight;
 import una.airline.domain.RoundTripFlights;
+import una.airline.domain.Seat;
+import una.airline.domain.SeatID;
+import una.airline.domain.TypeAirplane;
 
 /**
  *
@@ -20,6 +27,32 @@ public class FlightsBL {
 
     public FlightsBL() {
         flightDAO = new FlightDAO();
+    }
+    
+    public int addFlight(Flight flight) {
+        int result = flightDAO.addFlight(flight);
+        if(result == 1) {
+            result = this.addSeatsOfFlight(flight);
+        }
+        return result;
+    }
+    
+    public int addSeatsOfFlight(Flight flight) {
+        int result = 0;
+        TypeAirplane typeAirplane = flight.getAirplane().getTypeAirplane();
+        SeatDAO seatDAO = new SeatDAO();
+        for(int i = 1; i <= typeAirplane.getQtyOfRows(); i++) {
+            for (int j = 0; j < typeAirplane.getSeatsPerRow(); j++) {
+                Character a = (char) (65 + j);
+                String seatNum = i + a.toString();
+                try {
+                    seatDAO.addSeatWithoutPassenger(new Seat( new SeatID(seatNum, flight.getFlightNum()), flight ));
+                } catch (Exception ex) {
+                    return 0;
+                }
+            }
+        }
+        return result;
     }
 
     public List<Flight> getAllFlights() {

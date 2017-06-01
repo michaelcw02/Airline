@@ -731,3 +731,23 @@ Proxy.updateTrip = (code, distance, duration, departureCity, arrivalCity, depart
         });
     });
 }
+Proxy.getReservedFlights = (callback) => {
+    $.ajax({
+        url: 'TicketsServlet',
+        data: {
+            action: "getConfirmedReservation",
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not retrieve  the reservation");
+            setTimeout( () => hideModal('myModal'), 1500);
+            callback();
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+
+
+}

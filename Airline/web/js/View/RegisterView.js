@@ -9,7 +9,8 @@ function addElementsProperties() {
     //BASIC ELEMENTS
     $('#birthdate').datepicker( {
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        yearRange: '1900:-14'
     });
     
     //EVENT HANDLERS

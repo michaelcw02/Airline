@@ -20,6 +20,17 @@ public class BaseDAO {
     public BaseDAO() {
         connection = new Database(null, null, null);
     }
+    
+    public boolean setConnectionAutoCommit(boolean autoCommit) {
+        return connection.setConnectionAutoCommit(autoCommit);
+    }
+    
+    public boolean commit() {
+        return connection.connectionCommit();
+    }
+    public boolean rollback() {
+        return connection.connectionRollback();
+    }
 
     protected City city(ResultSet rs) {
         try {
@@ -171,6 +182,32 @@ public class BaseDAO {
                 throw new Exception("E~There was an issue with the Ticket of Passenger", e);
             }
             return new Passenger(passengerID, ticket, name, lastname, seat);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    protected Seat seat(ResultSet rs) throws Exception {
+        try {
+            String seatNumber = rs.getString("seat_num");
+            String flightNum = rs.getString("flight_num");
+            SeatID seatID = new SeatID(seatNumber, flightNum);
+            
+            String passport = rs.getString("passenger");
+            int ticketNum = rs.getInt("ticket_num");
+            
+            PassengerID passengerID = new PassengerID(passport, ticketNum);
+            Passenger passenger = null;
+            Flight flight = null;
+            try {
+                if(passport != null & ticketNum != 0) {
+                    passenger = (Passenger) new PassengerDAO().findByID(passengerID);
+                }
+                flight = (Flight) new FlightDAO().findByID(flightNum);
+            } catch (Exception ex) {
+                throw new Exception ("E~Passenger does not exists");
+            }
+            return new Seat(seatID, flight, passenger);
         } catch (SQLException e) {
             return null;
         }

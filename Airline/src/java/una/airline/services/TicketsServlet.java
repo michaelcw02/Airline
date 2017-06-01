@@ -104,9 +104,16 @@ public class TicketsServlet extends HttpServlet {
                     } else {
                         json = "{\"response\":\"E~2~Hey! you are not logged in, do it first before buying!\"}";
                         out.print(json);
+                        session.removeAttribute("OutboundReservation");
+                        session.removeAttribute("ReturnReservation");
                         break;
                     }
-
+                    
+                case "getConfirmedReservation":
+                    json = new Gson().toJson((RoundTripInfo<Ticket>) session.getAttribute("TicketsInfo"));
+                    out.print(json);
+                    break;
+                    
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;

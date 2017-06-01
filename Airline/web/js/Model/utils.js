@@ -14,15 +14,41 @@ function changeMessageModal(idDiv, title, message) {
 }
 
 function calculateArrivalDate(departureDate, departureTime, duration) {
-    return 'Missing ' + departureDate;
+    return '! - ' + departureDate;
 }
 
 function calculateArrivalTime(departureTime, duration) {
-    return 'Missing' + departureTime;
+    return '! - ' + departureTime;
 }
 
 function calculatePrice(basePrice, discount) {
     return (discount != 0) ? basePrice * ((100 - discount) / 100) : basePrice;
+}
+
+function calculateTime(time) {
+    time += '';
+    if(time.length == 4) {
+        var hour = time.charAt(0) + time.charAt(1);
+        var mode = 'PM';
+        if(hour != 12)
+            hour -= 12;
+        var min = time.charAt(2) + time.charAt(3);
+    }
+    if(time.length == 3) {
+        hour = time.charAt(0);
+        min = time.charAt(1) + time.charAt(2);
+        mode = 'AM';
+    }
+    if(time.length < 3 && time.length > 0) {
+        hour = 12;
+        min = time;
+        mode = 'AM';
+    }
+    if(min >= 60) {
+        hour = parseInt(hour) + Math.floor(min / 60);
+        min = min % 60;
+    }
+    return hour + ':' + min + ' ' + mode;
 }
 
 function calculateDuration(duration) {

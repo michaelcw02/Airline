@@ -7,48 +7,34 @@ TicketsController.prototype = {
         this.view = view;
         this.airlineController = new AirlineController();
     },
-    showFlightsResults: (jsonResults) => {
-        let outboundFlights = jsonResults.outboundFlights;
-        let returnFlights = jsonResults.returnFlights;
-        $('.outbound-flights-div').fadeOut();
-        $('.return-flights-div').fadeOut();
-        $('.confirmation-div').fadeOut();
-
-        if (outboundFlights != undefined) {
-            showResult($('#outbound-flights'), outboundFlights);
-            $('.outbound-flights-div').fadeIn();
-            toDataTable($('.outbound-flights-table'));
-        }
-        if (returnFlights != undefined) {
-            showResult($('#return-flights'), returnFlights);
-            $('.return-flights-div').fadeIn();
-            toDataTable($('.return-flights-table'));
-        }
-
-        $('.confirmation-div').fadeIn();
+    loadFlightDetails: function () {
+        this.airlineController.getReservedFlights( (reservedFlights) => {
+            console.log(reservedFlights);
+            let outboundTicket = reservedFlights.outboundTripInfo[0];
+            let returnTicket = reservedFlights.returnTripInfo[0];
+            showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
+            showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
+        } );
     },
-    searchFlights: function () {
-        
-    },
-    showSearchFlights: function (numPage = 1, flights) {
-        this.view.$("#flights").empty();
-        for (let i = 10 * (numPage - 1); i < (10 * numPage) && i < flights.length; i++) {
-            let flight = flights[i];
-            let element = '';
-            element += '</div>';
-            $(element).appendTo(this.view.$('.flights-container'));
-        }
-        this.printButtons(flights);
-    }    
 }
 
 
-function showResult($table, jsonFlights) {
-    $table.empty();
-    $table.show();
-    for (let i in jsonFlights) {
-        toList($table, jsonFlights[i]);
-    }
+function showDetail($div, ticket, mode) {
+    let flight = ticket.flight;
+    let element = '';
+    element += '<div class="row"><h3 class="col-md-4">' + mode + ' FLIGHT: <strong>'+ flight.flightNum +'</strong> </h3></div>';
+    element += '<div class="row">';
+    let depCity = flight.trip.cityByDepartureCity;
+    let arrCity = flight.trip.cityByArrivalCity;
+    element += '<h4 class="col-md-offset-2 col-md-4">From: <strong>'+ depCity.code + ', ' + depCity.name + ', ' + depCity.country +'</strong> </h4><h4 class="col-md-4"> To: <strong>'+ arrCity.code + ', ' + arrCity.name + ', ' + arrCity.country +'</strong></h4>';
+    element += '</div>';
+    element += '<div class="row">';
+    element += '<h4 class="col-md-offset-2 col-md-4">Date of departure: <strong>' + flight.departureDate + '</strong> </h4><h4 class="col-md-4"> Departure Time: <strong>' + calculateTime(flight.trip.departureTime) + '</strong></h4>';
+    element += '</div>';
+    element += '<div class="row">';
+    element += '<h4 class="col-md-offset-2 col-md-4">Date of arrival: <strong>' + calculateArrivalDate(flight.departureDate, flight.trip.departureTime, flight.trip.duration) + '</strong> </h4><h4 class="col-md-4"> Arrival Time: <strong>' + calculateArrivalTime(flight.trip.departureTime, flight.trip.duration) + '</strong></h4>';
+    element += '</div>'
+    $div.append($(element));
 }
 
 function toList($table, flight) {

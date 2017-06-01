@@ -191,7 +191,9 @@ AirlineController.prototype = {
         });
     },
     cancelReservation: function (callback) {
-
+        Proxy.cancelReservation( (data) => {
+            callback(data);
+        } ) 
     },
     loginUser: function () {
         $('#username').removeClass("has-error");
@@ -218,4 +220,10 @@ AirlineController.prototype = {
             callback(data);
         });
     },
+    getReservedFlights: function (callback) {
+        Proxy.getReservedFlights( (reserveFlights) => {
+            Storage.store('TicketsInfo', reserveFlights);
+            callback(reserveFlights);
+        } )
+    }
 }
