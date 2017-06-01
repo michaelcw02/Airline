@@ -5,7 +5,11 @@ function loadPage(event) {
 }
 
 function addElementsProperties() {
-    $('#birthdate').datepicker();
+    $('#birthdate').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1900:-14'
+    });
     $("#send").click(function () {
         controller.sendAction();
     });
