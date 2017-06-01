@@ -25,6 +25,10 @@ function calculatePrice(basePrice, discount) {
     return (discount != 0) ? basePrice * ((100 - discount) / 100) : basePrice;
 }
 
+function calculatePriceWithPassengers(basePrice, discount, passengers) {
+    return (discount != 0) ? passengers * basePrice * ((100 - discount) / 100) : passengers * basePrice;
+}
+
 function calculateTime(time) {
     time += '';
     if(time.length == 4) {
