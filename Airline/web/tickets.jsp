@@ -54,6 +54,10 @@
 
             </div>
             <hr>
+            <div class="container-fluid text-center" id="price-detail">
+
+            </div>
+            <hr>
             <h3>CONTACT FORM</h3>
             <div>
                 <form>
