@@ -290,10 +290,12 @@ function validateNumbers() {
     let text = $('#hoursDT').val();
     let text2 = $('#discount').val();
     let text3 = $('#minutesDT').val();
+    let text4 = $('#minutes').val();
+    let text5 = $('#hours').val();
     let error = false;
     let regex = /^(?:[0-1]?[0-9]|2[0-3])(?::[0-5][0-9])?$/;
     let regex2 = /^([0-9]|[1-9][0-9]|100)$/;
-    let regex3 = /^([0-5]?[0-9]|60)$/;
+    let regex3 = /^([0-5]?[0-9]|59)$/;
     if (!regex.test(text)) {
         error = true;
         alert("The hours in departure time are in the format of 24 hours and you wrote  " + text);
@@ -304,9 +306,17 @@ function validateNumbers() {
     }
     if (!regex3.test(text3)) {
         error = true;
-        alert("The minutes in departure time are in the format of 0-60 and you wrote  " + text3);
+        alert("The minutes in departure time are in the format of 0-59 and you wrote  " + text3);
     }
-
+    if (!regex3.test(text4)) {
+        error = true;
+        alert("The minutes in duration are in the format of 0-59 and you wrote  " + text4);
+    }
+      if (!regex.test(text5)) {
+        error = true;
+        alert("The hours in duration are in the format of 24 hours and you wrote  " + text5);
+    }
+    
     return error;
 }
 function doValidate() {
