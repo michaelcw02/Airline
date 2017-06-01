@@ -11,9 +11,11 @@ TicketsController.prototype = {
         this.airlineController.getReservedFlights( (reservedFlights) => {
             console.log(reservedFlights);
             let outboundTicket = reservedFlights.outboundTripInfo[0];
-            let returnTicket = reservedFlights.returnTripInfo[0];
             showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
-            showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
+            if(reservedFlights.returnTripInfo.length == 1) {
+                var returnTicket = reservedFlights.returnTripInfo[0];
+                showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
+            }
             showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
         } );
     },
@@ -46,10 +48,17 @@ function showDetail($div, ticket, mode) {
 }
 
 function showTotalPrice($div, outboundTicket, returnTicket) {
+    var price2;
     let outboundT = outboundTicket.flight.trip;
-    let returnT = returnTicket.flight.trip;
     let price1 = calculatePriceWithPassengers(outboundT.cost, outboundT.discount, outboundTicket.numPassengers);
-    let price2 = calculatePriceWithPassengers(returnT.cost, returnT.discount, returnTicket.numPassengers);
+    if ( returnTicket != undefined){
+        var returnT = returnTicket.flight.trip;
+        price2 = calculatePriceWithPassengers(returnT.cost, returnT.discount, returnTicket.numPassengers);
+    }
+    else{
+        price2 = 0;
+    }
+        
     let element = '';
     element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> </h1></div>';
     $div.append($(element));
