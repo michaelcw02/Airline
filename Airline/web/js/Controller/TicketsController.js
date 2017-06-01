@@ -35,17 +35,17 @@ function showDetail($div, ticket, mode) {
     element += '<div class="row">';
     element += '<h4 class="col-md-offset-2 col-md-4">Date of arrival: <strong>' + calculateArrivalDate(flight.departureDate, flight.trip.departureTime, flight.trip.duration) + '</strong> </h4><h4 class="col-md-4"> Arrival Time: <strong>' + calculateArrivalTime(flight.trip.departureTime, flight.trip.duration) + '</strong></h4>';
     element += '</div>';
-    element += '<div class="row"><h1 class="col-md-12"> Cost: <strong>' + calculatePrice(flight.trip.cost, flight.trip.discount) + '</strong> </h1></div>';
+    element += '<div class="row"><h1 class="col-md-12"> Price: <strong>' + calculatePriceWithPassengers(flight.trip.cost, flight.trip.discount, ticket.numPassengers) + '</strong> </h1></div>';
     $div.append($(element));
 }
 
 function showTotal($div, outboundTicket, returnTicket) {
     let outboundT = outboundTicket.flight.trip;
     let returnT = returnTicket.flight.trip;
-    let price1 = calculatePrice(outboundT.cost, outboundT.discount);
-    let price2 = calculatePrice(returnT.cost, returnT.discount);
+    let price1 = calculatePriceWithPassengers(outboundT.cost, outboundT.discount, outboundTicket.numPassengers);
+    let price2 = calculatePriceWithPassengers(returnT.cost, returnT.discount, returnTicket.numPassengers);
     let element = '';
-    element += '<div class="row"><h1 class="col-md-12"> Total Cost: <strong>' + (price1 + price2) + '</strong> </h1></div>';
+    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> </h1></div>';
     $div.append($(element));
 }
 
