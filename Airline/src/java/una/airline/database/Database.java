@@ -108,6 +108,6 @@ public final class Database {
     private static final String SERVIDOR = "localhost";
     private static final String PUERTO = "3306";
     private static final String USUARIO = "root";
-    private static final String CLAVE = "1234";
+    private static final String CLAVE = "root";
     private static final String BASEDATOS = "airlinedb";
 }

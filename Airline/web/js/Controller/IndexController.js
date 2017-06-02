@@ -249,7 +249,7 @@ function toList($table, flight) {
     var td = '<td class="td-flights-info col-md-8">';
     td += '<div><h2><strong>' + trip.cityByDepartureCity.code + ' - ' + trip.cityByArrivalCity.code + '　　　Flight: ' + flight.flightNum + '<strong></h2>';
     td += trip.cityByDepartureCity.name + ' to ' + trip.cityByArrivalCity.name + '<br>';
-    td += '<h4> Date of departure: ' + flight.departureDate + '    Time of departure: ' + trip.departureTime + 'h </h4></div></td>';
+    td += '<h4> Date of departure: ' + flight.departureDate + '    Time of departure: ' + calculateTime(trip.departureTime) + ' </h4></div></td>';
     $(tr).append(td);
     var precio = calculatePrice(trip.cost, trip.discount) + " USD";
     td = '<td class="td-flights-price col-md-4"><h2>' + precio + '</h2></td>';
@@ -272,7 +272,7 @@ function showFlightDetail (flightNum, flight, mode) {
                     element += '<h4 class="text-center">From: <i>' + trip.cityByDepartureCity.name + ', ' + trip.cityByDepartureCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4 class="text-center">Date: <i>' + flight.departureDate + '</i> At: <i>' + calculateTime(trip.departureTime) + 'h </i></h4>';
+                    element += '<h4 class="text-center">Date: <i>' + flight.departureDate + '</i> At: <i>' + calculateTime(trip.departureTime) + ' </i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';
@@ -280,7 +280,7 @@ function showFlightDetail (flightNum, flight, mode) {
                     element += '<h4 class="text-center">To: <i>' + trip.cityByArrivalCity.name + ', ' + trip.cityByArrivalCity.country + '</i></h4>';
                 element += '</div>';
                 element += '<div class="col-md-6 col-sm-12">';
-                    element += '<h4 class="text-center">Date: <i>' + calculateArrivalDate(flight.departureDate, flight.departureTime) + '</i> At: <i>' + calculateArrivalTime(trip.departureTime) + 'h </i></h4>';
+                    element += '<h4 class="text-center">Date: <i>' + calculateArrivalDate(flight.departureDate, trip.departureTime, trip.duration) + '</i> At: <i>' + calculateArrivalTime(trip.departureTime, trip.duration) + ' </i></h4>';
                 element += '</div>';
             element += '</div>';
             element += '<div class="row">';
