@@ -52,8 +52,7 @@ public class SeatDAO extends BaseDAO {
         } catch (Exception e) {
         }
         return listaResultado;
-    }
-    
+    }    
 
     public LinkedList<Seat> getAllSeats() {
         LinkedList<Seat> listaResultado = new LinkedList<>();
