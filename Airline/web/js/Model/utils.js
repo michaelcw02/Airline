@@ -66,7 +66,3 @@ function showMessage(idDiv, title, message, type) {
     }
     $("#" + idDiv).show();
 }
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}

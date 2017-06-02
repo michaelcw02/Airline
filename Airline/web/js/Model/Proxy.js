@@ -748,6 +748,25 @@ Proxy.getReservedFlights = (callback) => {
         type: 'POST',
         dataType: "json"
     });
+}
 
-
+Proxy.addPassengerToTicket = (passenger, callback) => {
+    $.ajax({
+        url: 'TicketsServlet',
+        data: {
+            action: "addPassenger",
+            passport: passenger.passport,
+            name: passenger.name,
+            lastname: passenger.lastname
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not add the passenger");
+            setTimeout( () => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }
