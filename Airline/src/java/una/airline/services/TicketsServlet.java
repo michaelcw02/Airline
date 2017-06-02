@@ -163,7 +163,12 @@ public class TicketsServlet extends HttpServlet {
                     } else {
                         response.sendRedirect("index.jsp");
                     }
-
+                    
+                case "getConfirmedReservation":
+                    json = new Gson().toJson((RoundTripInfo<Ticket>) session.getAttribute("TicketsInfo"));
+                    out.print(json);
+                    break;
+                    
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
