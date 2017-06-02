@@ -738,7 +738,7 @@ Proxy.getReservedFlights = (callback) => {
             action: "getConfirmedReservation",
         },
         error: function () { //si existe un error en la respuesta del ajax
-            showModal("myModal", "ERROR", "Could not retrieve  the reservation");
+            showModal("myModal", "ERROR", "Could not retrieve the reservation");
             setTimeout( () => hideModal('myModal'), 1500);
             callback();
         },

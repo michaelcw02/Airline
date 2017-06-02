@@ -326,7 +326,7 @@ function showFlightDetail (flightNum, flight, mode) {
             $('#cancel').on('click', (event) => {
                 $('#flightDetail').modal('hide');
                 $('#flightDetailMessage').html('');
-            })
+            });
         }
     })
 }

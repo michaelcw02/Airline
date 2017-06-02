@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
+import una.airline.bl.PassengerBL;
 import una.airline.bl.TicketsBL;
 import una.airline.bl.UserBL;
 import una.airline.dao.TicketDAO;
 import una.airline.domain.Flight;
+import una.airline.domain.Passenger;
 import una.airline.domain.RoundTripInfo;
 import una.airline.domain.Ticket;
 import una.airline.domain.User;
@@ -58,8 +60,8 @@ public class TicketsServlet extends HttpServlet {
                     String username = (String) session.getAttribute("username");
                     String status = (String) session.getAttribute("loginStatus");
                     String outboundReservation = (String) session.getAttribute("OutboundReservation");
-                    String returnReservation = null;
-                    
+                    String returnReservation = null;    //will be gotten later.
+
                     String mode = (String) request.getParameter("mode");
                     int numPassengers = Integer.parseInt(request.getParameter("numPassengers"));
 
@@ -79,9 +81,9 @@ public class TicketsServlet extends HttpServlet {
                             break;
                         }
                         //SUCCESS FOR ONE WAY
-                        outboundTicket = new Ticket( new FlightsBL().searchFlightByNum(outboundReservation), user, numPassengers );
+                        outboundTicket = new Ticket(new FlightsBL().searchFlightByNum(outboundReservation), user, numPassengers);
                         outList.add(outboundTicket);
-                        
+
                         if (mode.equalsIgnoreCase("RoundTrip")) {
                             returnReservation = (String) session.getAttribute("ReturnReservation");
                             if (returnReservation == null) {
@@ -90,14 +92,14 @@ public class TicketsServlet extends HttpServlet {
                                 break;
                             }
                             //SUCCESS FOR ROUND TRIPS
-                            returnTicket = new Ticket( new FlightsBL().searchFlightByNum(returnReservation), user, numPassengers );
+                            returnTicket = new Ticket(new FlightsBL().searchFlightByNum(returnReservation), user, numPassengers);
                             inList.add(returnTicket);
                         }
                         RoundTripInfo<Ticket> roundTickets = new RoundTripInfo<>(outList, inList);
-                        
+
                         //ATTENTION! THIS ATTRIBUTE MUST BE DELETED AFTER LOGOUT!
                         session.setAttribute("TicketsInfo", roundTickets);
-                        
+
                         json = "{\"response\":\"S~Tickets created successfully!\"}";
                         out.print(json);
                         break;
@@ -108,12 +110,60 @@ public class TicketsServlet extends HttpServlet {
                         session.removeAttribute("ReturnReservation");
                         break;
                     }
-                    
+
                 case "getConfirmedReservation":
-                    json = new Gson().toJson((RoundTripInfo<Ticket>) session.getAttribute("TicketsInfo"));
-                    out.print(json);
+                    if (session.getAttribute("OutboundReservation") != null) {
+                        json = new Gson().toJson((RoundTripInfo<Ticket>) session.getAttribute("TicketsInfo"));
+                        out.print(json);
+                    } else {
+                        response.sendRedirect("index.jsp");
+                    }
                     break;
-                    
+                case "addPassenger":
+                    String passport = request.getParameter("passport");
+                    String name = request.getParameter("name");
+                    String lastname = request.getParameter("lastname");
+                    RoundTripInfo<Ticket> roundTickets = (RoundTripInfo<Ticket>) session.getAttribute("TicketsInfo");
+                    Passenger passenger = null;
+
+                    if (session.getAttribute("OutboundReservation") != null) {
+                        LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                        if (outPassengerList == null) {
+                            outPassengerList = new LinkedList<>();
+                        }
+                        outboundTicket = roundTickets.getOutboundTripInfo().get(0);
+                        passenger = new PassengerBL().createPassenger(passport, name, lastname, outboundTicket);
+                        boolean isRepeated = checkIsRepeated(outPassengerList, passenger);
+                        if (isRepeated) {
+                            json = "{\"response\":\"E~Repeated Passenger!\"}";
+                            out.print(json);
+                            break;
+                        }
+                        outPassengerList.add(passenger);
+                        session.setAttribute("outPassengerList", outPassengerList);
+                        if (session.getAttribute("ReturnReservation") != null) {
+                            LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                            if (inPassengerList == null) {
+                                inPassengerList = new LinkedList<>();
+                            }
+                            returnTicket = roundTickets.getReturnTripInfo().get(0);
+                            passenger = new PassengerBL().createPassenger(passport, name, lastname, returnTicket);
+                            isRepeated = checkIsRepeated(inPassengerList, passenger);
+                            if (isRepeated) {
+                                json = "{\"response\":\"E~Repeated Passenger!\"}";
+                                out.print(json);
+                                break;
+                            }
+                            outPassengerList.add(passenger);
+                            session.setAttribute("inPassengerList", outPassengerList);
+                        }
+                        json = "{\"response\":\"E~Passenger Added!\"}";
+                        out.print(json);
+                        break;
+                    } else {
+                        response.sendRedirect("index.jsp");
+                    }
+
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
@@ -124,6 +174,10 @@ public class TicketsServlet extends HttpServlet {
         } catch (Exception e) {
             out.print("E~" + e.getMessage());
         }
+    }
+
+    private boolean checkIsRepeated(List<Passenger> list, Passenger pass) {
+        return list.stream().anyMatch(p -> p.getID().equals(pass.getID()));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

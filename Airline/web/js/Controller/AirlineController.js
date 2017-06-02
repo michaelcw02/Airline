@@ -222,8 +222,10 @@ AirlineController.prototype = {
     },
     getReservedFlights: function (callback) {
         Proxy.getReservedFlights( (reserveFlights) => {
-            Storage.store('TicketsInfo', reserveFlights);
-            callback(reserveFlights);
+            if(reserveFlights) {
+                Storage.store('TicketsInfo', reserveFlights);
+                callback(reserveFlights);
+            }
         } )
     }
 }
