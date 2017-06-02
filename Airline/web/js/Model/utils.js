@@ -14,11 +14,46 @@ function changeMessageModal(idDiv, title, message) {
 }
 
 function calculateArrivalDate(departureDate, departureTime, duration) {
-    return '! - ' + departureDate;
+    departureDate = new Date(departureDate);
+    days = calculateEstimated(departureTime, duration).split('~')[0];
+    departureDate.setDate(departureDate.getDate() + days);
+    return $.datepicker.formatDate('M dd, yy', departureDate);
 }
 
 function calculateArrivalTime(departureTime, duration) {
-    return '! - ' + departureTime;
+    return calculateTime(calculateEstimated(departureTime, duration).split('~')[1]);
+}
+
+function calculateEstimated(departureTime, duration) {
+    departureTime += '';
+    if(departureTime.length == 4) {
+        var min = departureTime.charAt(2) + departureTime.charAt(3);
+        var addedMin = parseInt(min) + parseInt(duration);
+        min = addedMin % 60;
+        var hour = departureTime.charAt(0) + departureTime.charAt(1);
+        var addedHours = parseInt(hour) + Math.floor(addedMin / 60);
+        hour = addedHours % 24;
+        var days = Math.floor(addedHours / 24);
+        return days + '~' + hour + min;
+    }
+    if(departureTime.length == 3) {
+        var min = departureTime.charAt(1) + departureTime.charAt(2);
+        var addedMin = parseInt(min) + parseInt(duration);
+        min = addedMin % 60;
+        var hour = departureTime.charAt(0);
+        var addedHours = parseInt(hour) + Math.floor(addedMin / 60);
+        hour = addedHours % 24;
+        var days = Math.floor(addedHours / 24);
+        return days + '~' + hour + min;
+    }
+    if(departureTime.length < 3 && departureTime.length > 0) {
+        var addedMin = parseInt(departureTime) + duration;
+        var min = addedMin % 60;
+        var addedHours = addedMin / 60;
+        var hour = addedHours % 24;
+        var days = Math.floor(addedHours / 24);
+        return days + '~' + hour + min;
+    }    
 }
 
 function calculatePrice(basePrice, discount) {
