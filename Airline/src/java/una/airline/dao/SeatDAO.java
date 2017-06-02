@@ -40,13 +40,25 @@ public class SeatDAO extends BaseDAO {
         }
     }
     
+    public LinkedList<Seat> getAllSeatsOfFlight(String flightNum) {
+        LinkedList<Seat> listaResultado = new LinkedList<>();
+        try {
+            String query = "SELECT * FROM Seat WHERE flight_num = '%s';";
+            query = String.format(query, flightNum);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listaResultado.add(seat(rs));
+            }
+        } catch (Exception e) {
+        }
+        return listaResultado;
+    }
     
 
     public LinkedList<Seat> getAllSeats() {
         LinkedList<Seat> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * FROM Seat;";
-            query = String.format(query);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
                 listaResultado.add(seat(rs));
