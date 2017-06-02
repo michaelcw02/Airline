@@ -39,7 +39,6 @@ public class SeatDAO extends BaseDAO {
             throw new Exception("E~City already exists.");
         }
     }
-    
     public LinkedList<Seat> getAllSeatsOfFlight(String flightNum) {
         LinkedList<Seat> listaResultado = new LinkedList<>();
         try {
@@ -52,7 +51,7 @@ public class SeatDAO extends BaseDAO {
         } catch (Exception e) {
         }
         return listaResultado;
-    }    
+    }
 
     public LinkedList<Seat> getAllSeats() {
         LinkedList<Seat> listaResultado = new LinkedList<>();
