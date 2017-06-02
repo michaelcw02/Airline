@@ -16,7 +16,7 @@ function changeMessageModal(idDiv, title, message) {
 function calculateArrivalDate(departureDate, departureTime, duration) {
     departureDate = new Date(departureDate);
     days = calculateEstimated(departureTime, duration).split('~')[0];
-    departureDate.setDate(departureDate.getDate() + days);
+    departureDate.setDate(departureDate.getDate() + parseInt(days));
     return $.datepicker.formatDate('M dd, yy', departureDate);
 }
 
@@ -69,8 +69,9 @@ function calculateTime(time) {
     if(time.length == 4) {
         var hour = time.charAt(0) + time.charAt(1);
         var mode = 'PM';
-        if(hour != 12)
-            hour -= 12;
+        if(hour < 12)   mode = 'AM'
+        if(hour > 12)   hour -= 12;
+        
         var min = time.charAt(2) + time.charAt(3);
     }
     if(time.length == 3) {
