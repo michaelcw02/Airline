@@ -349,7 +349,7 @@ Proxy.searchFlightByNum = (flightNum, callback) => {
 }
 Proxy.reserveFlight = (flightNum, mode, callback) => {
     $.ajax({
-        url: 'FlightsServlet',
+        url: 'TicketsServlet',
         data: {
             action: "reserveFlight",
             flightNum: flightNum,
@@ -644,11 +644,11 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         dataType: "json"
     });
 }
-Proxy.confirmReservation = (mode, numPassengers, callback) => {
+Proxy.confirmFlights = (mode, numPassengers, callback) => {
     $.ajax({
         url: 'TicketsServlet',
         data: {
-            action: "confirmReservation",
+            action: "confirmFlights",
             mode: mode,
             numPassengers: numPassengers
         },
@@ -752,7 +752,7 @@ Proxy.getReservedFlights = (callback) => {
 
 Proxy.addPassengerToTicket = (passenger, callback) => {
     $.ajax({
-        url: 'TicketsServlet',
+        url: 'ReserveServlet',
         data: {
             action: "addPassenger",
             passport: passenger.passport,

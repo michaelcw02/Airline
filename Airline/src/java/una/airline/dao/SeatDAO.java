@@ -29,7 +29,7 @@ public class SeatDAO extends BaseDAO {
             throw new Exception("E~Seat already exists.");
         }
     }
-    
+
     public void addSeatWithoutPassenger(Seat seat) throws Exception {
         String query = "INSERT INTO `airlinedb`.`seat` (`flight_num`, `seat_num`) VALUES ('%s', '%s');";
         query = String.format(query, seat.getFlight().getFlightNum(), seat.getId().getSeatNumber());
@@ -39,6 +39,7 @@ public class SeatDAO extends BaseDAO {
             throw new Exception("E~City already exists.");
         }
     }
+
     public LinkedList<Seat> getAllSeatsOfFlight(String flightNum) {
         LinkedList<Seat> listaResultado = new LinkedList<>();
         try {
@@ -83,14 +84,14 @@ public class SeatDAO extends BaseDAO {
         int result = connection.executeUpdate(query);
         return result;
     }
-    
+
     public void deleteSeat(Seat seat) throws Exception {
         String query = "DELETE FROM Seat WHERE flight_num = '%s' AND seat_num = '%s'";
         query = String.format(query, seat.getId().getFlightNum(), seat.getId().getSeatNumber());
         int result = connection.executeUpdate(query);
         if (result == 0) {
             throw new Exception("E~Seat does not exists");
-    }
+        }
     }
 
 }

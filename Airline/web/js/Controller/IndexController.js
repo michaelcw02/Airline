@@ -195,7 +195,7 @@ IndexController.prototype = {
                 this.view.addListenersButtons(idButton, (i + 1));
             }
     },
-    confirmReservation: function() {
+    confirmFlights: function() {
         let mode = $('#FlightMode').val();
         let outboundSelection = $('#OutboundSelection').val();
         let returnSelection;
@@ -203,7 +203,7 @@ IndexController.prototype = {
         if(mode == 'RoundTrip') {
             returnSelection = $('#ReturnSelection').val();
         }
-        this.airlineController.confirmReservation(mode, numPassengers, (response) => {
+        this.airlineController.confirmFlights(mode, numPassengers, (response) => {
             response = response.split('~');
             if(response[0] == 'S') {
                 //REDIRECTS TO TICKETS PAGE FOR FURTHER SETTINGS ON TICKETS AND PASSENGERS

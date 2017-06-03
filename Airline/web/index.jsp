@@ -160,7 +160,7 @@
 
                 <div class="container-fluid confirmation-div">
                     <div class="row text-center" id="confirmation">
-                        <button type="button" class="btn btn-success" id="confirmReservation">Confirm Reservation</button>
+                        <button type="button" class="btn btn-success" id="confirmFlights">Confirm Selected Flights</button>
                         <button type="button" class="btn btn-danger" id="cancelReservation">Cancel</button>
                     </div>
                 </div>

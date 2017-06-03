@@ -69,16 +69,6 @@ public class FlightsServlet extends HttpServlet {
                     out.print(json);
                     resetVariables();
                     break;
-                case "reserveFlight":
-                    flightNum = request.getParameter("flightNum");
-                    mode = request.getParameter("mode");    // Outbound || Return
-                    session.setAttribute(mode + "Reservation", flightNum);
-                    
-                    json = "{\"response\":\"S~" + mode + " Selected!\"}";
-                    out.print(json);
-
-                    resetVariables();
-                    break;
                 default:
                     out.print("{'response':'E~Did not receive any action'");
                     break;

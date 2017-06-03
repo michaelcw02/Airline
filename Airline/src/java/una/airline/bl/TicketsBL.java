@@ -43,14 +43,14 @@ public class TicketsBL {
         return null;
     }
 
-    public RoundTripInfo<Ticket> reserveTickets(String username, String outboundReservation, String returnReservation, int numPassengers) {
-        Ticket outboundTicket = this.ticketDAO.createTicket(username, outboundReservation, numPassengers);
+    public RoundTripInfo<Ticket> reserveTickets(String outboundReservation, String returnReservation, int numPassengers) {
+        Ticket outboundTicket = this.ticketDAO.createTicket(outboundReservation, numPassengers);
         Ticket returnTicket = null;
         List<Ticket> outList = new LinkedList<>();
         List<Ticket> inList = new LinkedList<>();
         outList.add(outboundTicket);
         if(returnReservation != null) {
-            returnTicket = this.ticketDAO.createTicket(username, returnReservation, numPassengers);
+            returnTicket = this.ticketDAO.createTicket(returnReservation, numPassengers);
             inList.add(returnTicket);
         } 
         RoundTripInfo<Ticket> roundTripTickets = new RoundTripInfo<>(outList, inList);

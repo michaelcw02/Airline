@@ -184,8 +184,8 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    confirmReservation: function (mode, numPassengers, callback) {
-        Proxy.confirmReservation(mode, numPassengers, (data) => {
+    confirmFlights: function (mode, numPassengers, callback) {
+        Proxy.confirmFlights(mode, numPassengers, (data) => {
             let response = data.response;
             callback(response);
         });

@@ -10,10 +10,10 @@ TicketsController.prototype = {
     loadFlightDetails: function () {
         this.airlineController.getReservedFlights( (reservedFlights) => {
             console.log(reservedFlights);
-            let outboundTicket = reservedFlights.outboundTripInfo[0];
+            let outboundTicket = reservedFlights.outboundTicket;
             showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
-            if(reservedFlights.returnTripInfo.length == 1) {
-                var returnTicket = reservedFlights.returnTripInfo[0];
+            if(reservedFlights.returnTicket) {
+                var returnTicket = reservedFlights.returnTicket;
                 showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
             }
             showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
@@ -61,6 +61,6 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
     }
         
     let element = '';
-    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> </h1></div>';
+    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> USD </h1></div>';
     $div.append($(element));
 }
