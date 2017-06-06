@@ -73,26 +73,29 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
 }
 
 function showPassengersInfo (outboundTicket) {
-//    new AirlineController().retrieveSearchFlights((results) => {
-//        if(flight !== undefined) {
             let element = '';
-            element += '<div class="container-fluid">';
-                element += '<div class="row content">';
-                    element += '<div class="col-sm-3 sidenav">';
-                        element += '<ul class="nav nav-pills nav-stacked">';
-                            for(var i=0; i < outboundTicket.numPassengers; i++){
+                    element += '<br>';
+                    element += '<div class="bs-example bs-example-tabs">';
+                        element += '<ul class="nav nav-tabs">';
+                            element += '<li class="active"><a href="#section1" id="passenger1" data-toggle="tab">Passenger 1</a></li>';    
+                            for(var i=1; i < outboundTicket.numPassengers; i++){
                                 var id = "#passenger"+(i+1);
-                                element += '<li><a href="#section'+ (i+1) +'")" id="passenger'+ (i+1) +'" onclick="active(this);">Passenger '+ (i+1) + '</a></li>';    
-                                $(this).on('click', (event) => {
-                                    $(this).addClass('active');
-                                })
+                                element += '<li><a href="#section'+ (i+1) +'" id="passenger'+ (i+1) +'" data-toggle="tab">Passenger '+ (i+1) + '</a></li>';    
                             }                
-                        element += '</ul><br>';
+                        element += '</ul>';
                     element += '</div>';
-                
+                    
+                    
                     //MOSTRAR FORM POR CADA PASAJERO, CORREGIR!!!
-                    //for(var i=0; i < outboundTicket.numPassengers; i++){  
-                        element += '<div class="col-sm-9 " id="section'+ (i+1) +'">';
+                    element += '<div class="modal-body">';
+                        element += '<div class="tab-content">';
+
+                        for(var i=0; i < outboundTicket.numPassengers; i++){  
+                            if(i==0)
+                                element += '<div class="tab-pane active in" id="section'+ (i+1) +'">';
+                            else
+                                element += '<div class="tab-pane fade in" id="section'+ (i+1) +'">';
+
                             element += '<form action="" method="POST" id="formPassenger'+ (i+1) +'">';
                                 element += '<br><div class="row">';
                                     element += '<div class="form-group text-center">';
@@ -112,26 +115,30 @@ function showPassengersInfo (outboundTicket) {
                                         element += '<div class="col-sm-4"><input type="text" id="lastname" class="form-control" placeholder="Doe"></div>';
                                     element += '</div>';
                                 element += '</div><br><br>';
-                            element += '</form>';
-                        element += '</div>';              
-                    //}
-                    
-                element += '</div>';
-            element += '</div>';
-            
-            element += '<form class="form" role="form" id="PassengersForm">';
-                element += '<div class="form-group text-center">';
-                    element += '<button type="button" class="btn btn-success" id="addPassenger">Add Passenger</button> ';
-                    element += ' <button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
-                element += '</div>';
+                                
+                                element += '<form class="form" role="form" id="PassengersForm">';
+                                    element += '<div class="form-group text-center">';
+                                        element += '<button type="button" class="btn btn-success" id="addPassenger">Add Passenger</button> ';
+                                        element += ' <button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
+                                    element += '</div>';
 
-                element += '<div class="form-group height25" >';
-                    element += '<div class="alert alert-success hiddenDiv" id="messageResult">';
-                        element += '<strong id="messageResultTitle">Info!... </strong>';
-                        element += '<span id="messageResultMessage">This alert box could indicate a neutral informative change or action.</span>';
-                    element += '</div>';
-                element += '</div>';
-            element += '</form>';
+                                    element += '<div class="form-group height25" >';
+                                        element += '<div class="alert alert-success hiddenDiv" id="messageResult">';
+                                            element += '<strong id="messageResultTitle">Info!... </strong>';
+                                            element += '<span id="messageResultMessage">This alert box could indicate a neutral informative change or action.</span>';
+                                        element += '</div>';
+                                    element += '</div>';
+                                element += '</form>';
+                            element += '</form>';
+                        element += '</div>'; 
+                        
+                        
+                    }
+                   element += '</div>';   
+                element += '</div>'; 
+    
+            
+            
             
             //modal settings
             showModal('passengersInfo', ' Passengers Information', element);
