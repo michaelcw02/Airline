@@ -5,6 +5,7 @@
  */
 package una.airline.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.LinkedList;
@@ -126,6 +127,31 @@ public class FlightDAO extends BaseDAO {
             return null;
         }
         return listFlights;
+    }
+    
+    public List<String> findAirplaneSeatsInfoByFlightNum(String flightNum) {
+        List<String> list = new LinkedList<>();
+        try {
+            String query = "SELECT qty_of_rows, seats_per_row "
+                    + "FROM airlinedb.TYPEAIRPLANE, airlinedb.AIRPLANE, airlinedb.FLIGHT "
+                    + "WHERE TYPEAIRPLANE.TYPE_AIRLINE = AIRPLANE.TYPE_AIRPLANE AND AIRPLANE.ID_AIRPLANE = FLIGHT.ID_AIRPLANE "
+                    + "AND FLIGHT.FLIGHT_NUM = ?;";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, flightNum);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) {
+                String rows =           rs.getString("qty_of_rows");
+                String seatsPerRow =    rs.getString("seats_per_row");
+                if(rows != null && seatsPerRow != null) {
+                    list.add(flightNum);
+                    list.add(rows);
+                    list.add(seatsPerRow);
+                }
+            }
+        } catch (Exception ex) {
+            return null;
+        }
+        return list;
     }
 
 }

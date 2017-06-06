@@ -6,6 +6,7 @@
 package una.airline.bl;
 
 import java.util.List;
+import java.util.Map;
 import una.airline.dao.SeatDAO;
 import una.airline.domain.Seat;
 import una.airline.domain.SeatID;
@@ -31,8 +32,8 @@ public class SeatsBL {
     public List<Seat> getAllSeats() {
         return this.seatDAO.getAllSeats();
     }
-    public List<Seat> getAllSeatsByFlight(String flightNum) {
-        return null;
+    public Map<String, Seat> getAllSeatsByFlight(String flightNum) {
+        return this.seatDAO.getAllSeatsOfFlight(flightNum);
     }
     public Seat getSeatByID(SeatID id) {
         try {

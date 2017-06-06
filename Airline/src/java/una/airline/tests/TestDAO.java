@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import una.airline.bl.*;
 import una.airline.dao.*;
 import una.airline.domain.*;
@@ -24,6 +25,10 @@ public class TestDAO {
     public static void main(String[] arg) throws Exception {
         
         FlightsBL flightBL = new FlightsBL();
+        List<String> result = flightBL.findAirplaneSeatsInfoByFlightNum("STEST");
+        System.out.println(result);
+        
+        
         Airplane airplane = new AirplaneBL().findAirplaneByID("ASA-054");
         Trip trip = new TripsBL().getTripByCode(18);
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
@@ -32,20 +37,6 @@ public class TestDAO {
         
         int lala = flightBL.addFlight(new Flight("STEST", airplane, trip, startDate, 80));
         System.out.println(lala);
-        
-        
-        SeatDAO seatDAO = new SeatDAO();
-        LinkedList<Seat> resulta = seatDAO.getAllSeats();
-        System.out.println(resulta);
-        
-        //TEST PASSED
-        TicketsBL ticketsBL = new TicketsBL();
-        RoundTripInfo<Ticket> result = ticketsBL.reserveTickets("michaelcw02", "ST003", null, 1);
-        System.out.println("doNE");
-        ticketsBL = new TicketsBL();
-        String json = new Gson().toJson(ticketsBL.reserveTickets("michaelcw02", "ST003", "ST007", 1));
-        System.out.println("doNE");
-        
         
         UserDAO userDAO = new UserDAO();
         User u = userDAO.validateUser("1", "1");

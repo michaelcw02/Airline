@@ -129,4 +129,7 @@ public class FlightsBL {
         return flightDAO.findByID(flightNum);
     }
 
+    public List<String> findAirplaneSeatsInfoByFlightNum(String flightNum) {
+        return flightDAO.findAirplaneSeatsInfoByFlightNum(flightNum);
+    }
 }

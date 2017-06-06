@@ -17,10 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
 import una.airline.bl.PassengerBL;
+import una.airline.bl.ReserveBL;
 import una.airline.bl.TicketsBL;
 import una.airline.bl.UserBL;
-import una.airline.dao.TicketDAO;
-import una.airline.domain.Flight;
 import una.airline.domain.Passenger;
 import una.airline.domain.Reserve;
 import una.airline.domain.RoundTripInfo;
@@ -31,7 +30,7 @@ import una.airline.domain.User;
  *
  * @author michaelcw02
  */
-public class TicketsServlet extends HttpServlet {
+public class ReserveServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,81 +48,57 @@ public class TicketsServlet extends HttpServlet {
             //String para guardar el JSON generaro por al libreria GSON
             String json;
 
-            TicketsBL ticketsBL = new TicketsBL();
+            ReserveBL reserveBL = new ReserveBL();
 
             HttpSession session = request.getSession();
 
             String action = request.getParameter("action");
             switch (action) {
-                case "reserveFlight":
-                    String flightNum = request.getParameter("flightNum");
-                    String mode = request.getParameter("mode");    // Outbound || Return
-                    session.setAttribute(mode + "Reservation", flightNum);
-                    json = "{\"response\":\"S~" + mode + " Selected!\"}";
-                    out.print(json);
-                    break;
-                case "confirmFlights":
-                    FlightsBL flightsBL = new FlightsBL();
+                case "addPassenger":
+                    String passport = request.getParameter("passport");
+                    String name = request.getParameter("name");
+                    String lastname = request.getParameter("lastname");
+                    Reserve reserve = (Reserve) session.getAttribute("Reservation");
+                    Passenger passenger = null;
 
-                    String username = (String) session.getAttribute("username");
-                    String status = (String) session.getAttribute("loginStatus");
-                    String outboundReservation = (String) session.getAttribute("OutboundReservation");
-                    String returnReservation = null;    //will be gotten later.
-
-                    mode = (String) request.getParameter("mode");
-                    int numPassengers = Integer.parseInt(request.getParameter("numPassengers"));
-
-                    User user = null;
-                    Ticket outboundTicket = null;
-                    Ticket returnTicket = null;
-
-                    json = "";
-
-                    if (username != null && status.equalsIgnoreCase("logged.")) {
-                        user = new UserBL().getUserByUsername(username);
-                        if (outboundReservation == null) {
-                            json = "{\"response\":\"E~1~Perhaps you forgot to select an outbound flight!\"}";
+                    if (session.getAttribute("OutboundReservation") != null) {
+                        LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                        if (outPassengerList == null) {
+                            outPassengerList = new LinkedList<>();
+                        }
+                        Ticket outboundTicket = reserve.getOutboundTicket();
+                        passenger = new PassengerBL().createPassenger(passport, name, lastname, outboundTicket);
+                        boolean isRepeated = checkIsRepeated(outPassengerList, passenger);
+                        if (isRepeated) {
+                            json = "{\"response\":\"E~Repeated Passenger!\"}";
                             out.print(json);
                             break;
                         }
-                        //SUCCESS FOR ONE WAY
-                        outboundTicket = new Ticket(flightsBL.searchFlightByNum(outboundReservation), numPassengers);
-                        
-                        if (mode.equalsIgnoreCase("RoundTrip")) {
-                            returnReservation = (String) session.getAttribute("ReturnReservation");
-                            if (returnReservation == null) {
-                                json = "{\"response\":\"E~1~Perhaps you forgot to select a return flight!\"}";
+                        outPassengerList.add(passenger);
+                        session.setAttribute("outPassengerList", outPassengerList);
+                        if (session.getAttribute("ReturnReservation") != null) {
+                            LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                            if (inPassengerList == null) {
+                                inPassengerList = new LinkedList<>();
+                            }
+                            Ticket returnTicket = reserve.getReturnTicket();
+                            passenger = new PassengerBL().createPassenger(passport, name, lastname, returnTicket);
+                            isRepeated = checkIsRepeated(inPassengerList, passenger);
+                            if (isRepeated) {
+                                json = "{\"response\":\"E~Repeated Passenger!\"}";
                                 out.print(json);
                                 break;
                             }
-                            //SUCCESS FOR ROUND TRIPS
-                            returnTicket = new Ticket(flightsBL.searchFlightByNum(returnReservation), numPassengers);
-                            
+                            outPassengerList.add(passenger);
+                            session.setAttribute("inPassengerList", outPassengerList);
                         }
-                        Reserve reserve = new Reserve (outboundTicket, returnTicket, user);
-
-                        //ATTENTION! THIS ATTRIBUTE MUST BE DELETED AFTER LOGOUT!
-                        session.setAttribute("Reservation", reserve);
-
-                        json = "{\"response\":\"S~Tickets created successfully!\"}";
+                        json = "{\"response\":\"E~Passenger Added!\"}";
                         out.print(json);
                         break;
-                    } else {
-                        json = "{\"response\":\"E~2~Hey! you are not logged in, do it first before buying!\"}";
-                        out.print(json);
-                        session.removeAttribute("OutboundReservation");
-                        session.removeAttribute("ReturnReservation");
-                        break;
-                    }
-
-                case "getConfirmedReservation":
-                    if (session.getAttribute("OutboundReservation") != null) {
-                        json = new Gson().toJson((Reserve) session.getAttribute("Reservation"));
-                        out.print(json);
                     } else {
                         response.sendRedirect("index.jsp");
                     }
-                    break;
+
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
@@ -134,9 +109,14 @@ public class TicketsServlet extends HttpServlet {
         } catch (Exception e) {
             out.print("E~" + e.getMessage());
         }
+
     }
-    
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
+    private boolean checkIsRepeated(List<Passenger> list, Passenger pass) {
+        return list.stream().anyMatch(p -> p.getID().equals(pass.getID()));
+    }
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

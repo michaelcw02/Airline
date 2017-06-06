@@ -7,16 +7,15 @@ function loadPage() {
 }
 
 function addElementsProperties() {
+    $('#seatBooking').modal();
     //BASIC ELEMENTS
+    $('#addPassengers').click( () => new TicketsController().addPassengers() );
+    $('#cancelReservation').click( () => new TicketsController().cancelReservation() );
 }
 
 function addListenersButtons(idButton, num) {
     $(idButton).click(() => this.controller.pageButtonsHandler(num));
 }
 
-function searchFlights() {
-    //THIS IS WHERE IT HAS TO GET THE FLIGHTS
-    this.controller.searchFlights();
-}
 
 $(loadPage);

@@ -9,8 +9,13 @@
 <!DOCTYPE html>
 
 <%
-
-    session = request.getSession(true);
+    session = request.getSession();
+    if (session == null) {
+        session = request.getSession(true);
+        session.setAttribute("loginStatus", "Not a User");
+        session.removeAttribute("OutboundReservation");
+        session.removeAttribute("ReturnReservation");
+    }
 %>
 
 <html>

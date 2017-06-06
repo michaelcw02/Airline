@@ -82,10 +82,10 @@
                                 <label for="departureTime">Departure Time (24h ex: 23:30 is equivalent to 11:30 PM): </label>
                                 <div class="form-group row">
                                     <div class="col-xs-6">
-                                        <input type="number" class="form-control" id="hoursDT" placeholder="hours">
+                                        <input type="number" class="form-control" id="hoursDT" placeholder="hours" min="0" max="23">
                                     </div>
                                     <div class="col-xs-6">
-                                        <input type="number" class="form-control" id="minutesDT" placeholder="minutes">
+                                        <input type="number" class="form-control" id="minutesDT" placeholder="minutes" min="0" max="59">
                                     </div>
                                 </div>
                             </div>

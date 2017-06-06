@@ -84,11 +84,15 @@ html {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         margin-top: 7px;
     }
-
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {
+        height: auto;
+    } 
 
 }
-
-
 
 input {
     position: relative;
@@ -344,7 +348,8 @@ article hr {
 
 .outbound-flights-div,
 .return-flights-div,
-.confirmation-div {
+.confirmation-div,
+.passengers-div{
     display: none;
 }
 
@@ -354,7 +359,8 @@ article hr {
 #myModal,
 #myModalCity,
 #modalAirplane,
-#myModalUser{
+#myModalUser,
+#passengersInfo{
     z-index: 6000 !important;
 }
 
@@ -380,4 +386,12 @@ article hr {
 }
 .ui-datepicker {
     z-index: 7000 !important;
+}
+
+#seatBooking {
+    z-index: 10000 !important;
+}
+.sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
 }

@@ -6,7 +6,9 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import una.airline.domain.Seat;
 import una.airline.domain.SeatID;
 
@@ -29,7 +31,7 @@ public class SeatDAO extends BaseDAO {
             throw new Exception("E~Seat already exists.");
         }
     }
-    
+
     public void addSeatWithoutPassenger(Seat seat) throws Exception {
         String query = "INSERT INTO `airlinedb`.`seat` (`flight_num`, `seat_num`) VALUES ('%s', '%s');";
         query = String.format(query, seat.getFlight().getFlightNum(), seat.getId().getSeatNumber());
@@ -39,14 +41,26 @@ public class SeatDAO extends BaseDAO {
             throw new Exception("E~City already exists.");
         }
     }
-    
-    
+
+    public Map<String, Seat> getAllSeatsOfFlight(String flightNum) {
+        Map<String, Seat> map = new HashMap<String, Seat>();
+        try {
+            String query = "SELECT * FROM Seat WHERE flight_num = '%s';";
+            query = String.format(query, flightNum);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                Seat s = seat(rs);
+                map.put(s.getId().getSeatNumber(), s);
+            }
+        } catch (Exception e) {
+        }
+        return map;
+    }
 
     public LinkedList<Seat> getAllSeats() {
         LinkedList<Seat> listaResultado = new LinkedList<>();
         try {
             String query = "SELECT * FROM Seat;";
-            query = String.format(query);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
                 listaResultado.add(seat(rs));
@@ -73,14 +87,14 @@ public class SeatDAO extends BaseDAO {
         int result = connection.executeUpdate(query);
         return result;
     }
-    
+
     public void deleteSeat(Seat seat) throws Exception {
         String query = "DELETE FROM Seat WHERE flight_num = '%s' AND seat_num = '%s'";
         query = String.format(query, seat.getId().getFlightNum(), seat.getId().getSeatNumber());
         int result = connection.executeUpdate(query);
         if (result == 0) {
             throw new Exception("E~Seat does not exists");
-    }
+        }
     }
 
 }

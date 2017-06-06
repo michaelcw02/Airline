@@ -6,9 +6,12 @@
 package una.airline.bl;
 
 import java.util.List;
+import una.airline.dao.FlightDAO;
 import una.airline.dao.PassengerDAO;
+import una.airline.domain.Flight;
 import una.airline.domain.Passenger;
 import una.airline.domain.PassengerID;
+import una.airline.domain.Ticket;
 
 /**
  *
@@ -41,6 +44,12 @@ public class PassengerBL {
         } catch(Exception ex) {
         }
         return null;
-    } 
+    }
+    
+    public Passenger createPassenger (String passport, String name, String lastname, Ticket ticket) {
+        PassengerID passengerID = new PassengerID(passport, ticket.getNumber());
+        Passenger passenger = new Passenger(passengerID, ticket, name, lastname, null);
+        return passenger;
+    }
     
 }

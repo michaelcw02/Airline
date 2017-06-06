@@ -7,6 +7,7 @@ package una.airline.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -102,12 +103,16 @@ public final class Database {
         }
         return null;
     }
+    
+    public PreparedStatement prepareStatement(String query) throws SQLException {
+        return cnx.prepareStatement(query);
+    }
 
     private static final String MANEJADOR_DB = "com.mysql.jdbc.Driver";
     private static final String PROTOCOLO = "jdbc:mysql:";
     private static final String SERVIDOR = "localhost";
     private static final String PUERTO = "3306";
     private static final String USUARIO = "root";
-    private static final String CLAVE = "root";
+    private static final String CLAVE = "1234";
     private static final String BASEDATOS = "airlinedb";
 }

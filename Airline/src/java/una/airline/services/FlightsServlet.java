@@ -77,44 +77,14 @@ public class FlightsServlet extends HttpServlet {
                     break;
                 case "reserveFlight":
                     flightNum = request.getParameter("flightNum");
-                    mode = request.getParameter("mode");
-                    //Outbound
-                    //Return
+                    mode = request.getParameter("mode");    // Outbound || Return
                     session.setAttribute(mode + "Reservation", flightNum);
-
+                    
                     json = "{\"response\":\"S~" + mode + " Selected!\"}";
                     out.print(json);
 
                     resetVariables();
                     break;
-                case "addFlights":
-                   /* Flight flight = new Flight();
-                    String num = request.getParameter("flightNum");
-                    int tripCode = Integer.parseInt(request.getParameter("idTrip"));
-                    String airpID = request.getParameter("idAirplane");
-                    Date date = new Date(request.getParameter("date"));
-                    int availableSeats = 0;
-                    Trip trip = null;
-                    Airplane airplane = null;
-                    try {
-                        TripsBL tripBL = new TripsBL();
-                        trip = tripBL.getTripByCode(tripCode);
-                    } catch (Exception e) {
-                        out.print("{\"data\":\"E~The trip are not valid!\"}");
-                    }
-                    try {
-                        AirplaneBL airplaneBL = new AirplaneBL();
-                        airplane = airplaneBL.findAirplaneByID(airpID);
-                        TypeAirplane typeAirplane = airplane.getTypeAirplane();
-                        availableSeats = typeAirplane.getQtyOfSeats();
-                    } catch (Exception e) {
-                        out.print("{\"data\":\"E~The airplane are not valid!\"}");
-                    }
-                    flight = new Flight(num, airplane, trip, date, availableSeats);
-                    json = new Gson().toJson(flightsBL.addFlight(flight));
-                    out.print(json);
-                    //out.print("{\"data\":\"C~La ruta fue ingresada correctamente\"}");
-                    break;*/
                 case "generateFlights":
                     long[] dates = new Gson().fromJson(request.getParameter("dates"),long[].class);
                     String num = request.getParameter("flightNum");
@@ -123,6 +93,10 @@ public class FlightsServlet extends HttpServlet {
                     flightsBL.generateFlights(dates,num,tripCode,airpID);
                     out.print("{\"data\":\"C~El vuelo fue ingresado correctamente\"}");
                     break;
+                  /*
+                    json = new Gson().toJson(flightsBL.findAirplaneSeatsInfoByFlightNum(flightNum));
+                    out.print(json);
+                  */
                 default:
                     out.print("{'response':'E~Did not receive any action'");
                     break;
