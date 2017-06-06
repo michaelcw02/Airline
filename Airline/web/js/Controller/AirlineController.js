@@ -227,5 +227,12 @@ AirlineController.prototype = {
                 callback(reserveFlights);
             }
         } )
-    }
+    },
+    getFlightSeatsInfo: function (flightNum, callback) {
+        Proxy.getFlightSeatsInfo( flightNum, (data) => {
+            if(data.length > 0) {
+                callback(data);
+            }
+        } );
+    }, 
 }
