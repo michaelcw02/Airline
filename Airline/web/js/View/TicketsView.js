@@ -7,7 +7,7 @@ function loadPage() {
 }
 
 function addElementsProperties() {
-    //BASIC ELEMENTS
+    $('#seatBooking').modal();
 }
 
 function addListenersButtons(idButton, num) {

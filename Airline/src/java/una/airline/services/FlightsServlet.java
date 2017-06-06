@@ -69,6 +69,10 @@ public class FlightsServlet extends HttpServlet {
                     out.print(json);
                     resetVariables();
                     break;
+                case "getAirplaneSeatsInfo":
+                    flightNum = request.getParameter("flightNum");
+                    json = new Gson().toJson(flightsBL.findAirplaneSeatsInfoByFlightNum(flightNum));
+                    out.print(json);
                 default:
                     out.print("{'response':'E~Did not receive any action'");
                     break;

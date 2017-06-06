@@ -6,9 +6,12 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import una.airline.domain.User;
 
 /**
@@ -80,14 +83,18 @@ public class UserDAO extends BaseDAO {
         }
     }
     
-    public User validateUser(String username, String password) throws Exception {
-        String query = "SELECT * FROM user WHERE username = '%s' AND password = '%s';";
-        query = String.format(query, username, password);
-        ResultSet rs = connection.executeQuery(query);
-        if(rs.next()) {
-            return user(rs);
-        } else {
-            throw new Exception("E~User does not exists");
+    public User validateUser(String username, String password) {
+        try {
+            String query = "SELECT * FROM user WHERE username = '%s' AND password = '%s';";
+            query = String.format(query, username, password);
+            ResultSet rs = connection.executeQuery(query);         
+            if(rs.next()) {
+                return user(rs);
+            } else {
+                return null;
+            }
+        } catch (Exception ex) {
+            return null;
         }
     }
 

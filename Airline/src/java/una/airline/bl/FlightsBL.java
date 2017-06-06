@@ -109,5 +109,8 @@ public class FlightsBL {
     public Flight searchFlightByNum (String flightNum) {
         return flightDAO.findByID(flightNum);
     }
+    public List<String> findAirplaneSeatsInfoByFlightNum(String flightNum) {
+        return flightDAO.findAirplaneSeatsInfoByFlightNum(flightNum);
+    }
     
 }

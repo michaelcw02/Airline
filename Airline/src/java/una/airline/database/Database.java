@@ -7,6 +7,7 @@ package una.airline.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -101,6 +102,10 @@ public final class Database {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public PreparedStatement prepareStatement(String query) throws SQLException {
+        return cnx.prepareStatement(query);
     }
 
     private static final String MANEJADOR_DB = "com.mysql.jdbc.Driver";
