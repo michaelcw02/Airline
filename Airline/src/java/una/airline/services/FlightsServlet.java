@@ -8,13 +8,19 @@ package una.airline.services;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import una.airline.bl.AirplaneBL;
 import una.airline.bl.FlightsBL;
+import una.airline.bl.TripsBL;
+import una.airline.domain.Airplane;
 import una.airline.domain.Flight;
+import una.airline.domain.Trip;
+import una.airline.domain.TypeAirplane;
 
 /**
  *
@@ -54,11 +60,11 @@ public class FlightsServlet extends HttpServlet {
                     departDate = request.getParameter("departDate");
                     returnDate = request.getParameter("returnDate");
                     String mode = "OneWayReservation";
-                    if(returnDate != null) {
+                    if (returnDate != null) {
                         mode = "RoundTripReservation";
                     }
                     session.setAttribute("ReservationMode", mode);
-                    
+
                     json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate));
                     out.print(json);
 
@@ -75,11 +81,47 @@ public class FlightsServlet extends HttpServlet {
                     //Outbound
                     //Return
                     session.setAttribute(mode + "Reservation", flightNum);
-                    
+
                     json = "{\"response\":\"S~" + mode + " Selected!\"}";
                     out.print(json);
 
                     resetVariables();
+                    break;
+                case "addFlights":
+                   /* Flight flight = new Flight();
+                    String num = request.getParameter("flightNum");
+                    int tripCode = Integer.parseInt(request.getParameter("idTrip"));
+                    String airpID = request.getParameter("idAirplane");
+                    Date date = new Date(request.getParameter("date"));
+                    int availableSeats = 0;
+                    Trip trip = null;
+                    Airplane airplane = null;
+                    try {
+                        TripsBL tripBL = new TripsBL();
+                        trip = tripBL.getTripByCode(tripCode);
+                    } catch (Exception e) {
+                        out.print("{\"data\":\"E~The trip are not valid!\"}");
+                    }
+                    try {
+                        AirplaneBL airplaneBL = new AirplaneBL();
+                        airplane = airplaneBL.findAirplaneByID(airpID);
+                        TypeAirplane typeAirplane = airplane.getTypeAirplane();
+                        availableSeats = typeAirplane.getQtyOfSeats();
+                    } catch (Exception e) {
+                        out.print("{\"data\":\"E~The airplane are not valid!\"}");
+                    }
+                    flight = new Flight(num, airplane, trip, date, availableSeats);
+                    json = new Gson().toJson(flightsBL.addFlight(flight));
+                    out.print(json);
+                    //out.print("{\"data\":\"C~La ruta fue ingresada correctamente\"}");
+                    break;*/
+                case "generateFlights":
+                    long[] dates = new Gson().fromJson(request.getParameter("dates"),long[].class);
+                    String num = request.getParameter("flightNum");
+                    int tripCode = Integer.parseInt(request.getParameter("idTrip"));
+                    String airpID = request.getParameter("codeAirplane");
+                    flightsBL.generateFlights(dates,num,tripCode,airpID);
+                    out.print("{\"data\":\"C~El vuelo fue ingresado correctamente\"}");
                     break;
                 default:
                     out.print("{'response':'E~Did not receive any action'");

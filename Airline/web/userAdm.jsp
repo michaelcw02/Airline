@@ -47,27 +47,27 @@
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control"  autofocus="true" id="name" placeholder="Name" required="true">
                             </div>
-                            
+
                             <div class="form-group" id="groupFirstLasname">
                                 <label for="firstlastname">First Lastname</label>
                                 <input type="text" class="form-control" id="firstlastname" placeholder="Lastname" required="true">
                             </div>
-                            
+
                             <div class="form-group" id="groupSecondLasname">
                                 <label for="secondlastname">Second Lastname</label>
                                 <input type="text" class="form-control" id="secondlastname" placeholder="Lastname" required="true">
                             </div>
-                            
+
                             <div class="form-group" id="groupBirthdate">
                                 <label for="birthdate">Birthdate</label>
                                 <input type="text" class="form-control" id="birthdate" placeholder="Birthdate" required="true">
                             </div>
-                            
+
                             <div class="form-group" id="groupEmail">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Email" required="true" >
                             </div>
-                            
+
                             <div class="form-group" id="groupUsername">
                                 <label for="user">Username</label>
                                 <input type="text" class="form-control" id="user" placeholder="Username" required="true">
@@ -77,22 +77,22 @@
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="pass" required="true" >
                             </div>
-                            
+
                             <div class="form-group" id="groupRepeatPassword">
                                 <label for="password">Repeat Password</label>
                                 <input type="password" class="form-control" id="passwordRepeat" required="true" >
                             </div>
-                            
+
                             <div class="form-group" id="groupTelephone">
                                 <label for="telephone">Telephone</label>
                                 <input type="text" class="form-control" id="telephone" placeholder="8888-8888" required="true">
                             </div>
-                            
+
                             <div class="form-group" id="groupCellphone">
                                 <label for="cellphone">Cellphone</label>
                                 <input type="text" class="form-control" id="cellphone" placeholder="8888-8888" required="true">
                             </div>
-                            
+
                             <div class="form-group" id="groupDirection">
                                 <label for="direction">Direction</label>
                                 <textarea class="form-control" id="direction" required="true"></textarea>
@@ -156,7 +156,7 @@
         <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        
+
         <script src="js/Model/Proxy.js" type="text/javascript"></script>
         <script src="js/Model/utils.js" type="text/javascript"></script>
         <!-- CONTROLLER -->

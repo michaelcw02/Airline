@@ -225,5 +225,14 @@ AirlineController.prototype = {
             Storage.store('TicketsInfo', reserveFlights);
             callback(reserveFlights);
         } )
-    }
+    },
+    addFlight: function(flightNum,idTrip,idAirplane,date,callback){
+        Proxy.addFlight(flightNum,idTrip,idAirplane,date,(data)=>{
+           callback(data); 
+        });
+    },
+    generateFlights: function(dates, flightNum1, idTrip, codeAirplane){
+      Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane);  
+    },
+    
 }
