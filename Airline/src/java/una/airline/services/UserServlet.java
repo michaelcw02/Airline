@@ -119,7 +119,7 @@ public class UserServlet extends HttpServlet {
                 case "userLogout":
                     //DELETE ALL EXISTING ATTRIBUTES 
                     session.removeAttribute("user");
-                    session.removeAttribute("TicketsInfo");
+                    session.removeAttribute("Reservation");
                     session.setAttribute("loginStatus", "Not logged.");                    
                     session.invalidate();
                     break;

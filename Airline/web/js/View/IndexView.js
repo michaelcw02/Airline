@@ -39,7 +39,7 @@ function addElementsProperties() {
 
     $('#searchFlights').submit( () => controller.validateSearch() );
 
-    $('#confirmReservation').click( () => controller.confirmReservation() );
+    $('#confirmFlights').click( () => controller.confirmFlights() );
     $('#cancelReservation').click( () => controller.cancelReservation() );
 }
 

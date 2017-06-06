@@ -14,11 +14,46 @@ function changeMessageModal(idDiv, title, message) {
 }
 
 function calculateArrivalDate(departureDate, departureTime, duration) {
-    return '! - ' + departureDate;
+    departureDate = new Date(departureDate);
+    days = calculateEstimated(departureTime, duration).split('~')[0];
+    departureDate.setDate(departureDate.getDate() + parseInt(days));
+    return $.datepicker.formatDate('M dd, yy', departureDate);
 }
 
 function calculateArrivalTime(departureTime, duration) {
-    return '! - ' + departureTime;
+    return calculateTime(calculateEstimated(departureTime, duration).split('~')[1]);
+}
+
+function calculateEstimated(departureTime, duration) {
+    departureTime += '';
+    if (departureTime.length == 4) {
+        var min = departureTime.charAt(2) + departureTime.charAt(3);
+        var addedMin = parseInt(min) + parseInt(duration);
+        min = addedMin % 60;
+        var hour = departureTime.charAt(0) + departureTime.charAt(1);
+        var addedHours = parseInt(hour) + Math.floor(addedMin / 60);
+        hour = addedHours % 24;
+        var days = Math.floor(addedHours / 24);
+        return days + '~' + hour + min;
+    }
+    if (departureTime.length == 3) {
+        var min = departureTime.charAt(1) + departureTime.charAt(2);
+        var addedMin = parseInt(min) + parseInt(duration);
+        min = addedMin % 60;
+        var hour = departureTime.charAt(0);
+        var addedHours = parseInt(hour) + Math.floor(addedMin / 60);
+        hour = addedHours % 24;
+        var days = Math.floor(addedHours / 24);
+        return days + '~' + hour + min;
+    }
+    if (departureTime.length < 3 && departureTime.length > 0) {
+        var addedMin = parseInt(departureTime) + duration;
+        var min = addedMin % 60;
+        var addedHours = addedMin / 60;
+        var hour = addedHours % 24;
+        var days = Math.floor(addedHours / 24);
+        return days + '~' + hour + min;
+    }
 }
 
 function calculatePrice(basePrice, discount) {
@@ -31,24 +66,25 @@ function calculatePriceWithPassengers(basePrice, discount, passengers) {
 
 function calculateTime(time) {
     time += '';
-    if(time.length == 4) {
+    if (time.length == 4) {
         var hour = time.charAt(0) + time.charAt(1);
         var mode = 'PM';
-        if(hour != 12)
-            hour -= 12;
+        if (hour < 12)  mode = 'AM'
+        if (hour > 12)  hour -= 12;
+
         var min = time.charAt(2) + time.charAt(3);
     }
-    if(time.length == 3) {
+    if (time.length == 3) {
         hour = time.charAt(0);
         min = time.charAt(1) + time.charAt(2);
         mode = 'AM';
     }
-    if(time.length < 3 && time.length > 0) {
+    if (time.length < 3 && time.length > 0) {
         hour = 12;
         min = time;
         mode = 'AM';
     }
-    if(min >= 60) {
+    if (min >= 60) {
         hour = parseInt(hour) + Math.floor(min / 60);
         min = min % 60;
     }
@@ -69,8 +105,4 @@ function showMessage(idDiv, title, message, type) {
         $("#" + idDiv).addClass("alert-" + type);
     }
     $("#" + idDiv).show();
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }

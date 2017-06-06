@@ -148,18 +148,15 @@ public class BaseDAO {
     protected Ticket ticket(ResultSet rs) throws Exception {
         try {
             int number = rs.getInt("number");
-            String username = rs.getString("username");
             String flightNum = rs.getString("flight_num");
             int numPassengers = rs.getInt("number_passengers");
-            User user = null;
             Flight flight = null;
             try {
-                user = (User) new UserDAO().getUserByUsername(username);
                 flight = (Flight) new FlightDAO().findByID(flightNum);
             } catch (Exception e) {
                 throw new Exception("E~There was an issue with User or Flight of Ticket", e);
             }
-            return new Ticket(number, flight, user, numPassengers);
+            return new Ticket(number, flight, numPassengers);
         } catch (SQLException e) {
             return null;
         }
@@ -208,6 +205,32 @@ public class BaseDAO {
                 throw new Exception ("E~Passenger does not exists");
             }
             return new Seat(seatID, flight, passenger);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    protected Reserve reserve (ResultSet rs) throws Exception {
+        try {
+            int number = rs.getInt("number");
+            int outboundTktNumber = rs.getInt("outboundTicket");
+            int returnTktNumber = rs.getInt("returnTicket");
+            String username = rs.getString("username");
+            Date reserveDate = rs.getDate("date");
+            double price = rs.getDouble("price");
+            
+            Ticket outboundTicket = null;
+            Ticket returnTicket   = null;
+            User   user           = null;
+            try {
+                TicketDAO ticketDAO = new TicketDAO();
+                outboundTicket = ticketDAO.findByID(outboundTktNumber);
+                returnTicket   = ticketDAO.findByID(returnTktNumber);
+                user           = new UserDAO().getUserByUsername(username);
+            } catch (Exception ex) {
+                throw new Exception ("E~Reserve does not exists");
+            }
+            return new Reserve(number, outboundTicket, returnTicket, user, reserveDate, price);
         } catch (SQLException e) {
             return null;
         }

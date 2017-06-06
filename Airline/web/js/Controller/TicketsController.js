@@ -9,10 +9,15 @@ TicketsController.prototype = {
     },
     loadFlightDetails: function () {
         this.airlineController.getReservedFlights( (reservedFlights) => {
+<<<<<<< HEAD
             let outboundTicket = reservedFlights.outboundTripInfo[0];
+=======
+            console.log(reservedFlights);
+            let outboundTicket = reservedFlights.outboundTicket;
+>>>>>>> 37f6aadaed3a0c6045dafcedb44843d62536008d
             showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
-            if(reservedFlights.returnTripInfo.length == 1) {
-                var returnTicket = reservedFlights.returnTripInfo[0];
+            if(reservedFlights.returnTicket) {
+                var returnTicket = reservedFlights.returnTicket;
                 showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
             }
             showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
@@ -44,6 +49,7 @@ function showDetail($div, ticket, mode) {
     element += '<div class="row">';
     element += '<h4 class="col-md-offset-2 col-md-4">Date of arrival: <strong>' + calculateArrivalDate(flight.departureDate, flight.trip.departureTime, flight.trip.duration) + '</strong> </h4><h4 class="col-md-4"> Arrival Time: <strong>' + calculateArrivalTime(flight.trip.departureTime, flight.trip.duration) + '</strong></h4>';
     element += '</div>'; 
+    element += '<div class="row"> <h4 class="col-md-offset-4 col-md-4">Duration: <strong>' + calculateDuration(flight.trip.duration) + '</strong></h4></div>'
     element += '<hr>';
     element += '<div class="row">';
     element += '<h4 class="col-md-offset-2 col-md-4"><strong> Base Price: </strong> ' + flight.trip.cost + ' USD</h4><h4 class="col-md-4"><strong> Discount: </strong> ' + flight.trip.discount + ' %</h4>';
@@ -67,7 +73,7 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
         price2 = 0;
     }    
     let element = '';
-    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> </h1></div>';
+    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> USD </h1></div>';
     $div.append($(element));
 }
 

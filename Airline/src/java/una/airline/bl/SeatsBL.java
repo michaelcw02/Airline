@@ -32,7 +32,7 @@ public class SeatsBL {
         return this.seatDAO.getAllSeats();
     }
     public List<Seat> getAllSeatsByFlight(String flightNum) {
-        return null;
+        return this.seatDAO.getAllSeatsOfFlight(flightNum);
     }
     public Seat getSeatByID(SeatID id) {
         try {

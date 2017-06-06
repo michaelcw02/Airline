@@ -33,20 +33,6 @@ public class TestDAO {
         int lala = flightBL.addFlight(new Flight("STEST", airplane, trip, startDate, 80));
         System.out.println(lala);
         
-        
-        SeatDAO seatDAO = new SeatDAO();
-        LinkedList<Seat> resulta = seatDAO.getAllSeats();
-        System.out.println(resulta);
-        
-        //TEST PASSED
-        TicketsBL ticketsBL = new TicketsBL();
-        RoundTripInfo<Ticket> result = ticketsBL.reserveTickets("michaelcw02", "ST003", null, 1);
-        System.out.println("doNE");
-        ticketsBL = new TicketsBL();
-        String json = new Gson().toJson(ticketsBL.reserveTickets("michaelcw02", "ST003", "ST007", 1));
-        System.out.println("doNE");
-        
-        
         UserDAO userDAO = new UserDAO();
         User u = userDAO.validateUser("1", "1");
         System.out.println(u.getUsername());

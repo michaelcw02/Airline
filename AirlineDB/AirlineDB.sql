@@ -147,17 +147,10 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `airlinedb`.`ticket` (
   `number` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(20) NOT NULL,
   `flight_num` VARCHAR(10) NOT NULL,
   `number_passengers` INT NOT NULL,
   PRIMARY KEY (`number`),
-  INDEX `id_user_idx` (`username` ASC),
   INDEX `flight_num_idx` (`flight_num` ASC),
-  CONSTRAINT `fk_ticket1`
-    FOREIGN KEY (`username`)
-    REFERENCES `airlinedb`.`user` (`username`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_ticket2`
     FOREIGN KEY (`flight_num`)
     REFERENCES `airlinedb`.`flight` (`flight_num`)
@@ -165,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`ticket` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 
 -- -----------------------------------------------------
@@ -215,6 +209,39 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`seat` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `airlinedb`.`reserve`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `airlinedb`.`reserve` (
+  `number` INT NOT NULL,
+  `outboundTicket` INT NOT NULL,
+  `returnTicket` INT NULL,
+  `username` VARCHAR(20) NOT NULL,
+  `date` DATE NOT NULL,
+  `price` FLOAT NOT NULL,
+  PRIMARY KEY (`number`),
+  INDEX `fk_reserve_1_idx` (`username` ASC),
+  INDEX `fk_reserve_2_idx` (`outboundTicket` ASC),
+  INDEX `fk_reserve_3_idx` (`returnTicket` ASC),
+  CONSTRAINT `fk_reserve_1`
+    FOREIGN KEY (`username`)
+    REFERENCES `airlinedb`.`user` (`username`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reserve_2`
+    FOREIGN KEY (`outboundTicket`)
+    REFERENCES `airlinedb`.`ticket` (`number`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reserve_3`
+    FOREIGN KEY (`returnTicket`)
+    REFERENCES `airlinedb`.`ticket` (`number`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -16,9 +16,8 @@ import una.airline.domain.Ticket;
 public class TicketDAO extends BaseDAO {
 
     public void addTicket(Ticket ticket) throws Exception {
-        String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`, `number_passengers`) VALUES ('%s', '%s', '%d');";
-        query = String.format(query, ticket.getUser().getUsername(),
-                ticket.getFlight().getFlightNum(),
+        String query = "INSERT INTO `airlinedb`.`ticket` (`flight_num`, `number_passengers`) VALUES ('%s', '%d');";
+        query = String.format(query, ticket.getFlight().getFlightNum(),
                 ticket.getNumPassengers()
         );
         System.out.println(query);
@@ -28,9 +27,9 @@ public class TicketDAO extends BaseDAO {
         }
     }
     
-    public int addTicket(String username, String flightNum, int numPassengers) {
-        String query = "INSERT INTO `airlinedb`.`ticket` (`username`, `flight_num`, `number_passengers`) VALUES ('%s', '%s', '%d');";
-        query = String.format(query, username, flightNum, numPassengers);
+    public int addTicket(String flightNum, int numPassengers) {
+        String query = "INSERT INTO `airlinedb`.`ticket` (`flight_num`, `number_passengers`) VALUES ('%s', '%d');";
+        query = String.format(query, flightNum, numPassengers);
         System.out.println(query);
         return connection.executeUpdate(query);
     }
@@ -58,26 +57,9 @@ public class TicketDAO extends BaseDAO {
         }
         throw new Exception("E~Ticket does not exists");
     }
-    
-    public Ticket searchTicketByFlightNUser(String username, String flightNum) throws Exception {
-        String query = "SELECT * FROM ticket WHERE username = '%s' AND flight_num = '%s';";
-        query = String.format(query, username, flightNum);
-        ResultSet rs = connection.executeQuery(query);
-        if(rs.next()) {
-            return ticket(rs);
-        }
-        throw new Exception("E~Ticket does not exists");
-    }
 
-    public Ticket createTicket(String username, String flightNum, int numPassengers) {
-        int result = this.addTicket(username, flightNum, numPassengers);
-        if(result == 1) {
-            try {
-                return this.searchTicketByFlightNUser(username, flightNum);                
-            } catch (Exception ex) {
-                return null;
-            }
-        }
+    public Ticket createTicket(String flightNum, int numPassengers) {
+        
         return null;        
     }
     

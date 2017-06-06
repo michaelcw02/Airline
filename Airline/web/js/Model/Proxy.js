@@ -349,7 +349,7 @@ Proxy.searchFlightByNum = (flightNum, callback) => {
 }
 Proxy.reserveFlight = (flightNum, mode, callback) => {
     $.ajax({
-        url: 'FlightsServlet',
+        url: 'TicketsServlet',
         data: {
             action: "reserveFlight",
             flightNum: flightNum,
@@ -644,11 +644,11 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         dataType: "json"
     });
 }
-Proxy.confirmReservation = (mode, numPassengers, callback) => {
+Proxy.confirmFlights = (mode, numPassengers, callback) => {
     $.ajax({
         url: 'TicketsServlet',
         data: {
-            action: "confirmReservation",
+            action: "confirmFlights",
             mode: mode,
             numPassengers: numPassengers
         },
@@ -738,7 +738,7 @@ Proxy.getReservedFlights = (callback) => {
             action: "getConfirmedReservation",
         },
         error: function () { //si existe un error en la respuesta del ajax
-            showModal("myModal", "ERROR", "Could not retrieve  the reservation");
+            showModal("myModal", "ERROR", "Could not retrieve the reservation");
             setTimeout( () => hideModal('myModal'), 1500);
             callback();
         },
@@ -748,6 +748,25 @@ Proxy.getReservedFlights = (callback) => {
         type: 'POST',
         dataType: "json"
     });
+}
 
-
+Proxy.addPassengerToTicket = (passenger, callback) => {
+    $.ajax({
+        url: 'ReserveServlet',
+        data: {
+            action: "addPassenger",
+            passport: passenger.passport,
+            name: passenger.name,
+            lastname: passenger.lastname
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not add the passenger");
+            setTimeout( () => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }
