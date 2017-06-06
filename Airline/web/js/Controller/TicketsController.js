@@ -9,12 +9,7 @@ TicketsController.prototype = {
     },
     loadFlightDetails: function () {
         this.airlineController.getReservedFlights( (reservedFlights) => {
-<<<<<<< HEAD
-            let outboundTicket = reservedFlights.outboundTripInfo[0];
-=======
-            console.log(reservedFlights);
             let outboundTicket = reservedFlights.outboundTicket;
->>>>>>> 37f6aadaed3a0c6045dafcedb44843d62536008d
             showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
             if(reservedFlights.returnTicket) {
                 var returnTicket = reservedFlights.returnTicket;
@@ -25,7 +20,7 @@ TicketsController.prototype = {
     },
     addPassengers: function() {
         this.airlineController.getReservedFlights( (reservedFlights) => {
-            let outboundTicket = reservedFlights.outboundTripInfo[0];
+            let outboundTicket = reservedFlights.outboundTicket;
             showPassengersInfo(outboundTicket);
         } );
     },
