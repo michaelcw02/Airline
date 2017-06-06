@@ -9,7 +9,6 @@ TicketsController.prototype = {
     },
     loadFlightDetails: function () {
         this.airlineController.getReservedFlights( (reservedFlights) => {
-            console.log(reservedFlights);
             let outboundTicket = reservedFlights.outboundTripInfo[0];
             showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
             if(reservedFlights.returnTripInfo.length == 1) {
@@ -19,6 +18,15 @@ TicketsController.prototype = {
             showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
         } );
     },
+    addPassengers: function() {
+        this.airlineController.getReservedFlights( (reservedFlights) => {
+            let outboundTicket = reservedFlights.outboundTripInfo[0];
+            showPassengersInfo(outboundTicket);
+        } );
+    },
+    cancelReservation: function() {
+        window.location.replace("/Airline");
+    }
 }
 
 function showDetail($div, ticket, mode) {
@@ -57,9 +65,106 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
     }
     else{
         price2 = 0;
-    }
-        
+    }    
     let element = '';
     element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> </h1></div>';
     $div.append($(element));
+}
+
+function showPassengersInfo (outboundTicket) {
+//    new AirlineController().retrieveSearchFlights((results) => {
+//        if(flight !== undefined) {
+            let element = '';
+            element += '<div class="container-fluid">';
+                element += '<div class="row content">';
+                    element += '<div class="col-sm-3 sidenav">';
+                        element += '<ul class="nav nav-pills nav-stacked">';
+                            for(var i=0; i < outboundTicket.numPassengers; i++){
+                                var id = "#passenger"+(i+1);
+                                element += '<li><a href="#section'+ (i+1) +'")" id="passenger'+ (i+1) +'" onclick="active(this);">Passenger '+ (i+1) + '</a></li>';    
+                                $(this).on('click', (event) => {
+                                    $(this).addClass('active');
+                                })
+                            }                
+                        element += '</ul><br>';
+                    element += '</div>';
+                
+                    //MOSTRAR FORM POR CADA PASAJERO, CORREGIR!!!
+                    //for(var i=0; i < outboundTicket.numPassengers; i++){  
+                        element += '<div class="col-sm-9 " id="section'+ (i+1) +'">';
+                            element += '<form action="" method="POST" id="formPassenger'+ (i+1) +'">';
+                                element += '<br><div class="row">';
+                                    element += '<div class="form-group text-center">';
+                                        element += '<div class="col-sm-offset-3 col-sm-2 text-center"><strong>Passport: </strong></div>';
+                                        element += '<div class="col-sm-4"><input type="text" id="passport" class="form-control" placeholder="8-8888-8888"></div>';
+                                    element += '</div>';
+                                element += '</div><br>';
+                                element += '<div class="row">';
+                                    element += '<div class="form-group text-center">';
+                                        element += '<div class="col-sm-offset-3 col-sm-2 text-center"><strong>Name:</strong></div>';
+                                        element += '<div class="col-sm-4"><input type="text" id="name" class="form-control" placeholder="John"></div>';
+                                    element += '</div>';
+                                element += '</div><br>';
+                                element += '<div class="row">';
+                                    element += '<div class="form-group text-center">';
+                                        element += '<div class="col-sm-offset-3 col-sm-2 text-center"><strong>Lastname: </strong></div>';
+                                        element += '<div class="col-sm-4"><input type="text" id="lastname" class="form-control" placeholder="Doe"></div>';
+                                    element += '</div>';
+                                element += '</div><br><br>';
+                            element += '</form>';
+                        element += '</div>';              
+                    //}
+                    
+                element += '</div>';
+            element += '</div>';
+            
+            element += '<form class="form" role="form" id="PassengersForm">';
+                element += '<div class="form-group text-center">';
+                    element += '<button type="button" class="btn btn-success" id="addPassenger">Add Passenger</button> ';
+                    element += ' <button type="button" class="btn btn-danger" id="cancel">Cancel</button>';
+                element += '</div>';
+
+                element += '<div class="form-group height25" >';
+                    element += '<div class="alert alert-success hiddenDiv" id="messageResult">';
+                        element += '<strong id="messageResultTitle">Info!... </strong>';
+                        element += '<span id="messageResultMessage">This alert box could indicate a neutral informative change or action.</span>';
+                    element += '</div>';
+                element += '</div>';
+            element += '</form>';
+            
+            //modal settings
+            showModal('passengersInfo', ' Passengers Information', element);
+            $('#addPassenger').on('click', (event) => {
+                showMessage('messageResult', 'Info!...', 'Adding passenger!');
+//                new AirlineController().reserveFlight(flight.flightNum, mode, (data) => {
+//                    if(data.response[0] == 'S') {
+//                        let response = data.response.split('~')[1];
+//                        showMessage('messageResult', 'Info!...', response, 'success');
+//                        setTimeout( () => { $('#flightDetail').modal("hide"); }, 1500 );
+//                    }
+//                    else {
+//                        let response = data.response.split('~')[1];
+//                        showMessage('messageResult', 'Warning!...', response, 'warning');
+//                        setTimeout( () => { $('#flightDetail').modal("hide"); }, 1500 );
+//                    }
+//                });
+            });
+            $('#cancel').on('click', (event) => {
+                $('#passengersInfo').modal('hide');
+                $('#passengersInfoMessage').html('');
+            })
+//        }
+//    })
+}
+
+function showDiv(div){
+    if (document.getElementById){  
+        var aux = document.getElementById(div).style;  
+        aux.display = aux.display? "":"block";  
+    }  
+}
+
+function active(item){
+    elemento = $(item).attr('id');
+    document.getElementById(elemento).className = 'active';
 }

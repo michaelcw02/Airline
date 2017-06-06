@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
-    <link rel="stylesheet" href="css/dataTables.bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="css/hover.css">
 </head>
 
@@ -55,7 +54,14 @@
             </div>
             <hr>
             <div class="container-fluid text-center" id="price-detail">
-
+                   
+            </div>
+            <hr>
+            <div class="container-fluid text-center">
+                <div class="row text-center" id="confirmation">
+                    <button type="button" class="btn btn-success" id="addPassengers">Confirm Reservation</button>
+                    <button type="button" class="btn btn-danger" id="cancelReservation">Cancel</button>
+                </div>
             </div>
             <hr>
             <h3>CONTACT FORM</h3>
@@ -91,19 +97,20 @@
                                 <button type="submit" id="btnSubmit" class="btn btn-primary button ">Send your message</button>
                             </div>
                         </div>
+                    </div>
                 </form>
-                </div>
+            </div>
         </article>
 
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="passengersInfo" role="dialog">
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
+                        <h4 class="modal-title" id="passengersInfoTitle">Passengers Information</h4>
                     </div>
-                    <div class="modal-body" id="myModalMessage">
-                        <p>This is a small modal.</p>
+                    <div class="modal-body" id="passengersInfoMessage">
+                        <!--THIS PLACE WILL BE THE PASSENGERS DETAILS-->
                     </div>
                 </div>
             </div>

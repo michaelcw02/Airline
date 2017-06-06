@@ -8,6 +8,8 @@ function loadPage() {
 
 function addElementsProperties() {
     //BASIC ELEMENTS
+    $('#addPassengers').click( () => new TicketsController().addPassengers() );
+    $('#cancelReservation').click( () => new TicketsController().cancelReservation() );
 }
 
 function addListenersButtons(idButton, num) {
