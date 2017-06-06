@@ -5,16 +5,20 @@
  */
 package una.airline.bl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import una.airline.dao.AirplaneDAO;
 import una.airline.dao.FlightDAO;
 import una.airline.dao.SeatDAO;
+import una.airline.dao.TripDAO;
 import una.airline.domain.Airplane;
 import una.airline.domain.Flight;
 import una.airline.domain.RoundTripFlights;
 import una.airline.domain.Seat;
 import una.airline.domain.SeatID;
+import una.airline.domain.Trip;
 import una.airline.domain.TypeAirplane;
 
 /**
@@ -36,7 +40,18 @@ public class FlightsBL {
         }
         return result;
     }
-    
+    public void generateFlights(long[] dates, String num, int tripCode, String airpID) throws Exception {
+        Trip trip = new TripDAO().getTripByCode(tripCode);
+        Airplane airplane = new AirplaneDAO().findAirplaneByID(airpID);
+        TypeAirplane typeAirplane = airplane.getTypeAirplane();
+        int seats = typeAirplane.getQtyOfSeats();
+        for (int i = 0; i <= dates.length; i++) {
+            String idTrip = num + i;
+            Date date=new Date(dates[i]); 
+            Flight flight = new Flight(idTrip, airplane, trip,date, seats);
+            this.addFlight(flight);
+        }
+    }
     public int addSeatsOfFlight(Flight flight) {
         int result = 0;
         TypeAirplane typeAirplane = flight.getAirplane().getTypeAirplane();

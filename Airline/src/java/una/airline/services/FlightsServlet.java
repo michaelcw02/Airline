@@ -54,11 +54,11 @@ public class FlightsServlet extends HttpServlet {
                     departDate = request.getParameter("departDate");
                     returnDate = request.getParameter("returnDate");
                     String mode = "OneWayReservation";
-                    if(returnDate != null) {
+                    if (returnDate != null) {
                         mode = "RoundTripReservation";
                     }
                     session.setAttribute("ReservationMode", mode);
-                    
+
                     json = new Gson().toJson(flightsBL.searchFlights(cityFrom, cityTo, departDate, returnDate));
                     out.print(json);
 
@@ -73,6 +73,15 @@ public class FlightsServlet extends HttpServlet {
                     flightNum = request.getParameter("flightNum");
                     json = new Gson().toJson(flightsBL.findAirplaneSeatsInfoByFlightNum(flightNum));
                     out.print(json);
+                    break;
+                case "generateFlights":
+                    long[] dates = new Gson().fromJson(request.getParameter("dates"), long[].class);
+                    String num = request.getParameter("flightNum");
+                    int tripCode = Integer.parseInt(request.getParameter("idTrip"));
+                    String airpID = request.getParameter("codeAirplane");
+                    flightsBL.generateFlights(dates, num, tripCode, airpID);
+                    out.print("{\"data\":\"C~El vuelo fue ingresado correctamente\"}");
+                    break;
                 default:
                     out.print("{'response':'E~Did not receive any action'");
                     break;

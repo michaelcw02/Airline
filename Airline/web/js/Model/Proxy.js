@@ -788,5 +788,26 @@ Proxy.getFlightSeatsInfo = (flightNum, callback) => {
         type: 'POST',
         dataType: "json"
     });
-
+}
+Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane) => {
+    let json = JSON.stringify(dates);
+    console.log(json);
+    $.ajax({
+        url: 'FlightsServlet',
+        data: {
+            action: "generateFlights",
+            dates: json,
+            flightNum: flightNum1,
+            idTrip: idTrip,
+            codeAirplane: codeAirplane
+        },
+        error: () => { //si existe un error en la respuesta del ajax
+            showModal("myModal", "Error!...", "The flight can not be inserted in the database");
+            setTimeout(() => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }

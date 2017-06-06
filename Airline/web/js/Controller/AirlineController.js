@@ -191,9 +191,9 @@ AirlineController.prototype = {
         });
     },
     cancelReservation: function (callback) {
-        Proxy.cancelReservation( (data) => {
+        Proxy.cancelReservation((data) => {
             callback(data);
-        } ) 
+        })
     },
     loginUser: function () {
         $('#username').removeClass("has-error");
@@ -221,18 +221,21 @@ AirlineController.prototype = {
         });
     },
     getReservedFlights: function (callback) {
-        Proxy.getReservedFlights( (reserveFlights) => {
-            if(reserveFlights) {
+        Proxy.getReservedFlights((reserveFlights) => {
+            if (reserveFlights) {
                 Storage.store('TicketsInfo', reserveFlights);
                 callback(reserveFlights);
             }
-        } )
+        })
     },
     getFlightSeatsInfo: function (flightNum, callback) {
-        Proxy.getFlightSeatsInfo( flightNum, (data) => {
-            if(data.length > 0) {
+        Proxy.getFlightSeatsInfo(flightNum, (data) => {
+            if (data.length > 0) {
                 callback(data);
             }
-        } );
-    }, 
+        });
+    },
+    generateFlights: function (dates, flightNum1, idTrip, codeAirplane) {
+        Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane);
+    },
 }
