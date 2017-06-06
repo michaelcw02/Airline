@@ -33,11 +33,8 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="css/seat-booking.css" type="text/css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.css" type="text/css"/>
-=======
->>>>>>> 07ce3194e74aa10c6029b3955e6662ea9858f284
     <link rel="stylesheet" href="css/hover.css">
 </head>
 
