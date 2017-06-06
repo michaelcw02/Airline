@@ -32,14 +32,15 @@ public class FlightsBL {
     public FlightsBL() {
         flightDAO = new FlightDAO();
     }
-    
+
     public int addFlight(Flight flight) {
         int result = flightDAO.addFlight(flight);
-        if(result == 1) {
+        if (result == 1) {
             result = this.addSeatsOfFlight(flight);
         }
         return result;
     }
+
     public void generateFlights(long[] dates, String num, int tripCode, String airpID) throws Exception {
         Trip trip = new TripDAO().getTripByCode(tripCode);
         Airplane airplane = new AirplaneDAO().findAirplaneByID(airpID);
@@ -52,16 +53,17 @@ public class FlightsBL {
             this.addFlight(flight);
         }
     }
+
     public int addSeatsOfFlight(Flight flight) {
         int result = 0;
         TypeAirplane typeAirplane = flight.getAirplane().getTypeAirplane();
         SeatDAO seatDAO = new SeatDAO();
-        for(int i = 1; i <= typeAirplane.getQtyOfRows(); i++) {
+        for (int i = 1; i <= typeAirplane.getQtyOfRows(); i++) {
             for (int j = 0; j < typeAirplane.getSeatsPerRow(); j++) {
                 Character a = (char) (65 + j);
                 String seatNum = i + a.toString();
                 try {
-                    seatDAO.addSeatWithoutPassenger(new Seat( new SeatID(seatNum, flight.getFlightNum()), flight ));
+                    seatDAO.addSeatWithoutPassenger(new Seat(new SeatID(seatNum, flight.getFlightNum()), flight));
                 } catch (Exception ex) {
                     return 0;
                 }
@@ -99,20 +101,20 @@ public class FlightsBL {
         List<Flight> results = null;
 
         if (!"All".equalsIgnoreCase(cityFrom)) {
-            if(!"All".equalsIgnoreCase(cityTo)) {
+            if (!"All".equalsIgnoreCase(cityTo)) {
                 //GET ALL FLIGHTS FROM CITY & TO CITY
-                if(departDate != null) {
+                if (departDate != null) {
                     results = flightDAO.findFlightByCityFromCityToNDate(cityFrom, cityTo, departDate);
-                    return results;                
+                    return results;
                 } else {
                     results = flightDAO.findFlightByCityFromCityTo(cityFrom, cityTo);
                     return results;
-                }                
+                }
             } else {
                 //GET ALL FLIGHTS FROM CITY
-                if(departDate != null) {
+                if (departDate != null) {
                     results = flightDAO.findFlightByCityFromNDate(cityFrom, departDate);
-                    return results;                
+                    return results;
                 } else {
                     results = flightDAO.findFlightByCityFrom(cityFrom);
                     return results;
@@ -121,11 +123,12 @@ public class FlightsBL {
         }
         return flightDAO.getAllFlights();
     }
-    public Flight searchFlightByNum (String flightNum) {
+
+    public Flight searchFlightByNum(String flightNum) {
         return flightDAO.findByID(flightNum);
     }
+
     public List<String> findAirplaneSeatsInfoByFlightNum(String flightNum) {
         return flightDAO.findAirplaneSeatsInfoByFlightNum(flightNum);
     }
-    
 }

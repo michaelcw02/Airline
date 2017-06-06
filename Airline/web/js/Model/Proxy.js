@@ -8,7 +8,7 @@ Proxy.getCities = (callback) => {
         },
         error: () => { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error ocurred while loading cities");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -25,7 +25,7 @@ Proxy.getDiscounts = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error ocurred while loading discounts");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -42,7 +42,7 @@ Proxy.getFlights = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error ocurred while loading flights");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -59,7 +59,7 @@ Proxy.getTrips = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error ocurred while loading trips");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -80,7 +80,7 @@ Proxy.searchForFlights = (cityFrom, cityTo, departDate, returnDate, callback) =>
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error ocurred while loading flights");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -98,7 +98,7 @@ Proxy.searchForTypeAirplane = (type_airline, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "This type of airplane doesn´t exist");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -115,7 +115,7 @@ Proxy.getAllTypeAirline = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred in the loading of type of airplane");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -139,11 +139,11 @@ Proxy.addTypeAirplane = (type_airline, year, brand, rows, seatsRow) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a type of airplane was inserted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The type of airplane was inserted into the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -159,11 +159,11 @@ Proxy.deleteTypeAirplane = (type_airline) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a type of airplane was deleted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The type of airplane was deleted of the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -183,11 +183,11 @@ Proxy.updateTypeAirplane = (type_airline, year, brand, rows, seatsRow) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a type of airplane was modified");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The type of airplane was updated in the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -203,7 +203,7 @@ Proxy.searchForAirplane = (id_airplane, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "This airplane doesn´t exist");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -223,11 +223,11 @@ Proxy.addAirplane = (id_airplane, type_airplane) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a airplane was inserted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The airplane was inserted into the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -242,7 +242,7 @@ Proxy.getAllAirplanes = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred in the loading of airplane");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -262,11 +262,11 @@ Proxy.updateAirplane = (id_airplane, type_airplane) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when an airplane was modified");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The airplane was updated in the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -281,11 +281,11 @@ Proxy.deleteAirplane = (id_airplane) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a airplane was deleted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The airplane was deleted of the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -300,7 +300,7 @@ Proxy.searchTripByCode = (idTrip, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "This route doesn´t exist");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -318,11 +318,11 @@ Proxy.deleteTrip = (id_trip) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a route was deleted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The route was deleted of the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -338,7 +338,7 @@ Proxy.searchFlightByNum = (flightNum, callback) => {
         },
         error: () => { //si existe un error en la respuesta del ajax
             showModal("myModal", "Error!...", "The selected flight does not exists");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -357,7 +357,7 @@ Proxy.reserveFlight = (flightNum, mode, callback) => {
         },
         error: () => { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Sorry, we could not select your flight.");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -375,7 +375,7 @@ Proxy.searchCityByCode = (code, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "This city doesn´t exist");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -396,11 +396,11 @@ Proxy.addCity = (code, name, country) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a city was inserted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The city was inserted into the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -415,11 +415,11 @@ Proxy.deleteCity = (code) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a city was deleted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The city was deleted of the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -436,11 +436,11 @@ Proxy.updateCity = (code, name, country) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a city was modified");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The city was updated in the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -454,7 +454,7 @@ Proxy.getLastID = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -472,7 +472,7 @@ Proxy.searchUserByUsername = (username, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "This user doesn´t exist");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -489,7 +489,7 @@ Proxy.getAllUsers = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred in the loading of users");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -518,7 +518,7 @@ Proxy.addUser = (user, admin, client, callback) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a user was inserted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -536,11 +536,11 @@ Proxy.deleteUser = (username) => {
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a user was deleted");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The user was deleted of the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -566,12 +566,12 @@ Proxy.addTrip = (code, distance, duration, departureCity, arrivalCity, departure
             },
             error: function () {
                 showModal("myModal", "ERROR", "An error occurred when a trip was inserted");
-                setTimeout( () => hideModal('myModal'), 1500);
+                setTimeout(() => hideModal('myModal'), 1500);
             },
             success: (data) => {
                 callback(data);
                 showModal("myModal", "Status", "The trip was inserted in the database");
-                setTimeout( () => hideModal('myModal'), 1500);
+                setTimeout(() => hideModal('myModal'), 1500);
             },
             type: 'POST',
             dataType: "json"
@@ -589,7 +589,7 @@ Proxy.addTripImage = (idTrip, image, callback) => {
         contentType: false,
         error: function () {
             showModal("myModal", "ERROR", "An error occurred while uploading the image");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data.data);
@@ -616,11 +616,11 @@ Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birth
         },
         error: function () {
             showModal("myModal", "ERROR", "An error occurred when a user was modified");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             showModal("myModal", "Status", "The user was updated in the database");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         type: 'POST',
         dataType: "json"
@@ -635,7 +635,7 @@ Proxy.getTripsFromCity = (cityFrom, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred while retrieving cities");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -654,7 +654,7 @@ Proxy.confirmFlights = (mode, numPassengers, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred while reserving the tickets");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -673,7 +673,7 @@ Proxy.loginUser = (username, password, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "An error occurred while signing in");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data.response);
@@ -699,7 +699,7 @@ Proxy.logoutUser = (callback) => {
         dataType: "json"
     });
 }
-Proxy.updateTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image,callback) => {
+Proxy.updateTrip = (code, distance, duration, departureCity, arrivalCity, departureTime, departureDay, cost, discount, discountDes, discountPath, image, callback) => {
     Proxy.addTripImage(code, image, (dat) => {
         $.ajax({
             url: 'TripsServlet',
@@ -719,12 +719,12 @@ Proxy.updateTrip = (code, distance, duration, departureCity, arrivalCity, depart
             },
             error: function () {
                 showModal("myModal", "ERROR", "An error occurred when a trip was updated");
-                setTimeout( () => hideModal('myModal'), 1500);
+                setTimeout(() => hideModal('myModal'), 1500);
             },
             success: (data) => {
                 callback(data);
                 showModal("myModal", "Status", "The trip was updated in the database");
-                setTimeout( () => hideModal('myModal'), 1500);
+                setTimeout(() => hideModal('myModal'), 1500);
             },
             type: 'POST',
             dataType: "json"
@@ -739,7 +739,7 @@ Proxy.getReservedFlights = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not retrieve the reservation");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
             callback();
         },
         success: (data) => {
@@ -761,7 +761,7 @@ Proxy.addPassengerToTicket = (passenger, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not add the passenger");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -770,7 +770,6 @@ Proxy.addPassengerToTicket = (passenger, callback) => {
         dataType: "json"
     });
 }
-
 Proxy.getFlightSeatsInfo = (flightNum, callback) => {
     $.ajax({
         url: 'FlightsServlet',
@@ -780,7 +779,7 @@ Proxy.getFlightSeatsInfo = (flightNum, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not get the seats information");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);

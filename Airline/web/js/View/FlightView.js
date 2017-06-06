@@ -16,7 +16,7 @@ function addElementsProperties() {
         minDate: new Date(),
         dateFormat: "yy-mm-dd"
     });
-    $("#btGenerateFlights").click(() => controller.test3());
+    $("#btGenerateFlights").click(() => controller.generateFlights());
 }
 $(loadPage);
 

@@ -40,7 +40,7 @@ AirlineController.prototype = {
             Proxy.getTripsFromCity(codeCityFrom, (data) => {
                 let citiesTo = [];
                 data = data.filter((trip) => {
-                    return(trip.cityByDepartureCity.code === codeCityFrom)
+                    return (trip.cityByDepartureCity.code === codeCityFrom)
                 });
                 data.forEach((trip) => {
                     citiesTo.push(trip.cityByArrivalCity)
@@ -238,4 +238,5 @@ AirlineController.prototype = {
     generateFlights: function (dates, flightNum1, idTrip, codeAirplane) {
         Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane);
     },
+
 }

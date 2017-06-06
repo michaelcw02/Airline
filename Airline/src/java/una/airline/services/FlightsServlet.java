@@ -8,13 +8,19 @@ package una.airline.services;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import una.airline.bl.AirplaneBL;
 import una.airline.bl.FlightsBL;
+import una.airline.bl.TripsBL;
+import una.airline.domain.Airplane;
 import una.airline.domain.Flight;
+import una.airline.domain.Trip;
+import una.airline.domain.TypeAirplane;
 
 /**
  *
@@ -69,7 +75,7 @@ public class FlightsServlet extends HttpServlet {
                     out.print(json);
                     resetVariables();
                     break;
-                case "getAirplaneSeatsInfo":
+                 case "getAirplaneSeatsInfo":
                     flightNum = request.getParameter("flightNum");
                     json = new Gson().toJson(flightsBL.findAirplaneSeatsInfoByFlightNum(flightNum));
                     out.print(json);
