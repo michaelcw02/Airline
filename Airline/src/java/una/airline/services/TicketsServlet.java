@@ -87,7 +87,7 @@ public class TicketsServlet extends HttpServlet {
                             break;
                         }
                         //SUCCESS FOR ONE WAY
-                        outboundTicket = new Ticket(new FlightsBL().searchFlightByNum(outboundReservation), numPassengers);
+                        outboundTicket = new Ticket(flightsBL.searchFlightByNum(outboundReservation), numPassengers);
                         
                         if (mode.equalsIgnoreCase("RoundTrip")) {
                             returnReservation = (String) session.getAttribute("ReturnReservation");
@@ -97,7 +97,7 @@ public class TicketsServlet extends HttpServlet {
                                 break;
                             }
                             //SUCCESS FOR ROUND TRIPS
-                            returnTicket = new Ticket(new FlightsBL().searchFlightByNum(returnReservation), numPassengers);
+                            returnTicket = new Ticket(flightsBL.searchFlightByNum(returnReservation), numPassengers);
                             
                         }
                         Reserve reserve = new Reserve (outboundTicket, returnTicket, user);

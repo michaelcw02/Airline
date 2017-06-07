@@ -6,7 +6,9 @@
 package una.airline.dao;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import una.airline.domain.Seat;
 import una.airline.domain.SeatID;
 
@@ -40,18 +42,19 @@ public class SeatDAO extends BaseDAO {
         }
     }
 
-    public LinkedList<Seat> getAllSeatsOfFlight(String flightNum) {
-        LinkedList<Seat> listaResultado = new LinkedList<>();
+    public Map<String, Seat> getAllSeatsOfFlight(String flightNum) {
+        Map<String, Seat> map = new HashMap<String, Seat>();
         try {
             String query = "SELECT * FROM Seat WHERE flight_num = '%s';";
             query = String.format(query, flightNum);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
-                listaResultado.add(seat(rs));
+                Seat s = seat(rs);
+                map.put(s.getId().getSeatNumber(), s);
             }
         } catch (Exception e) {
         }
-        return listaResultado;
+        return map;
     }
 
     public LinkedList<Seat> getAllSeats() {

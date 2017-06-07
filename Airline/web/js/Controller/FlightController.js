@@ -17,28 +17,59 @@ FlightController.prototype = {
             fillWithAirplanes(this.view.$('#airplaneAvailable'), results);
         });
     },
-    //toma el día de la semana de la fecha seleccionada
-    test: function () {
+    validateDayMatch: function () {
+        var idTrip = this.view.$("#tripsAvailable").val();
         var date1 = $('#firstDate').val();
         var date = new Date(date1);
+        date.setDate(date.getDate() + 1);
         var day = date.getDay();
-        console.log(day);
+        var dateL1 = $('#lastDate').val();
+        var dateL = new Date(dateL1);
+        dateL.setDate(dateL.getDate() + 1);
+        var dayL = dateL.getDay();
+        var error = true;
+        var tripDay = "";
+        var trips = [];
+        trips = this.airlineController.retrieveAllTrips();
+        for (var i = 0; i < trips.length; i++) {
+            if (trips[i].idTrip == idTrip) {
+                tripDay = trips[i].departureDay;
+            }
+        }
+        if (tripDay == "MONDAY" && day == 1 && dayL == 1) {
+            error = false;
+        } else if (tripDay == "TUESDAY" && day == 2 && dayL == 2) {
+            error = false;
+        } else if (tripDay == "WEDNESDAY" && day == 3 && dayL == 3) {
+            error = false;
+        } else if (tripDay == "THURSDAY" && day == 4 && dayL == 4) {
+            error = false;
+        } else if (tripDay == "FRIDAY" && day == 5 && dayL == 5) {
+            error = false;
+        } else if (tripDay == "SATURDAY" && day == 6 && dayL == 6) {
+            error = false;
+        } else if (tripDay == "SUNDAY" && day == 0 && dayL == 0) {
+            error = false;
+        }
+        return error;
     },
-    //suma de días, día más uno, suma 1 día es el mismo día
-    test2: function () {
-        var date = $('#firstDate').val();
-        var result = new Date(date);
-        var days = 366;
-        result.setDate(result.getDate() + days);
-        console.log(result);
-    },
-    test3: function () {
-        var date = $('#firstDate').val();
-        var fecha1 = new Date(date);
-        var date2 = $('#lastDate').val();
-        var fecha2 = new Date(date2);
-        
-
+    generateFlights: function () {
+        if (!this.validateDayMatch()) {
+            if (!doValidate()) {
+                var dates = [];
+                dates = arrayDates();
+                var idTrip = $("#tripsAvailable").val();
+                var codeAirplane = $("#airplaneAvailable").val();
+                var flightNum1 = $("#identifier").val();
+                var i = 0;
+                this.airlineController.generateFlights(dates, flightNum1, idTrip, codeAirplane);
+                showModal("myModal", "Waiting...", "Inserting Flights..");
+                setTimeout(() => hideModal('myModal'), 6000);
+            }
+        } else {
+            showModal("myModal", "ALERT", "The days that you selected does not coincide with the departure day of the trip ");
+            setTimeout(() => hideModal('myModal'), 1500);
+        }
     },
 }
 function fillWithTrips($select, trips) {
@@ -66,6 +97,86 @@ function fillWithAirplanes($select, airplanes) {
     }
     if (!$select.has('option').length > 1)
         $select.append('<option value="undefined">No Airplanes</option>');
+}
+//TAKE THE SELECTED DATES AND MAKE AN ARRAY WITH ALL DAYS OF THE RANGE
+function arrayDates() {
+    var datesArray = [];
+    var date1 = $('#firstDate').val();
+    var firstDate = new Date(date1);
+    var days1 = 1;
+    firstDate.setDate(firstDate.getDate() + days1);
+    var date2 = $('#lastDate').val();
+    var lastDate = new Date(date2);
+    var days = 8;
+    lastDate.setDate(lastDate.getDate() + days);
+    for (var d = firstDate; d < lastDate; d.setDate(d.getDate() + 7)) {
+        datesArray.push(new Date(d).getTime());
+    }
+    return datesArray;
+}
+function validateDaysSelected() {
+    var date = new Date($("#firstDate").val());
+    date.setDate(date.getDate() + 1);
+    var dateL = new Date($("#lastDate").val());
+    dateL.setDate(dateL.getDate() + 1);
+    var error = false;
+    if (date > dateL) {
+        error = true;
+    }
+    return error;
+}
+function isBlank(element) {
+    removeInvalid(element);
+    if (!element.val()) {
+        setInvalid(element);
+        return true;
+    }
+}
+function removeInvalid(element) {
+    element.removeClass('invalid');
+}
+function setInvalid(element) {
+    element.addClass('invalid');
+}
+function isSomethingBlank() {
+    let blanks = false;
+    if (isBlank($('#identifier'))) {
+        blanks = true;
+    } else if ($('#tripsAvailable').val() == "0") {
+        alert("Please, select a trip");
+        blanks = true;
+    } else if ($('#airplaneAvailable').val() == "0") {
+        alert("Please, select a city");
+        blanks = true;
+    } else if (isBlank($("#firstDate"))) {
+        blanks = true;
+    } else if (isBlank($("#lastDate"))) {
+        blanks = true;
+    }
+    return blanks;
+}
+function validateLength() {
+    let error = false;
+    var Max_Length1 = 3;
+    var lengthId = $("#identifier").val().length;
+    if (lengthId > Max_Length1) {
+        alert("The max length of " + Max_Length1 + " characters is reached in Identifier, you typed in  " + lengthId + "characters");
+        error = true;
+    }
+    return error;
+}
+function doValidate() {
+    var error = false;
+    if (this.isSomethingBlank()) {
+        alert("There is something you missed, please fill it up!");
+        error = true;
+    } else if (validateLength()) {
+        error = true;
+    } else if (validateDaysSelected()) {
+        error = true;
+        alert("The first date are bigger than the last date");
+    }
+    return error;
 }
 
 

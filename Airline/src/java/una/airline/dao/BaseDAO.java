@@ -5,6 +5,7 @@
  */
 package una.airline.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -20,16 +21,21 @@ public class BaseDAO {
     public BaseDAO() {
         connection = new Database(null, null, null);
     }
-    
+
     public boolean setConnectionAutoCommit(boolean autoCommit) {
         return connection.setConnectionAutoCommit(autoCommit);
     }
-    
+
     public boolean commit() {
         return connection.connectionCommit();
     }
+
     public boolean rollback() {
         return connection.connectionRollback();
+    }
+
+    public PreparedStatement prepareStatement(String query) throws SQLException {
+        return connection.prepareStatement(query);
     }
 
     protected City city(ResultSet rs) {
@@ -66,7 +72,7 @@ public class BaseDAO {
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in cities of trip", ex);
             }
-            return new Trip(idTrip, cityFrom, cityTo,distance,duration, departureTime, departureDay, cost, discount, discountDescription, discountImagePath);
+            return new Trip(idTrip, cityFrom, cityTo, distance, duration, departureTime, departureDay, cost, discount, discountDescription, discountImagePath);
         } catch (SQLException ex) {
             return null;
         }
@@ -183,34 +189,34 @@ public class BaseDAO {
             return null;
         }
     }
-    
+
     protected Seat seat(ResultSet rs) throws Exception {
         try {
             String seatNumber = rs.getString("seat_num");
             String flightNum = rs.getString("flight_num");
             SeatID seatID = new SeatID(seatNumber, flightNum);
-            
+
             String passport = rs.getString("passenger");
             int ticketNum = rs.getInt("ticket_num");
-            
+
             PassengerID passengerID = new PassengerID(passport, ticketNum);
             Passenger passenger = null;
             Flight flight = null;
             try {
-                if(passport != null & ticketNum != 0) {
+                if (passport != null & ticketNum != 0) {
                     passenger = (Passenger) new PassengerDAO().findByID(passengerID);
                 }
                 flight = (Flight) new FlightDAO().findByID(flightNum);
             } catch (Exception ex) {
-                throw new Exception ("E~Passenger does not exists");
+                throw new Exception("E~Passenger does not exists");
             }
             return new Seat(seatID, flight, passenger);
         } catch (SQLException e) {
             return null;
         }
     }
-    
-    protected Reserve reserve (ResultSet rs) throws Exception {
+
+    protected Reserve reserve(ResultSet rs) throws Exception {
         try {
             int number = rs.getInt("number");
             int outboundTktNumber = rs.getInt("outboundTicket");
@@ -218,17 +224,17 @@ public class BaseDAO {
             String username = rs.getString("username");
             Date reserveDate = rs.getDate("date");
             double price = rs.getDouble("price");
-            
+
             Ticket outboundTicket = null;
-            Ticket returnTicket   = null;
-            User   user           = null;
+            Ticket returnTicket = null;
+            User user = null;
             try {
                 TicketDAO ticketDAO = new TicketDAO();
                 outboundTicket = ticketDAO.findByID(outboundTktNumber);
-                returnTicket   = ticketDAO.findByID(returnTktNumber);
-                user           = new UserDAO().getUserByUsername(username);
+                returnTicket = ticketDAO.findByID(returnTktNumber);
+                user = new UserDAO().getUserByUsername(username);
             } catch (Exception ex) {
-                throw new Exception ("E~Reserve does not exists");
+                throw new Exception("E~Reserve does not exists");
             }
             return new Reserve(number, outboundTicket, returnTicket, user, reserveDate, price);
         } catch (SQLException e) {

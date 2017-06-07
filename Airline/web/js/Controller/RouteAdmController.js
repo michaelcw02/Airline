@@ -312,11 +312,11 @@ function validateNumbers() {
         error = true;
         alert("The minutes in duration are in the format of 0-59 and you wrote  " + text4);
     }
-      if (!regex.test(text5)) {
+    if (!regex.test(text5)) {
         error = true;
         alert("The hours in duration are in the format of 24 hours and you wrote  " + text5);
     }
-    
+
     return error;
 }
 function doValidate() {

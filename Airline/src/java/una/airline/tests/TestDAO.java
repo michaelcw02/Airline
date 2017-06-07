@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import una.airline.bl.*;
 import una.airline.dao.*;
 import una.airline.domain.*;
@@ -24,6 +25,10 @@ public class TestDAO {
     public static void main(String[] arg) throws Exception {
         
         FlightsBL flightBL = new FlightsBL();
+        List<String> result = flightBL.findAirplaneSeatsInfoByFlightNum("STEST");
+        System.out.println(result);
+        
+        
         Airplane airplane = new AirplaneBL().findAirplaneByID("ASA-054");
         Trip trip = new TripsBL().getTripByCode(18);
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 

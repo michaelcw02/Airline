@@ -9,7 +9,7 @@ html {
     color: #fff;
 }
 .bg-black{
-     background:rgba(0,0,0,.5);
+    background:rgba(0,0,0,.5);
 }
 
 .icon {
@@ -24,8 +24,8 @@ html {
     font-size: 40px !important;
 }
 .navbar-nav > li > a {
-  /* NEW ADDITION BY MCW */
-  font-size: 20px;
+    /* NEW ADDITION BY MCW */
+    font-size: 20px;
 }
 /* SCREEN SMALLER THAN 768PX */
 .top-container {
@@ -209,16 +209,16 @@ input {
     font-size: 20px;
 }
 .img-small{
-  width: 250px; height: 200px;
+    width: 250px; height: 200px;
 }
 .back{
-     background:rgba(0,0,0,.5);
+    background:rgba(0,0,0,.5);
 }
 .button{
-	margin-top:15px;
+    margin-top:15px;
 }
 .text-med{
-	 font-size: 16px;
+    font-size: 16px;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
@@ -230,21 +230,21 @@ input {
 }
 
 .contact-us-body {
-	background:url('../images/background-16.jpg'); /* Nuestra imagen de fondo */
-	background-repeat:no-repeat; /* Indicamos que no se repetira */
-	background-size:cover; /* Encajamos la imagen al 100% del ancho */
-	background-attachment: fixed; /* Establecemos una posicion fija para la imagen */
-	font-family:helvetica, arial, sans-serif;
-	line-height:20px;
+    background:url('../images/background-16.jpg'); /* Nuestra imagen de fondo */
+    background-repeat:no-repeat; /* Indicamos que no se repetira */
+    background-size:cover; /* Encajamos la imagen al 100% del ancho */
+    background-attachment: fixed; /* Establecemos una posicion fija para la imagen */
+    font-family:helvetica, arial, sans-serif;
+    line-height:20px;
 }
 
 .register-body {
-	background:url('../images/background-12.jpg'); 
-	background-repeat:no-repeat; 
-	background-size:cover; 
-	background-attachment: fixed; 
-	font-family:helvetica, arial, sans-serif;
-	line-height:20px;
+    background:url('../images/background-12.jpg'); 
+    background-repeat:no-repeat; 
+    background-size:cover; 
+    background-attachment: fixed; 
+    font-family:helvetica, arial, sans-serif;
+    line-height:20px;
 }
 
 .profile-body {
@@ -257,54 +257,54 @@ input {
 }
 
 .about-us-body {
-	background:url('../images/background-0.jpg'); 
-	background-repeat:no-repeat; 
-	background-size:cover; 
-	background-attachment: fixed; 
-	font-family:helvetica, arial, sans-serif;
-	line-height:20px;
+    background:url('../images/background-0.jpg'); 
+    background-repeat:no-repeat; 
+    background-size:cover; 
+    background-attachment: fixed; 
+    font-family:helvetica, arial, sans-serif;
+    line-height:20px;
 }
 .benchmarks-body {
-	background:url('../images/background-17.jpg'); 
-	background-repeat:no-repeat; 
-	background-size:cover; 
-	background-attachment: fixed; 
-	font-family:helvetica, arial, sans-serif;
-	line-height:20px;
+    background:url('../images/background-17.jpg'); 
+    background-repeat:no-repeat; 
+    background-size:cover; 
+    background-attachment: fixed; 
+    font-family:helvetica, arial, sans-serif;
+    line-height:20px;
 }
 .company-body {
-	background:url('../images/background-11.jpg'); 
-	background-repeat:no-repeat; 
-	background-size:cover; 
-	background-attachment: fixed; 
-	font-family:helvetica, arial, sans-serif;
-	line-height:20px;
+    background:url('../images/background-11.jpg'); 
+    background-repeat:no-repeat; 
+    background-size:cover; 
+    background-attachment: fixed; 
+    font-family:helvetica, arial, sans-serif;
+    line-height:20px;
 }
 
 .ticket-body {
-	background:url('../images/background-19.jpg'); 
-	background-repeat:no-repeat; 
-	background-size:cover; 
-	background-attachment: fixed; 
-	font-family:helvetica, arial, sans-serif;
-	line-height:20px;
+    background:url('../images/background-19.jpg'); 
+    background-repeat:no-repeat; 
+    background-size:cover; 
+    background-attachment: fixed; 
+    font-family:helvetica, arial, sans-serif;
+    line-height:20px;
 }
 article {
-	background:rgba(0,0,0,.5);
-	padding:20px;
-	margin:10px 0;
-	color:white;
-	box-shadow:0 5px 5px 3px rgba(0, 0, 0, 0.25);
+    background:rgba(0,0,0,.5);
+    padding:20px;
+    margin:10px 0;
+    color:white;
+    box-shadow:0 5px 5px 3px rgba(0, 0, 0, 0.25);
 }
 
 article hr {
-	background:grey;
-	height:3px;
-	border:none;
+    background:grey;
+    height:3px;
+    border:none;
 }
 
 article p {
-	line-height: 25px;
+    line-height: 25px;
 }
 
 article h1,
@@ -315,8 +315,8 @@ article h5,
 article p, 
 article hr {
     font-family: 'Open Sans', sans-serif !important;
-	color: white;
-	margin-bottom: 20px;
+    color: white;
+    margin-bottom: 20px;
 }
 .flights-container{
     margin-top: 30px;
@@ -396,6 +396,10 @@ article hr {
 }
 .ui-datepicker {
     z-index: 7000 !important;
+}
+
+#seatBooking {
+    z-index: 10000 !important;
 }
 .sidenav {
       background-color: #f1f1f1;
