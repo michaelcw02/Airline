@@ -139,20 +139,15 @@
                             <%}%> 
 
                             <%  if (user != null){%>
-                            <% if (request.getSession().getAttribute("type").equals("Administrator")){%> 
-                            <script>
-                                document.getElementById("administration").style.display = 'block';
-                            </script>
-                            <%}%> 
-                            <li class="dropdown">
-                                <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
-                                    <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
-                                    <%=user%>
-                                </a>
-                                <ul class="dropdown-menu logout">
-                                    <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();return false;">
-                                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                                        Log Out
+                                <% if (request.getSession().getAttribute("type").equals("Administrator")){%> 
+                                    <script>
+                                        document.getElementById("administration").style.display = 'block';
+                                    </script>
+                                <%}%> 
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">
+                                        <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
+                                        <%=user%>
                                     </a>
                                     <ul class="dropdown-menu profile">
                                         <div>
@@ -170,8 +165,6 @@
                                         </div>
                                     </ul>
                                 </li>
-                                </ul>
-                            </li>
                             <%}%> 
                         </ul>
                     </div>
