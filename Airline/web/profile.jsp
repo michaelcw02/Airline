@@ -21,14 +21,22 @@
     <link rel="stylesheet" href="css/stylesheet.css">
 </head>
 
-<% String birth = (String) request.getSession().getAttribute("birth"); %>
-<% String[] separated = birth.split("-"); %>
-<% String year = separated[0]; %>
-<% String month = separated[1]; %>
-<% String day = separated[2]; %>
-<% birth = month + "/" + day + "/" + year; %>
-
 <body class="profile-body">
+    <% String user =(String) request.getSession().getAttribute("user"); %>
+    <% String lastname1 =(String) request.getSession().getAttribute("lastname1"); %>
+    <% String lastname2 =(String) request.getSession().getAttribute("lastname2"); %>
+    <% String username =(String) request.getSession().getAttribute("username"); %>
+    <% String phone =(String) request.getSession().getAttribute("phone"); %>
+    <% String cellphone =(String) request.getSession().getAttribute("cellphone"); %>
+    <% String email =(String) request.getSession().getAttribute("email"); %>
+    <% String location =(String) request.getSession().getAttribute("location"); %>
+    <% String birth = (String) request.getSession().getAttribute("birth"); %>
+    <% String[] separated = birth.split("-"); %>
+    <% String year = separated[0]; %>
+    <% String month = separated[1]; %>
+    <% String day = separated[2]; %>
+    <% birth = month + "/" + day + "/" + year; %>
+    
     <div class="container top-container">
         <jsp:include page="header.jsp" />
     </div>
@@ -38,13 +46,13 @@
             <article>
                 <div class="row">
                     <div class="col-xs-12 col-sm-8">
-                      <h2><%=(String) request.getSession().getAttribute("user") %> <%=(String) request.getSession().getAttribute("lastname1") %> <%=(String) request.getSession().getAttribute("lastname2") %></h2>
-                      <p><span class="glyphicon glyphicon-user"></span><strong> <%=(String) request.getSession().getAttribute("username") %></strong></p>
+                      <h2> <%=user%> <%=lastname1%> <%=lastname2%></h2>
+                      <p><span class="glyphicon glyphicon-user"></span><strong> <%=username%></strong></p>
                       <p><span class="glyphicon glyphicon-gift"></span><strong> <%=birth%></strong></p>
-                      <p><span class="glyphicon glyphicon-phone-alt"></span><strong> <%=(String) request.getSession().getAttribute("phone") %></strong></p>
-                      <p><span class="glyphicon glyphicon-phone"></span><strong> <%=(String) request.getSession().getAttribute("cellphone") %></strong></p>
-                      <p><span class="glyphicon glyphicon-envelope"></span><strong> <%=(String) request.getSession().getAttribute("email") %></strong></p>
-                      <p><span class="glyphicon glyphicon-map-marker"></span><strong> <%=(String) request.getSession().getAttribute("location") %></strong></p>
+                      <p><span class="glyphicon glyphicon-phone-alt"></span><strong> <%=phone%></strong></p>
+                      <p><span class="glyphicon glyphicon-phone"></span><strong> <%=cellphone%></strong></p>
+                      <p><span class="glyphicon glyphicon-envelope"></span><strong> <%=email%></strong></p>
+                      <p><span class="glyphicon glyphicon-map-marker"></span><strong> <%=location%></strong></p>
                     </div>          
                     <div class="col-xs-12 col-sm-4 text-center">
                         <p> <img src="images/user.png" alt="" class="center-block img-circle img-responsive face-picture"> </p>
@@ -70,21 +78,21 @@
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Name:</div>
-                                    <div class='col-sm-6'><input type='text' id='name' class='form-control bg-black text-white' placeholder="John" value=<%=(String) request.getSession().getAttribute("user") %>></div>
+                                    <div class='col-sm-6'><input type='text' id='name' class='form-control bg-black text-white' placeholder="John" value=<%=user%>></div>
                                 </div>
                             </div>
                             <br>
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3  text-center text-white label'>First Lastname:</div>
-                                    <div class='col-sm-6'><input type='text' id='firstlastname' class='form-control bg-black text-white' placeholder="Doe" value=<%=(String) request.getSession().getAttribute("lastname1") %>></div>
+                                    <div class='col-sm-6'><input type='text' id='firstlastname' class='form-control bg-black text-white' placeholder="Doe" value=<%=lastname1%>></div>
                                 </div>
                             </div>
                             <br>
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Second Lastname:</div>
-                                    <div class='col-sm-6'><input type='text' id='secondlastname' class='form-control bg-black text-white' placeholder="Doe" value=<%=(String) request.getSession().getAttribute("lastname2") %>></div>
+                                    <div class='col-sm-6'><input type='text' id='secondlastname' class='form-control bg-black text-white' placeholder="Doe" value=<%=lastname2%>></div>
                                 </div>
                             </div>
                             <br>
@@ -98,14 +106,14 @@
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Username:</div>
-                                    <div class='col-sm-6'><input onfocus = "this.blur()" type='text' id='user' class='form-control bg-black text-white' placeholder="johndoe123" value=<%=(String) request.getSession().getAttribute("username") %>></div>
+                                    <div class='col-sm-6'><input onfocus = "this.blur()" type='text' id='user' class='form-control bg-black text-white' placeholder="johndoe123" value=<%=username%>></div>
                                 </div>
                             </div>
                             <br>
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Email:</div>
-                                    <div class='col-sm-6'><input type='email' id='email' class='form-control bg-black text-white' placeholder="johndoe@email.com" value=<%=(String) request.getSession().getAttribute("email") %>></div>
+                                    <div class='col-sm-6'><input type='email' id='email' class='form-control bg-black text-white' placeholder="johndoe@email.com" value=<%=email%>></div>
                                 </div>
                             </div>
                             <br>
@@ -126,21 +134,21 @@
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Telephone:</div>
-                                    <div class='col-sm-6'><input type='text' id='telephone' class='form-control bg-black text-white' placeholder="8888-8888" value=<%=(String) request.getSession().getAttribute("phone") %>></div>
+                                    <div class='col-sm-6'><input type='text' id='telephone' class='form-control bg-black text-white' placeholder="8888-8888" value=<%=phone%>></div>
                                 </div>
                             </div>
                             <br>
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Cellphone:</div>
-                                    <div class='col-sm-6'><input type='text' id='cellphone' class='form-control bg-black text-white' placeholder="8888-8888" value=<%=(String) request.getSession().getAttribute("cellphone") %>></div>
+                                    <div class='col-sm-6'><input type='text' id='cellphone' class='form-control bg-black text-white' placeholder="8888-8888" value=<%=cellphone%>></div>
                                 </div>
                             </div>
                             <br>
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-3 col-sm-2 text-center text-white label'>Direction:</div>
-                                    <div class='col-sm-6'><textarea class="form-control controls bg-black text-white" id="direction" required="true" placeholder="Alajuela, Costa Rica"><%=(String) request.getSession().getAttribute("location") %></textarea></div>
+                                    <div class='col-sm-6'><textarea class="form-control controls bg-black text-white" id="direction" required="true" placeholder="Alajuela, Costa Rica"><%=location%></textarea></div>
                                 </div>
                             </div>
                             <br>
