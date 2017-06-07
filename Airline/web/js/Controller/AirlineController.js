@@ -32,8 +32,12 @@ AirlineController.prototype = {
     },
     getAllTrips: function (callback) {
         Proxy.getTrips((data) => {
+            Storage.store('allTrips', data);
             callback(data);
         })
+    },
+    retrieveAllTrips: function () {
+        return Storage.retrieve('allTrips');
     },
     searchCitiesTo: function (codeCityFrom, callback) {
         if (codeCityFrom != 0) {

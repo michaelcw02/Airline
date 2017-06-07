@@ -801,8 +801,8 @@ Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane) => {
             codeAirplane: codeAirplane
         },
         error: () => { //si existe un error en la respuesta del ajax
-            showModal("myModal", "Error!...", "The flight can not be inserted in the database");
-            setTimeout(() => hideModal('myModal'), 1500);
+            showModal("myModal", "Error!...", "The flight can not be inserted in the database,the id or the dates already exists");
+            setTimeout(() => hideModal('myModal'), 3000);
         },
         success: (data) => {
         },
