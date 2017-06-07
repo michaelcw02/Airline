@@ -120,6 +120,8 @@ public class UserServlet extends HttpServlet {
                     //DELETE ALL EXISTING ATTRIBUTES 
                     session.removeAttribute("user");
                     session.removeAttribute("Reservation");
+                    session.removeAttribute("outPassengerList");
+                    session.removeAttribute("inPassengerList");
                     session.setAttribute("loginStatus", "Not logged.");                    
                     session.invalidate();
                     break;

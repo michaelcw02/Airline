@@ -788,5 +788,22 @@ Proxy.getFlightSeatsInfo = (flightNum, callback) => {
         type: 'POST',
         dataType: "json"
     });
+}
 
+Proxy.getPassengerList = (callback) => {
+    $.ajax({
+        url: 'ReserveServlet',
+        data: {
+            action: "getPassengerList",
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not get the passengers information");
+            setTimeout( () => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }

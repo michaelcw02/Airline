@@ -7,7 +7,7 @@ function loadPage() {
 }
 
 function addElementsProperties() {
-    $('#seatBooking').modal();
+    //$('#seatBooking').modal();
     //BASIC ELEMENTS
     $('#addPassengers').click( () => new TicketsController().addPassengers() );
     $('#cancelReservation').click( () => new TicketsController().cancelReservation() );

@@ -228,11 +228,39 @@ AirlineController.prototype = {
             }
         } )
     },
+    retrieveReservedFlights: function (callback) {
+        let reservedFlights = Storage.retrieve('TicketsInfo');
+        if(reservedFlights != null)
+            callback(reservedFlights);
+        else
+            this.getReservedFlights(callback);
+    },
     getFlightSeatsInfo: function (flightNum, callback) {
         Proxy.getFlightSeatsInfo( flightNum, (data) => {
             if(data.length > 0) {
                 callback(data);
             }
         } );
-    }, 
+    },
+    addPassenger: function(passenger, callback) {
+        Proxy.addPassengerToTicket( passenger, (data) => {
+            let msg = data.response.split('~');
+            if(msg[0] === 'E') {
+                showModal('myModal', 'Error!...', msg[1]);
+            }
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Success!...', msg[1]);
+            }
+            setTimeout(() => hideModal('myModal'), 1500);
+        });
+    },
+    getPassengerList: function(callback) {
+        Proxy.getPassengerList( (data) => {
+            if(data.response === undefined) {
+                callback(data);
+            } else {
+                callback(undefined);
+            }
+        });
+    },
 }

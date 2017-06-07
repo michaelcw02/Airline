@@ -75,7 +75,6 @@ public class ReserveServlet extends HttpServlet {
                             break;
                         }
                         outPassengerList.add(passenger);
-                        session.setAttribute("outPassengerList", outPassengerList);
                         if (session.getAttribute("ReturnReservation") != null) {
                             LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
                             if (inPassengerList == null) {
@@ -89,15 +88,30 @@ public class ReserveServlet extends HttpServlet {
                                 out.print(json);
                                 break;
                             }
-                            outPassengerList.add(passenger);
-                            session.setAttribute("inPassengerList", outPassengerList);
+                            inPassengerList.add(passenger);
+                            session.setAttribute("inPassengerList", inPassengerList);
                         }
-                        json = "{\"response\":\"E~Passenger Added!\"}";
+                        json = "{\"response\":\"S~Passenger Added!\"}";
                         out.print(json);
                         break;
                     } else {
                         response.sendRedirect("index.jsp");
+                        break;
                     }
+                case "getPassengerList":
+                    if(session.getAttribute("OutboundReservation") != null) {
+                        LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                        if(outPassengerList != null) {
+                            json = new Gson().toJson(outPassengerList);
+                        } else {
+                            json = "{\"response\":\"E~No passenger found!\"}";
+                        }
+                        out.print(json);
+                        break;
+                    } else {
+                        response.sendRedirect("index.jsp");
+                        break;
+                    } 
 
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

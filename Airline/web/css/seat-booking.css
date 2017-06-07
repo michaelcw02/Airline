@@ -76,7 +76,8 @@ ol {
   padding: 5px;
   position: relative;
 }
-.seat:nth-child(3) {
+.seat:nth-child(3),
+.seat:nth-child(6) {
   margin-right: 14.28571428571429%;
 }
 .seat input[type=checkbox] {
@@ -91,7 +92,7 @@ ol {
   animation-fill-mode: both;
 }
 .seat input[type=checkbox]:disabled + label {
-  background: #dddddd;
+  background: #F42536;
   text-indent: -9999px;
   overflow: hidden;
 }
@@ -116,7 +117,7 @@ ol {
   font-weight: bold;
   line-height: 1.5rem;
   padding: 4px 0;
-  background: #F42536;
+  background: #dddddd;
   border-radius: 5px;
   animation-duration: 300ms;
   animation-fill-mode: both;
