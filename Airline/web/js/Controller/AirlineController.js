@@ -265,7 +265,20 @@ AirlineController.prototype = {
     },
     addPassengerSeat: function(index, seatID, flightNum, mode, callback) {
         Proxy.addPassengerSeat(index, seatID, flightNum, mode, (data) => {
-            callback(data);
+            let msg = data.response.split('~');
+            if(msg[0] === 'CE') {
+                showModal('myModal', 'Error!...', msg[1]);
+                window.location.replace("/Airline");
+            }
+            if(msg[0] === 'E') {
+                showModal('myModal', 'Error!...', msg[1]);
+            }
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Success!...', msg[1]);
+            }
+            setTimeout(() => hideModal('myModal'), 1500);
+            
+            if(callback !== undefined)  callback(data);
         });
     },
 }

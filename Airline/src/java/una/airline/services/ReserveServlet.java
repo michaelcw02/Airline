@@ -119,7 +119,7 @@ public class ReserveServlet extends HttpServlet {
                 case "addPassengerSeat":
                     if(session.getAttribute("OutboundReservation") != null) {
                         String mode = request.getParameter("mode");
-                        String flightNum = request.getParameter("flighNum");
+                        String flightNum = request.getParameter("flightNum");
                         String seatNum = request.getParameter("seatID");
                         int index = Integer.parseInt(request.getParameter("index"));
                         reserve = (Reserve) session.getAttribute("Reservation");

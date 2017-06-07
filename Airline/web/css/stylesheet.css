@@ -364,6 +364,10 @@ article hr {
     z-index: 6000 !important;
 }
 
+#seatBooking {
+    z-index: 5000 !important;
+}
+
 .height25{
     height: 25px;
     margin-bottom: 22px;

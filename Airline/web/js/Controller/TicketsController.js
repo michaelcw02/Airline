@@ -208,7 +208,8 @@ function showSeatsDetail(ticket, mode) {
             let regex = /^[0-9]{1,3}[a-iA-I]{1}/;
             let selection = $('#seatSelection' + (i + 1)).val();
             if(regex.test(selection)) {
-                new AirlineController().addPassengerSeat(i, selection, ticket.flight.flightNum, mode, )
+                //STILL MISSING CALLBACK, THINK ABOUT IT LATER..    
+                new AirlineController().addPassengerSeat(i, selection, ticket.flight.flightNum, mode);
             }
         } )
 
