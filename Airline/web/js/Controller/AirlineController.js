@@ -263,4 +263,9 @@ AirlineController.prototype = {
             }
         });
     },
+    addPassengerSeat: function(index, seatID, flightNum, mode, callback) {
+        Proxy.addPassengerSeat(index, seatID, flightNum, mode, (data) => {
+            callback(data);
+        });
+    },
 }

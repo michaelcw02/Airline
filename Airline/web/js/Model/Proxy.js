@@ -807,3 +807,25 @@ Proxy.getPassengerList = (callback) => {
         dataType: "json"
     });
 }
+
+Proxy.addPassengerSeat = (index, seatID, flightNum, mode, callback) => {
+    $.ajax({
+        url: 'ReserveServlet',
+        data: {
+            action: "addPassengerSeat",
+            index: index,
+            seatID: seatID, 
+            flightNum: flightNum,
+            mode: mode
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not add the passengers seat");
+            setTimeout( () => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}

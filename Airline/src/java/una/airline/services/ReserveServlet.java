@@ -75,6 +75,7 @@ public class ReserveServlet extends HttpServlet {
                             break;
                         }
                         outPassengerList.add(passenger);
+                        session.setAttribute("outPassengerList", outPassengerList);
                         if (session.getAttribute("ReturnReservation") != null) {
                             LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
                             if (inPassengerList == null) {
@@ -111,7 +112,38 @@ public class ReserveServlet extends HttpServlet {
                     } else {
                         response.sendRedirect("index.jsp");
                         break;
-                    } 
+                    }
+                case "addPassengerSeat":
+                    if(session.getAttribute("OutboundReservation") != null) {
+                        String mode = request.getParameter("mode");
+                        String flightNum = request.getParameter("flighNum");
+                        String seatID = request.getParameter("seatID");
+                        int index = Integer.parseInt(request.getParameter("index"));
+                        reserve = (Reserve) session.getAttribute("Reservation");
+                        json = "";
+                        if(mode.equals("OUTBOUND")) {
+                            Ticket outboundTicket = reserve.getOutboundTicket();
+                            if(outboundTicket.getFlight().getFlightNum().equalsIgnoreCase(flightNum)) {
+                                LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                                if(outPassengerList != null) {
+                                    Passenger p = outPassengerList.get(index);
+                                    //                                    
+                                } else {
+                                    json = "{\"response\":\"E~You have to add the passengers first!\"}";
+                                }
+                            }
+                            
+                        }
+                        if(mode.equals("RETURN")) {
+                            
+                        }
+                        out.print(json);
+                        break;
+                    } else {
+                        response.sendRedirect("index.jsp");
+                        break;
+                    }
+                    
 
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
