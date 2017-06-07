@@ -162,7 +162,7 @@
                 </article>
             </div>
         </div>
-                    </div>
+    </div>
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-sm">
