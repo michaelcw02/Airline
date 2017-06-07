@@ -112,24 +112,22 @@ function showPassengersInfo (outboundTicket) {
                             element += '</div>';
                         element += '</div><br><br>';
 
-                        element += '<form class="form" role="form" id="PassengersForm">';
+                        element += '<form class="form" role="form" id="PassengersForm'+ (i+1) +'">';
                             element += '<div class="form-group text-center">';
                                 element += '<button type="button" class="btn btn-success" id="addPassenger'+ (i+1) +'">Add Passenger</button> ';
                                 element += ' <button type="button" class="btn btn-danger" id="cancel'+ (i+1) +'">Cancel</button>';
                             element += '</div>';
 
                             element += '<div class="form-group height25" >';
-                                element += '<div class="alert alert-success hiddenDiv" id="messageResult">';
-                                    element += '<strong id="messageResultTitle">Info!... </strong>';
-                                    element += '<span id="messageResultMessage">This alert box could indicate a neutral informative change or action.</span>';
+                                element += '<div class="alert alert-success hiddenDiv" id="messageResult'+ (i+1) +'">';
+                                    element += '<strong id="messageResult'+ (i+1) +'Title">Info!... </strong>';
+                                    element += '<span id="messageResult'+ (i+1) +'Message">This alert box could indicate a neutral informative change or action.</span>';
                                 element += '</div>';
                             element += '</div>';
                         element += '</form>';
 
                     element += '</form>';
                 element += '</div>'; 
-
-
             }
            element += '</div>';   
         element += '</div>'; 
@@ -137,10 +135,12 @@ function showPassengersInfo (outboundTicket) {
         //modal settings
         showModal('passengersInfo', ' Passengers Information', element);
         for(var i=0; i < outboundTicket.numPassengers; i++){  
-            var buttonSend = "#addPassenger"+(i+1);
-            var buttonCancel = "#cancel"+(i+1);
+            var buttonSend = "#addPassenger" + (i+1);
+            var buttonCancel = "#cancel" + (i+1);
+            var messageResult = "messageResult" + (i+1);
             $(buttonSend).on('click', (event) => {
-                showMessage('messageResult', 'Info!...', 'Adding passenger!');
+                
+                showMessage(messageResult, 'Info!...', ' Adding passenger!');
         //                new AirlineController().reserveFlight(flight.flightNum, mode, (data) => {
         //                    if(data.response[0] == 'S') {
         //                        let response = data.response.split('~')[1];

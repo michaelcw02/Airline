@@ -149,11 +149,20 @@
                                         <img class="icon" src="images/user-48.png" alt="Sign In"><span class="text-SignIn"></span>
                                         <%=user%>
                                     </a>
-                                    <ul class="dropdown-menu logout">
-                                        <a class="btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();return false;">
-                                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                                            Log Out
-                                        </a>
+                                    <ul class="dropdown-menu profile">
+                                        <div>
+                                            <a class="hvr-grow btn btn-info" role="button" href="./profile.jsp">
+                                                <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                                                Profile   
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <a class="hvr-grow btn btn-warning" href="Logout" role="button" onclick="javascript: new AirlineController().logout();return false;">
+                                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                                Log Out
+                                            </a>
+                                        </div>
                                     </ul>
                                 </li>
                             <%}%> 

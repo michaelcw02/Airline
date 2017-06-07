@@ -247,6 +247,15 @@ input {
 	line-height:20px;
 }
 
+.profile-body {
+	background:url('../images/background-20.jpg'); 
+	background-repeat:no-repeat; 
+	background-size:cover; 
+	background-attachment: fixed; 
+	font-family:helvetica, arial, sans-serif;
+	line-height:20px;
+}
+
 .about-us-body {
 	background:url('../images/background-0.jpg'); 
 	background-repeat:no-repeat; 
@@ -376,7 +385,8 @@ article hr {
     height: 60px;
     margin-bottom: 22px;
 }
-.logout {
+.logout,
+.profile{
     background: rgba(51, 51, 51, .8);
     width: 180px;
     text-align: center;
