@@ -626,6 +626,34 @@ Proxy.updateUser = (username, password, name, lastname1, lastname2, email, birth
         dataType: "json"
     });
 }
+Proxy.updateSession = (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) => {
+    $.ajax({
+        url: 'UserServlet',
+        data: {
+            action: "updateSession",
+            username: username,
+            password: password,
+            name: name,
+            lastname1: lastname1,
+            lastname2: lastname2,
+            email: email,
+            birthdate: birthdate,
+            address: address,
+            phone: phone,
+            celular: celular
+        },
+        error: function () {
+            showModal("myModal", "ERROR", "An error occurred when a user was modified");
+            setTimeout(() => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            showModal("myModal", "Status", "The user was updated in the database");
+            setTimeout(() => hideModal('myModal'), 1500);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
 Proxy.getTripsFromCity = (cityFrom, callback) => {
     $.ajax({
         url: 'TripsServlet',

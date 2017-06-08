@@ -47,10 +47,10 @@ public class UserBL {
             user = userDAO.validateUser(username, password);
             if(user != null) {
                 if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                    return (user.isAdministrator() == true) ? "Administrator~" + user.getName() + "~" + user.getLastname1() + "~" 
-                          + user.getLastname2() + "~" + user.getEmail() + "~" + user.getPhone() + "~" + user.getCelular() + "~" + user.getAddress() + "~" + user.getBirthday()
-                            : "Client~"  + user.getName() + "~" + user.getLastname1() + "~" 
-                          + user.getLastname2() + "~" + user.getEmail() + "~" + user.getPhone() + "~" + user.getCelular() + "~" + user.getAddress() + "~" + user.getBirthday();
+                    return (user.isAdministrator() == true) ? "Administrator~" + user.getName() + "~" + user.getLastname1() + "~" + user.getLastname2() 
+                            + "~" + user.getEmail() + "~" + user.getPhone() + "~" + user.getCelular() + "~" + user.getAddress() + "~" + user.getBirthday() + "~" + user.getPassword()
+                            : "Client~"  + user.getName() + "~" + user.getLastname1() + "~" + user.getLastname2() + "~" + user.getEmail() + "~" + 
+                            user.getPhone() + "~" + user.getCelular() + "~" + user.getAddress() + "~" + user.getBirthday() + "~" + user.getPassword();
                 }
             }
         } catch (Exception e) {

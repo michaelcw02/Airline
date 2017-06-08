@@ -159,6 +159,9 @@ AirlineController.prototype = {
     updateUser: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
         Proxy.updateUser(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
     },
+    updateSession: function (username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular) {
+        Proxy.updateSession(username, password, name, lastname1, lastname2, email, birthdate, address, phone, celular);
+    },
     deleteUser: function (username) {
         Proxy.deleteUser(username);
     },

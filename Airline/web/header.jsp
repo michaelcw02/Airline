@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 
 <%
-    session = request.getSession();
+    session = request.getSession(true);
     if (session == null) {
         session = request.getSession(true);
         session.setAttribute("loginStatus", "Not a User");

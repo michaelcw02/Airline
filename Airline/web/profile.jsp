@@ -22,20 +22,23 @@
 </head>
 
 <body class="profile-body">
-    <% String user =(String) request.getSession().getAttribute("user"); %>
-    <% String lastname1 =(String) request.getSession().getAttribute("lastname1"); %>
-    <% String lastname2 =(String) request.getSession().getAttribute("lastname2"); %>
-    <% String username =(String) request.getSession().getAttribute("username"); %>
-    <% String phone =(String) request.getSession().getAttribute("phone"); %>
-    <% String cellphone =(String) request.getSession().getAttribute("cellphone"); %>
-    <% String email =(String) request.getSession().getAttribute("email"); %>
-    <% String location =(String) request.getSession().getAttribute("location"); %>
-    <% String birth = (String) request.getSession().getAttribute("birth"); %>
-    <% String[] separated = birth.split("-"); %>
-    <% String year = separated[0]; %>
-    <% String month = separated[1]; %>
-    <% String day = separated[2]; %>
-    <% birth = month + "/" + day + "/" + year; %>
+  <% String user =(String) request.getSession().getAttribute("user"); 
+     String lastname1 =(String) request.getSession().getAttribute("lastname1"); 
+     String lastname2 =(String) request.getSession().getAttribute("lastname2"); 
+     String username =(String) request.getSession().getAttribute("username"); 
+     String phone =(String) request.getSession().getAttribute("phone"); 
+     String cellphone =(String) request.getSession().getAttribute("cellphone"); 
+     String email =(String) request.getSession().getAttribute("email");
+     String pass =(String) request.getSession().getAttribute("pass"); 
+     String location =(String) request.getSession().getAttribute("location"); 
+     String birth = (String) request.getSession().getAttribute("birth");
+     String[] separated = birth.split("-"); 
+     if (separated.length == 3){ 
+       String year = separated[0];
+       String month = separated[1];
+       String day = separated[2]; 
+       birth = month + "/" + day + "/" + year;
+    }%>
     
     <div class="container top-container">
         <jsp:include page="header.jsp" />
@@ -120,14 +123,14 @@
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Password:</div>
-                                    <div class='col-sm-6'><input type='password' id='pass' class='form-control bg-black text-white'></div>
+                                    <div class='col-sm-6'><input type='password' id='pass' class='form-control bg-black text-white' value=<%=pass%>></div>
                                 </div>
                             </div>
                             <br>
                             <div class='row'>
                                 <div class='form-group text-center'>
                                     <div class='col-sm-offset-2 col-sm-3 text-center text-white label'>Repeat Password:</div>
-                                    <div class='col-sm-6'><input type='password' id='passwordRepeat' class='form-control bg-black text-white'></div>
+                                    <div class='col-sm-6'><input type='password' id='passwordRepeat' class='form-control bg-black text-white' value=<%=pass%>></div>
                                 </div>
                             </div>
                             <br>
