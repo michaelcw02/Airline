@@ -124,7 +124,6 @@ function showPassengersInfo(outboundTicket) {
             element += '<div class="col-sm-4"><input type="text" name="lastname" class="form-control" placeholder="Doe" value="' + lastname + '"></div>';
             element += '</div>';
             element += '</div><br><br>';
-
             element += '<form class="form" role="form" id="PassengersForm">';
             element += '<div class="form-group text-center">';
             element += '<button type="button" class="btn btn-success" id="addPassenger' + (i + 1) + '">Add Passenger</button> ';
@@ -158,7 +157,7 @@ function showPassengersInfo(outboundTicket) {
                     lastname: document.getElementById(form).elements.namedItem("lastname").value
                 }
                 new AirlineController().addPassenger(pass);
-            })
+            });
             $(buttonCancel).on('click', (event) => {
                 $('#passengersInfo').modal('hide');
                 $('#passengersInfoMessage').html('');

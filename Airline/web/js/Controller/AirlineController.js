@@ -32,15 +32,19 @@ AirlineController.prototype = {
     },
     getAllTrips: function (callback) {
         Proxy.getTrips((data) => {
+            Storage.store('allTrips', data);
             callback(data);
         })
+    },
+    retrieveAllTrips: function () {
+        return Storage.retrieve('allTrips');
     },
     searchCitiesTo: function (codeCityFrom, callback) {
         if (codeCityFrom != 0) {
             Proxy.getTripsFromCity(codeCityFrom, (data) => {
                 let citiesTo = [];
                 data = data.filter((trip) => {
-                    return(trip.cityByDepartureCity.code === codeCityFrom)
+                    return (trip.cityByDepartureCity.code === codeCityFrom)
                 });
                 data.forEach((trip) => {
                     citiesTo.push(trip.cityByArrivalCity)
@@ -191,9 +195,9 @@ AirlineController.prototype = {
         });
     },
     cancelReservation: function (callback) {
-        Proxy.cancelReservation( (data) => {
+        Proxy.cancelReservation((data) => {
             callback(data);
-        } ) 
+        })
     },
     loginUser: function () {
         $('#username').removeClass("has-error");
@@ -221,12 +225,12 @@ AirlineController.prototype = {
         });
     },
     getReservedFlights: function (callback) {
-        Proxy.getReservedFlights( (reserveFlights) => {
-            if(reserveFlights) {
+        Proxy.getReservedFlights((reserveFlights) => {
+            if (reserveFlights) {
                 Storage.store('TicketsInfo', reserveFlights);
                 callback(reserveFlights);
             }
-        } )
+        })
     },
     retrieveReservedFlights: function (callback) {
         let reservedFlights = Storage.retrieve('TicketsInfo');
@@ -236,11 +240,14 @@ AirlineController.prototype = {
             this.getReservedFlights(callback);
     },
     getFlightSeatsInfo: function (flightNum, callback) {
-        Proxy.getFlightSeatsInfo( flightNum, (data) => {
-            if(data.length > 0) {
+        Proxy.getFlightSeatsInfo(flightNum, (data) => {
+            if (data.length > 0) {
                 callback(data);
             }
-        } );
+        });
+    },
+    generateFlights: function (dates, flightNum1, idTrip, codeAirplane) {
+        Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane);
     },
     addPassenger: function(passenger, callback) {
         Proxy.addPassengerToTicket( passenger, (data) => {

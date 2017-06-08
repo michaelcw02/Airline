@@ -106,11 +106,25 @@ public class UserServlet extends HttpServlet {
                     String[] separated = type.split("~");
                     type = separated[0];
                     String name = separated[1];
+                    String lastName1 = separated[2];
+                    String lastName2 = separated[3];
+                    String email = separated[4];
+                    String phone = separated[5];
+                    String cellphone = separated[6];
+                    String location = separated[7];
+                    String birth = separated[8];
                     json = "{}";
                     if(!type.equals("Not A User")) {
                         session.setAttribute("user", name);
                         session.setAttribute("type", type);
                         session.setAttribute("username", username);
+                        session.setAttribute("lastname1", lastName1);
+                        session.setAttribute("lastname2", lastName2);
+                        session.setAttribute("email", email);
+                        session.setAttribute("phone", phone);
+                        session.setAttribute("cellphone", cellphone);
+                        session.setAttribute("location", location);
+                        session.setAttribute("birth", birth);
                         session.setAttribute("loginStatus", "logged.");
                         json = "{\"response\":\"C~The user has been validated successfully\"}";
                     }

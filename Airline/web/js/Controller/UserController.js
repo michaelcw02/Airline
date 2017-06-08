@@ -111,7 +111,7 @@ UserController.prototype = {
                 direction: this.view.$("#direction").val()
             }
             this.airlineController.addUser(user, 1, 0, (data) => {
-                showModal('myModal', 'Status', 'The user was successfully registered into the database, please login');
+                showModal('myModal', 'Status', 'The user was successfully registered into the database');
                 setTimeout( () => { hideModal('myModal') }, 1500);
             });
             hideModal("myModalUser");

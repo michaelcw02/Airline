@@ -19,6 +19,18 @@
     </head>
     <body>
         <jsp:include page="header.jsp" />
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalTitle">Modal Header</h4>
+                    </div>
+                    <div class="modal-body" id="myModalMessage">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="page-header">
                 <h1>Management <small>System for the administration of flights</small></h1>
@@ -30,9 +42,18 @@
                 <div class="panel-body">
 
                     <form role="form" onsubmit="return false;" id="form" class="form-horizontal centered">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="identifier">Initials for the flights identifiers:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Initials identifiers only 3 letters" id="identifier">
+                            </div>
+                        </div>
+
                         <div class=" form-group row">          
                             <div class="col-sm-1">
-                                <label for="tripsAvailable">Trips:</label>
+                                <label for="tripsAvailable">Available trips:</label>
                             </div> 
                             <div class="col-sm-6">
                                 <select class='form-control' id='tripsAvailable'>
@@ -49,6 +70,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="notify">Select the range of dates for your flights:</label>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <input type="text" class="form-control" placeholder="First Date" id="firstDate">
@@ -85,3 +112,4 @@
         <!-- VIEW -->
         <script type="text/javascript" src="js/View/FlightView.js"></script>
     </body>
+</html>

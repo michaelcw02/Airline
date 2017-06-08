@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author michaelcw02
@@ -30,7 +29,7 @@ public final class Database {
             cnx = this.getConnection(null, null, null);
         }
     }
-    
+
     public boolean setConnectionAutoCommit(boolean autoCommit) {
         try {
             cnx.setAutoCommit(autoCommit);
@@ -39,7 +38,7 @@ public final class Database {
         }
         return true;
     }
-    
+
     public boolean connectionCommit() {
         try {
             cnx.commit();
@@ -48,6 +47,7 @@ public final class Database {
         }
         return true;
     }
+
     public boolean connectionRollback() {
         try {
             cnx.rollback();
