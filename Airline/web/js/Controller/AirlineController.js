@@ -300,5 +300,10 @@ AirlineController.prototype = {
             console.log(data);
             callback(data);
         })
+    },
+    confirmReservation: function( callback) {
+        Proxy.confirmReservation( (data) => {
+
+        })
     }
 }

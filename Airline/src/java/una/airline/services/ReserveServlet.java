@@ -185,8 +185,16 @@ public class ReserveServlet extends HttpServlet {
                         response.sendRedirect("index.jsp");
                         break;
                     }
-                    
-
+                case "confirmReservation":
+                    if(session.getAttribute("Reservation") != null) {
+                        if(session.getAttribute("username") != null) {
+                            String username = (String) session.getAttribute("username");
+                            Reserve reservation = (Reserve) session.getAttribute("Reservation");
+                            
+                        }                        
+                    }
+                    response.sendRedirect("index.jsp");
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;

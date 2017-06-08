@@ -31,7 +31,9 @@ TicketsController.prototype = {
         });
     },
     confirmReservation: function () {
-        
+        this.airlineController.confirmReservation( () => {
+
+        } );
     },
     cancelReservation: function () {
         window.location.replace("/Airline");
