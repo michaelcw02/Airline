@@ -49,7 +49,7 @@ function calculateEstimated(departureTime, duration) {
     if (departureTime.length < 3 && departureTime.length > 0) {
         var addedMin = parseInt(departureTime) + duration;
         var min = addedMin % 60;
-        var addedHours = addedMin / 60;
+        var addedHours = Math.floor(addedMin / 60);
         var hour = addedHours % 24;
         var days = Math.floor(addedHours / 24);
         return days + '~' + hour + min;
