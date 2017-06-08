@@ -218,10 +218,14 @@ public class ReserveServlet extends HttpServlet {
                                 }
                                 
                                 reserveBL.addReserve(reservation);
-                                
+                                json = "{\"response\":\"S~Reservation Complete!\"}";
+                                out.print(json);
+                                break;
                             }
                         }                        
                     }
+                    json = "{\"response\":\"E~Could not get reservation!\"}";
+                    out.print(json);
                     response.sendRedirect("index.jsp");
                     break;
                 default:
