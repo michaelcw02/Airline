@@ -175,14 +175,17 @@ public class BaseDAO {
             PassengerID passengerID = new PassengerID(passport, number);
             String name = rs.getString("name");
             String lastname = rs.getString("lastname");
-            String seat = rs.getString("seat");
+            String seatNum = rs.getString("seat");
             boolean checked = (rs.getInt("checked") == 1);
 
             Ticket ticket = null;
+            Seat seat = null;
             try {
                 ticket = (Ticket) new TicketDAO().findByID(number);
+                SeatID seatID = new SeatID(seatNum, ticket.getFlight().getFlightNum());
+                seat = (Seat) new SeatDAO().getSeatByID(seatID);
             } catch (Exception e) {
-                throw new Exception("E~There was an issue with the Ticket of Passenger", e);
+                throw new Exception("E~There was an issue with the seat of Passenger", e);
             }
             return new Passenger(passengerID, ticket, name, lastname, seat);
         } catch (SQLException e) {

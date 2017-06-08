@@ -18,11 +18,14 @@ import javax.servlet.http.HttpSession;
 import una.airline.bl.FlightsBL;
 import una.airline.bl.PassengerBL;
 import una.airline.bl.ReserveBL;
+import una.airline.bl.SeatsBL;
 import una.airline.bl.TicketsBL;
 import una.airline.bl.UserBL;
 import una.airline.domain.Passenger;
 import una.airline.domain.Reserve;
 import una.airline.domain.RoundTripInfo;
+import una.airline.domain.Seat;
+import una.airline.domain.SeatID;
 import una.airline.domain.Ticket;
 import una.airline.domain.User;
 
@@ -89,15 +92,81 @@ public class ReserveServlet extends HttpServlet {
                                 out.print(json);
                                 break;
                             }
-                            outPassengerList.add(passenger);
-                            session.setAttribute("inPassengerList", outPassengerList);
+                            inPassengerList.add(passenger);
+                            session.setAttribute("inPassengerList", inPassengerList);
                         }
-                        json = "{\"response\":\"E~Passenger Added!\"}";
+                        json = "{\"response\":\"S~Passenger Added!\"}";
                         out.print(json);
                         break;
                     } else {
                         response.sendRedirect("index.jsp");
+                        break;
                     }
+                case "getPassengerList":
+                    if(session.getAttribute("OutboundReservation") != null) {
+                        LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                        if(outPassengerList != null) {
+                            json = new Gson().toJson(outPassengerList);
+                        } else {
+                            json = "{\"response\":\"E~No passenger found!\"}";
+                        }
+                        out.print(json);
+                        break;
+                    } else {
+                        response.sendRedirect("index.jsp");
+                        break;
+                    }
+                case "addPassengerSeat":
+                    if(session.getAttribute("OutboundReservation") != null) {
+                        String mode = request.getParameter("mode");
+                        String flightNum = request.getParameter("flightNum");
+                        String seatNum = request.getParameter("seatID");
+                        int index = Integer.parseInt(request.getParameter("index"));
+                        reserve = (Reserve) session.getAttribute("Reservation");
+                        json = "";
+                        if(mode.equals("OUTBOUND")) {
+                            Ticket outboundTicket = reserve.getOutboundTicket();
+                            if(outboundTicket.getFlight().getFlightNum().equalsIgnoreCase(flightNum)) {
+                                LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                                if(outPassengerList != null) {
+                                    Passenger p = outPassengerList.get(index);
+                                    SeatID seatID = new SeatID(seatNum, flightNum);
+                                    Seat seat = new SeatsBL().getSeatByID(seatID);
+                                    p.setSeat(seat);
+                                    outPassengerList.set(index, p);
+                                    json = "{\"response\":\"S~Seat assigned successfully!\"}";
+                                } else {
+                                    json = "{\"response\":\"E~You have to add the passengers first!\"}";
+                                }
+                            } else {
+                                json = "{\"response\":\"CE~Internal Error!\"}";
+                            }
+                        }
+                        if(mode.equals("RETURN")) {
+                            Ticket returnTicket = reserve.getReturnTicket();
+                            if(returnTicket.getFlight().getFlightNum().equalsIgnoreCase(flightNum)) {
+                                LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                                if(inPassengerList != null) {
+                                    Passenger p = inPassengerList.get(index);
+                                    SeatID seatID = new SeatID(seatNum, flightNum);
+                                    Seat seat = new SeatsBL().getSeatByID(seatID);
+                                    p.setSeat(seat);
+                                    inPassengerList.set(index, p);
+                                    json = "{\"response\":\"S~Seat assigned successfully!\"}";
+                                } else {
+                                    json = "{\"response\":\"E~You have to add the passengers first!\"}";
+                                }
+                            } else {
+                                json = "{\"response\":\"CE~Internal Error!\"}";
+                            }
+                        }
+                        out.print(json);
+                        break;
+                    } else {
+                        response.sendRedirect("index.jsp");
+                        break;
+                    }
+                    
 
                 default:
                     out.print("E~No se indico la acción que se desea realizare");

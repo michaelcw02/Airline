@@ -70,7 +70,6 @@ IndexController.prototype = {
             });
         }
     },
-
     pageButtonsHandler: function (pageNum) {
         let results = this.airlineController.retrieveSearchFlights();
         this.showSearchFlights(pageNum, results);

@@ -15,7 +15,7 @@ public class Passenger implements java.io.Serializable {
     private Ticket ticket;
     private String name;
     private String lastname;
-    private String seat;
+    private Seat seat;
     private boolean checked;
 
     public Passenger() {
@@ -26,7 +26,7 @@ public class Passenger implements java.io.Serializable {
         this.ticket = ticket;
     }
 
-    public Passenger(PassengerID id, Ticket ticket, String name, String lastname, String seat) {
+    public Passenger(PassengerID id, Ticket ticket, String name, String lastname, Seat seat) {
         this.id = id;
         this.ticket = ticket;
         this.name = name;
@@ -67,11 +67,11 @@ public class Passenger implements java.io.Serializable {
         this.lastname = lastname;
     }
 
-    public String getSeat() {
+    public Seat getSeat() {
         return this.seat;
     }
 
-    public void setSeat(String seat) {
+    public void setSeat(Seat seat) {
         this.seat = seat;
     }
 

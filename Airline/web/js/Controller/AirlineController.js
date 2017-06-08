@@ -235,6 +235,13 @@ AirlineController.prototype = {
             }
         })
     },
+    retrieveReservedFlights: function (callback) {
+        let reservedFlights = Storage.retrieve('TicketsInfo');
+        if(reservedFlights != null)
+            callback(reservedFlights);
+        else
+            this.getReservedFlights(callback);
+    },
     getFlightSeatsInfo: function (flightNum, callback) {
         Proxy.getFlightSeatsInfo(flightNum, (data) => {
             if (data.length > 0) {
@@ -245,5 +252,44 @@ AirlineController.prototype = {
     generateFlights: function (dates, flightNum1, idTrip, codeAirplane) {
         Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane);
     },
-
+    addPassenger: function(passenger, callback) {
+        Proxy.addPassengerToTicket( passenger, (data) => {
+            let msg = data.response.split('~');
+            if(msg[0] === 'E') {
+                showModal('myModal', 'Error!...', msg[1]);
+            }
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Success!...', msg[1]);
+            }
+            setTimeout(() => hideModal('myModal'), 1500);
+        });
+    },
+    getPassengerList: function(callback) {
+        Proxy.getPassengerList( (data) => {
+            if(data.response === undefined) {
+                console.log(data);
+                callback(data);
+            } else {
+                callback(undefined);
+            }
+        });
+    },
+    addPassengerSeat: function(index, seatID, flightNum, mode, callback) {
+        Proxy.addPassengerSeat(index, seatID, flightNum, mode, (data) => {
+            let msg = data.response.split('~');
+            if(msg[0] === 'CE') {
+                showModal('myModal', 'Error!...', msg[1]);
+                window.location.replace("/Airline");
+            }
+            if(msg[0] === 'E') {
+                showModal('myModal', 'Error!...', msg[1]);
+            }
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Success!...', msg[1]);
+            }
+            setTimeout(() => hideModal('myModal'), 1500);
+            
+            if(callback !== undefined)  callback(data);
+        });
+    },
 }

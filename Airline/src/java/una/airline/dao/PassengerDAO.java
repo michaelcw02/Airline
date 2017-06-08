@@ -23,7 +23,7 @@ public class PassengerDAO extends BaseDAO {
                 passenger.getTicket().getNumber(),
                 passenger.getName(),
                 passenger.getLastname(),
-                passenger.getSeat(),
+                passenger.getSeat().getId().getSeatNumber(),
                 passenger.isChecked()
         );
         System.out.println(query);

@@ -365,12 +365,15 @@ article hr {
 #flightDetail,
 #modalRoute,
 #myModalTypeAirplane,
-#myModal,
 #myModalCity,
 #modalAirplane,
 #myModalUser,
-#passengersInfo{
+#passengersInfo,
+#seatBooking{
     z-index: 6000 !important;
+}
+#myModal {
+    z-index: 15000 !important;
 }
 
 .height25{
@@ -396,10 +399,6 @@ article hr {
 }
 .ui-datepicker {
     z-index: 7000 !important;
-}
-
-#seatBooking {
-    z-index: 10000 !important;
 }
 .sidenav {
       background-color: #f1f1f1;
