@@ -898,3 +898,22 @@ Proxy.getSeatsOfFlight = (flightNum, callback) => {
     });
 
 }
+Proxy.confirmReservation = (callback) => {
+    $.ajax({
+        url: 'ReserveServlet',
+        data: {
+            action: "confirmReservation",
+            flightNum: flightNum,
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not confirm the reservation");
+            setTimeout( () => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+
+}

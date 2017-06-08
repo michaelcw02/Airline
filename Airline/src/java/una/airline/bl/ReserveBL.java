@@ -43,15 +43,4 @@ public class ReserveBL {
         return null;
     }
     
-    public void addTicketNPassengers(Ticket ticket, List<Passenger> passengers) {
-        TicketsBL ticketsBL = new TicketsBL();
-        ticketsBL.addTicket(ticket);
-        int ticketNumber = ticketsBL.findLastNumber();
-        ticket = ticketsBL.findByID(ticketNumber);
-        PassengerBL passengerBL = new PassengerBL();
-        for(Passenger p : passengers) {
-            p.setTicket(ticket);
-            passengerBL.addPassenger(p);
-        }
-    }
 }
