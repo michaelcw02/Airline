@@ -100,10 +100,8 @@
         <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="js/Model/utils.js" type="text/javascript"></script>
-        <!-- MODEL -->
-        <script type="text/javascript" src="js/Model/Flight/Flight.js"></script>
         <!-- NEW -->
+        <script type="text/javascript" src="js/Model/utils.js"></script>
         <script type="text/javascript" src="js/Model/Proxy.js"></script>
         <!-- CONTROLLER -->
         <script type="text/javascript" src="js/Controller/Storage.js"></script>

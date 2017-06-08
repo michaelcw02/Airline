@@ -267,8 +267,8 @@ AirlineController.prototype = {
             setTimeout(() => hideModal('myModal'), 1500);
         });
     },
-    getPassengerList: function(callback) {
-        Proxy.getPassengerList( (data) => {
+    getPassengerList: function(mode, callback) {
+        Proxy.getPassengerList(mode, (data) => {
             if(data.response === undefined) {
                 console.log(data);
                 callback(data);
@@ -290,7 +290,7 @@ AirlineController.prototype = {
             if(msg[0] === 'S') {
                 showModal('myModal', 'Success!...', msg[1]);
             }
-            setTimeout(() => hideModal('myModal'), 1500);
+
             
             if(callback !== undefined)  callback(data);
         });

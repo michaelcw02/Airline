@@ -103,12 +103,20 @@ public class ReserveServlet extends HttpServlet {
                         break;
                     }
                 case "getPassengerList":
+                    String mode = request.getParameter("mode");
                     if(session.getAttribute("OutboundReservation") != null) {
-                        LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
-                        if(outPassengerList != null) {
-                            json = new Gson().toJson(outPassengerList);
-                        } else {
-                            json = "{\"response\":\"E~No passenger found!\"}";
+                        json = "{\"response\":\"E~No passenger found!\"}";
+                        if(mode.equals("OUTBOUND")) {
+                            LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                            if(outPassengerList != null) {
+                                json = new Gson().toJson(outPassengerList);
+                            }
+                        }
+                        if(mode.equals("RETURN")) {
+                            LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                            if(inPassengerList != null) {
+                                json = new Gson().toJson(inPassengerList);
+                            }
                         }
                         out.print(json);
                         break;
@@ -128,7 +136,7 @@ public class ReserveServlet extends HttpServlet {
                     }                    
                 case "addPassengerSeat":
                     if(session.getAttribute("OutboundReservation") != null) {
-                        String mode = request.getParameter("mode");
+                        mode = request.getParameter("mode");
                         flightNum = request.getParameter("flightNum");
                         String seatNum = request.getParameter("seatID");
                         int index = Integer.parseInt(request.getParameter("index"));

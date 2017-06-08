@@ -816,11 +816,12 @@ Proxy.getFlightSeatsInfo = (flightNum, callback) => {
         dataType: "json"
     });
 }
-Proxy.getPassengerList = (callback) => {
+Proxy.getPassengerList = (mode, callback) => {
     $.ajax({
         url: 'ReserveServlet',
         data: {
             action: "getPassengerList",
+            mode: mode
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not get the passengers information");
