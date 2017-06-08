@@ -86,7 +86,7 @@ public class FlightsServlet extends HttpServlet {
                     int tripCode = Integer.parseInt(request.getParameter("idTrip"));
                     String airpID = request.getParameter("codeAirplane");
                     flightsBL.generateFlights(dates, num, tripCode, airpID);
-                    out.print("{\"data\":\"C~El vuelo fue ingresado correctamente\"}");
+                    out.print("{\"response\":\"C~The flights and its seats are successfully added!\"}");
                     break;
                 default:
                     out.print("{'response':'E~Did not receive any action'");

@@ -63,7 +63,7 @@ FlightController.prototype = {
                 var flightNum1 = $("#identifier").val();
                 var i = 0;
                 this.airlineController.generateFlights(dates, flightNum1, idTrip, codeAirplane);
-                showModal("myModal", "Waiting...", "Inserting Flights..");
+                showModal("myModal", "Waiting...", "<h4>This will take a while, we will notify you when it's ready</h4>");
                 setTimeout(() => hideModal('myModal'), 6000);
             }
         } else {

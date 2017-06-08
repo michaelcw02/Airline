@@ -71,7 +71,7 @@ public class SeatDAO extends BaseDAO {
     }
 
     public Seat getSeatByID(SeatID id) throws Exception {
-        String query = "SELECT * FROM Seat WHERE flight_num = '%d' AND seat_num = '%s';";
+        String query = "SELECT * FROM Seat WHERE flight_num = '%s' AND seat_num = '%s';";
         query = String.format(query, id.getFlightNum(), id.getSeatNumber());
         ResultSet rs = connection.executeQuery(query);
         if (rs.next()) {
@@ -82,7 +82,7 @@ public class SeatDAO extends BaseDAO {
     }
 
     public int updateSeat(Seat seat) {
-        String query = "UPDATE Seat SET passenger = '%s', ticket_num = '%d' WHERE flight_num = '%s' AND seat_num = '$s'";
+        String query = "UPDATE Seat SET passenger = '%s', ticket_num = '%d' WHERE flight_num = '%s' AND seat_num = '%s'";
         query = String.format(query, seat.getPassenger().getID().getPassport(), seat.getPassenger().getID().getTicketNum(), seat.getFlight().getFlightNum(), seat.getId().getSeatNumber());
         int result = connection.executeUpdate(query);
         return result;

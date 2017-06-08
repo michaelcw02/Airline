@@ -828,7 +828,7 @@ Proxy.addPassengerSeat = (index, seatID, flightNum, mode, callback) => {
     });
 }
 
-Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane) => {
+Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane, callback) => {
     let json = JSON.stringify(dates);
     console.log(json);
     $.ajax({
@@ -845,6 +845,7 @@ Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane) => {
             setTimeout(() => hideModal('myModal'), 3000);
         },
         success: (data) => {
+            callback(data);
         },
         type: 'POST',
         dataType: "json"

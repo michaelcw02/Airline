@@ -133,6 +133,7 @@ public class ReserveServlet extends HttpServlet {
                                     SeatID seatID = new SeatID(seatNum, flightNum);
                                     Seat seat = new SeatsBL().getSeatByID(seatID);
                                     p.setSeat(seat);
+                                    seat.setPassenger(p);
                                     outPassengerList.set(index, p);
                                     json = "{\"response\":\"S~Seat assigned successfully!\"}";
                                 } else {

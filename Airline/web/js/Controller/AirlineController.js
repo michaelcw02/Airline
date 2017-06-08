@@ -247,7 +247,10 @@ AirlineController.prototype = {
         });
     },
     generateFlights: function (dates, flightNum1, idTrip, codeAirplane) {
-        Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane);
+        Proxy.generateFlights(dates, flightNum1, idTrip, codeAirplane, (data) => {
+            let msg = data.response.split('~');
+            showModal('myModal', 'Success!...', msg[1]);
+        });
     },
     addPassenger: function(passenger, callback) {
         Proxy.addPassengerToTicket( passenger, (data) => {
