@@ -7,7 +7,9 @@ package una.airline.bl;
 
 import java.util.List;
 import una.airline.dao.ReserveDAO;
+import una.airline.domain.Passenger;
 import una.airline.domain.Reserve;
+import una.airline.domain.Ticket;
 
 /**
  *
@@ -39,5 +41,17 @@ public class ReserveBL {
         } catch (Exception ex) {
         }
         return null;
+    }
+    
+    public void addTicketNPassengers(Ticket ticket, List<Passenger> passengers) {
+        TicketsBL ticketsBL = new TicketsBL();
+        ticketsBL.addTicket(ticket);
+        int ticketNumber = ticketsBL.findLastNumber();
+        ticket = ticketsBL.findByID(ticketNumber);
+        PassengerBL passengerBL = new PassengerBL();
+        for(Passenger p : passengers) {
+            p.setTicket(ticket);
+            passengerBL.addPassenger(p);
+        }
     }
 }

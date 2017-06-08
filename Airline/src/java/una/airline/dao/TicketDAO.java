@@ -26,7 +26,7 @@ public class TicketDAO extends BaseDAO {
             throw new Exception("Ticket already exists.");
         }
     }
-    
+
     public int addTicket(String flightNum, int numPassengers) {
         String query = "INSERT INTO `airlinedb`.`ticket` (`flight_num`, `number_passengers`) VALUES ('%s', '%d');";
         query = String.format(query, flightNum, numPassengers);
@@ -59,8 +59,18 @@ public class TicketDAO extends BaseDAO {
     }
 
     public Ticket createTicket(String flightNum, int numPassengers) {
-        
-        return null;        
+
+        return null;
     }
-    
+
+    public int getAutoIncremental() throws Exception {
+        String query = "SELECT MAX(number) FROM Ticket;";
+        query = String.format(query);
+        ResultSet rs = connection.executeQuery(query);
+        if (rs.next()) {
+            return rs.getInt("MAX(number)");
+        }
+        throw new Exception("E~Ticket does not exists");
+    }
+
 }

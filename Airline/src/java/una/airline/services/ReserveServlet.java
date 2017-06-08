@@ -187,10 +187,39 @@ public class ReserveServlet extends HttpServlet {
                     }
                 case "confirmReservation":
                     if(session.getAttribute("Reservation") != null) {
+                        Reserve reservation = (Reserve) session.getAttribute("Reservation");
                         if(session.getAttribute("username") != null) {
                             String username = (String) session.getAttribute("username");
-                            Reserve reservation = (Reserve) session.getAttribute("Reservation");
-                            
+                            if(reservation.getOutboundTicket() != null) {
+                                
+                                TicketsBL ticketsBL = new TicketsBL();
+                                Ticket outboundTicket = reservation.getOutboundTicket();
+                                outboundTicket = ticketsBL.addNGetTicket(outboundTicket);
+                                
+                                PassengerBL passengerBL = new PassengerBL();
+                                LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                                outPassengerList = (LinkedList<Passenger>) passengerBL.addNGetListPassenger(outPassengerList, outboundTicket);
+                                
+                                
+                                reservation.setOutboundTicket(outboundTicket);
+                                PassengerBL passBL = new PassengerBL();
+                                
+                                
+                                LinkedList<Passenger> inPassengerList = null;
+                                if(reservation.getReturnTicket() != null) {
+                                    Ticket returnTicket = null;
+                                    returnTicket = reservation.getReturnTicket();
+                                    returnTicket = ticketsBL.addNGetTicket(returnTicket);
+                                    
+                                    inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                                    inPassengerList = (LinkedList<Passenger>) passengerBL.addNGetListPassenger(inPassengerList, returnTicket);
+                                
+                                    reservation.setReturnTicket(returnTicket);
+                                }
+                                
+                                reserveBL.addReserve(reservation);
+                                
+                            }
                         }                        
                     }
                     response.sendRedirect("index.jsp");
