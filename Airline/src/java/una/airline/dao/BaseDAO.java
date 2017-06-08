@@ -175,15 +175,12 @@ public class BaseDAO {
             PassengerID passengerID = new PassengerID(passport, number);
             String name = rs.getString("name");
             String lastname = rs.getString("lastname");
-            String seatNum = rs.getString("seat");
+            String seat = rs.getString("seat");
             boolean checked = (rs.getInt("checked") == 1);
 
             Ticket ticket = null;
-            Seat seat = null;
             try {
                 ticket = (Ticket) new TicketDAO().findByID(number);
-                SeatID seatID = new SeatID(seatNum, ticket.getFlight().getFlightNum());
-                seat = (Seat) new SeatDAO().getSeatByID(seatID);
             } catch (Exception e) {
                 throw new Exception("E~There was an issue with the seat of Passenger", e);
             }
@@ -193,7 +190,7 @@ public class BaseDAO {
         }
     }
 
-    protected Seat seat(ResultSet rs) throws Exception {
+    protected Seat seat(ResultSet rs, Flight flight) throws Exception {
         try {
             String seatNumber = rs.getString("seat_num");
             String flightNum = rs.getString("flight_num");
@@ -204,12 +201,13 @@ public class BaseDAO {
 
             PassengerID passengerID = new PassengerID(passport, ticketNum);
             Passenger passenger = null;
-            Flight flight = null;
             try {
                 if (passport != null & ticketNum != 0) {
                     passenger = (Passenger) new PassengerDAO().findByID(passengerID);
                 }
-                flight = (Flight) new FlightDAO().findByID(flightNum);
+                if(flight == null) {
+                    flight = (Flight) new FlightDAO().findByID(flightNum);
+                }
             } catch (Exception ex) {
                 throw new Exception("E~Passenger does not exists");
             }

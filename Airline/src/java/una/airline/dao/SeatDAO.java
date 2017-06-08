@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import una.airline.domain.Flight;
 import una.airline.domain.Seat;
 import una.airline.domain.SeatID;
 
@@ -42,14 +43,15 @@ public class SeatDAO extends BaseDAO {
         }
     }
 
-    public Map<String, Seat> getAllSeatsOfFlight(String flightNum) {
-        Map<String, Seat> map = new HashMap<String, Seat>();
+    public Map<String, Seat> getAllOccupiedSeatsOfFlight(String flightNum) {
+        Map<String, Seat> map = new HashMap<>();
         try {
-            String query = "SELECT * FROM Seat WHERE flight_num = '%s';";
+            Flight flight = new FlightDAO().findByID(flightNum);
+            String query = "SELECT * FROM Seat WHERE flight_num = '%s' AND passenger IS NOT NULL;";
             query = String.format(query, flightNum);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
-                Seat s = seat(rs);
+                Seat s = seat(rs, flight);
                 map.put(s.getId().getSeatNumber(), s);
             }
         } catch (Exception e) {
@@ -63,7 +65,7 @@ public class SeatDAO extends BaseDAO {
             String query = "SELECT * FROM Seat;";
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
-                listaResultado.add(seat(rs));
+                listaResultado.add(seat(rs, null));
             }
         } catch (Exception e) {
         }
@@ -75,7 +77,7 @@ public class SeatDAO extends BaseDAO {
         query = String.format(query, id.getFlightNum(), id.getSeatNumber());
         ResultSet rs = connection.executeQuery(query);
         if (rs.next()) {
-            return seat(rs);
+            return seat(rs, null);
         } else {
             throw new Exception("E~City not found.");
         }

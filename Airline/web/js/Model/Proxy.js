@@ -830,7 +830,6 @@ Proxy.addPassengerSeat = (index, seatID, flightNum, mode, callback) => {
 
 Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane, callback) => {
     let json = JSON.stringify(dates);
-    console.log(json);
     $.ajax({
         url: 'FlightsServlet',
         data: {
@@ -850,4 +849,23 @@ Proxy.generateFlights = (dates, flightNum1, idTrip, codeAirplane, callback) => {
         type: 'POST',
         dataType: "json"
     });
+}
+Proxy.getSeatsOfFlight = (flightNum, callback) => {
+    $.ajax({
+        url: 'ReserveServlet',
+        data: {
+            action: "getSeatsOfFlight",
+            flightNum: flightNum,
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not get the seats of passenger");
+            setTimeout( () => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+
 }

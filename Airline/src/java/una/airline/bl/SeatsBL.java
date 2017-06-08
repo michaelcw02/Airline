@@ -32,8 +32,8 @@ public class SeatsBL {
     public List<Seat> getAllSeats() {
         return this.seatDAO.getAllSeats();
     }
-    public Map<String, Seat> getAllSeatsByFlight(String flightNum) {
-        return this.seatDAO.getAllSeatsOfFlight(flightNum);
+    public Map<String, Seat> getAllOccupiedSeatsOfFlight(String flightNum) {
+        return this.seatDAO.getAllOccupiedSeatsOfFlight(flightNum);
     }
     public Seat getSeatByID(SeatID id) {
         try {

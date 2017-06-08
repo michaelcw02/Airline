@@ -116,10 +116,20 @@ public class ReserveServlet extends HttpServlet {
                         response.sendRedirect("index.jsp");
                         break;
                     }
+                case "getSeatsOfFlight":
+                    String flightNum = request.getParameter("flightNum");
+                    if(session.getAttribute("OutboundReservation") != null) {
+                        json = new Gson().toJson( new SeatsBL().getAllOccupiedSeatsOfFlight(flightNum) );
+                        out.print(json);
+                        break;
+                    } else {
+                        response.sendRedirect("index.jsp");
+                        break;
+                    }                    
                 case "addPassengerSeat":
                     if(session.getAttribute("OutboundReservation") != null) {
                         String mode = request.getParameter("mode");
-                        String flightNum = request.getParameter("flightNum");
+                        flightNum = request.getParameter("flightNum");
                         String seatNum = request.getParameter("seatID");
                         int index = Integer.parseInt(request.getParameter("index"));
                         reserve = (Reserve) session.getAttribute("Reservation");
@@ -132,7 +142,7 @@ public class ReserveServlet extends HttpServlet {
                                     Passenger p = outPassengerList.get(index);
                                     SeatID seatID = new SeatID(seatNum, flightNum);
                                     Seat seat = new SeatsBL().getSeatByID(seatID);
-                                    p.setSeat(seat);
+                                    p.setSeat(seat.getId().getSeatNumber());
                                     seat.setPassenger(p);
                                     outPassengerList.set(index, p);
                                     json = "{\"response\":\"S~Seat assigned successfully!\"}";
@@ -151,7 +161,7 @@ public class ReserveServlet extends HttpServlet {
                                     Passenger p = inPassengerList.get(index);
                                     SeatID seatID = new SeatID(seatNum, flightNum);
                                     Seat seat = new SeatsBL().getSeatByID(seatID);
-                                    p.setSeat(seat);
+                                    p.setSeat(seat.getId().getSeatNumber());
                                     inPassengerList.set(index, p);
                                     json = "{\"response\":\"S~Seat assigned successfully!\"}";
                                 } else {

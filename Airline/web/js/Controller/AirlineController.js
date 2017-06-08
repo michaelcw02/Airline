@@ -292,4 +292,10 @@ AirlineController.prototype = {
             if(callback !== undefined)  callback(data);
         });
     },
+    getSeatsOfFlight: function(flightNum, callback) {
+        Proxy.getSeatsOfFlight(flightNum, (data) => {
+            console.log(data);
+            callback(data);
+        })
+    }
 }

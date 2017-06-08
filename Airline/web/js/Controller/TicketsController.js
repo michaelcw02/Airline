@@ -170,54 +170,56 @@ function showSeatsDetail(ticket, mode) {
     let rows = ticket.flight.airplane.typeairplane.qtyOfRows;
     let seatsPerRow = ticket.flight.airplane.typeairplane.seatsPerRow;
     let element = '';
-    element += '<div class="bs-example bs-example-tabs">';
-    element += '    <ul class="nav nav-tabs">';
-    element += '        <li class="active"><a href="#seatSection1" id="seatPassenger1" data-toggle="tab">Passenger 1 Seat</a></li>';
-    for (let i = 1; i < ticket.numPassengers; i++)
-        element += '    <li><a href="#section' + (i + 1) + '" id="seatPassenger' + (i + 1) + '" data-toggle="tab">Passenger ' + (i + 1) + ' Seat</a></li>';
-    element += '    </ul>';
-    element += '</div>';
-    element += '<div class="tab-content">';
-    for (let i = 0; i < ticket.numPassengers; i++) {
-        if (i == 0)
-            element += '<div class="tab-pane active in" id="seatSection1' + (i + 1) + '">';
-        else
-            element += '<div class="tab-pane fade in" id="seatSection1' + (i + 1) + '">';
+    let ac = new AirlineController();
+    ac.getSeatsOfFlight(ticket.flight.flightNum, (seatsObj) => {
+        ac.getPassengerList( (list) => {
+            element += '<div class="bs-example bs-example-tabs">';
+            element += '    <ul class="nav nav-tabs">';
+            element += '        <li class="active"><a href="#seatSection1" id="seatPassenger1" data-toggle="tab">Passenger 1 Seat</a></li>';
+            for (let i = 1; i < ticket.numPassengers; i++)
+                element += '    <li><a href="#section' + (i + 1) + '" id="seatPassenger' + (i + 1) + '" data-toggle="tab">Passenger ' + (i + 1) + ' Seat</a></li>';
+            element += '    </ul>';
+            element += '</div>';
+            element += '<div class="tab-content">';
+            for (let i = 0; i < ticket.numPassengers; i++) {
+                if (i == 0)
+                    element += '<div class="tab-pane active in" id="seatSection1' + (i + 1) + '">';
+                else
+                    element += '<div class="tab-pane fade in" id="seatSection1' + (i + 1) + '">';
 
-        element += '<br><div class="row">';
-        element += '    <div class="col-md-offset-2 col-md-4"><h4>The seat you selected is: <strong id="selection'+ (i+1) +'">None</strong></h4></div>';
-        element += '    <div class="col-md-offset-3 col-md-2"><button type="button" class="btn btn-success" id="seatSelectionBtn' + (i + 1) + '">Select Seat</button> </div>';
-        element += '    <input type="hidden" value="None" id="seatSelection'+ (i+1) +'"/>';
-        element += '</div>';
-        element += '<form id="formSeatPassenger' + (i + 1) + '">';
-        element += drawSeats(ticket.flight, rows, seatsPerRow);
-        element += '</form>'
-    }
-    element += '</div>';
-    showModal('seatBooking', 'Seats Selection', element);
-    for (let i = 0; i < ticket.numPassengers; i++) {
-        $('#formSeatPassenger1 .seat input[type=checkbox]').click( (e) => { 
-            $('#formSeatPassenger1 .seat input[type=checkbox]').prop('checked', false); 
-            $(e.target).prop('checked', true);
-            let selection = $(e.target).attr('id');
-            $('#selection' + (i + 1)).text(selection);
-            $('#seatSelection' + (i + 1)).val(selection);
-        } );
-        $('#seatSelectionBtn' + (i + 1)).click( () => {
-            let regex = /^[0-9]{1,3}[a-iA-I]{1}/;
-            let selection = $('#seatSelection' + (i + 1)).val();
-            if(regex.test(selection)) {
-                //STILL MISSING CALLBACK, THINK ABOUT IT LATER..    
-                new AirlineController().addPassengerSeat(i, selection, ticket.flight.flightNum, mode);
+                element += '<br><div class="row">';
+                element += '    <div class="col-md-offset-2 col-md-4"><h4>The seat you selected is: <strong id="selection'+ (i+1) +'">None</strong></h4></div>';
+                element += '    <div class="col-md-offset-3 col-md-2"><button type="button" class="btn btn-success" id="seatSelectionBtn' + (i + 1) + '">Select Seat</button> </div>';
+                element += '    <input type="hidden" value="None" id="seatSelection'+ (i+1) +'"/>';
+                element += '</div>';
+                element += '<form id="formSeatPassenger' + (i + 1) + '">';
+                element += drawSeats(rows, seatsPerRow, seatsObj, list);
+                element += '</form>'
             }
-        } )
-
-    }
-
+            element += '</div>';
+            showModal('seatBooking', 'Seats Selection', element);
+            for (let i = 0; i < ticket.numPassengers; i++) {
+                $('#formSeatPassenger1 .seat input[type=checkbox]').click( (e) => { 
+                    $('#formSeatPassenger1 .seat input[type=checkbox]').prop('checked', false); 
+                    $(e.target).prop('checked', true);
+                    let selection = $(e.target).attr('id');
+                    $('#selection' + (i + 1)).text(selection);
+                    $('#seatSelection' + (i + 1)).val(selection);
+                } );
+                $('#seatSelectionBtn' + (i + 1)).click( () => {
+                    let regex = /^[0-9]{1,3}[a-iA-I]{1}/;
+                    let selection = $('#seatSelection' + (i + 1)).val();
+                    if(regex.test(selection)) {
+                        //STILL MISSING CALLBACK, THINK ABOUT IT LATER..    
+                        new AirlineController().addPassengerSeat(i, selection, ticket.flight.flightNum, mode);
+                    }
+                } )
+            }
+        });
+    });
 }
 
-function drawSeats(flight, rows, seatsPerRow) {
-
+function drawSeats(rows, seatsPerRow, seatsObj, list) {
     let element = '';
     element += '<div class="plane">';
     element += '    <div class="cockpit">';
@@ -229,9 +231,15 @@ function drawSeats(flight, rows, seatsPerRow) {
         element += '<li class="row row--' + (i + 1) + '">'
         element += '    <ol class="seats" type="A">';
         for (let j = 0; j < seatsPerRow; j++) {
-            let isDisabled = false;
+            let seatID = (i + 1) + String.fromCharCode(65 + j);
+            let isDisabled = (seatsObj[seatID]) ? true : false;
+            let passenger = (list == undefined) ? undefined : list[i];
+            if('undefined' !== typeof passenger) {
+                if('undefined' !== typeof passenger.seat) {
+                    isDisabled = true;
+                }
+            }
             let disabled = (isDisabled) ? 'Disabled' : '';
-            let seatID = (isDisabled) ? 'Disabled' : (i + 1) + String.fromCharCode(65 + j);
 
             element += '<li class="seat">';
             element += '    <input type="checkbox" ' + disabled + ' id="' + seatID + '" />';
@@ -245,6 +253,7 @@ function drawSeats(flight, rows, seatsPerRow) {
     element += '    <div class="exit exit--back fuselage"></div>';
     element += '</div>';
     return element;
+
 }
 
 function showDiv(div) {

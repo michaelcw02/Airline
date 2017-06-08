@@ -23,7 +23,7 @@ public class PassengerDAO extends BaseDAO {
                 passenger.getTicket().getNumber(),
                 passenger.getName(),
                 passenger.getLastname(),
-                passenger.getSeat().getId().getSeatNumber(),
+                passenger.getSeat(),
                 passenger.isChecked()
         );
         System.out.println(query);
@@ -48,7 +48,7 @@ public class PassengerDAO extends BaseDAO {
     }
 
     public Passenger findByID(PassengerID passengerID) throws Exception {
-        String query = "SELECT FROM passenger WHERE passport = %s AND ticket_num = %s;";
+        String query = "SELECT * FROM passenger WHERE passport = '%s' AND ticket_num = %d;";
         query = String.format(query, passengerID.getPassport(), passengerID.getTicketNum());
         ResultSet rs = connection.executeQuery(query);
         if (rs.next()) {
