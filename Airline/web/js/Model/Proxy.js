@@ -902,8 +902,7 @@ Proxy.confirmReservation = (callback) => {
     $.ajax({
         url: 'ReserveServlet',
         data: {
-            action: "confirmReservation",
-            flightNum: flightNum,
+            action: "confirmReservation"
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not confirm the reservation");

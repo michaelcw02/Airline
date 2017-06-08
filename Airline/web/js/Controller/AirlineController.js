@@ -289,9 +289,7 @@ AirlineController.prototype = {
             }
             if(msg[0] === 'S') {
                 showModal('myModal', 'Success!...', msg[1]);
-            }
-
-            
+            }            
             if(callback !== undefined)  callback(data);
         });
     },
@@ -301,9 +299,16 @@ AirlineController.prototype = {
             callback(data);
         })
     },
-    confirmReservation: function( callback) {
-        Proxy.confirmReservation( (data) => {
-
+    confirmReservation: function(callback) {
+        Proxy.confirmReservation((data) => {
+            let msg = data.response.split('~');
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Sucess!...', msg[1]);
+            }
+            if(msg[0] === 'E') {
+                showModal('myModal', 'Error!...', msg[1]);
+            }
+            callback(msg[1]);
         })
     }
 }
