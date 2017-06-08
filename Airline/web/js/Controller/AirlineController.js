@@ -257,6 +257,7 @@ AirlineController.prototype = {
     getPassengerList: function(callback) {
         Proxy.getPassengerList( (data) => {
             if(data.response === undefined) {
+                console.log(data);
                 callback(data);
             } else {
                 callback(undefined);
