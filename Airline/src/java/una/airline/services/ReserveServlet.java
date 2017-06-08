@@ -103,12 +103,20 @@ public class ReserveServlet extends HttpServlet {
                         break;
                     }
                 case "getPassengerList":
+                    String mode = request.getParameter("mode");
                     if(session.getAttribute("OutboundReservation") != null) {
-                        LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
-                        if(outPassengerList != null) {
-                            json = new Gson().toJson(outPassengerList);
-                        } else {
-                            json = "{\"response\":\"E~No passenger found!\"}";
+                        json = "{\"response\":\"E~No passenger found!\"}";
+                        if(mode.equals("OUTBOUND")) {
+                            LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                            if(outPassengerList != null) {
+                                json = new Gson().toJson(outPassengerList);
+                            }
+                        }
+                        if(mode.equals("RETURN")) {
+                            LinkedList<Passenger> inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                            if(inPassengerList != null) {
+                                json = new Gson().toJson(inPassengerList);
+                            }
                         }
                         out.print(json);
                         break;
@@ -128,7 +136,7 @@ public class ReserveServlet extends HttpServlet {
                     }                    
                 case "addPassengerSeat":
                     if(session.getAttribute("OutboundReservation") != null) {
-                        String mode = request.getParameter("mode");
+                        mode = request.getParameter("mode");
                         flightNum = request.getParameter("flightNum");
                         String seatNum = request.getParameter("seatID");
                         int index = Integer.parseInt(request.getParameter("index"));
@@ -177,8 +185,49 @@ public class ReserveServlet extends HttpServlet {
                         response.sendRedirect("index.jsp");
                         break;
                     }
-                    
-
+                case "confirmReservation":
+                    if(session.getAttribute("Reservation") != null) {
+                        Reserve reservation = (Reserve) session.getAttribute("Reservation");
+                        if(session.getAttribute("username") != null) {
+                            String username = (String) session.getAttribute("username");
+                            if(reservation.getOutboundTicket() != null) {
+                                
+                                TicketsBL ticketsBL = new TicketsBL();
+                                Ticket outboundTicket = reservation.getOutboundTicket();
+                                outboundTicket = ticketsBL.addNGetTicket(outboundTicket);
+                                
+                                PassengerBL passengerBL = new PassengerBL();
+                                LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
+                                outPassengerList = (LinkedList<Passenger>) passengerBL.addNGetListPassenger(outPassengerList, outboundTicket);
+                                
+                                
+                                reservation.setOutboundTicket(outboundTicket);
+                                PassengerBL passBL = new PassengerBL();
+                                
+                                
+                                LinkedList<Passenger> inPassengerList = null;
+                                if(reservation.getReturnTicket() != null) {
+                                    Ticket returnTicket = null;
+                                    returnTicket = reservation.getReturnTicket();
+                                    returnTicket = ticketsBL.addNGetTicket(returnTicket);
+                                    
+                                    inPassengerList = (LinkedList<Passenger>) session.getAttribute("inPassengerList");
+                                    inPassengerList = (LinkedList<Passenger>) passengerBL.addNGetListPassenger(inPassengerList, returnTicket);
+                                
+                                    reservation.setReturnTicket(returnTicket);
+                                }
+                                
+                                reserveBL.addReserve(reservation);
+                                json = "{\"response\":\"S~Reservation Complete!\"}";
+                                out.print(json);
+                                break;
+                            }
+                        }                        
+                    }
+                    json = "{\"response\":\"E~Could not get reservation!\"}";
+                    out.print(json);
+                    response.sendRedirect("index.jsp");
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;

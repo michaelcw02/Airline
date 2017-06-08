@@ -77,4 +77,14 @@ public class TicketDAO extends BaseDAO {
         return listResult;
     }
 
+    public int getAutoIncremental() throws Exception {
+        String query = "SELECT MAX(number) FROM Ticket;";
+        query = String.format(query);
+        ResultSet rs = connection.executeQuery(query);
+        if (rs.next()) {
+            return rs.getInt("MAX(number)");
+        }
+        throw new Exception("E~Ticket does not exists");
+    }
+
 }

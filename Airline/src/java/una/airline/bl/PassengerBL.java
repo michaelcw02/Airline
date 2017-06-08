@@ -6,6 +6,8 @@
 package una.airline.bl;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import una.airline.dao.FlightDAO;
 import una.airline.dao.PassengerDAO;
 import una.airline.domain.Flight;
@@ -34,8 +36,28 @@ public class PassengerBL {
         return true;
     }
     
+    public List<Passenger> addNGetListPassenger(List<Passenger> list, Ticket t) {
+        try {
+            for(Passenger p : list) {
+                p.setTicket(t);
+                this.passengerDAO.addPassenger(p);
+            }
+            return this.passengerDAO.findPassengersOfFlight(t);            
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     public List<Passenger> getAllPassengers() {
         return this.passengerDAO.getAllPassengers();
+    }
+    
+    public List<Passenger> getAllPassengersOfTickets(Ticket t) {
+        try {
+            return this.passengerDAO.findPassengersOfFlight(t);
+        } catch (Exception ex) {
+            return null;
+        }
     }
     
     public Passenger findByID(PassengerID id) {

@@ -31,7 +31,9 @@ TicketsController.prototype = {
         });
     },
     confirmReservation: function () {
-
+        this.airlineController.confirmReservation( () => {
+            
+        });
     },
     cancelReservation: function () {
         window.location.replace("/Airline");
@@ -82,7 +84,7 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
 }
 
 function showPassengersInfo(outboundTicket) {
-    new AirlineController().getPassengerList((list) => {
+    new AirlineController().getPassengerList('OUTBOUND', (list) => {
         let element = '';
         element += '<br>';
         element += '<div class="bs-example bs-example-tabs">';
@@ -146,11 +148,11 @@ function showPassengersInfo(outboundTicket) {
 
         //modal settings
         showModal('passengersInfo', ' Passengers Information', element);
-        for (var i = 0; i < outboundTicket.numPassengers; i++) {
-            var form = "formPassenger" + (i + 1);
-            var buttonAdd = "#addPassenger" + (i + 1);
-            var buttonCancel = "#cancel" + (i + 1);
+        for (let i = 0; i < outboundTicket.numPassengers; i++) {
+            let buttonAdd = "#addPassenger" + (i + 1);
+            let buttonCancel = "#cancel" + (i + 1);
             $(buttonAdd).click(() => {
+                let form = "formPassenger" + (i + 1);
                 let pass = {
                     passport: document.getElementById(form).elements.namedItem("passport").value,
                     name: document.getElementById(form).elements.namedItem("name").value,
@@ -172,12 +174,12 @@ function showSeatsDetail(ticket, mode) {
     let element = '';
     let ac = new AirlineController();
     ac.getSeatsOfFlight(ticket.flight.flightNum, (seatsObj) => {
-        ac.getPassengerList( (list) => {
+        ac.getPassengerList(mode, (list) => {
 
             var array = [];
-            if('undefined' !== list) {
+            if(undefined !== list) {
                 for( let i in list) {
-                    if('undefined' !== list[i].seat) {
+                    if(undefined !== list[i].seat) {
                         array[list[i].seat] = list[i].id.passport;
                     }
                 }
@@ -186,38 +188,49 @@ function showSeatsDetail(ticket, mode) {
             element += '    <ul class="nav nav-tabs">';
             element += '        <li class="active"><a href="#seatSection1" id="seatPassenger1" data-toggle="tab">Passenger 1 Seat</a></li>';
             for (let i = 1; i < ticket.numPassengers; i++)
-                element += '    <li><a href="#section' + (i + 1) + '" id="seatPassenger' + (i + 1) + '" data-toggle="tab">Passenger ' + (i + 1) + ' Seat</a></li>';
+                element += '    <li><a href="#seatSection' + (i + 1) + '" id="seatPassenger' + (i + 1) + '" data-toggle="tab">Passenger ' + (i + 1) + ' Seat</a></li>';
             element += '    </ul>';
             element += '</div>';
             element += '<div class="tab-content">';
             for (let i = 0; i < ticket.numPassengers; i++) {
                 if (i == 0)
-                    element += '<div class="tab-pane active in" id="seatSection1' + (i + 1) + '">';
+                    element += '<div class="tab-pane active in" id="seatSection' + (i + 1) + '">';
                 else
-                    element += '<div class="tab-pane fade in" id="seatSection1' + (i + 1) + '">';
+                    element += '<div class="tab-pane fade in" id="seatSection' + (i + 1) + '">';
 
+                element += '<form id="formSeatPassenger' + (i + 1) + '">';
                 element += '<br><div class="row">';
                 element += '    <div class="col-md-offset-2 col-md-4"><h4>The seat you selected is: <strong id="selection'+ (i+1) +'">None</strong></h4></div>';
                 element += '    <div class="col-md-offset-3 col-md-2"><button type="button" class="btn btn-success" id="seatSelectionBtn' + (i + 1) + '">Select Seat</button> </div>';
                 element += '    <input type="hidden" value="None" id="seatSelection'+ (i+1) +'"/>';
                 element += '</div>';
-                element += '<form id="formSeatPassenger' + (i + 1) + '">';
                 console.log('passport', list[i].id.passport);
                 console.log('array', array, array.length);
                 element += drawSeats(rows, seatsPerRow, seatsObj, list[i].id.passport, array);
                 element += '</form>'
+                element += '</div>';
             }
             element += '</div>';
             showModal('seatBooking', 'Seats Selection', element);
+
+
             for (let i = 0; i < ticket.numPassengers; i++) {
-                $('#formSeatPassenger1 .seat input[type=checkbox]').click( (e) => { 
-                    $('#formSeatPassenger1 .seat input[type=checkbox]').prop('checked', false); 
+                let selection = $('#formSeatPassenger' + (i + 1) + ' .seat input[type=checkbox]:checked').attr('id');
+                $('#selection' + (i + 1)).text(selection);
+                $('#seatSelection' + (i + 1)).val(selection);
+
+                let form = '#formSeatPassenger' + (i + 1) + ' .seat input[type=checkbox]';
+                let sbtn = '#seatSelectionBtn' + (i + 1);
+
+                $(form).click( (e) => { 
+                    form = '#formSeatPassenger' + (i + 1) + ' .seat input[type=checkbox]';
+                    $(form).prop('checked', false); 
                     $(e.target).prop('checked', true);
                     let selection = $(e.target).attr('id');
                     $('#selection' + (i + 1)).text(selection);
                     $('#seatSelection' + (i + 1)).val(selection);
                 } );
-                $('#seatSelectionBtn' + (i + 1)).click( () => {
+                $(sbtn).click( () => {
                     let regex = /^[0-9]{1,3}[a-iA-I]{1}/;
                     let selection = $('#seatSelection' + (i + 1)).val();
                     if(regex.test(selection)) {
@@ -245,13 +258,11 @@ function drawSeats(rows, seatsPerRow, seatsObj, passport, array) {
             let seatID = (i + 1) + String.fromCharCode(65 + j);
             let isDisabled = (seatsObj[seatID]) ? true : false;
             let checked = false;
-            if(array.length > 0) {
-                if('undefined' !== array[seatID]) {
-                    if(array[seatID] == passport) {
-                        checked = true;
-                    } else {
-                        isDisabled = true;
-                    }
+            if(undefined !== array[seatID]) {
+                if(array[seatID] == passport) {
+                    checked = true;
+                } else {
+                    isDisabled = true;
                 }
             }
             let isChecked = (checked) ? 'checked' : '';

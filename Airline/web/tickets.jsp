@@ -10,6 +10,9 @@
     session = request.getSession();
     if(session!=null){
         if (session.getAttribute("loginStatus")  != null) {
+            session.removeAttribute("outPassengerList");
+            session.removeAttribute("inPassengerList");
+            
             if("Not logged.".equalsIgnoreCase((String) session.getAttribute("loginStatus"))) {
                 response.sendRedirect("index.jsp");
             }

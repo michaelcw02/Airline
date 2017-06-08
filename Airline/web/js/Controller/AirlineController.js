@@ -292,8 +292,7 @@ AirlineController.prototype = {
             }
             setTimeout(() => hideModal('myModal'), 1500);
 
-            if (callback !== undefined)
-                callback(data);
+            if(callback !== undefined)  callback(data); 
         });
     },
     getSeatsOfFlight: function (flightNum, callback) {
@@ -307,4 +306,16 @@ AirlineController.prototype = {
             callback(data);
         })
     },
+    confirmReservation: function(callback) {
+        Proxy.confirmReservation((data) => {
+            let msg = data.response.split('~');
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Sucess!...', msg[1]);
+            }
+            if(msg[0] === 'E') {
+                showModal('myModal', 'Error!...', msg[1]);
+            }
+            callback(msg[1]);
+        })
+    }
 }

@@ -816,11 +816,12 @@ Proxy.getFlightSeatsInfo = (flightNum, callback) => {
         dataType: "json"
     });
 }
-Proxy.getPassengerList = (callback) => {
+Proxy.getPassengerList = (mode, callback) => {
     $.ajax({
         url: 'ReserveServlet',
         data: {
             action: "getPassengerList",
+            mode: mode
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not get the passengers information");
@@ -906,6 +907,23 @@ Proxy.getTicketsByFlight = (flightNum, callback) => {
         error: () => { //si existe un error en la respuesta del ajax
             showModal("myModal", "Error!...", "Tickets in this flight do not exist");
             setTimeout(() => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
+}
+Proxy.confirmReservation = (callback) => {
+    $.ajax({
+        url: 'ReserveServlet',
+        data: {
+            action: "confirmReservation"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not confirm the reservation");
+            setTimeout( () => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);

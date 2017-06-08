@@ -7,6 +7,8 @@ package una.airline.bl;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import una.airline.dao.TicketDAO;
 import una.airline.domain.RoundTripInfo;
 import una.airline.domain.Ticket;
@@ -29,6 +31,16 @@ public class TicketsBL {
             return false;
         }
         return true;
+    }
+    
+    public Ticket addNGetTicket(Ticket t) {
+        try {
+            this.ticketDAO.addTicket(t);
+            int ticketNumber = this.ticketDAO.getAutoIncremental();
+            return this.ticketDAO.findByID(ticketNumber);
+        } catch (Exception ex) {
+            return null;
+        }
     }
     
     public List<Ticket> getAllTickets() {
@@ -60,5 +72,14 @@ public class TicketsBL {
    public List<Ticket> getTicketsByFlight(String number){
        return ticketDAO.getTicketsByFlight(number);
    }
+    
+
+    public int findLastNumber() {
+        try {
+            return this.ticketDAO.getAutoIncremental();
+        } catch (Exception ex) {
+            return -1;
+        }
+    }
     
 }

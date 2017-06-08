@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import una.airline.domain.Passenger;
 import una.airline.domain.PassengerID;
+import una.airline.domain.Ticket;
 
 /**
  *
@@ -43,6 +44,21 @@ public class PassengerDAO extends BaseDAO {
                 listResult.add(passenger(rs));
             }
         } catch (Exception e) {
+        }
+        return listResult;
+    }
+
+    public LinkedList<Passenger> findPassengersOfFlight(Ticket t) throws Exception {
+        LinkedList<Passenger> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT * FROM passenger WHERE ticket_num = %d;";
+            query = String.format(query, t.getNumber());
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(passenger(rs));
+            }
+        } catch (Exception e) {
+            throw new Exception("E~This is wrong man");
         }
         return listResult;
     }
