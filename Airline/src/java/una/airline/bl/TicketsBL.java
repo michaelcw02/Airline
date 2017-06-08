@@ -57,6 +57,8 @@ public class TicketsBL {
         return roundTripTickets;
     }
     
-    
+   public List<Ticket> getTicketsByFlight(String number){
+       return ticketDAO.getTicketsByFlight(number);
+   }
     
 }

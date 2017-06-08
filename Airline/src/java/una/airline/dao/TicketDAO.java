@@ -26,7 +26,7 @@ public class TicketDAO extends BaseDAO {
             throw new Exception("Ticket already exists.");
         }
     }
-    
+
     public int addTicket(String flightNum, int numPassengers) {
         String query = "INSERT INTO `airlinedb`.`ticket` (`flight_num`, `number_passengers`) VALUES ('%s', '%d');";
         query = String.format(query, flightNum, numPassengers);
@@ -59,8 +59,22 @@ public class TicketDAO extends BaseDAO {
     }
 
     public Ticket createTicket(String flightNum, int numPassengers) {
-        
-        return null;        
+
+        return null;
     }
-    
+
+    public LinkedList<Ticket> getTicketsByFlight(String number) {
+        LinkedList<Ticket> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT * FROM ticket WHERE flight_num = '%s'";
+            query = String.format(query, number);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(ticket(rs));
+            }
+        } catch (Exception e) {
+        }
+        return listResult;
+    }
+
 }

@@ -824,7 +824,7 @@ Proxy.getPassengerList = (callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not get the passengers information");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -840,13 +840,13 @@ Proxy.addPassengerSeat = (index, seatID, flightNum, mode, callback) => {
         data: {
             action: "addPassengerSeat",
             index: index,
-            seatID: seatID, 
+            seatID: seatID,
             flightNum: flightNum,
             mode: mode
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not add the passengers seat");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -887,7 +887,7 @@ Proxy.getSeatsOfFlight = (flightNum, callback) => {
         },
         error: function () { //si existe un error en la respuesta del ajax
             showModal("myModal", "ERROR", "Could not get the seats of passenger");
-            setTimeout( () => hideModal('myModal'), 1500);
+            setTimeout(() => hideModal('myModal'), 1500);
         },
         success: (data) => {
             callback(data);
@@ -895,5 +895,22 @@ Proxy.getSeatsOfFlight = (flightNum, callback) => {
         type: 'POST',
         dataType: "json"
     });
-
+}
+Proxy.getTicketsByFlight = (flightNum, callback) => {
+    $.ajax({
+        url: 'TicketsServlet',
+        data: {
+            action: "getTicketsByFlight",
+            flightNum: flightNum
+        },
+        error: () => { //si existe un error en la respuesta del ajax
+            showModal("myModal", "Error!...", "Tickets in this flight do not exist");
+            setTimeout(() => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
+    });
 }

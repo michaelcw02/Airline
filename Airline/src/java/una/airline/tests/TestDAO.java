@@ -25,13 +25,12 @@ public class TestDAO {
     public static void main(String[] arg) throws Exception {
         
         
+       
         
-        
-        FlightsBL flightBL = new FlightsBL();
+       /* FlightsBL flightBL = new FlightsBL();
         List<Flight> r = flightBL.getAllFlights();
         System.out.println(r.get(0));
         System.out.println(r.get(0));
-        
         
         List<String> result = flightBL.findAirplaneSeatsInfoByFlightNum("STEST");
         System.out.println(result);
@@ -48,9 +47,11 @@ public class TestDAO {
         
         UserDAO userDAO = new UserDAO();
         User u = userDAO.validateUser("1", "1");
-        System.out.println(u.getUsername());
+        System.out.println(u.getUsername());*/
      
-        
-    }
+        TicketsBL ti =new TicketsBL();
+        List<Ticket> r1 = ti.getTicketsByFlight("ST001");
+        System.out.println(r1.get(0).getNumber());
+                }
     
 }

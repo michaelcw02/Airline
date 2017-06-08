@@ -63,13 +63,21 @@ FlightController.prototype = {
                 var flightNum1 = $("#identifier").val();
                 var i = 0;
                 this.airlineController.generateFlights(dates, flightNum1, idTrip, codeAirplane);
+                this.cleanForm();
                 showModal("myModal", "Waiting...", "<h4>This will take a while, we will notify you when it's ready</h4>");
-                setTimeout(() => hideModal('myModal'), 6000);
+                setTimeout(() => hideModal('myModal'), 3000);
             }
         } else {
             showModal("myModal", "ALERT", "The days that you selected does not coincide with the departure day of the trip ");
             setTimeout(() => hideModal('myModal'), 1500);
         }
+    },
+    cleanForm: function () {
+        $("#tripsAvailable").val(0);
+        $("#airplaneAvailable").val(0);
+        $("#identifier").val(" ");
+        $("#firstDate").val(" ");
+        $("#lastDate").val(" ");
     },
 }
 function fillWithTrips($select, trips) {

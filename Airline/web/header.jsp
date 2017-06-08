@@ -68,6 +68,7 @@
                                         <li class="text-white"> <h5> <a href="routeAdm.jsp">Routes</a></h5> </li>
                                         <li class="text-white"> <h5> <a href="flightAdm.jsp">Flights</a></h5> </li>
                                         <li class="text-white"> <h5> <a href="citiesAdm.jsp">Cities</a></h5> </li>
+                                        <li class="text-white"> <h5> <a href="ticketAdm.jsp">Tickets</a></h5> </li>
                                     </ul>
                                 </ul>
                             </li>
