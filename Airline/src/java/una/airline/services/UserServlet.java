@@ -93,6 +93,19 @@ public class UserServlet extends HttpServlet {
                     userBL.updateUser(user);
                     out.print("{\"data\":\"C~El usuario fue modificado correctamente\"}");
                     break;
+                case "updateSession":
+                    session.setAttribute("user", request.getParameter("name"));
+                    session.setAttribute("username", request.getParameter("username"));
+                    session.setAttribute("lastname1", request.getParameter("lastname1"));
+                    session.setAttribute("lastname2", request.getParameter("lastname2"));
+                    session.setAttribute("email", request.getParameter("email"));
+                    session.setAttribute("phone", request.getParameter("phone"));
+                    session.setAttribute("cellphone", request.getParameter("celular"));
+                    session.setAttribute("location", request.getParameter("address"));
+                    session.setAttribute("birth", request.getParameter("birthdate"));
+                    session.setAttribute("pass", request.getParameter("password"));
+                    out.print("{\"data\":\"C~El usuario fue modificado correctamente\"}");
+                    break;
                 case "deleteUser":
                     user.setUsername(request.getParameter("username"));
                     userBL.deleteUser(user);
@@ -113,6 +126,7 @@ public class UserServlet extends HttpServlet {
                     String cellphone = separated[6];
                     String location = separated[7];
                     String birth = separated[8];
+                    String pass = separated[9];
                     json = "{}";
                     if(!type.equals("Not A User")) {
                         session.setAttribute("user", name);
@@ -125,6 +139,7 @@ public class UserServlet extends HttpServlet {
                         session.setAttribute("cellphone", cellphone);
                         session.setAttribute("location", location);
                         session.setAttribute("birth", birth);
+                        session.setAttribute("pass", pass);
                         session.setAttribute("loginStatus", "logged.");
                         json = "{\"response\":\"C~The user has been validated successfully\"}";
                     }
