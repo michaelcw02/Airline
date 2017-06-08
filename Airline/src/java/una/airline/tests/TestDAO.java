@@ -24,7 +24,15 @@ public class TestDAO {
     
     public static void main(String[] arg) throws Exception {
         
+        
+        
+        
         FlightsBL flightBL = new FlightsBL();
+        List<Flight> r = flightBL.getAllFlights();
+        System.out.println(r.get(0));
+        System.out.println(r.get(0));
+        
+        
         List<String> result = flightBL.findAirplaneSeatsInfoByFlightNum("STEST");
         System.out.println(result);
         

@@ -38,11 +38,14 @@ public class FlightDAO extends BaseDAO {
     public LinkedList<Flight> getAllFlights() {
         LinkedList<Flight> listaResultado = new LinkedList<>();
         try {
-            String query = "SELECT * FROM flight;";
+            String query =  "SELECT * " +
+                            "FROM airlinedb.flight, airlinedb.trip, airlinedb.airplane, airlinedb.typeairplane " +
+                            "WHERE flight.id_trip = trip.id_trip " +
+                            "AND flight.id_airplane = airplane.id_airplane AND airplane.type_airplane = typeairplane.type_airline;";
             query = String.format(query);
             ResultSet rs = connection.executeQuery(query);
             while (rs.next()) {
-                listaResultado.add(flight(rs));
+                listaResultado.add(toFlights(rs));
             }
         } catch (Exception e) {
         }

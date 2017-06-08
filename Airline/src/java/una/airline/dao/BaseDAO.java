@@ -77,6 +77,19 @@ public class BaseDAO {
             return null;
         }
     }
+    
+    protected Flight toFlights(ResultSet rs) throws Exception {
+        try {
+            String flightNum = rs.getString("flight_num");
+            Airplane airplane = airplane(rs);
+            Trip trip = trip(rs);
+            Date departureDate = rs.getDate("departure_date");
+            int availableSeats = rs.getInt("available_seats");
+            return new Flight(flightNum, airplane, trip, departureDate, availableSeats);
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 
     protected Flight flight(ResultSet rs) throws Exception {
         try {
@@ -86,16 +99,16 @@ public class BaseDAO {
             Date departureDate = rs.getDate("departure_date");
             int availableSeats = rs.getInt("available_seats");
             Airplane airplane = null;
-            Trip trip = null;
+            Trip trip1 = null;
             try {
                 AirplaneDAO airplaneDAO = new AirplaneDAO();
                 airplane = (Airplane) airplaneDAO.findAirplaneByID(airplaneId);
                 TripDAO tripDAO = new TripDAO();
-                trip = (Trip) tripDAO.getTripByCode(tripId);
+                trip1 = (Trip) tripDAO.getTripByCode(tripId);
             } catch (Exception ex) {
                 throw new Exception("E~There was an issue in airplane or trips of flight", ex);
             }
-            return new Flight(flightNum, airplane, trip, departureDate, availableSeats);
+            return new Flight(flightNum, airplane, trip1, departureDate, availableSeats);
         } catch (SQLException ex) {
             return null;
         }
@@ -110,6 +123,16 @@ public class BaseDAO {
             int qtyOfRows = rs.getInt("qty_of_rows");
             int seatsPerRow = rs.getInt("seats_per_row");
             return new TypeAirplane(typeAirline, year, brand, qtyOfSeats, qtyOfRows, seatsPerRow);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    protected Airplane toAirplane(ResultSet rs) throws Exception {
+        try {
+            String idAirplane = rs.getString("id_airplane");
+            TypeAirplane typeAirplane = typeAirplane(rs);
+            return new Airplane(idAirplane, typeAirplane);
         } catch (SQLException e) {
             return null;
         }

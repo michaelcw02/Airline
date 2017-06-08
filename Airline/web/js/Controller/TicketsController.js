@@ -173,6 +173,15 @@ function showSeatsDetail(ticket, mode) {
     let ac = new AirlineController();
     ac.getSeatsOfFlight(ticket.flight.flightNum, (seatsObj) => {
         ac.getPassengerList( (list) => {
+
+            var array = [];
+            if('undefined' !== list) {
+                for( let i in list) {
+                    if('undefined' !== list[i].seat) {
+                        array[list[i].seat] = list[i].id.passport;
+                    }
+                }
+            }
             element += '<div class="bs-example bs-example-tabs">';
             element += '    <ul class="nav nav-tabs">';
             element += '        <li class="active"><a href="#seatSection1" id="seatPassenger1" data-toggle="tab">Passenger 1 Seat</a></li>';
@@ -193,7 +202,9 @@ function showSeatsDetail(ticket, mode) {
                 element += '    <input type="hidden" value="None" id="seatSelection'+ (i+1) +'"/>';
                 element += '</div>';
                 element += '<form id="formSeatPassenger' + (i + 1) + '">';
-                element += drawSeats(rows, seatsPerRow, seatsObj, list);
+                console.log('passport', list[i].id.passport);
+                console.log('array', array, array.length);
+                element += drawSeats(rows, seatsPerRow, seatsObj, list[i].id.passport, array);
                 element += '</form>'
             }
             element += '</div>';
@@ -219,7 +230,7 @@ function showSeatsDetail(ticket, mode) {
     });
 }
 
-function drawSeats(rows, seatsPerRow, seatsObj, list) {
+function drawSeats(rows, seatsPerRow, seatsObj, passport, array) {
     let element = '';
     element += '<div class="plane">';
     element += '    <div class="cockpit">';
@@ -233,16 +244,21 @@ function drawSeats(rows, seatsPerRow, seatsObj, list) {
         for (let j = 0; j < seatsPerRow; j++) {
             let seatID = (i + 1) + String.fromCharCode(65 + j);
             let isDisabled = (seatsObj[seatID]) ? true : false;
-            let passenger = (list == undefined) ? undefined : list[i];
-            if('undefined' !== typeof passenger) {
-                if('undefined' !== typeof passenger.seat) {
-                    isDisabled = true;
+            let checked = false;
+            if(array.length > 0) {
+                if('undefined' !== array[seatID]) {
+                    if(array[seatID] == passport) {
+                        checked = true;
+                    } else {
+                        isDisabled = true;
+                    }
                 }
             }
+            let isChecked = (checked) ? 'checked' : '';
             let disabled = (isDisabled) ? 'Disabled' : '';
 
             element += '<li class="seat">';
-            element += '    <input type="checkbox" ' + disabled + ' id="' + seatID + '" />';
+            element += '    <input type="checkbox" ' + disabled + ' id="' + seatID + '" '+isChecked+'/>';
             element += '    <label for="' + seatID + '">' + seatID + '</label>';
             element += '</li>';
         }
