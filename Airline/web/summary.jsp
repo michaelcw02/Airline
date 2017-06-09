@@ -63,7 +63,7 @@
             <div class="container-fluid text-center">
                 <div class="row" id="confirmation">
                     <button type="button" class="btn btn-success" id="confirmPayment">Payment</button>
-                    <button type="button" class="btn btn-info" id="generatePDF">PDF</button>
+                    <button type="button" class="btn btn-info" id="generatePDF" href="/Airline/PDFServlet">PDF</button>
                     <button type="button" class="btn btn-danger" id="cancelPayment">Cancel</button>
                 </div>
             </div>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="modal" id="paymentModal" role="dialog">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
