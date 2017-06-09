@@ -8,7 +8,9 @@ function loadPage() {
 
 function addElementsProperties() {
     //BASIC ELEMENTS
-    $('#cancelReservation').click( () => new SummaryController().cancelReservation() );
+    $('#cancelPayment').click( () => new SummaryController().cancelPayment() );
+    $('#confirmPayment').click( () => new SummaryController().confirmPayment() );
+    $('#generatePDF').click( () => new SummaryController().generatePDF() );
 }
 
 
