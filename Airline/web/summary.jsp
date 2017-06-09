@@ -84,13 +84,13 @@
         </div>
 
         <div class="modal" id="paymentModal" role="dialog">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" id="paymentModalTitle">Choose your seat</h4>
+                        <h4 class="modal-title" id="paymentModalTitle">PAYMENT</h4>
                     </div>
-                    <div class="modal-body" id="paymentModalMessage">
+                    <div class="modal-body text-center" id="paymentModalMessage">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-md-4">
@@ -100,17 +100,13 @@
                                                 Payment Details
                                             </h3>
                                             <div class="checkbox pull-right">
-                                                <label>
-                            <input type="checkbox" />
-                            Remember
-                        </label>
+                                                <label><input type="checkbox" />Remember</label>
                                             </div>
                                         </div>
                                         <div class="panel-body">
                                             <form role="form">
                                                 <div class="form-group">
-                                                    <label for="cardNumber">
-                            CARD NUMBER</label>
+                                                    <label for="cardNumber">CARD NUMBER</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number" required autofocus />
                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
@@ -119,8 +115,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-7 col-md-7">
                                                         <div class="form-group">
-                                                            <label for="expityMonth">
-                                    EXPIRY DATE</label>
+                                                            <label for="expityMonth">EXPIRY DATE</label>
                                                             <div class="col-xs-6 col-lg-6 pl-ziro">
                                                                 <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
                                                             </div>
@@ -130,8 +125,7 @@
                                                     </div>
                                                     <div class="col-xs-5 col-md-5 pull-right">
                                                         <div class="form-group">
-                                                            <label for="cvCode">
-                                    CV CODE</label>
+                                                            <label for="cvCode">CV CODE</label>
                                                             <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
                                                         </div>
                                                     </div>
@@ -144,7 +138,7 @@
                                         </li>
                                     </ul>
                                     <br/>
-                                    <a href="http://www.jquery2dotnet.com" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+                                    <a href="#" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
                                 </div>
                             </div>
                         </div>
