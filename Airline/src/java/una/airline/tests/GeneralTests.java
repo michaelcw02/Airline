@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import una.airline.services.exchangerate.ExchangeRate;
 
 /**
  *
@@ -35,6 +36,10 @@ public class GeneralTests {
     }
 
     public static void main(String[] arg) {
+        
+        Double compra = new ExchangeRate().getCompra();
+        Double venta  = new ExchangeRate().getVenta();
+        System.out.println(compra + ", " + venta);
 
         char[] alpha = new char[26];
         int k = 0;

@@ -79,8 +79,11 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
         price2 = 0;
     }
     let element = '';
-    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> USD </h1></div>';
+    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> USD </h1> <button type="button" class="btn btn-primary" id="exchangeRate">Exchange Rate</button> </div>';
     $div.append($(element));
+    $('#exchangeRate').click( () => {
+        new AirlineController().getTipoDeCambio((price1 + price2));
+    } )
 }
 
 function showPassengersInfo(outboundTicket) {

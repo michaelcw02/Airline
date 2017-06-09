@@ -310,5 +310,13 @@ AirlineController.prototype = {
             }
             callback(msg[1]);
         })
+    },
+    getTipoDeCambio: function(precio, callback) {
+        Proxy.getTipoCambio( (data) => {
+            let msg = data.response.split('~');
+            if(msg[0] === 'S') {
+                showModal('myModal', 'Sucess!...','El tipo de cambio es: ' + msg[1] + '. <br> En total sería ' + precio * parseFloat(msg[1]) + ' de colones.');
+            }
+        })
     }
 }
