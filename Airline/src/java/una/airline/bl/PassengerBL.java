@@ -13,6 +13,8 @@ import una.airline.dao.PassengerDAO;
 import una.airline.domain.Flight;
 import una.airline.domain.Passenger;
 import una.airline.domain.PassengerID;
+import una.airline.domain.Seat;
+import una.airline.domain.SeatID;
 import una.airline.domain.Ticket;
 
 /**
@@ -37,11 +39,16 @@ public class PassengerBL {
     }
     
     public List<Passenger> addNGetListPassenger(List<Passenger> list, Ticket t) {
+        SeatsBL seatsBL = new SeatsBL();
         try {
             for(Passenger p : list) {
                 p.setTicket(t);
                 this.passengerDAO.addPassenger(p);
-                
+                String seatNum      = p.getSeat();
+                String flightNum    = t.getFlight().getFlightNum();
+                SeatID seatID       = new SeatID(seatNum, flightNum);
+                Seat seat           = seatsBL.getSeatByID(seatID);
+                seatsBL.updateSeat(seat);
             }
             return this.passengerDAO.findPassengersOfTicket(t);            
         } catch (Exception e) {
