@@ -19,13 +19,13 @@ import una.airline.domain.Ticket;
 public class PassengerDAO extends BaseDAO {
 
     public void addPassenger(Passenger passenger) throws Exception {
-        String query = "INSERT INTO passenger VALUES ('%s', '%s', '%s', '%s', '%s', '%d');";
+        String query = "INSERT INTO passenger VALUES ('%s', '%d', '%s', '%s', '%s', '%d');";
         query = String.format(query, passenger.getID().getPassport(),
                 passenger.getTicket().getNumber(),
                 passenger.getName(),
                 passenger.getLastname(),
                 passenger.getSeat(),
-                passenger.isChecked()
+                (passenger.isChecked()) ? 1 : 0
         );
         System.out.println(query);
         int result = connection.executeUpdate(query);
@@ -48,7 +48,7 @@ public class PassengerDAO extends BaseDAO {
         return listResult;
     }
 
-    public LinkedList<Passenger> findPassengersOfFlight(Ticket t) throws Exception {
+    public LinkedList<Passenger> findPassengersOfTicket(Ticket t) throws Exception {
         LinkedList<Passenger> listResult = new LinkedList<>();
         try {
             String query = "SELECT * FROM passenger WHERE ticket_num = %d;";

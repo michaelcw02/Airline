@@ -42,7 +42,7 @@ public class PassengerBL {
                 p.setTicket(t);
                 this.passengerDAO.addPassenger(p);
             }
-            return this.passengerDAO.findPassengersOfFlight(t);            
+            return this.passengerDAO.findPassengersOfTicket(t);            
         } catch (Exception e) {
             return null;
         }
@@ -54,7 +54,7 @@ public class PassengerBL {
     
     public List<Passenger> getAllPassengersOfTickets(Ticket t) {
         try {
-            return this.passengerDAO.findPassengersOfFlight(t);
+            return this.passengerDAO.findPassengersOfTicket(t);
         } catch (Exception ex) {
             return null;
         }
