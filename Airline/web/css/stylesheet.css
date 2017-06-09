@@ -369,7 +369,8 @@ article hr {
 #modalAirplane,
 #myModalUser,
 #passengersInfo,
-#seatBooking{
+#seatBooking,
+#paymentModal{
     z-index: 6000 !important;
 }
 #myModal {
