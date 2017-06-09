@@ -20,6 +20,7 @@ public class Ticket {
     
     //FOR DAO'S USE
     public Ticket(int number, Flight flight, int numPassengers) {
+        this.number = number;
         this.flight = flight;
         this.numPassengers = numPassengers;
     }
