@@ -66,7 +66,7 @@ function showPassengers($div, passengers) {
     for (let i in passengers) {
         let passenger = passengers[i];
         element += '<div class="row">';
-        element += '<h4 class="col-md-offset-2 col-md-4"><strong>' + passenger.id.passport + '</strong>, ' + passenger.name + ' ' + passenger.lastname + '</h4><h4 class="col-md-4"> Seat: <strong>' + passenger.seat + '</strong></h4>';
+        element += '<h3 class="col-md-offset-2 col-md-4"><strong>' + passenger.id.passport + '</strong>, ' + passenger.name + ' ' + passenger.lastname + '</h3><h3 class="col-md-4"> Seat: <strong>' + passenger.seat + '</strong></h3>';
         element += '</div>';
     }
     $div.append($(element));
