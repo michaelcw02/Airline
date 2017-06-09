@@ -88,7 +88,7 @@ public class TicketsServlet extends HttpServlet {
                         }
                         //SUCCESS FOR ONE WAY
                         outboundTicket = new Ticket(flightsBL.searchFlightByNum(outboundReservation), numPassengers);
-                        
+
                         if (mode.equalsIgnoreCase("RoundTrip")) {
                             returnReservation = (String) session.getAttribute("ReturnReservation");
                             if (returnReservation == null) {
@@ -98,9 +98,9 @@ public class TicketsServlet extends HttpServlet {
                             }
                             //SUCCESS FOR ROUND TRIPS
                             returnTicket = new Ticket(flightsBL.searchFlightByNum(returnReservation), numPassengers);
-                            
+
                         }
-                        Reserve reserve = new Reserve (outboundTicket, returnTicket, user);
+                        Reserve reserve = new Reserve(outboundTicket, returnTicket, user);
 
                         //ATTENTION! THIS ATTRIBUTE MUST BE DELETED AFTER LOGOUT!
                         session.setAttribute("Reservation", reserve);
@@ -124,6 +124,11 @@ public class TicketsServlet extends HttpServlet {
                         response.sendRedirect("index.jsp");
                     }
                     break;
+                case "getTicketsByFlight":
+                    String flight_num = request.getParameter("flightNum");
+                    json = new Gson().toJson(ticketsBL.getTicketsByFlight(flight_num));
+                    out.print(json);
+                    break;
                 default:
                     out.print("E~No se indico la acción que se desea realizare");
                     break;
@@ -135,7 +140,7 @@ public class TicketsServlet extends HttpServlet {
             out.print("E~" + e.getMessage());
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -237,7 +237,7 @@ AirlineController.prototype = {
     },
     retrieveReservedFlights: function (callback) {
         let reservedFlights = Storage.retrieve('TicketsInfo');
-        if(reservedFlights != null)
+        if (reservedFlights != null)
             callback(reservedFlights);
         else
             this.getReservedFlights(callback);
@@ -255,21 +255,21 @@ AirlineController.prototype = {
             showModal('myModal', 'Success!...', msg[1]);
         });
     },
-    addPassenger: function(passenger, callback) {
-        Proxy.addPassengerToTicket( passenger, (data) => {
+    addPassenger: function (passenger, callback) {
+        Proxy.addPassengerToTicket(passenger, (data) => {
             let msg = data.response.split('~');
-            if(msg[0] === 'E') {
+            if (msg[0] === 'E') {
                 showModal('myModal', 'Error!...', msg[1]);
             }
-            if(msg[0] === 'S') {
+            if (msg[0] === 'S') {
                 showModal('myModal', 'Success!...', msg[1]);
             }
             setTimeout(() => hideModal('myModal'), 1500);
         });
     },
-    getPassengerList: function(mode, callback) {
+    getPassengerList: function (mode, callback) {
         Proxy.getPassengerList(mode, (data) => {
-            if(data.response === undefined) {
+            if (data.response === undefined) {
                 console.log(data);
                 callback(data);
             } else {
@@ -277,38 +277,44 @@ AirlineController.prototype = {
             }
         });
     },
-    addPassengerSeat: function(index, seatID, flightNum, mode, callback) {
+    addPassengerSeat: function (index, seatID, flightNum, mode, callback) {
         Proxy.addPassengerSeat(index, seatID, flightNum, mode, (data) => {
             let msg = data.response.split('~');
-            if(msg[0] === 'CE') {
+            if (msg[0] === 'CE') {
                 showModal('myModal', 'Error!...', msg[1]);
                 window.location.replace("/Airline");
             }
-            if(msg[0] === 'E') {
+            if (msg[0] === 'E') {
                 showModal('myModal', 'Error!...', msg[1]);
             }
-            if(msg[0] === 'S') {
+            if (msg[0] === 'S') {
                 showModal('myModal', 'Success!...', msg[1]);
-            }            
-            if(callback !== undefined)  callback(data);
+            }
+            if (callback !== undefined)
+                callback(data);
         });
     },
-    getSeatsOfFlight: function(flightNum, callback) {
+    getSeatsOfFlight: function (flightNum, callback) {
         Proxy.getSeatsOfFlight(flightNum, (data) => {
             console.log(data);
             callback(data);
         })
     },
-    confirmReservation: function(callback) {
+    confirmReservation: function (callback) {
         Proxy.confirmReservation((data) => {
             let msg = data.response.split('~');
-            if(msg[0] === 'S') {
+            if (msg[0] === 'S') {
                 showModal('myModal', 'Sucess!...', msg[1]);
             }
-            if(msg[0] === 'E') {
+            if (msg[0] === 'E') {
                 showModal('myModal', 'Error!...', msg[1]);
             }
             callback(msg[1]);
         })
-    }
+    },
+    getTicketsByFlight: function (flightNum, callback) {
+        Proxy.getTicketsByFlight(flightNum, (data) => {
+            callback(data);
+        })
+    },
 }

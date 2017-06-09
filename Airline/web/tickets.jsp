@@ -59,7 +59,7 @@
     <div class="container top-container">
         <jsp:include page="header.jsp" />
     </div>
-
+    
     <div class="container body-container">
         <article>
             <h1 class="text-center">TICKET RESERVATION DETAILS</h1>

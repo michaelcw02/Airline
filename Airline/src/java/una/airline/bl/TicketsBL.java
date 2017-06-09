@@ -18,12 +18,13 @@ import una.airline.domain.Ticket;
  * @author michaelcw02
  */
 public class TicketsBL {
+
     TicketDAO ticketDAO;
 
     public TicketsBL() {
         this.ticketDAO = new TicketDAO();
     }
-    
+
     public boolean addTicket(Ticket t) {
         try {
             this.ticketDAO.addTicket(t);
@@ -32,7 +33,7 @@ public class TicketsBL {
         }
         return true;
     }
-    
+
     public Ticket addNGetTicket(Ticket t) {
         try {
             this.ticketDAO.addTicket(t);
@@ -42,11 +43,11 @@ public class TicketsBL {
             return null;
         }
     }
-    
+
     public List<Ticket> getAllTickets() {
         return this.ticketDAO.getAllTickets();
     }
-    
+
     public Ticket findByID(int num) {
         try {
             return this.ticketDAO.findByID(num);
@@ -61,14 +62,14 @@ public class TicketsBL {
         List<Ticket> outList = new LinkedList<>();
         List<Ticket> inList = new LinkedList<>();
         outList.add(outboundTicket);
-        if(returnReservation != null) {
+        if (returnReservation != null) {
             returnTicket = this.ticketDAO.createTicket(returnReservation, numPassengers);
             inList.add(returnTicket);
-        } 
+        }
         RoundTripInfo<Ticket> roundTripTickets = new RoundTripInfo<>(outList, inList);
         return roundTripTickets;
     }
-    
+
     public int findLastNumber() {
         try {
             return this.ticketDAO.getAutoIncremental();
@@ -76,7 +77,9 @@ public class TicketsBL {
             return -1;
         }
     }
-    
-    
-    
+
+    public List<Ticket> getTicketsByFlight(String number) {
+        return ticketDAO.getTicketsByFlight(number);
+    }
+
 }
