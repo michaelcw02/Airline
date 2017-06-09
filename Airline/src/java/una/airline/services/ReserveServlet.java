@@ -189,7 +189,6 @@ public class ReserveServlet extends HttpServlet {
                     if(session.getAttribute("Reservation") != null) {
                         Reserve reservation = (Reserve) session.getAttribute("Reservation");
                         if(session.getAttribute("username") != null) {
-                            String username = (String) session.getAttribute("username");
                             if(reservation.getOutboundTicket() != null) {
                                 
                                 TicketsBL ticketsBL = new TicketsBL();
@@ -200,10 +199,8 @@ public class ReserveServlet extends HttpServlet {
                                 LinkedList<Passenger> outPassengerList = (LinkedList<Passenger>) session.getAttribute("outPassengerList");
                                 outPassengerList = (LinkedList<Passenger>) passengerBL.addNGetListPassenger(outPassengerList, outboundTicket);
                                 
-                                
                                 reservation.setOutboundTicket(outboundTicket);
                                 PassengerBL passBL = new PassengerBL();
-                                
                                 
                                 LinkedList<Passenger> inPassengerList = null;
                                 if(reservation.getReturnTicket() != null) {
