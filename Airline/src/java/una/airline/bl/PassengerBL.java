@@ -41,6 +41,7 @@ public class PassengerBL {
             for(Passenger p : list) {
                 p.setTicket(t);
                 this.passengerDAO.addPassenger(p);
+                
             }
             return this.passengerDAO.findPassengersOfTicket(t);            
         } catch (Exception e) {
