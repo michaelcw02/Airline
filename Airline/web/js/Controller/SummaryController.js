@@ -25,7 +25,7 @@ SummaryController.prototype = {
         });
     },
     confirmPayment: function () {
-        
+        showModal("paymentModal");
     },
     cancelPayment: function () {
         window.location.replace("/Airline");
