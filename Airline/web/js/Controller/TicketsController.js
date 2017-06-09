@@ -32,6 +32,8 @@ TicketsController.prototype = {
     },
     confirmReservation: function () {
         this.airlineController.confirmReservation( () => {
+
+            window.location.replace("/Airline/summary.jsp");
             
         });
     },
