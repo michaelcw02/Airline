@@ -9,21 +9,21 @@ SummaryController.prototype = {
     },
     loadDetails: function () {
         this.airlineController.getReservedFlights((reservedFlights) => {
-//            this.airlineController.getPassengerList((passengers) => {
-                let outboundTicket = reservedFlights.outboundTicket;
-                showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
-                if (reservedFlights.returnTicket) {
-                    var returnTicket = reservedFlights.returnTicket;
-                    showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
-                }
-                showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
+            this.airlineController.getPassengerList((passengers) => {
+//                let outboundTicket = reservedFlights.outboundTicket;
+//                showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
+//                if (reservedFlights.returnTicket) {
+//                    var returnTicket = reservedFlights.returnTicket;
+//                    showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
+//                }
+//                showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
 //                
-//                showPassengers($('#outbound-flight-detail'), passengers);
+                showPassengers($('#outbound-flight-detail'), passengers);
                 
                 
 //                Agregar los pasajeros de return-flight-detail
 //                showPassengers($('#return-flight-detail'), passengers);
-//            });
+            });
         });
     },
     confirmReservation: function () {
