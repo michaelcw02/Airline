@@ -48,7 +48,12 @@ public class PassengerBL {
                 String flightNum    = t.getFlight().getFlightNum();
                 SeatID seatID       = new SeatID(seatNum, flightNum);
                 Seat seat           = seatsBL.getSeatByID(seatID);
-                seatsBL.updateSeat(seat);
+                Passenger pass      = this.passengerDAO.findByID(p.getID());
+                seat.setPassenger(pass);
+                int result = seatsBL.updateSeat(seat);
+                if(result == 0) {
+                    return null;
+                }
             }
             return this.passengerDAO.findPassengersOfTicket(t);            
         } catch (Exception e) {
