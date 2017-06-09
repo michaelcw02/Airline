@@ -61,9 +61,10 @@
             </div>
             <hr>
             <div class="container-fluid text-center">
-                <div class="row text-center" id="confirmation">
-                    <button type="button" class="btn btn-success" id="confirmReservation">Confirm Reservation</button>
-                    <button type="button" class="btn btn-danger" id="cancelReservation">Cancel</button>
+                <div class="row" id="confirmation">
+                    <button type="button" class="btn btn-success" id="confirmPayment">Payment</button>
+                    <button type="button" class="btn btn-info" id="generatePDF">PDF</button>
+                    <button type="button" class="btn btn-danger" id="cancelPayment">Cancel</button>
                 </div>
             </div>
         </article>

@@ -72,5 +72,18 @@ public class TicketDAO extends BaseDAO {
         }
         throw new Exception("E~Ticket does not exists");
     }
+      public LinkedList<Ticket> getTicketsByFlight(String number) {
+        LinkedList<Ticket> listResult = new LinkedList<>();
+        try {
+            String query = "SELECT * FROM ticket WHERE flight_num = '%s'";
+            query = String.format(query, number);
+            ResultSet rs = connection.executeQuery(query);
+            while (rs.next()) {
+                listResult.add(ticket(rs));
+            }
+        } catch (Exception e) {
+        }
+        return listResult;
+    }
 
 }

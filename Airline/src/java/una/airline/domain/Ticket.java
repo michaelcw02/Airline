@@ -17,7 +17,7 @@ public class Ticket {
 
     public Ticket() {
     }
-    
+
     //FOR DAO'S USE
     public Ticket(int number, Flight flight, int numPassengers) {
         this.number = number;
@@ -54,5 +54,5 @@ public class Ticket {
     public void setNumPassengers(int numPassengers) {
         this.numPassengers = numPassengers;
     }
-    
+
 }
