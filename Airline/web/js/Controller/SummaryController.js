@@ -11,12 +11,12 @@ SummaryController.prototype = {
         this.airlineController.getReservedFlights((reservedFlights) => {
 //            this.airlineController.getPassengerList((passengers) => {
                 let outboundTicket = reservedFlights.outboundTicket;
-//                showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
-//                if (reservedFlights.returnTicket) {
-//                    var returnTicket = reservedFlights.returnTicket;
-//                    showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
-//                }
-//                showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
+                showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
+                if (reservedFlights.returnTicket) {
+                    var returnTicket = reservedFlights.returnTicket;
+                    showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
+                }
+                showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
 //                
 //                showPassengers($('#outbound-flight-detail'), passengers);
                 
