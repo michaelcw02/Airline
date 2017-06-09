@@ -9,21 +9,19 @@ SummaryController.prototype = {
     },
     loadDetails: function () {
         this.airlineController.getReservedFlights((reservedFlights) => {
-            this.airlineController.getPassengerList((passengers) => {
-//                let outboundTicket = reservedFlights.outboundTicket;
-//                showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
-//                if (reservedFlights.returnTicket) {
-//                    var returnTicket = reservedFlights.returnTicket;
-//                    showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
-//                }
-//                showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
-//                
+            let outboundTicket = reservedFlights.outboundTicket;
+            showDetail($('#outbound-flight-detail'), outboundTicket, 'OUTBOUND');
+            this.airlineController.getPassengerList('OUTBOUND',(passengers) => {
                 showPassengers($('#outbound-flight-detail'), passengers);
-                
-                
-//                Agregar los pasajeros de return-flight-detail
-//                showPassengers($('#return-flight-detail'), passengers);
             });
+            if (reservedFlights.returnTicket) {
+                var returnTicket = reservedFlights.returnTicket;
+                showDetail($('#return-flight-detail'), returnTicket, 'RETURN');
+                this.airlineController.getPassengerList('RETURN',(passengers) => {
+                    showPassengers($('#return-flight-detail'), passengers);
+                });
+            }
+            showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
         });
     },
     confirmReservation: function () {
@@ -61,7 +59,7 @@ function showDetail($div, ticket, mode) {
 function showPassengers($div, passengers) {
     let element = '';
     element += '<hr>';
-    element += '<h3 class="col-md-4">PASSENGERS</h3>';
+    element += '<div class="row"><h3 class="col-md-4">PASSENGERS</h3></div>';
     for (let i in passengers) {
         let passenger = passengers[i];
         element += '<div class="row">';
