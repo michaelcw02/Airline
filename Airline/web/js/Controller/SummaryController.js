@@ -1,5 +1,6 @@
 function SummaryController(view) {
     this.SummaryController(view);
+    this.totalPrice = 0;
 }
 
 SummaryController.prototype = {
@@ -25,6 +26,7 @@ SummaryController.prototype = {
         });
     },
     confirmPayment: function () {
+        $('#modalPrice').text(this.totalPrice);
         showModal("paymentModal");
     },
     cancelPayment: function () {
@@ -83,6 +85,7 @@ function showTotalPrice($div, outboundTicket, returnTicket) {
         price2 = 0;
     }
     let element = '';
-    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + (price1 + price2) + '</strong> USD </h1></div>';
+    this.totalPrice = (price1 + price2);
+    element += '<div class="row"><h1 class="col-md-12"> Total Price: <strong>' + this.totalPrice + '</strong> USD </h1></div>';
     $div.append($(element));
 }
