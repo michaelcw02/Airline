@@ -39,7 +39,6 @@
 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Check In</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle hvr-grow" data-toggle="dropdown" href="#">Our Company</a>
                                 <ul class="dropdown-menu dropdown-profile">

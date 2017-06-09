@@ -33,7 +33,7 @@ SummaryController.prototype = {
         window.location.replace("/Airline");
     },
     generatePDF: function () {
-        
+        window.location.replace("/Airline/PDFServlet");
     }
 }
 
