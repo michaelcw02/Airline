@@ -24,11 +24,14 @@ SummaryController.prototype = {
             showTotalPrice($('#price-detail'), outboundTicket, returnTicket);
         });
     },
-    confirmReservation: function () {
+    confirmPayment: function () {
         
     },
-    cancelReservation: function () {
+    cancelPayment: function () {
         window.location.replace("/Airline");
+    },
+    generatePDF: function () {
+        
     }
 }
 
