@@ -932,5 +932,22 @@ Proxy.getTicketsByFlight = (flightNum, callback) => {
         },
         type: 'POST',
         dataType: "json"
+    })
+}
+Proxy.getTipoCambio = (callback) => {
+    $.ajax({
+        url: 'TicketsServlet',
+        data: {
+            action: "tipoCambio"
+        },
+        error: function () { //si existe un error en la respuesta del ajax
+            showModal("myModal", "ERROR", "Could not get the exchange rate");
+            setTimeout(() => hideModal('myModal'), 1500);
+        },
+        success: (data) => {
+            callback(data);
+        },
+        type: 'POST',
+        dataType: "json"
     });
 }

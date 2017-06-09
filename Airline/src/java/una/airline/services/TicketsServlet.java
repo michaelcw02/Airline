@@ -26,6 +26,7 @@ import una.airline.domain.Reserve;
 import una.airline.domain.RoundTripInfo;
 import una.airline.domain.Ticket;
 import una.airline.domain.User;
+import una.airline.services.exchangerate.ExchangeRate;
 
 /**
  *
@@ -127,6 +128,11 @@ public class TicketsServlet extends HttpServlet {
                 case "getTicketsByFlight":
                     String flight_num = request.getParameter("flightNum");
                     json = new Gson().toJson(ticketsBL.getTicketsByFlight(flight_num));
+                    out.print(json);
+                    break;
+                case "tipoCambio":
+                    Double cambio = new ExchangeRate().getCompra();
+                    json = "{\"response\":\"S~" + cambio.toString() + "\"}";
                     out.print(json);
                     break;
                 default:

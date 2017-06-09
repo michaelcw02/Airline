@@ -69,7 +69,7 @@ ProfileController.prototype = {
         let direction = this.view.$("#direction").val();
         this.airlineController.updateUser(username, pass, name, firstLast, secondLast, email, birth, direction, tel, cel);
         this.airlineController.updateSession(username, pass, name, firstLast, secondLast, email, birth, direction, tel, cel);
-        window.location.reload(true); 
+        window.location.reload(true);
     }
 }
 
