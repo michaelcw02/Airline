@@ -49,6 +49,8 @@ public class Passenger implements java.io.Serializable {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+        int ticketNum = ticket.getNumber();
+        this.setID(new PassengerID(this.id.getPassport(), ticketNum));
     }
 
     public String getName() {

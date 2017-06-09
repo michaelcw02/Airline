@@ -210,17 +210,15 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`seat` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `airlinedb`.`reserve`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `airlinedb`.`reserve` (
-  `number` INT NOT NULL,
+  `number` INT NOT NULL AUTO_INCREMENT,
   `outboundTicket` INT NOT NULL,
   `returnTicket` INT NULL,
   `username` VARCHAR(20) NOT NULL,
   `date` DATE NOT NULL,
-  `price` FLOAT NOT NULL,
   PRIMARY KEY (`number`),
   INDEX `fk_reserve_1_idx` (`username` ASC),
   INDEX `fk_reserve_2_idx` (`outboundTicket` ASC),
@@ -241,7 +239,6 @@ CREATE TABLE IF NOT EXISTS `airlinedb`.`reserve` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
